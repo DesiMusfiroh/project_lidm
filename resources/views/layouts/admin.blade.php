@@ -30,8 +30,8 @@
 
     <footer class="app-footer">
         <div>
-            <a href="https://www.instagram.com/repaldi_hs/?hl=id">Ji Capster</a>
-            <span>&copy; 2019 Universitas Jambi.</span>
+            <a href="https://www.instagram.com/repaldi_hs/?hl=id">LIDM</a>
+            <span>&copy; 2020 Universitas Jambi.</span>
             
         </div>
         <div class="ml-auto">

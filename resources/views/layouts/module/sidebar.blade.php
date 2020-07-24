@@ -1,49 +1,37 @@
 <nav class="sidebar-nav">
     <ul class="nav">
-    <li class="nav-title"></li>
-        <li class="nav-item">
-            <a class="nav-link" href="">
-                <i class="nav-icon icon-speedometer"></i> Dashboard
-            </a>
-        </li>
-        <li class="nav-item">
+            <li class="nav-title">
+            <img src="{{asset('assets/img/user.png')}}"  style="width: 150px; height: 150px; border-radius: 50%; display: block; margin: auto; ">
+                <center> <strong>{{auth()->user()->name}}</strong> </center>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="">
                     <i class="nav-icon fa fa-home"></i> Beranda
                 </a>
             </li>
-        <li class="nav-title" style="background-color:#303036">MANAJEMEN PENGGUNA</li>
             <li class="nav-item">
                 <a class="nav-link" href=""> 
-                    <i class="nav-icon fa fa-user" aria-hidden="true"></i> Profil User
+                    <i class="nav-icon fa fa-user" aria-hidden="true"></i> Profil
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href=""> 
-                    <i class="nav-icon fa fa-user" aria-hidden="true"></i> Profil Toko
-                </a>
-            </li>
-
-        <li class="nav-title "  style="background-color:#303036">MANAJEMEN PRODUK</li>
-           
             <li class="nav-item">
                 <a class="nav-link" href="">
-                    <i class="nav-icon fa fa-list-alt"></i> Kategori
+                    <i class="nav-icon fa fa-university "></i> Kelas
                 </a>
             </li>
             <li class="nav-item">
                  <a class="nav-link" href="">
-                    <i class="nav-icon fa fa-product-hunt"></i> Produk
+                    <i class="nav-icon fa fa-file-text "></i> Paket Soal
                  </a>
             </li>
-        <li class="nav-title" style="background-color:#303036">DATA TRANSAKSI</li>
             <li class="nav-item">
                 <a class="nav-link" href="">
-                    <i class="nav-icon fa fa-arrow-left"></i> Pembelian
+                    <i class="nav-icon fa fa-graduation-cap"></i> Ujian
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">
-                    <i class="nav-icon fa fa-arrow-right"></i> Penjualan
+                    <i class="nav-icon fa fa-desktop"></i> Monitoring Ujian
                 </a>
             </li>
             
