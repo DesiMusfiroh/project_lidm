@@ -15,3 +15,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/register/guru', function () { return view('auth.register_guru'); });
+Route::get('/register/siswa', function () { return view('auth.register_siswa'); });
