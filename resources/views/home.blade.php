@@ -1,23 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+
+@section('title')
+    <title>List Product</title>
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+<main class="main">
+    <ol class="breadcrumb bg-dark">
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item active">Product</li>
+    </ol>
+    <div class="container-fluid">
+        
     </div>
-</div>
+</main>
 @endsection
