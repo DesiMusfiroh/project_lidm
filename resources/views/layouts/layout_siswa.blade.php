@@ -18,10 +18,10 @@
     
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
-    @include('layouts.module.header')
+    @include('layouts.siswa.header')
     <div class="app-body" id="dw">
         <div class="sidebar">
-            @include('layouts.module.sidebar')
+            @include('layouts.siswa.sidebar')
             <button class="sidebar-minimizer brand-minimizer" type="button"></button>
         </div>
         @yield('content')
