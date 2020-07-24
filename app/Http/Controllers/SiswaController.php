@@ -17,7 +17,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return view('home_siswa');
+        return view('Siswa/index');
     }
 
     /**

@@ -18,7 +18,7 @@ class GuruController extends Controller
      */
     public function index()
     {
-        return view('home_guru');
+        return view('Guru/index');
     }
 
     /**

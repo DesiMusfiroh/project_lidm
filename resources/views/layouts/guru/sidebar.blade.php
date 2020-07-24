@@ -5,32 +5,32 @@
                 <center> <strong>{{auth()->user()->name}}</strong> </center>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/home">
                     <i class="nav-icon fa fa-home"></i> Beranda
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""> 
+                <a class="nav-link" href="/profil/guru"> 
                     <i class="nav-icon fa fa-user" aria-hidden="true"></i> Profil
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/home">
                     <i class="nav-icon fa fa-university "></i> Kelas
                 </a>
             </li>
             <li class="nav-item">
-                 <a class="nav-link" href="">
+                 <a class="nav-link" href="/home">
                     <i class="nav-icon fa fa-file-text "></i> Paket Soal
                  </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/home">
                     <i class="nav-icon fa fa-graduation-cap"></i> Ujian
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/home">
                     <i class="nav-icon fa fa-desktop"></i> Monitoring Ujian
                 </a>
             </li>

@@ -5,17 +5,17 @@
                 <center> <strong>{{auth()->user()->name}}</strong> </center>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="/home">
                     <i class="nav-icon fa fa-home"></i> Beranda
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href=""> 
+                <a class="nav-link" href="/profil/siswa"> 
                     <i class="nav-icon fa fa-user" aria-hidden="true"></i> Profil
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="#">
                     <i class="nav-icon fa fa-university "></i> Kelas
                 </a>
             </li>
