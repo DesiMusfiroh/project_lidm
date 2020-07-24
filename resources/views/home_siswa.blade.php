@@ -12,7 +12,7 @@
         <li class="breadcrumb-item active">Siswa</li>
     </ol>
     <div class="container-fluid">
-    
+
     </div>
 </main>
 @endsection

@@ -59,7 +59,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <table class="table table-hover table-sm">
                                 <tr>
                                     <td col><b> Nomor Induk</b> </td>
@@ -91,13 +90,13 @@
                                     <td> : </td>
                                     <td>{{ $siswa->instusi }}</td>
                                 </tr>
-                               
+
                                 <tr>
                                     <td col><b> Alamat </b> </td>
                                     <td> : </td>
                                     <td>{{ $siswa->alamat }}</td>
                                 </tr>
-                                
+
                             </table>
                     </div>
                 </div>
@@ -202,7 +201,7 @@
                                     @if($errors->has('jk'))
                                     <span class="help-block">{{$errors->first('jk')}}</span>
                                     @endif
-                                   
+
                                 </div>
                                 <div class="form-group col-md-6">
                                 <label for="angkatan"> <b> Angkatan : </b> </label>
