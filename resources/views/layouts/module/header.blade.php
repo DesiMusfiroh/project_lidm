@@ -1,39 +1,67 @@
-<header class="app-header navbar">
-    <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">
-        <img class="navbar-brand-full" src="{{asset ('assets/img/ji capster putih.png') }}" width="93"  alt="U-Market">
-        <img class="navbar-brand-minimized" src="{{asset ('assets/img/ji capster putih.png') }}" width="50"  alt="U-market Logo">
-    </a>
-    <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <ul class="nav navbar-nav ml-auto">
-        
-        <li class="nav-item d-md-down-none">
-            <a class="nav-link" href="#">
-        {{ Auth::user()->name }}
-        </a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img class="img-avatar" src="{{ asset('assets/img/avatars/icon.png') }}" alt="admin@umarket.com">
-            </a>
-        <div class="dropdown-menu dropdown-menu-right">
-            <div class="dropdown-header text-center">
-                <strong>Account</strong>
+<div class="app-header__content">
+    <div class="app-header-left">
+        <div class="search-wrapper">
+            <div class="input-holder">
+                <input type="text" class="search-input" placeholder="Type to search">
+                <button class="search-icon"><span></span></button>
             </div>
-            <div class="divider"></div>
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">
-                <i class="fa fa-lock"></i> Logout
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+            <button class="close"></button>
         </div>
-        </li>
-    </ul>
-</header>
+        <ul class="header-menu nav">
+            <li class="nav-item">
+                <a href="javascript:void(0);" class="nav-link">
+                    <i class="nav-link-icon fa fa-database"> </i>
+                    Statistics
+                </a>
+            </li>
+            <li class="btn-group nav-item">
+                <a href="javascript:void(0);" class="nav-link">
+                    <i class="nav-link-icon fa fa-edit"></i>
+                    Projects
+                </a>
+            </li>
+            <li class="dropdown nav-item">
+                <a href="javascript:void(0);" class="nav-link">
+                    <i class="nav-link-icon fa fa-cog"></i>
+                    Settings
+                </a>
+            </li>
+        </ul>        </div>
+    <div class="app-header-right">
+        <div class="header-btn-lg pr-0">
+            <div class="widget-content p-0">
+                <div class="widget-content-wrapper">
+                    <div class="widget-content-left">
+                        <div class="btn-group">
+                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
+                                <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
+                                <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                            </a>
+                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                <button type="button" tabindex="0" class="dropdown-item">User Account</button>
+                                <button type="button" tabindex="0" class="dropdown-item">Settings</button>
+                                <h6 tabindex="-1" class="dropdown-header">Header</h6>
+                                <button type="button" tabindex="0" class="dropdown-item">Actions</button>
+                                <div tabindex="-1" class="dropdown-divider"></div>
+                                <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content-left  ml-3 header-user-info">
+                        <div class="widget-heading">
+                            Alina Mclourd
+                        </div>
+                        <div class="widget-subheading">
+                            VP People Manager
+                        </div>
+                    </div>
+                    <div class="widget-content-right header-user-info ml-3">
+                        <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
+                            <i class="fa text-white fa-calendar pr-1 pl-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+</div>
