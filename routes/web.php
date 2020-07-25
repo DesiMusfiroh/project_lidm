@@ -29,7 +29,7 @@ Route::group(['prefix' => 'guru'], function () {
     // route kelola profil guru
     Route::group(['prefix' => 'profil'], function () {
         Route::get('/index','GuruController@index')->name('guru.profil');
-        Route::post('/store','GuruController@store')->name('guru.store');
+        Route::post('/store','GuruController@store')->name('guru.profil.store');
     });
     // route kelola kelas guru
     Route::group(['prefix' => 'kelas'], function () {

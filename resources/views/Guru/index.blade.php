@@ -122,7 +122,7 @@
     </div>
 @else
 
-    <form action="{{route('guru.store')}}" method="post" enctype="multipart/form-data" >
+    <form action="{{route('guru.profil.store')}}" method="post" enctype="multipart/form-data" >
     @csrf
         <div class="row">
 
