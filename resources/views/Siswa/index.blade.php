@@ -9,7 +9,7 @@
     $siswa = Siswa::where('user_id', Auth::user()->id )->first();
 ?>
 <main class="main">
-    <ol class="breadcrumb bg-dark">
+    <ol class="breadcrumb bg-white">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item active">Siswa</li>
     </ol>
@@ -68,7 +68,7 @@
                                 <tr>
                                     <td col><b> Nama Lengkap</b> </td>
                                     <td> : </td>
-                                    <td>{{ $siswa>nama_lengkap }}</td>
+                                    <td>{{ $siswa->nama_lengkap }}</td>
                                 </tr>
                                 <tr>
                                     <td col><b> Jenis Kelamin </b> </td>
@@ -88,7 +88,7 @@
                                 <tr>
                                     <td col><b> Institusi </b> </td>
                                     <td> : </td>
-                                    <td>{{ $siswa->instusi }}</td>
+                                    <td>{{ $siswa->instansi }}</td>
                                 </tr>
 
                                 <tr>
@@ -103,7 +103,7 @@
 
                 <div class="card-footer" style="border-radius: 0px 0px 20px 20px ">
                     <div class="row justify-content-center">
-                        <a href="#"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
+                        <a href="{{route('siswa.profil.edit')}}"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
                     </div>
                 </div>
 
@@ -116,7 +116,7 @@
                 </div>
                 <div class="card-body text-center">
                     <div class="form-group">
-                        <img src="/images/{{$guru->foto}}" class="img-fluid mx-auto ">
+                        <img src="/images/{{$siswa->foto}}" class="img-fluid mx-auto ">
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@
     </div>
 @else
 
-    <form action="#" method="post" enctype="multipart/form-data" >
+    <form action="{{route('siswa.profil.store')}}" method="post" enctype="multipart/form-data" >
     @csrf
         <div class="row">
 
@@ -212,10 +212,10 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="institusi"> <b> Institusi : </b> </label>
-                                    <input type="text" class="form-control" id="institusi" name="institusi" style="border-radius:10px; box-shadow: 3px 0px 5px grey;">
-                                    @if($errors->has('institusi'))
-                                    <span class="help-block">{{$errors->first('institusi')}}</span>
+                                    <label for="institusi"> <b> Instansi : </b> </label>
+                                    <input type="text" class="form-control" id="instansi" name="instansi" style="border-radius:10px; box-shadow: 3px 0px 5px grey;">
+                                    @if($errors->has('instansi'))
+                                    <span class="help-block">{{$errors->first('instansi')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -246,9 +246,6 @@
                                 <input type="file" class="custom-file-input" id="customFile"  name="foto">
                                 <label class="custom-file-label" for="customFile">Pilih File Foto ..</label>
                             </div>
-<!-- <script>
-if (document.getElementById('FName_Status').getAttribute('src') == "pictures/apic.png")
-</script> -->
                             @if($errors->has('foto'))
                               <span class="help-block">{{$errors->first('foto')}}</span>
                             @endif

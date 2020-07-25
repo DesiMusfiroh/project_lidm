@@ -1,3 +1,6 @@
+<?php  use App\Siswa;
+    $siswa = Siswa::where('user_id', Auth::user()->id )->first();
+?>
 <div class="app-sidebar sidebar-shadow">
     <div class="app-header__logo">
         <div class="logo-src"></div>
@@ -32,28 +35,40 @@
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
-                <li class="app-sidebar__heading">Beranda</li>
+            <center>
+            @if( Siswa::where('user_id', Auth::user()->id )->first() != null )
+                <li class="app-sidebar__heading"> <img class="rounded-circle" style="width: 100px; height: 100px; display: block; margin: auto;" src="/images/{{$siswa->foto}}" alt=""></li>
+            @else
+            <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" style="width: 100px; height: 100px; display: block; margin: auto;" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
+            @endif
+            </center>
+
                 <li>
-                    <a href="index.html" class="mm-active">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Dashboard Example 1
+                    <a href="/home" class="active mb-2">
+                        <i class="metismenu-icon pe-7s-home"></i>
+                        Beranda
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Data diri</li>
                 <li>
-                    <a href="/profil/siswa" >
-                        <i class="metismenu-icon pe-7s-rocket"></i>
+                    <a href="{{route('siswa.profil')}}" class="mb-2">
+                        <i class="metismenu-icon pe-7s-user"></i>
                         Profil
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Data kelas</li>
                 <li>
-                    <a href="" >
-                        <i class="metismenu-icon pe-7s-rocket"></i>
+                    <a href="#" class="mb-2">
+                        <i class="metismenu-icon pe-7s-monitor"></i>
                         Kelas
                     </a>
                 </li>
-
+                <li>
+                    <a href="" class="mb-2">
+                        <i class="metismenu-icon pe-7s-bookmarks"></i>
+                        Ujian
+                    </a>
+                </li>
+                <li>
+                </li>
             </ul>
         </div>
     </div>

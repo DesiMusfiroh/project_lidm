@@ -11,6 +11,7 @@
         <li class="breadcrumb-item active">Kelas</li>
     </ol>
     <div class="container-fluid">
-    <div class="animated fadeIn">
+        
+    </div>
 </main>
 @endsection
