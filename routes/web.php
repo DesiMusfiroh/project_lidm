@@ -27,6 +27,10 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/edit','SiswaController@edit')->name('siswa.profil.edit');
         Route::patch('/update','SiswaController@update')->name('siswa.profil.update');
     });
+    // route kelola kelas siswa
+    Route::group(['prefix' => 'kelas'], function () {
+        Route::get('/index','AnggotaKelasController@index')->name('siswa.kelas');
+    });
 });
 
 // ROUTE GURU  ------------------------------------------------------------------------------------------
