@@ -7,6 +7,8 @@ use Auth;
 use Str;
 use App\Kelas;
 use App\Guru;
+use App\Pertemuan;
+use App\AnggotaKelas;
 
 class KelasController extends Controller
 {
@@ -38,8 +40,10 @@ class KelasController extends Controller
 
     public function show($id)
     {
-        $kelas = Kelas::find($id);
-        return view('Kelas.show', compact('kelas'));
+        $kelas          = Kelas::find($id);
+        $pertemuan      = Pertemuan::where('kelas_id',$id)->get();
+        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
+        return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas'));
     }
 
     public function edit($id)

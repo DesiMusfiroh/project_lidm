@@ -1,6 +1,17 @@
 <?php  use App\Guru;
     $guru = Guru::where('user_id', Auth::user()->id )->first();
 ?>
+
+<style>
+
+#a-ku:hover{
+    background-color :#e0f3ff;
+    display:block;
+    color:#343a40;
+    border-radius:5px;
+
+};
+</style>
 <div class="app-sidebar sidebar-shadow">
     <div class="app-header__logo">
         <div class="logo-src"></div>
@@ -41,10 +52,22 @@
             @else
             <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
             @endif
+            <li class="app-sidebar__heading">{{auth()->user()->name}}</li> 
+            
+                <a  id="a-ku" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
+                    <button type="button" class="btn">
+                    Logout
+                    
+                    </button>
+                </a>
+            
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+            </form>
             </center>
 
                 <li>
-                    <a href="/home" class="mb-2  {{(request()->is('/home*')) ? 'mm-active' : ''}}">
+                    <a href="{{route('home')}}" class="mb-2  {{(request()->is('/home*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-home"></i>
                         Beranda
                     </a>
@@ -80,10 +103,26 @@
                 </li>
 
                 <li>
-                    <a href="" class="mb-2">
+                    <a href="#" class="mb-2">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
                         Paket Soal
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
+                    <ul>
+                    <li>
+                        <a href="{{route('guru.paketsoal.create')}}">
+                           Buat Paket Soal
+                            <i class="metismenu-icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('paketsoal.index')}}">
+                            Daftar Paket Soal
+                            <i class="metismenu-icon pe-7s-monitor"></i>
+                        </a>
+                    </li>
+                                        
+                </ul>
                 </li>
                 <li>
                 <a href="#" class="md-2">

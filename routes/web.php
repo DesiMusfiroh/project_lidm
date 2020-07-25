@@ -22,7 +22,7 @@ Route::get('/register/siswa', function () { return view('auth.register_siswa'); 
 Route::group(['prefix' => 'siswa'], function () {
     // route kelola profil siswa
     Route::group(['prefix' => 'profil'], function () {
-        Route::get('/index','SiswaController@index')->name('siswa.profil');
+        Route::get('/','SiswaController@index')->name('siswa.profil');
         Route::post('/store','SiswaController@store')->name('siswa.profil.store');
         Route::get('/edit','SiswaController@edit')->name('siswa.profil.edit');
         Route::patch('/update','SiswaController@update')->name('siswa.profil.update');
@@ -30,6 +30,8 @@ Route::group(['prefix' => 'siswa'], function () {
     // route kelola kelas siswa
     Route::group(['prefix' => 'kelas'], function () {
         Route::get('/index','AnggotaKelasController@index')->name('siswa.kelas');
+        Route::post('/gabungkelas','AnggotaKelasController@gabungKelas')->name('gabungKelas');
+        Route::get('/show/{id}','AnggotaKelasController@showKelas')->name('siswa.kelas.show');
     });
 });
 
@@ -37,7 +39,7 @@ Route::group(['prefix' => 'siswa'], function () {
 Route::group(['prefix' => 'guru'], function () {
     // route kelola profil guru
     Route::group(['prefix' => 'profil'], function () {
-        Route::get('/index','GuruController@index')->name('guru.profil');
+        Route::get('/','GuruController@index')->name('guru.profil');
         Route::post('/store','GuruController@store')->name('guru.profil.store');
         Route::get('/edit','GuruController@edit')->name('guru.profil.edit');
         Route::patch('/update','GuruController@update')->name('guru.profil.update');
@@ -48,9 +50,19 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/create','KelasController@create')->name('guru.kelas.create');
         Route::post('/store','KelasController@store')->name('guru.kelas.store');
         Route::get('/show/{id}','KelasController@show')->name('guru.kelas.show');
+
+        // route kelola pertemuan
+        Route::group(['prefix' => 'pertemuan'], function () {
+            Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
+            Route::post('/store','PertemuanController@store')->name('pertemuan.store');
+        });
     });
-    // route kelola pertemuan
-    Route::group(['prefix' => 'pertemuan'], function () {
-        Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
+    // route kelola paketsoal
+    Route::group(['prefix' => 'paketsoal'], function () {
+        Route::get('/','QuestionController@index')->name('paketsoal.index');
+        Route::get('/create','QuestionController@create')->name('guru.paketsoal.create');
+        Route::post('/store','QuestionController@store')->name('guru.paketsoal.store');
+       
     });
+     
 });

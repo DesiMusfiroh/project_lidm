@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Kelas;
+use App\PaketSoal;
 
 class Guru extends Model
 {
@@ -16,4 +17,7 @@ class Guru extends Model
     public function kelas(){
         return $this->hasMany(Kelas::class,'guru_id');
     }
+    public function paket_soal(){
+        return $this->hasMany(PaketSoal::class,'guru_id');
+      }
 }
