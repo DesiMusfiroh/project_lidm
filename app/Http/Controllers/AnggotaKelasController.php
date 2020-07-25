@@ -54,7 +54,8 @@ class AnggotaKelasController extends Controller
     
         $kelas = Kelas::find($id);
         $pertemuan = Pertemuan::where('kelas_id',$id)->get();
-        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan], compact('kelas'));
+        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
+        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas'));
 
     }
 
