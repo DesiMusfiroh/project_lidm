@@ -15,7 +15,7 @@ class KelasController extends Controller
     public function index()
     {
         $kelas = Kelas::where('guru_id',Auth::user()->guru->id)->get();
-        return view('Kelas.index',['kelas', $kelas]);
+        return view('Kelas.index',['kelas' => $kelas]);
     }
 
     public function create()
@@ -38,7 +38,8 @@ class KelasController extends Controller
 
     public function show($id)
     {
-        //
+        $kelas = Kelas::find($id);
+        return view('Kelas.show', compact('kelas'));
     }
 
     public function edit($id)

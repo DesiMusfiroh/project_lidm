@@ -43,5 +43,6 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/index','KelasController@index')->name('guru.kelas');
         Route::get('/create','KelasController@create')->name('guru.kelas.create');
         Route::post('/store','KelasController@store')->name('guru.kelas.store');
+        Route::get('/show/{id}','KelasController@show')->name('guru.kelas.show');
     });
 });
