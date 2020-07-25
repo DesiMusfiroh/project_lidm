@@ -7,7 +7,6 @@
 @section('content')
 <main class="main">
     <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item active">Kelas</li>
     </ol>
     <div class="container-fluid">

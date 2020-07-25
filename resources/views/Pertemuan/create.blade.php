@@ -7,8 +7,8 @@
 @section('content')
 <main class="main">
     <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Kelas</li>
-        <li class="breadcrumb-item">{{$kelas->nama_kelas}}</li>
+        <li class="breadcrumb-item"><a href="{{route('guru.kelas')}}">Kelas</a> </li>
+        <li class="breadcrumb-item"><a href="{{route('guru.kelas.show',$kelas->id)}}"> {{$kelas->nama_kelas}} </a></li>
         <li class="breadcrumb-item active">Buat Pertemuan</li>
     </ol>
     <div class="container-fluid">
