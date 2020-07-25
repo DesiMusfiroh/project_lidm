@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Kelas;
 use App\Siswa;
 use App\AnggotaKelas;
+use App\Pertemuan;
 
 
 use Auth;
@@ -46,14 +47,25 @@ class AnggotaKelasController extends Controller
         // } catch (\Exception $e) {
         //   return redirect()->back()->with('tidakditemukan','Kode Kelas tidak ditemukan');
         // }
+}
 
-        }
+
+    public function showKelas($id){
+    
+        $kelas = Kelas::find($id);
+        $pertemuan = Pertemuan::where('kelas_id',$id)->get();
+        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan], compact('kelas'));
+
+    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function create()
     {
         //
