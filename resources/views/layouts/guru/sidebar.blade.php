@@ -34,21 +34,21 @@
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Beranda</li>
                 <li>
-                    <a href="index.html" class="mm-active">
+                    <a href="index.html" class="">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Beranda
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Data diri</li>
                 <li>
-                    <a href="{{route('guru.profil')}}" >
+                    <a href="{{route('guru.profil')}}" class=" {{(request()->is('guru/profil*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Profil
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Data kelas</li>
                 <li>
-                    <a href="{{route('guru.kelas')}}">
+                    <a href="{{route('guru.kelas')}}"  class=" {{(request()->is('guru/kelas*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Kelas
                     </a>
