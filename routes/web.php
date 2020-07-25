@@ -57,5 +57,12 @@ Route::group(['prefix' => 'guru'], function () {
             Route::post('/store','PertemuanController@store')->name('pertemuan.store');
         });
     });
+    // route kelola paketsoal
+    Route::group(['prefix' => 'paketsoal'], function () {
+        Route::get('/','QuestionController@index')->name('paketsoal.index');
+        Route::get('/create','QuestionController@create')->name('guru.paketsoal.create');
+        Route::post('/store','QuestionController@store')->name('guru.paketsoal.store');
+       
+    });
      
 });

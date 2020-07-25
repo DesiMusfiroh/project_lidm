@@ -80,10 +80,26 @@
                 </li>
 
                 <li>
-                    <a href="" class="mb-2">
+                    <a href="#" class="mb-2">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
                         Paket Soal
+                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
+                    <ul>
+                    <li>
+                        <a href="{{route('guru.paketsoal.create')}}">
+                           Buat Paket Soal
+                            <i class="metismenu-icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('paketsoal.index')}}">
+                            Daftar Paket Soal
+                            <i class="metismenu-icon pe-7s-monitor"></i>
+                        </a>
+                    </li>
+                                        
+                </ul>
                 </li>
                 <li>
                 <a href="#" class="md-2">
