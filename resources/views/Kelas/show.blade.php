@@ -7,7 +7,6 @@
 @section('content')
 <main class="main">
     <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item"><a href="{{route('guru.kelas')}}">Kelas</a> </li>
         <li class="breadcrumb-item active">{{$kelas->nama_kelas}}</li>
     </ol>
@@ -61,16 +60,17 @@
                                 <a href="{{route('pertemuan.create',$kelas->id)}}"> <button class="btn btn-success">Buat Pertemuan</button> </a>
                             </div>
                             <div class="row">
+                                @if($pertemuan->count() != 0)
                                 <table class="table table-striped">
                                     <thead class="thead-dark thead">
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Nama Pertemuan</td>
-                                            <td>Waktu Mulai</td>
+                                            <td>Jadwal</td>
                                             <td>Opsi</td>
                                         </tr>
                                     </thead>
-                                    @if($pertemuan->count() != 0)
+                                    
                                     <tbody>
                                     <?php $i=1; ?>
                                     @foreach ($pertemuan as $item)
@@ -82,14 +82,14 @@
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                    @else 
-                                    <tbody>
-                                    <div class="alert alert-warning" role="alert">
-                                        Belum ada pertemuan yang dibuat
-                                    </div>
-                                    </tbody>
-                                    @endif
                                 </table>
+                                @else   
+                                    <div class="col-md-12">
+                                        <div class="alert alert-warning" role="alert">
+                                            Belum ada pertemuan yang dibuat
+                                        </div>
+                                    </div> 
+                                @endif
                             </div>
                         </div>
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
