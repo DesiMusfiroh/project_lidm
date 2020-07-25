@@ -25,14 +25,33 @@
                 <div class="card mb-3">
                     <div class="card-header">Daftar Siswa</div>
                     <div class="card-body">
+                        @if($anggotakelas->count() != 0)
                         <table class="table table-striped">
                             <thead class="thead-dark thead">
                                 <tr>
-                                    <td>No</td>
+                                    <td width="30px">No</td>
                                     <td>Nama Siswa</td>
+                                    <td width="30px"></td>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <?php $i=1; ?>
+                                @foreach ($anggotakelas as $item)
+                                    <tr>
+                                        <td><?php echo $i; $i++?></td>
+                                        <td>{{$item->siswa->nama_lengkap}}</td>
+                                        <td><a href=""><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a> </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
+                        @else
+                        <div class="col-md-12">
+                            <div class="alert alert-warning" role="alert">
+                                Belum ada siswa yang mengikuti kelas ini
+                            </div>
+                        </div> 
+                        @endif
                     </div>
                 </div>
             </div>
