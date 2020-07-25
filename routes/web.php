@@ -48,9 +48,12 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/create','KelasController@create')->name('guru.kelas.create');
         Route::post('/store','KelasController@store')->name('guru.kelas.store');
         Route::get('/show/{id}','KelasController@show')->name('guru.kelas.show');
+
+        // route kelola pertemuan
+        Route::group(['prefix' => 'pertemuan'], function () {
+            Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
+            Route::post('/store','PertemuanController@store')->name('pertemuan.store');
+        });
     });
-    // route kelola pertemuan
-    Route::group(['prefix' => 'pertemuan'], function () {
-        Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
-    });
+     
 });

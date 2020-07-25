@@ -64,12 +64,31 @@
                                 <table class="table table-striped">
                                     <thead class="thead-dark thead">
                                         <tr>
-                                            <td>No</td>
+                                            <td width="30px">No</td>
                                             <td>Nama Pertemuan</td>
                                             <td>Waktu Mulai</td>
                                             <td>Opsi</td>
                                         </tr>
                                     </thead>
+                                    @if($pertemuan->count() != 0)
+                                    <tbody>
+                                    <?php $i=1; ?>
+                                    @foreach ($pertemuan as $item)
+                                        <tr>
+                                            <td><?php echo $i; $i++?></td>
+                                            <td>{{$item->nama_pertemuan}}</td>
+                                            <td>{{$item->waktu_mulai}}</td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    @else 
+                                    <tbody>
+                                    <div class="alert alert-warning" role="alert">
+                                        Belum ada pertemuan yang dibuat
+                                    </div>
+                                    </tbody>
+                                    @endif
                                 </table>
                             </div>
                         </div>
