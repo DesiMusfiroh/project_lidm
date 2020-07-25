@@ -44,7 +44,7 @@
             </center>
 
                 <li>
-                    <a href="/home" class="active mb-2">
+                    <a href="/home" class="mb-2  {{(request()->is('/home*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-home"></i>
                         Beranda
                     </a>

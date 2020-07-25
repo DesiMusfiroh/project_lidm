@@ -6,7 +6,7 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-dark">
+    <ol class="breadcrumb bg-white">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item">Kelas</li>
         <li class="breadcrumb-item active">Buat Kelas Baru</li>

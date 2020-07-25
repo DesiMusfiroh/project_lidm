@@ -6,7 +6,7 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-dark">
+    <ol class="breadcrumb bg-white">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item"><a href="{{route('guru.kelas')}}">Kelas</a> </li>
         <li class="breadcrumb-item active">{{$kelas->nama_kelas}}</li>
