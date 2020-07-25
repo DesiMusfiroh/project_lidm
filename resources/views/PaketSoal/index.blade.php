@@ -40,7 +40,6 @@
                         </div>
                 @endif
                 <div class="card-body ">
-                <div class="table-inside">
                 @if($paketsoal->count() != 0)
                     <table class="table table-striped table-bordered table-sm">
                         <thead class="thead-dark text-center">
@@ -112,7 +111,6 @@
                         </button>
                     </div>
                 @endif
-                </div>
                 </div>
             </div>
         </div>
