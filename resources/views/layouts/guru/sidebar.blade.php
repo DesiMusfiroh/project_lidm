@@ -41,14 +41,14 @@
                 </li>
                 <li class="app-sidebar__heading">Data diri</li>
                 <li>
-                    <a href="/profil/guru" >
+                    <a href="{{route('guru.profil')}}" >
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Profil
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Data kelas</li>
                 <li>
-                    <a href="" >
+                    <a href="{{route('guru.kelas')}}">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Kelas
                     </a>

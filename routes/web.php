@@ -21,4 +21,18 @@ Route::get('/register/siswa', function () { return view('auth.register_siswa'); 
 // ROUTE PROFIL SISWA -----------------------------------------------------------------------------------------
 Route::get('profil/siswa','SiswaController@index');
 // ROUTE PROFIL GURU -----------------------------------------------------------------------------------------
-Route::get('profil/guru','GuruController@index');
+// Route::get('profil/guru','GuruController@index');
+
+
+// ROUTE GURU  ------------------------------------------------------------------------------------------
+Route::group(['prefix' => 'guru'], function () {
+    // route kelola profil guru
+    Route::group(['prefix' => 'profil'], function () {
+        Route::get('/index','GuruController@index')->name('guru.profil');
+        Route::post('/store','GuruController@store')->name('guru.store');
+    });
+    // route kelola kelas guru
+    Route::group(['prefix' => 'kelas'], function () {
+        Route::get('/index','KelasController@index')->name('guru.kelas');
+    });
+});
