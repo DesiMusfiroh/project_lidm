@@ -34,14 +34,14 @@
             <ul class="vertical-nav-menu">
                 <li class="app-sidebar__heading">Beranda</li>
                 <li>
-                    <a href="index.html" class="mm-active">
+                    <a href="/home" class="active">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Beranda
                     </a>
                 </li>
                 <li class="app-sidebar__heading">Data diri</li>
                 <li>
-                    <a href="/profil/guru" >
+                    <a href="/profil/guru"  class="active">
                         <i class="metismenu-icon pe-7s-rocket"></i>
                         Profil
                     </a>

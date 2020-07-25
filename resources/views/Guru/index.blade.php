@@ -9,7 +9,7 @@
     $guru = Guru::where('user_id', Auth::user()->id )->first();
 ?>
 <main class="main">
-    <ol class="breadcrumb bg-dark">
+    <ol class="breadcrumb bg-white">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item active">Guru</li>
     </ol>
