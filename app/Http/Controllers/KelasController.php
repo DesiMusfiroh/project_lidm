@@ -3,80 +3,55 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Str;
+use App\Kelas;
+use App\Guru;
 
 class KelasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+
     public function index()
     {
-        return view('Kelas.index');
+        $kelas = Kelas::where('guru_id',Auth::user()->guru->id)->get();
+        return view('Kelas.index',['kelas' => $kelas]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('Kelas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $kode_kelas = Str::random(6);
+        $guru_id = Auth::user()->guru->id;
+        $kelas = Kelas::create([
+            'guru_id' => $guru_id,
+            'nama_kelas' => $request->nama_kelas,
+            'deskripsi' => $request->deskripsi,
+            'kode_kelas' => $kode_kelas,
+        ]);
+        return redirect()->route('guru.kelas')->with('success','Kelas baru berhasil dibuat');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $kelas = Kelas::find($id);
+        return view('Kelas.show', compact('kelas'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

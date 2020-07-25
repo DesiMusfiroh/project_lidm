@@ -18,11 +18,20 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/register/guru', function () { return view('auth.register_guru'); });
 Route::get('/register/siswa', function () { return view('auth.register_siswa'); });
 
-// ROUTE PROFIL SISWA -----------------------------------------------------------------------------------------
-Route::get('profil/siswa','SiswaController@index');
-// ROUTE PROFIL GURU -----------------------------------------------------------------------------------------
-// Route::get('profil/guru','GuruController@index');
-
+// ROUTE SISWA  -----------------------------------------------------------------------------------------
+Route::group(['prefix' => 'siswa'], function () {
+    // route kelola profil siswa
+    Route::group(['prefix' => 'profil'], function () {
+        Route::get('/index','SiswaController@index')->name('siswa.profil');
+        Route::post('/store','SiswaController@store')->name('siswa.profil.store');
+        Route::get('/edit','SiswaController@edit')->name('siswa.profil.edit');
+        Route::patch('/update','SiswaController@update')->name('siswa.profil.update');
+    });
+    // route kelola kelas siswa
+    Route::group(['prefix' => 'kelas'], function () {
+        Route::get('/index','AnggotaKelasController@index')->name('siswa.kelas');
+    });
+});
 
 // ROUTE GURU  ------------------------------------------------------------------------------------------
 Route::group(['prefix' => 'guru'], function () {
@@ -36,5 +45,12 @@ Route::group(['prefix' => 'guru'], function () {
     // route kelola kelas guru
     Route::group(['prefix' => 'kelas'], function () {
         Route::get('/index','KelasController@index')->name('guru.kelas');
+        Route::get('/create','KelasController@create')->name('guru.kelas.create');
+        Route::post('/store','KelasController@store')->name('guru.kelas.store');
+        Route::get('/show/{id}','KelasController@show')->name('guru.kelas.show');
+    });
+    // route kelola pertemuan
+    Route::group(['prefix' => 'pertemuan'], function () {
+        Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
     });
 });
