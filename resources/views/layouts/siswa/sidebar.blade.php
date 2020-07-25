@@ -50,13 +50,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('siswa.profil')}}" class="mb-2">
+                    <a href="{{route('siswa.profil')}}" class="mb-2  {{(request()->is('siswa/profil*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-user"></i>
                         Profil
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="mb-2">
+                    <a href="{{route('siswa.kelas')}}" class="mb-2  {{(request()->is('siswa/kelas*')) ? 'mm-active' : ''}}"">
                         <i class="metismenu-icon pe-7s-monitor"></i>
                         Kelas
                     </a>
