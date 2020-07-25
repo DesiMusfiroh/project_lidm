@@ -30,6 +30,7 @@ Route::group(['prefix' => 'siswa'], function () {
     // route kelola kelas siswa
     Route::group(['prefix' => 'kelas'], function () {
         Route::get('/index','AnggotaKelasController@index')->name('siswa.kelas');
+        Route::post('/gabungkelas','AnggotaKelasController@gabungKelas')->name('gabungKelas');
     });
 });
 
