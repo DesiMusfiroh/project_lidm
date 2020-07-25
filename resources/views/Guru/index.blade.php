@@ -69,7 +69,7 @@
                                 <tr>
                                     <td col><b> Nama Lengkap</b> </td>
                                     <td> : </td>
-                                    <td>{{ $guru>nama_lengkap }}</td>
+                                    <td>{{ $guru->nama_lengkap }}</td>
                                 </tr>
                                 <tr>
                                     <td col><b> Jenis Kelamin </b> </td>
@@ -82,9 +82,9 @@
                                     <td>{{ $guru->no_hp }}</td>
                                 </tr>
                                 <tr>
-                                    <td col><b> Institusi </b> </td>
+                                    <td col><b> Instansi </b> </td>
                                     <td> : </td>
-                                    <td>{{ $guru>instusi }}</td>
+                                    <td>{{ $guru->instansi }}</td>
                                 </tr>
                                
                                 <tr>
@@ -99,7 +99,7 @@
 
                 <div class="card-footer" style="border-radius: 0px 0px 20px 20px ">
                     <div class="row justify-content-center">
-                        <a href="#"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
+                        <a href="{{route('guru.profil.edit')}}"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
                     </div>
                 </div>
 
@@ -122,7 +122,7 @@
     </div>
 @else
 
-    <form action="#" method="post" enctype="multipart/form-data" >
+    <form action="{{route('guru.profil.store')}}" method="post" enctype="multipart/form-data" >
     @csrf
         <div class="row">
 
@@ -199,10 +199,10 @@
                                     @endif
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label for="institusi"> <b> Institusi : </b> </label>
-                                    <input type="text" class="form-control" id="institusi" name="institusi" style="border-radius:10px; box-shadow: 3px 0px 5px grey;">
-                                    @if($errors->has('institusi'))
-                                    <span class="help-block">{{$errors->first('institusi')}}</span>
+                                    <label for="instansi"> <b> Instansi : </b> </label>
+                                    <input type="text" class="form-control" id="instansi" name="instansi" style="border-radius:10px; box-shadow: 3px 0px 5px grey;">
+                                    @if($errors->has('instansi'))
+                                    <span class="help-block">{{$errors->first('instansi')}}</span>
                                     @endif
                                 </div>
                             </div>
@@ -233,9 +233,7 @@
                                 <input type="file" class="custom-file-input" id="customFile"  name="foto">
                                 <label class="custom-file-label" for="customFile">Pilih File Foto ..</label>
                             </div>
-<!-- <script>
-if (document.getElementById('FName_Status').getAttribute('src') == "pictures/apic.png")
-</script> -->
+
                             @if($errors->has('foto'))
                               <span class="help-block">{{$errors->first('foto')}}</span>
                             @endif

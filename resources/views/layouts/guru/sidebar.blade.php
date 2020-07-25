@@ -1,3 +1,6 @@
+<?php  use App\Guru;
+    $guru = Guru::where('user_id', Auth::user()->id )->first();
+?>
 <div class="app-sidebar sidebar-shadow">
     <div class="app-header__logo">
         <div class="logo-src"></div>
@@ -32,48 +35,60 @@
     <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
             <ul class="vertical-nav-menu">
-                <li class="app-sidebar__heading">Beranda</li>
+            <center>
+            @if( Guru::where('user_id', Auth::user()->id )->first() != null )
+                <li class="app-sidebar__heading"> <img class="rounded-circle" style="width: 100px; height: 100px; display: block; margin: auto;" src="/images/{{$guru->foto}}" alt=""></li>
+            @else
+            <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
+            @endif
+            </center>
+
                 <li>
-                    <a href="/home" class="active">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
+                    <a href="/home" class="active mb-2">
+                        <i class="metismenu-icon pe-7s-home"></i>
                         Beranda
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Data diri</li>
                 <li>
-                    <a href="/profil/guru"  class="active">
-                        <i class="metismenu-icon pe-7s-rocket"></i>
+                    <a href="{{route('guru.profil')}}" class="mb-2">
+                        <i class="metismenu-icon pe-7s-user"></i>
                         Profil
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Data kelas</li>
                 <li>
-                    <a href="" >
-                        <i class="metismenu-icon pe-7s-rocket"></i>
+                    <a href="{{route('guru.kelas')}}" class="mb-2">
+                        <i class="metismenu-icon pe-7s-monitor"></i>
                         Kelas
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Bank Soal</li>
                 <li>
-                    <a href="" >
-                        <i class="metismenu-icon pe-7s-rocket"></i>
+                    <a href="" class="mb-2">
+                        <i class="metismenu-icon pe-7s-bookmarks"></i>
                         Paket Soal
                     </a>
                 </li>
-                <li class="app-sidebar__heading">Kelola Ujian</li>
                 <li>
-                    <a href="" >
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Ujian
-                    </a>
+                <a href="#" class="md-2">
+                     <i class="metismenu-icon pe-7s-display2"></i>
+                        Kelola Ujian
+                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="#">
+                           Ujian
+                            <i class="metismenu-icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Monitoring Ujian
+                            <i class="metismenu-icon pe-7s-monitor"></i>
+                        </a>
+                    </li>
+                                        
+                </ul>
                 </li>
-                <li>
-                    <a href="" >
-                        <i class="metismenu-icon pe-7s-rocket"></i>
-                        Monitoring Ujian
-                    </a>
-                </li>
-
             </ul>
         </div>
     </div>
