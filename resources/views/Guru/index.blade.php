@@ -99,7 +99,7 @@
 
                 <div class="card-footer" style="border-radius: 0px 0px 20px 20px ">
                     <div class="row justify-content-center">
-                        <a href="#"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
+                        <a href="{{route('guru.profil.edit')}}"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
                     </div>
                 </div>
 

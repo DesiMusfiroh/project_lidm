@@ -30,6 +30,8 @@ Route::group(['prefix' => 'guru'], function () {
     Route::group(['prefix' => 'profil'], function () {
         Route::get('/index','GuruController@index')->name('guru.profil');
         Route::post('/store','GuruController@store')->name('guru.profil.store');
+        Route::get('/edit','GuruController@edit')->name('guru.profil.edit');
+        Route::patch('/update','GuruController@update')->name('guru.profil.update');
     });
     // route kelola kelas guru
     Route::group(['prefix' => 'kelas'], function () {
