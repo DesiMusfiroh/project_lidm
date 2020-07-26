@@ -50,14 +50,14 @@
                             <div class="alert alert-warning" role="alert">
                                 Belum ada siswa yang mengikuti kelas ini
                             </div>
-                        </div> 
+                        </div>
                         @endif
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="card pt-3 pr-3 pl-3 pb-3">
- 
+
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="pertemuan-tab" data-toggle="tab" href="#pertemuan" role="tab" aria-controls="pertemuan" aria-selected="true">Pertemuan</a>
@@ -89,7 +89,7 @@
                                             <td>Opsi</td>
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
                                     <?php $i=1; ?>
                                     @foreach ($pertemuan as $item)
@@ -102,12 +102,12 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-                                @else   
+                                @else
                                     <div class="col-md-12">
                                         <div class="alert alert-warning" role="alert">
                                             Belum ada pertemuan yang dibuat
                                         </div>
-                                    </div> 
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -125,7 +125,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </main>
 

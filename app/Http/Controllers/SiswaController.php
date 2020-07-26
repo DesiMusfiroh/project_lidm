@@ -15,7 +15,9 @@ class SiswaController extends Controller
 
     public function index()
     {
-        return view('Siswa/index');
+
+        $siswa = Siswa::where('user_id', Auth::user()->id )->first();
+        return view('Siswa/index',compact(['siswa']));
     }
 
     public function store(Request $request)

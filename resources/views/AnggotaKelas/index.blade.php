@@ -6,10 +6,9 @@
 @endsection
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item active">Kelas</li>
-    </ol>
+    <div class="">
+        {{ Breadcrumbs::render('kelas') }}
+    </div>
 
 <div class="container">
     <div class="row justify-content-center">
@@ -37,7 +36,7 @@
                     <form method="POST" action="{{ route('gabungKelas') }}">
                     @csrf
                         <div class="input-group">
-                        <input type="kode_kelas" id="kode_kelas" name="kode_kelas" required 
+                        <input type="kode_kelas" id="kode_kelas" name="kode_kelas" required
                         placeholder="Masukkan Kode Kelas" class="form-control">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-secondary"><i class="fa fa-plus"></i>  Gabung</button>
@@ -70,7 +69,7 @@
                             </button>
                         </div>
                     @endif
-                    
+
                 </div>
             </div>
         </div>

@@ -56,7 +56,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('siswa.kelas')}}" class="mb-2  {{(request()->is('siswa/kelas*')) ? 'mm-active' : ''}}"">
+                    <a href="{{route('siswa.kelas')}}" class="mb-2  {{(request()->is('siswa/kelas*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-monitor"></i>
                         Kelas
                     </a>

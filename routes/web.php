@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () {
+Route::get('/', function () { 
     return view('welcome');
 });
 
@@ -62,7 +62,7 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/','QuestionController@index')->name('paketsoal.index');
         Route::get('/create','QuestionController@create')->name('guru.paketsoal.create');
         Route::post('/store','QuestionController@store')->name('guru.paketsoal.store');
-       
+
     });
-     
+
 });
