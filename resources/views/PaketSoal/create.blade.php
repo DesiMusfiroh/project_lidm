@@ -6,10 +6,9 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Guru</a> </li>
-        <li class="breadcrumb-item active">Buat Paket Soal</li>
-    </ol>
+      <div>
+        {{ Breadcrumbs::render('buat-paketsoal') }}
+      </div>
 
 
 <div class="col-md-12">

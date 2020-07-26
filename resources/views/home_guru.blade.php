@@ -7,12 +7,11 @@
 
 
   <main class="main">
-      <ol class="breadcrumb bg-white">
-          <li class="breadcrumb-item">Home</li>
-          <li class="breadcrumb-item active">Guru</li>
-      </ol>
+    <div>
+      {{ Breadcrumbs::render('home') }}
+    </div>
       <div class="container-fluid">
-   
+
       </div>
   </main>
 @endsection

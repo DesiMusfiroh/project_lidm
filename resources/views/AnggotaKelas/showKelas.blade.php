@@ -82,6 +82,7 @@
                                             <td>Nama Pertemuan</td>
                                             <td>Waktu Mulai</td>
                                             <td>Status</td>
+                                            <td>Aksi</td>
                                         </tr>
                                     </thead>
                                     @if($pertemuan->count() != 0)
@@ -99,6 +100,12 @@
                                             @elseif($item->status ==2)
                                             <td>Selesai</td>
                                             @endif
+                                            <!--Aksi-->
+                                            <td>
+                                            <button type="submit" class="btn btn-secondary">
+                                            <i class="fa fa-key"></i> 
+                                            </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

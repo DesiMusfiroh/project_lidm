@@ -6,11 +6,9 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item">Kelas</li>
-        <li class="breadcrumb-item active">Buat Kelas Baru</li>
-    </ol>
+    <div>
+      {{ Breadcrumbs::render('guru.kelas.create') }}
+    </div>
     <div class="container-fluid ">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -20,7 +18,7 @@
             </div>
             <form action="{{route('guru.kelas.store')}}"  method="post" enctype="multipart/form-data" >
             @csrf
-            <div class="card-body">        
+            <div class="card-body">
                     <div class="form-group row">
                         <label  class="col-sm-2 col-form-label">Nama Kelas</label>
                         <div class="col-sm-10">
@@ -32,7 +30,7 @@
                         <div class="col-sm-10">
                         <textarea class="form-control" rows="3" name="deskripsi"></textarea>
                         </div>
-                    </div>                
+                    </div>
             </div>
             <div class="card-footer">
                 <div class="mr-auto">

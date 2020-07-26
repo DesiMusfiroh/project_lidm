@@ -12,7 +12,7 @@ use App\AnggotaKelas;
 
 class KelasController extends Controller
 {
-    
+
 
     public function index()
     {
@@ -41,6 +41,7 @@ class KelasController extends Controller
     public function show($id)
     {
         $kelas          = Kelas::find($id);
+        //dd($kelas);
         $pertemuan      = Pertemuan::where('kelas_id',$id)->get();
         $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
         return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas'));

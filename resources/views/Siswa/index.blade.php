@@ -17,8 +17,8 @@
     <div class="row">
 
         <div class="col-md-8">
-            <div class="card"  style="border-radius:20px;  box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
-                <div class="card-header pt-3 pb-2 text-center" style="border-radius: 20px 20px 0px 0px; background: #EDE5E5; ">
+            <div class="card"  style=" box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
+                <div class="card-header pt-3 pb-2 text-center" >
                     <strong style="font-size:18px"> Profil</strong>
                 </div>
                 <div class="card-body" >
@@ -107,8 +107,8 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card"  style="border-radius:20px;  box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
-                <div class="card-header pt-3 pb-2 text-center" style="border-radius: 20px 20px 0px 0px; background-color:#6BCB9D;">
+            <div class="card"  style="box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
+                <div class="card-header pt-3 pb-2 text-center" >
                     <strong style="font-size:18px"> Foto Profil </strong>
                 </div>
                 <div class="card-body text-center">
@@ -129,8 +129,8 @@
 
 
             <div class="col-md-8">
-                <div class="card"  style="border-radius:20px;  box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
-                    <div class="card-header  pt-3 pb-2 text-center"  style="border-radius: 20px 20px 0px 0px; background: #EDE5E5;">
+                <div class="card"  style=" box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
+                    <div class="card-header  pt-3 pb-2 text-center"  >
                         <strong style="font-size:18px"> Profil </strong>
                     </div>
                     <div class="card-body">
@@ -148,7 +148,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="disabledTextInput"><b> User Name </b> </label>
                                         <div class="input-group mb-0">
-                                        <div class="input-group-prepend" style="border-radius:10px; border-color:#c4cdcf; box-shadow: 3px 3px 5px grey;">
+                                        <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1"> <span class="fa fa-user"></span> </span>
                                         </div>
                                         <input type="text" id="disabledTextInput" class="form-control" placeholder="{{ Auth::user()->name }}" readonly>

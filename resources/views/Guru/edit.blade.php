@@ -8,7 +8,7 @@
 <?php use App\Guru ;
 ?>
 <main class="main">
-
+    {{ Breadcrumbs::render('guru.profil.edit') }}
     <div class="container-fluid">
         <div class="animated fadeIn">
 
