@@ -7,6 +7,7 @@ use App\User;
 use App\Guru;
 use App\AnggotaKelas;
 use App\Pertemuan;
+use App\Ujian;
 
 class Kelas extends Model
 {
@@ -20,5 +21,9 @@ class Kelas extends Model
     }
     public function pertemuan(){
         return $this->hasMany(Pertemuan::class,'kelas_id');
+    }
+
+    public function ujian(){
+      return $this->hasMany(Ujian::class,'kelas_id');
     }
 }
