@@ -97,7 +97,9 @@
                                             <td><?php echo $i; $i++?></td>
                                             <td>{{$item->nama_pertemuan}}</td>
                                             <td>{{$item->waktu_mulai}}</td>
-                                            <td></td>
+                                            <td>
+                                            <a href="{{route('pertemuan.show',$item->id)}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

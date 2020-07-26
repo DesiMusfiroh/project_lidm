@@ -18,8 +18,8 @@
             @method('PATCH')
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card"  style="border-radius:20px;  box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
-                            <div class="card-header  pt-3 pb-2 text-center"  style="border-radius: 20px 20px 0px 0px;  background-color:#6BCB9D;">
+                        <div class="card"  style="box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
+                            <div class="card-header  pt-3 pb-2 text-center" >
                                 <strong style="font-size:18px"> Foto Profil </strong>
                             </div>
                             <div class="card-body">
@@ -40,8 +40,8 @@
                     </div>
 
                     <div class="col-md-8">
-                        <div class="card"  style="border-radius:20px;  box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
-                            <div class="card-header  pt-3 pb-2  text-center"  style="border-radius: 20px 20px 0px 0px;  background: #EDE5E5;">
+                        <div class="card"  style="box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
+                            <div class="card-header  pt-3 pb-2  text-center"  >
                                 <strong style="font-size:18px"> Foto Profil </strong>
                             </div>
                             <div class="card-body">
