@@ -6,11 +6,9 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item"><a href="{{route('guru.kelas')}}">Kelas </a> </li>
-        <li class="breadcrumb-item"><a href="{{route('guru.kelas.show',$kelas->id)}}">{{$kelas->nama_kelas}} </a></li>
-        <li class="breadcrumb-item active">{{$pertemuan->nama_pertemuan}} </li>
-    </ol>
+    <div>
+      {{ Breadcrumbs::render('pertemuan.show',$pertemuan->kelas,$pertemuan) }}
+    </div>
     <div class="container-fluid">
         <div class="alert alert-success" role="alert">
             <h4 class="alert-heading">{{$pertemuan->nama_pertemuan}}</h4>
@@ -44,14 +42,14 @@
                                         <td>{{$item->siswa->nama_lengkap}}</td>
                                         <td>
                                             <a href="#">
-                                                <button type="button" class="btn btn-sm btn-info"  data-toggle="popover" title="{{$item->siswa->nama_lengkap}} ({{$item->siswa->nomor_induk}})" 
+                                                <button type="button" class="btn btn-sm btn-info"  data-toggle="popover" title="{{$item->siswa->nama_lengkap}} ({{$item->siswa->nomor_induk}})"
                                                 data-content="
                                                 {{$item->siswa->jk}}">
                                                     <i class="fa fa-eye"></i>
                                                 </button>
-                                            </a> 
+                                            </a>
                                         </td>
-                                                                         
+
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -61,14 +59,14 @@
                             <div class="alert alert-warning" role="alert">
                                 Belum ada siswa yang mengikuti kelas ini
                             </div>
-                        </div> 
+                        </div>
                         @endif
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="card pt-3 pr-3 pl-3 pb-3">
- 
+
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <!-- <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="pertemuan-tab" data-toggle="tab" href="#pertemuan" role="tab" aria-controls="pertemuan" aria-selected="true">Pertemuan</a>
@@ -91,7 +89,7 @@
                                         <div class="alert alert-warning" role="alert">
                                             Belum ada pertemuan yang dibuat
                                         </div>
-                                    </div> 
+                                    </div>
                             </div>
                         </div>  -->
                         <div class="tab-pane active" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
@@ -103,7 +101,7 @@
                                     <div class="alert alert-warning" role="alert">
                                             Belum ada kelompok yang dibuat
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
@@ -112,7 +110,7 @@
                                         <div class="alert alert-warning" role="alert">
                                             Belum ada tugas yang dibuat
                                         </div>
-                                    </div> 
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -120,7 +118,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </main>
 

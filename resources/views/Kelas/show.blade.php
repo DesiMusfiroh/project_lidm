@@ -6,10 +6,10 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item"><a href="{{route('guru.kelas')}}">Kelas</a> </li>
-        <li class="breadcrumb-item active">{{$kelas->nama_kelas}}</li>
-    </ol>
+    <div>
+      {{ Breadcrumbs::render('guru.kelas.show',$kelas) }}
+    </div>
+
     <div class="container-fluid">
 
         <div class="alert alert-success" role="alert">
@@ -98,7 +98,7 @@
                                             <td>{{$item->nama_pertemuan}}</td>
                                             <td>{{$item->waktu_mulai}}</td>
                                             <td>
-                                            <a href="{{route('pertemuan.show',$item->id)}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
+                                            <a href="{{route('pertemuan.show',['kelas_id'=>$kelas->id,'id_pertemuan'=>$item->id])}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
                                             </td>
                                         </tr>
                                     @endforeach

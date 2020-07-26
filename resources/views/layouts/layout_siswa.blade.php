@@ -20,7 +20,13 @@
     =========================================================
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
-<link href="{{asset('/')}}main.css" rel="stylesheet"></head>
+<link href="{{asset('/')}}main.css" rel="stylesheet">
+<style media="screen">
+  .breadcrumb{
+    background-color: white;
+  }
+</style>
+</head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">

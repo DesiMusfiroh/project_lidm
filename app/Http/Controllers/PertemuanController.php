@@ -25,11 +25,12 @@ class PertemuanController extends Controller
         ]);
         return redirect()->route('guru.kelas.show',$request->kelas_id)->with('success','Pertemuan baru berhasil dibuat');
     }
-    public function show($id)
+    public function show($kelas_id,$id_pertemuan)
     {
-        $pertemuan      = Pertemuan::find($id);
-        $kelas          = Kelas::find($id);
-        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
+        $pertemuan      = Pertemuan::find($id_pertemuan);
+        $kelas          = Kelas::find($kelas_id);
+        $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
+        //dd($pertemuan);
         return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, ], compact('pertemuan','kelas'));
     }
 }

@@ -8,12 +8,8 @@
 <?php use App\Siswa ;
 ?>
 <main class="main">
-  <ol class="breadcrumb bg-white">
     {{ Breadcrumbs::render('edit') }}
-  </ol>
     <div class="container-fluid">
-        <div class="animated fadeIn">
-
 
             <form action="{{route('siswa.profil.update')}}" method="post" enctype="multipart/form-data" >
             @csrf
@@ -152,7 +148,6 @@
                 </div>
             </form>
 
-        </div>
     </div>
 </main>
 @endsection

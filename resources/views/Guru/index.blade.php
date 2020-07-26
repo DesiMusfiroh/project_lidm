@@ -9,12 +9,10 @@
     $guru = Guru::where('user_id', Auth::user()->id )->first();
 ?>
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item active">Guru</li>
-    </ol>
-    <div class="container-fluid">
-    <div class="animated fadeIn">
+    <div>
+      {{ Breadcrumbs::render('guru.profil') }}
+    </div>
+
 
 @if ( Guru::where('user_id', Auth::user()->id )->first() != null )
     <div class="row">
@@ -86,20 +84,20 @@
                                     <td> : </td>
                                     <td>{{ $guru->instansi }}</td>
                                 </tr>
-                               
+
                                 <tr>
                                     <td col><b> Alamat </b> </td>
                                     <td> : </td>
                                     <td>{{ $guru->alamat }}</td>
                                 </tr>
-                                
+
                             </table>
                     </div>
                 </div>
 
                 <div class="card-footer" style="border-radius: 0px 0px 20px 20px ">
                     <div class="row">
-                    
+
                         <a href="{{route('guru.profil.edit')}}"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
                     </div>
                 </div>
@@ -118,8 +116,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
     </div>
 @else
 

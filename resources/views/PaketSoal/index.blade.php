@@ -6,10 +6,9 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Guru</a> </li>
-        <li class="breadcrumb-item active">Daftar Paket Soal</li>
-    </ol>
+  <div>
+    {{ Breadcrumbs::render('paketsoal.index') }}
+  </div>
 @if(session('pesan'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong>{{session('pesan')}}</strong>

@@ -6,9 +6,9 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item active">Kelas</li>
-    </ol>
+    <div>
+      {{ Breadcrumbs::render('guru.kelas') }}
+    </div>
 
     <div class="container-fluid">
     <div class="alert alert-info" role="alert">
@@ -33,7 +33,7 @@
         <div class="alert alert-warning" role="alert">
             Belum ada kelas yang dibuat
         </div>
-    </div> 
+    </div>
     @endif
     </div>
 </main>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', function () { 
+Route::get('/', function () {
     return view('welcome');
 });
 
@@ -55,7 +55,7 @@ Route::group(['prefix' => 'guru'], function () {
         Route::group(['prefix' => 'pertemuan'], function () {
             Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
             Route::post('/store','PertemuanController@store')->name('pertemuan.store');
-            Route::get('/show/{id}','PertemuanController@show')->name('pertemuan.show');
+            Route::get('/show/{kelas_id}/{id_pertemuan}','PertemuanController@show',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.show');
         });
     });
     // route kelola paketsoal
