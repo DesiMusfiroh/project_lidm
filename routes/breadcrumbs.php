@@ -26,4 +26,7 @@ Breadcrumbs::register('showkelas', function ($breadcrumbs, $kelas) {
     $breadcrumbs->push($kelas->nama_kelas, route('siswa.kelas.show', $kelas->id));
 });
 
+
+
+
  ?>
