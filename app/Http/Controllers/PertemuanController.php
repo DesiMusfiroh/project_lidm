@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kelas;
 use App\Pertemuan;
+use App\AnggotaKelas;
 
 class PertemuanController extends Controller
 {
@@ -23,5 +24,12 @@ class PertemuanController extends Controller
             'status' => 0,
         ]);
         return redirect()->route('guru.kelas.show',$request->kelas_id)->with('success','Pertemuan baru berhasil dibuat');
+    }
+    public function show($id)
+    {
+        $pertemuan      = Pertemuan::find($id);
+        $kelas          = Kelas::find($id);
+        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
+        return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, ], compact('pertemuan','kelas'));
     }
 }

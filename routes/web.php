@@ -55,6 +55,7 @@ Route::group(['prefix' => 'guru'], function () {
         Route::group(['prefix' => 'pertemuan'], function () {
             Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
             Route::post('/store','PertemuanController@store')->name('pertemuan.store');
+            Route::get('/show/{id}','PertemuanController@show')->name('pertemuan.show');
         });
     });
     // route kelola paketsoal

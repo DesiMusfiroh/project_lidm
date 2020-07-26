@@ -9,7 +9,11 @@
     <ol class="breadcrumb bg-white">
         <li class="breadcrumb-item active">Kelas</li>
     </ol>
+
     <div class="container-fluid">
+    <div class="alert alert-info" role="alert">
+    <h4> Daftar Kelas</h4>
+    </div>
     @if($kelas->count() != 0)
         <div class="row">
             @foreach ($kelas as $item)
@@ -25,6 +29,11 @@
             @endforeach
         </div>
     @else
+    <div class="col-md-12">
+        <div class="alert alert-warning" role="alert">
+            Belum ada kelas yang dibuat
+        </div>
+    </div> 
     @endif
     </div>
 </main>
