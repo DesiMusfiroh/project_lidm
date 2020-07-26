@@ -40,7 +40,9 @@
                                     <tr>
                                         <td><?php echo $i; $i++?></td>
                                         <td>{{$item->siswa->nama_lengkap}}</td>
-                                        <td><a href=""><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a> </td>
+                                        <td>
+                                            <a href=""><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a> 
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -86,7 +88,7 @@
                                             <td width="30px">No</td>
                                             <td>Nama Pertemuan</td>
                                             <td>Jadwal</td>
-                                            <td>Opsi</td>
+                                            <td align="center">Opsi</td>
                                         </tr>
                                     </thead>
 
@@ -97,8 +99,13 @@
                                             <td><?php echo $i; $i++?></td>
                                             <td>{{$item->nama_pertemuan}}</td>
                                             <td>{{$item->waktu_mulai}}</td>
-                                            <td>
-                                            <a href="{{route('pertemuan.show',$item->id)}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
+                                            <td  align="center">
+                                            <a href="#"> 
+                                                <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
+                                            </a>
+                                            <a href="{{route('pertemuan.show',$item->id)}}"> 
+                                                <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> 
+                                            </a>
                                             </td>
                                         </tr>
                                     @endforeach

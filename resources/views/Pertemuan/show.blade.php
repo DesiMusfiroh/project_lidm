@@ -3,12 +3,14 @@
 @section('title')
     <title>Unbreakable</title>
 @endsection
-
+<?php 
+Use App\Kelas;
+?>
 @section('content')
 <main class="main">
     <ol class="breadcrumb bg-white">
         <li class="breadcrumb-item"><a href="{{route('guru.kelas')}}">Kelas </a> </li>
-        <li class="breadcrumb-item"><a href="{{route('guru.kelas.show',$kelas->id)}}">{{$kelas->nama_kelas}} </a></li>
+        <li class="breadcrumb-item"><a href="{{route('guru.kelas.show',$kelas->id)}}">{{$pertemuan->kelas->nama_kelas}}</a></li>
         <li class="breadcrumb-item active">{{$pertemuan->nama_pertemuan}} </li>
     </ol>
     <div class="container-fluid">
@@ -19,7 +21,7 @@
             </p>
             <hr>
             <div class="mb-0 text-right">
-                Nama Kelas : <strong>{{$kelas->nama_kelas}}</strong>
+                Nama Kelas : <strong>{{$pertemuan->kelas->nama_kelas}}</strong>
             </div>
         </div>
         <div class="row">
@@ -27,42 +29,13 @@
                 <div class="card mb-3">
                     <div class="card-header">Daftar Siswa</div>
                     <div class="card-body">
-                        @if($anggotakelas->count() != 0)
-                        <table class="table table-striped">
-                            <thead class="thead-dark thead">
-                                <tr>
-                                    <td width="30px">No</td>
-                                    <td>Nama Siswa</td>
-                                    <td width="30px"></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $i=1; ?>
-                                @foreach ($anggotakelas as $item)
-                                    <tr>
-                                        <td><?php echo $i; $i++?></td>
-                                        <td>{{$item->siswa->nama_lengkap}}</td>
-                                        <td>
-                                            <a href="#">
-                                                <button type="button" class="btn btn-sm btn-info"  data-toggle="popover" title="{{$item->siswa->nama_lengkap}} ({{$item->siswa->nomor_induk}})" 
-                                                data-content="
-                                                {{$item->siswa->jk}}">
-                                                    <i class="fa fa-eye"></i>
-                                                </button>
-                                            </a> 
-                                        </td>
-                                                                         
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        @else
+                        
                         <div class="col-md-12">
                             <div class="alert alert-warning" role="alert">
                                 Belum ada siswa yang mengikuti kelas ini
                             </div>
                         </div> 
-                        @endif
+                       
                     </div>
                 </div>
             </div>

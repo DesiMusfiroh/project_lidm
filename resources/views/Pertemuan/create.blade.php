@@ -40,6 +40,7 @@
                         </div>
                     </div>     
                     <input type="hidden" name="kelas_id" value="{{$kelas->id}}">            
+                    <input type="hidden" name="status" value="0">            
             </div>
             <div class="card-footer">
                 <div class="mr-auto">
