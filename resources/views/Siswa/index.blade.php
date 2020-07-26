@@ -5,18 +5,15 @@
 @endsection
 
 @section('content')
-<?php  use App\Siswa;
-    $siswa = Siswa::where('user_id', Auth::user()->id )->first();
-?>
+
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item active">Siswa</li>
-    </ol>
+    <div class="">
+      {{ Breadcrumbs::render('profil') }}
+    </div>
     <div class="container-fluid">
     <div class="animated fadeIn">
 
-@if ( Siswa::where('user_id', Auth::user()->id )->first() != null )
+@if ( $siswa->count() != null )
     <div class="row">
 
         <div class="col-md-8">

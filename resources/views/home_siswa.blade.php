@@ -7,12 +7,10 @@
 @section('content')
 
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item active">Siswa</li>
-    </ol>
-    <div class="container-fluid">
-
+    <div>
+      {{ Breadcrumbs::render('home') }}
+    </div>
+    <div class="animated fadeIn">
     </div>
 </main>
 @endsection

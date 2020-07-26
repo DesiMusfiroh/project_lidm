@@ -6,11 +6,9 @@
 
 @section('content')
 <main class="main">
-    <ol class="breadcrumb bg-white">
-        <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item"><a href="{{route('guru.kelas')}}">Kelas</a> </li>
-        <li class="breadcrumb-item active">{{$kelas->nama_kelas}}</li>
-    </ol>
+    <div>
+        {{ Breadcrumbs::render('showkelas',$kelas) }}
+    </div>
     <div class="container-fluid">
 
         <div class="alert alert-success" role="alert">
@@ -51,14 +49,14 @@
                             <div class="alert alert-warning" role="alert">
                                 Belum ada siswa yang mengikuti kelas ini
                             </div>
-                        </div> 
+                        </div>
                         @endif
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="card pt-3 pr-3 pl-3 pb-3">
- 
+
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="pertemuan-tab" data-toggle="tab" href="#pertemuan" role="tab" aria-controls="pertemuan" aria-selected="true">Pertemuan</a>
@@ -104,7 +102,7 @@
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                    @else 
+                                    @else
                                     <tbody>
                                     <div class="alert alert-warning" role="alert">
                                         Belum ada pertemuan
@@ -128,7 +126,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </main>
 

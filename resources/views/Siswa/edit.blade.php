@@ -8,7 +8,9 @@
 <?php use App\Siswa ;
 ?>
 <main class="main">
-
+  <ol class="breadcrumb bg-white">
+    {{ Breadcrumbs::render('edit') }}
+  </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
 
