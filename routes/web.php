@@ -68,6 +68,9 @@ Route::group(['prefix' => 'guru'], function () {
 
     Route::group(['prefix' => 'ujian'], function(){
       Route::get('/','UjianController@index')->name('guru.ujian.index');
+      Route::get('/create','UjianController@create')->name('guru.ujian.create');
+      Route::post('/store','UjianController@store')->name('guru.ujian.store');
+      Route::get('/show/{id}','UjianController@show')->name('guru.ujian.show');
     });
 
 });

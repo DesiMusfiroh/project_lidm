@@ -23,9 +23,9 @@ class PaketSoal extends Model
       return $this->hasMany(Ujian::class,'paket_soal_id');
     }
 
-    public function jumlah_soal(){
-      $id_paket_soal = $this->id;
-      $jumlahSoal = SoalSatuan::where('paket_soal_id',$id_paket_soal)->count();
-      return $jumlahSoal;
-    }
+    // public function jumlah_soal(){
+    //   $id_paket_soal = $this->id;
+    //   $jumlahSoal = SoalSatuan::where('paket_soal_id',$id_paket_soal)->count();
+    //   return $jumlahSoal;
+    // }
 }

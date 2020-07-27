@@ -19,5 +19,9 @@ class Guru extends Model
     }
     public function paket_soal(){
         return $this->hasMany(PaketSoal::class,'guru_id');
-      }
+    }
+
+    public function ujian(){
+      return $this->hasMany(Ujian::class,'guru_id');
+    }
 }

@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+<?php
+use App\Siswa;
+
+ ?>
 
 <main class="main">
     <div class="">
@@ -13,7 +17,7 @@
     <div class="container-fluid">
     <div class="animated fadeIn">
 
-@if ( $siswa->count() != null )
+@if ( Siswa::where('user_id', Auth::user()->id )->first() != null )
     <div class="row">
 
         <div class="col-md-8">

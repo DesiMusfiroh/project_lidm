@@ -11,8 +11,11 @@
     border-radius:5px;
 
 };
+.merah{
+  background-color: red;
+}
 </style>
-<div class="app-sidebar sidebar-shadow">
+<div class="app-sidebar sidebar-shadow merah">
     <div class="app-header__logo">
         <div class="logo-src"></div>
         <div class="header__pane ml-auto">
@@ -69,32 +72,32 @@
                 <li>
                     <a href="{{route('home')}}" class="mb-2  {{(request()->is('/home*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-home"></i>
-                        Beranda
+                        <b>Beranda</b>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('guru.profil')}}" class="mb-2 {{(request()->is('guru/profil*')) ? 'mm-active' : ''}} ">
                         <i class="metismenu-icon pe-7s-user"></i>
-                        Profil
+                        <b>Profil</b>
                     </a>
                 </li>
 
                 <li>
                 <a href="{{route('guru.kelas')}}" class="mb-2  {{(request()->is('guru/kelas*')) ? 'mm-active' : ''}}">
                      <i class="metismenu-icon pe-7s-monitor"></i>
-                        Kelas
+                        <b>Kelas</b>
                      <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                 </a>
                 <ul>
                     <li>
                         <a href="{{route('guru.kelas.create')}}">
-                           Buat Kelas Baru
+                          <b>Buat Kelas Baru</b>
                             <i class="metismenu-icon"></i>
                         </a>
                     </li>
                     <li>
                         <a href="{{route('guru.kelas')}}">
-                            Daftar Kelas
+                            <b>Daftar Kelas</b>
                             <i class="metismenu-icon pe-7s-monitor"></i>
                         </a>
                     </li>
@@ -105,19 +108,19 @@
                 <li>
                     <a href="#" class="mb-2">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Paket Soal
+                        <b>Paket Soal</b>
                         <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                     </a>
                     <ul>
                     <li>
                         <a href="{{route('guru.paketsoal.create')}}">
-                           Buat Paket Soal
+                          <b>Buat Paket Soal</b>
                             <i class="metismenu-icon"></i>
                         </a>
                     </li>
                     <li>
                         <a href="{{route('paketsoal.index')}}">
-                            Daftar Paket Soal
+                            <b>Daftar Paket Soal</b>
                             <i class="metismenu-icon pe-7s-monitor"></i>
                         </a>
                     </li>
@@ -127,19 +130,19 @@
                 <li>
                 <a href="#" class="md-2">
                      <i class="metismenu-icon pe-7s-display2"></i>
-                        Kelola Ujian
                      <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                     <b>Kelola Ujian</b>
                 </a>
                 <ul>
                     <li>
                         <a href="{{route('guru.ujian.index')}}">
-                           Ujian
+                          <b>Ujian</b>
                             <i class="metismenu-icon"></i>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            Monitoring Ujian
+                            <b>Monitoring Ujian</b>
                             <i class="metismenu-icon pe-7s-monitor"></i>
                         </a>
                     </li>
