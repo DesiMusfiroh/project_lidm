@@ -52,15 +52,15 @@
             @else
             <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
             @endif
-            <li class="app-sidebar__heading">{{auth()->user()->name}}</li> 
-            
-                <a  id="a-ku" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
+            <li class="app-sidebar__heading">{{auth()->user()->name}}</li>
+
+                <a  id="a-ku" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <button type="button" class="btn">
                     Logout
-                    
+
                     </button>
                 </a>
-            
+
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
             </form>
@@ -78,7 +78,7 @@
                         Profil
                     </a>
                 </li>
-                    
+
                 <li>
                 <a href="{{route('guru.kelas')}}" class="mb-2  {{(request()->is('guru/kelas*')) ? 'mm-active' : ''}}">
                      <i class="metismenu-icon pe-7s-monitor"></i>
@@ -98,7 +98,7 @@
                             <i class="metismenu-icon pe-7s-monitor"></i>
                         </a>
                     </li>
-                                        
+
                 </ul>
                 </li>
 
@@ -121,7 +121,7 @@
                             <i class="metismenu-icon pe-7s-monitor"></i>
                         </a>
                     </li>
-                                        
+
                 </ul>
                 </li>
                 <li>
@@ -132,7 +132,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="{{route('guru.ujian.index')}}">
                            Ujian
                             <i class="metismenu-icon"></i>
                         </a>
@@ -143,7 +143,7 @@
                             <i class="metismenu-icon pe-7s-monitor"></i>
                         </a>
                     </li>
-                                        
+
                 </ul>
                 </li>
             </ul>

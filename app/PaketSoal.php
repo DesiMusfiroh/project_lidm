@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Guru;
 use App\Ujian;
-use App\SoalSatuan;
+//use App\SoalSatuan;
 
 class PaketSoal extends Model
 {
