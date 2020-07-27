@@ -33,6 +33,10 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::post('/gabungkelas','AnggotaKelasController@gabungKelas')->name('gabungKelas');
         Route::get('/show/{id}','AnggotaKelasController@showKelas')->name('siswa.kelas.show');
     });
+    // route kelola pertemuan
+    Route::group(['prefix' => 'pertemuan'], function () {
+        Route::get('/show/{kelas_id}/{id_pertemuan}','AnggotaKelasController@showPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.show');
+    });
 });
 
 // ROUTE GURU  ------------------------------------------------------------------------------------------

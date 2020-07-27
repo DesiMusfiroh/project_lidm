@@ -12,12 +12,8 @@
     <div class="container-fluid">
 
         <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">{{$kelas->nama_kelas}}</h4>
+            <h5 class="alert-heading">{{$kelas->nama_kelas}}</h5>
             <p>{{$kelas->deskripsi}}</p>
-            <hr>
-            <div class="mb-0 text-right">
-                Kode Akses Kelas : <strong>{{$kelas->kode_kelas}}</strong>
-            </div>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -78,7 +74,7 @@
                                 <table class="table table-striped">
                                     <thead class="thead-dark thead">
                                         <tr>
-                                            <td width="30px">No</td>
+                                            <td>No</td>
                                             <td>Nama Pertemuan</td>
                                             <td>Waktu Mulai</td>
                                             <td>Status</td>
@@ -102,9 +98,7 @@
                                             @endif
                                             <!--Aksi-->
                                             <td>
-                                            <button type="submit" class="btn btn-secondary">
-                                            <i class="fa fa-key"></i> 
-                                            </button>
+                                            <a href="{{route('pertemuanSiswa.show',['kelas_id'=>$kelas->id,'id_pertemuan'=>$item->id])}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
                                             </td>
                                         </tr>
                                     @endforeach
