@@ -58,6 +58,13 @@ class AnggotaKelasController extends Controller
         return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas'));
 
     }
+    public function showPertemuan($kelas_id, $id_pertemuan){
+
+        $pertemuan      = Pertemuan::find($id_pertemuan);
+        $kelas          = Kelas::find($kelas_id);
+        $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
+        return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, ], compact('pertemuan','kelas'));
+    }
 
     /**
      * Show the form for creating a new resource.
