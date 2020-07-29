@@ -41,7 +41,7 @@
                                         <td><?php echo $i; $i++?></td>
                                         <td>{{$item->siswa->nama_lengkap}}</td>
                                         <td>
-                                            <a href=""><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a> 
+                                            <a href=""><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -100,7 +100,7 @@
                                             <td>{{$item->nama_pertemuan}}</td>
                                             <td>{{$item->waktu_mulai}}</td>
                                             <td>
-                                            <a href="#"> 
+                                            <a href="#">
                                                 <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
                                             </a>
                                             <a href="{{route('pertemuan.show',['kelas_id'=>$kelas->id,'id_pertemuan'=>$item->id])}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>

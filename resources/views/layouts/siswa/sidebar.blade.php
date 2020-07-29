@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="mb-2">
+                    <a href="{{route('siswa.ujian.index')}}" class="mb-2">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
                         Ujian
                     </a>
