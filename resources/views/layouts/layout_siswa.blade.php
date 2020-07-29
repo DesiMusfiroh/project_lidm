@@ -360,3 +360,4 @@
 @yield('js')
 @yield('chart')
 </html>
+@yield('modal')
