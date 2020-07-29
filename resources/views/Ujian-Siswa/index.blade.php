@@ -1,5 +1,7 @@
 @extends('layouts.layout_siswa')
-@section('title','Ujian Saya')
+@section('title')
+	<title>Ujian Saya</title>
+@endsection
 @section('content')
 <div>
   {{ Breadcrumbs::render('guru.kelas') }}
@@ -7,6 +9,7 @@
 <div class="main">
 	<div class="">
 		<div class="row">
+			@if($peserta->count() != 0)
 			@foreach($peserta as $item)
 			<div class="col-md-4">	
 			    <div class="card mb-3 widget-content bg-arielle-smile">
@@ -20,7 +23,8 @@
 			        </div>
 			    </div>
 			</div>
-		@endforeach
+			@endforeach
+			@endif
 		</div>
 	</div>
 </div>
