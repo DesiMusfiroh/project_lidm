@@ -25,6 +25,7 @@
     }
     .card{
         box-shadow: 2px 2px 10px rgba(48, 10, 64, 0.5);
+        margin-bottom: 20px;
     } 
     .card-header { background: rgba(26, 166, 65, 0.47);}
     .metismenu-icon {color: black; font-weight:bold;}

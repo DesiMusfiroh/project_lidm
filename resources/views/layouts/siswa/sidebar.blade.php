@@ -51,7 +51,7 @@
             @else
             <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
             @endif
-            <li style="color: blue;">{{auth()->user()->name}}</li> 
+            <li class="app-sidebar__heading">{{auth()->user()->name}}</li> 
             
                 <a  id="a-ku" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
                     <button type="button" class="btn">
@@ -67,25 +67,25 @@
                 <li>
                     <a href="/home" class="active mb-2">
                         <i class="metismenu-icon pe-7s-home"></i>
-                        Beranda
+                        <b>Beranda</b>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('siswa.profil')}}" class="mb-2  {{(request()->is('siswa/profil*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-user"></i>
-                        Profil
+                        <b>Profil</b>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('siswa.kelas')}}" class="mb-2  {{(request()->is('siswa/kelas*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-monitor"></i>
-                        Kelas
+                        <b>Kelas</b>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('siswa.ujian.index')}}" class="mb-2">
+                    <a href="" class="mb-2">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Ujian
+                        <b>Ujian</b>
                     </a>
                 </li>
                 <li>
