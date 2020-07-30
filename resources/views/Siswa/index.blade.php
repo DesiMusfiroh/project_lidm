@@ -14,9 +14,9 @@ use App\Siswa;
     <div class="">
       {{ Breadcrumbs::render('profil') }}
     </div>
-    <div class="container-fluid">
-    <div class="animated fadeIn">
 
+
+<div class="container">
 @if ( Siswa::where('user_id', Auth::user()->id )->first() != null )
     <div class="row">
 
@@ -102,10 +102,8 @@ use App\Siswa;
                     </div>
                 </div>
 
-                <div class="card-footer" style="border-radius: 0px 0px 20px 20px ">
-                    <div class="row justify-content-center">
-                        <a href="{{route('siswa.profil.edit')}}"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
-                    </div>
+                <div class="card-footer justify-content-center" style="border-radius: 0px 0px 20px 20px ">
+                    <a href="{{route('guru.profil.edit')}}"><button class="btn btn-info"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
                 </div>
 
             </div>
@@ -124,7 +122,6 @@ use App\Siswa;
         </div>
     </div>
 
-    </div>
 @else
 
     <form action="{{route('siswa.profil.store')}}" method="post" enctype="multipart/form-data" >
@@ -258,6 +255,6 @@ use App\Siswa;
     </form>
 @endif
 </div>
-</div>
+
 </main>
 @endsection

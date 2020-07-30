@@ -20,7 +20,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12" >
-            <div class="card" >
+            <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-12">
@@ -38,10 +38,10 @@
                             </button>
                         </div>
                 @endif
-                <div class="card-body ">
                 @if($paketsoal->count() != 0)
+                <div class="table-inside">
                     <table class="table table-striped table-bordered table-sm">
-                        <thead class="thead-dark text-center">
+                        <thead class="text-center bg-dark" style="color:white;">
                             <tr>
                                 <th scope="col" style="width:50px">No</th>
                                 <th scope="col" >Judul Paket Soal </th>
@@ -102,6 +102,7 @@
                         </tbody>
                     </table>
                     {{$paketsoal->links()}}
+                </div>
                 @else
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong> Belum ada paket soal yang di buat. Silahkan buat paket soal baru!</strong>

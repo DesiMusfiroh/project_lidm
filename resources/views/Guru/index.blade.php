@@ -13,16 +13,16 @@
       {{ Breadcrumbs::render('guru.profil') }}
     </div>
 
-
+<div class="container">
 @if ( Guru::where('user_id', Auth::user()->id )->first() != null )
     <div class="row">
 
         <div class="col-md-8">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header pt-3 pb-2 text-center">
-                    <strong style="font-size:18px"> Profil</strong>
+                    <strong style="font-size:18px; "> Profil</strong>
                 </div>
-                <div class="card-body" >
+                <div class="card-body ">
                         @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ session('success') }}</strong>
@@ -95,18 +95,15 @@
                     </div>
                 </div>
 
-                <div class="card-footer" style="border-radius: 0px 0px 20px 20px ">
-                    <div class="row">
-
-                        <a href="{{route('guru.profil.edit')}}"><button class="btn btn-primary"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
-                    </div>
+                <div class="card-footer justify-content-center" style="border-radius: 0px 0px 20px 20px ">
+                    <a href="{{route('guru.profil.edit')}}"><button class="btn btn-info"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
                 </div>
 
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card"  style="box-shadow: 5px 5px 10px rgba(48, 10, 64, 0.5);">
-                <div class="card-header pt-3 pb-2 text-center">
+            <div class="card" >
+                <div class="card-header pt-3 pb-2 justify-content-center" >
                     <strong style="font-size:18px"> Foto Profil </strong>
                 </div>
                 <div class="card-body text-center">
@@ -242,6 +239,6 @@
     </form>
 @endif
 </div>
-</div>
+
 </main>
 @endsection
