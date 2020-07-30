@@ -11,12 +11,6 @@ use App\Siswa;
 class User extends Authenticatable
 {
     use Notifiable;
-    public function guru() {
-    	return $this->hasOne(Guru::class,'user_id');
-    }
-    public function siswa() {
-    	return $this->hasOne(Siswa::class,'user_id');
-    }
     protected $fillable = [
         'name', 'email', 'password','role',
     ];
@@ -28,4 +22,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function guru() {
+    	return $this->hasOne(Guru::class,'user_id');
+    }
+    public function siswa() {
+    	return $this->hasOne(Siswa::class,'user_id');
+    }
 }

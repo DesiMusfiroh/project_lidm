@@ -51,7 +51,7 @@
             @else
             <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
             @endif
-            <li class="app-sidebar__heading">{{auth()->user()->name}}</li> 
+            <li style="color: blue;">{{auth()->user()->name}}</li> 
             
                 <a  id="a-ku" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
                     <button type="button" class="btn">
@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="" class="mb-2">
+                    <a href="{{route('siswa.ujian.index')}}" class="mb-2">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
                         Ujian
                     </a>

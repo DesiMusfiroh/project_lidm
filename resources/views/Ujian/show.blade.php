@@ -82,8 +82,9 @@
                             </tr>
                         </thead>
                         <tbody>
+                          @if($ujian->peserta_ujian->count() !=0)
                           @foreach($ujian->peserta_ujian as $item)
-                          
+
                             <tr>
                               <td class="text-center">{{$loop->iteration}}</td>
                               <td class="text-center">{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
@@ -99,6 +100,11 @@
                               </td>
                             </tr>
                           @endforeach
+                          @else
+                          <tr>
+                            Belum ada peserta
+                          </tr>
+                          @endif
 
                         </tbody>
                     </table>

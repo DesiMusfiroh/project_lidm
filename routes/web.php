@@ -37,6 +37,12 @@ Route::group(['prefix' => 'siswa'], function () {
     Route::group(['prefix' => 'pertemuan'], function () {
         Route::get('/show/{kelas_id}/{id_pertemuan}','AnggotaKelasController@showPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.show');
     });
+
+    Route::group(['prefix' => 'ujian'], function () {
+        Route::get('/index','SiswaController@indexUjian')->name('siswa.ujian.index');
+    });
+
+
 });
 
 // ROUTE GURU  ------------------------------------------------------------------------------------------
