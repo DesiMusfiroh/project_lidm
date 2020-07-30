@@ -11,18 +11,18 @@
     </div>
 
     <div class="container-fluid">
-    <div class="alert alert-info" role="alert">
-    <h4> Daftar Kelas</h4>
+    <div class="alert alert-success pb-1 pt-2" role="alert">
+    <h5><strong>Daftar Kelas</strong> </h5>
     </div>
     @if($kelas->count() != 0)
         <div class="row">
             @foreach ($kelas as $item)
             <div class="col-md-4">
-            <div class="card mb-3">
+            <div class="card mb-3 ">
                 <div class="card-body">
                     <h5 class="card-title">{{$item->nama_kelas}}</h5>
                     <p class="card-text">{{$item->deskripsi}}</p>
-                    <a href="{{route('guru.kelas.show',$item->id)}}" class="btn btn-primary">Masuk</a>
+                    <div class="text-right"><a href="{{route('guru.kelas.show',$item->id)}}" class="btn btn-info"><i class="metismenu-icon pe-7s-monitor mr-1"></i> Masuk</a></div>
                 </div>
             </div>
             </div>

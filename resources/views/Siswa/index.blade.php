@@ -14,9 +14,9 @@ use App\Siswa;
     <div class="">
       {{ Breadcrumbs::render('profil') }}
     </div>
-    <div class="container-fluid">
-    <div class="animated fadeIn">
 
+
+<div class="container">
 @if ( Siswa::where('user_id', Auth::user()->id )->first() != null )
     <div class="row">
 
@@ -124,7 +124,6 @@ use App\Siswa;
         </div>
     </div>
 
-    </div>
 @else
 
     <form action="{{route('siswa.profil.store')}}" method="post" enctype="multipart/form-data" >
@@ -258,6 +257,6 @@ use App\Siswa;
     </form>
 @endif
 </div>
-</div>
+
 </main>
 @endsection

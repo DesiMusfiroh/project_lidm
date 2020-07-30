@@ -15,7 +15,7 @@
   background-color: red;
 }
 </style>
-<div class="app-sidebar sidebar-shadow merah">
+<div class="app-sidebar sidebar-shadow merah" style="background: linear-gradient(180deg, #12C3CE 0%, #D7E8E9 100%); box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.25);">
     <div class="app-header__logo">
         <div class="logo-src"></div>
         <div class="header__pane ml-auto">

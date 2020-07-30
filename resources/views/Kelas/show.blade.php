@@ -12,18 +12,23 @@
 
     <div class="container-fluid">
 
-        <div class="alert alert-success" role="alert">
-            <h4 class="alert-heading">{{$kelas->nama_kelas}}</h4>
-            <p>{{$kelas->deskripsi}}</p>
-            <hr>
-            <div class="mb-0 text-right">
-                Kode Akses Kelas : <strong>{{$kelas->kode_kelas}}</strong>
-            </div>
+        <div class="alert alert-success " role="alert">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5 class="alert-heading"><strong>{{$kelas->nama_kelas}}</strong> </h5>
+                    {{$kelas->deskripsi}}
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-0 text-right">
+                    Kode Akses Kelas : <strong>{{$kelas->kode_kelas}}</strong>
+                    </div>
+                </div>
+            </div> 
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="card mb-3">
-                    <div class="card-header">Daftar Siswa</div>
+                <div class="card mb-3"  style="box-shadow: 2px 2px 10px rgba(48, 10, 64, 0.5);" >
+                    <div class="card-header" >Daftar Siswa</div>
                     <div class="card-body">
                         @if($anggotakelas->count() != 0)
                         <table class="table table-striped">
@@ -58,9 +63,9 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card pt-3 pr-3 pl-3 pb-3">
+                <div class="card pt-3 pr-3 pl-3 pb-3"  style="box-shadow: 2px 2px 10px rgba(48, 10, 64, 0.5);" >
 
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist" >
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="pertemuan-tab" data-toggle="tab" href="#pertemuan" role="tab" aria-controls="pertemuan" aria-selected="true">Pertemuan</a>
                         </li>
