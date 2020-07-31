@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+body {
+    background: url('/images/LinesRoom.png') no-repeat center center fixed;
+}
+</style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -70,4 +76,5 @@
         </div>
     </div>
 </div>
+    
 @endsection
