@@ -6,6 +6,7 @@
 
 @section('content')
 <main class="main">
+  <?php use App\KelompokMaster; ?>
     <div>
       {{ Breadcrumbs::render('guru.kelas.show',$kelas) }}
     </div>
@@ -130,6 +131,7 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
+                          @if(KelompokMaster::where('kelas_id',$kelas->id)->count() == null)
                             <div class="card-body"><h5 class="card-title">Buat Kelompok</h5>
                                 <form class="" action="{{route('storeKelompok')}}" method="post">
                                 @csrf
@@ -145,6 +147,31 @@
                                     <button class="mt-1 btn btn-primary" type="submit">Submit</button>
                                 </form>
                             </div>
+                          @else
+                            @foreach($kelompok as $kel)
+                            <div class="row">
+                              <div class="card-body"><h5 class="card-title">{{$kel->nama_kelompok}}</h5>
+                                <table class="mb-0 table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($kel->anggota_kelompok as $item)
+                                    <tr>
+                                        <th scope="row">{{$loop->iteration}}</th>
+                                        <td>{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            @endforeach
+                          @endif
                         </div>
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
                             tugas

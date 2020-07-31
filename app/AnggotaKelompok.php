@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\AnggotaKelas;
 use Illuminate\Database\Eloquent\Model;
 
 class AnggotaKelompok extends Model
@@ -13,7 +13,7 @@ class AnggotaKelompok extends Model
     	return $this->belongsTo(Kelompok::class);
     }
 
-    public function anggota_kelas()
+    public function anggota_kelas(){
     	return $this->belongsTo(AnggotaKelas::class);
     }
 

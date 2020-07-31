@@ -13,7 +13,7 @@ class KelompokMaster extends Model
     	return $this->belongsTo(Kelas::class);
     }
 
-    // public function kelompok()
-    //   return $this->hasMany(Kelompok::class,'kelompok_master_id');
-    // }
+    public function kelompok(){
+      return $this->hasOne(Kelompok::class,'kelompok_master_id');
+    }
 }

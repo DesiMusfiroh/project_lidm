@@ -25,6 +25,6 @@ class AnggotaKelas extends Model
         return $this->hasMany(Absensi::class,'anggota_kelas_id');
     }
     public function anggota_kelompok(){
-        return $this->hasOne(AnggotaKelompok::class,'anggota_kelas_id');
+        return $this->hasMany(AnggotaKelompok::class,'anggota_kelas_id');
     }
 }

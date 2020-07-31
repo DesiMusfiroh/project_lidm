@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\KelompokMaster;
 use Illuminate\Database\Eloquent\Model;
 
 class Kelompok extends Model
