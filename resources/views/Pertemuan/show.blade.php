@@ -205,6 +205,17 @@
                 </div>
             </div>
             
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3">
+                        <button class="btn btn-warning" onclick="closeFullscreen();" >Akhiri Pertemuan</button>
+                    </div>
+                   
+                </div>
+                <div class="col-md-10">
+                
+                </div>
+            </div>
         </div>
 
     </div>
@@ -222,7 +233,15 @@
     function openFullscreen() {
     $("#fullscreenPertemuan").show();
         if (elem.requestFullscreen) {
-            elem.requestFullscreen();
+            elem.requestFullscreen();   
+            // akses kamera user           
+            var video = document.querySelector("#video-webcam");
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+            if (navigator.getUserMedia) {
+                navigator.getUserMedia({ video: true }, handleVideo, videoError);
+            }
+            function handleVideo(stream) { video.srcObject = stream; }
+            function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
         }
     }
 
@@ -230,14 +249,14 @@
     function closeFullscreen() {
         if (document.exitFullscreen) {
             document.exitFullscreen();
-            $("#fullscreenExam").hide();
+            $("#fullscreenPertemuan").hide();
         }
     }
 
 // keluar otomatis dari fullscreen saat klik esc atau x
-    $('#fullscreenExam').mouseleave(function(){
-        closeFullscreen();
-    });
+    // $('#fullscreenPertemuan').mouseleave(function(){
+    //     closeFullscreen();
+    // });
 
 // pengaturan JS untuk hitung waktu mulai pertemuan
     const waktu_mulai = new Date('<?php echo $waktu_mulai ?>').getTime();
@@ -260,25 +279,6 @@
         }
     }, 1000);
 
-//Pengaturan JS untuk akses kamera user
-    // seleksi elemen video
-    var video = document.querySelector("#video-webcam");
-    // minta izin user
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-    // jika user memberikan izin
-    if (navigator.getUserMedia) {
-        // jalankan fungsi handleVideo, dan videoError jika izin ditolak
-        navigator.getUserMedia({ video: true }, handleVideo, videoError);
-    }
-    // fungsi ini akan dieksekusi jika  izin telah diberikan
-    function handleVideo(stream) {
-        video.srcObject = stream;
-    }
-    // fungsi ini akan dieksekusi kalau user menolak izin
-    function videoError(e) {
-        // do something
-        alert("Izinkan menggunakan webcam untuk demo!")
-    }
 </script>
 
 @endsection
