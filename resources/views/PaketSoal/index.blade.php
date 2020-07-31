@@ -86,7 +86,7 @@
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                 Edit
                                 </button>
-                                    <a href="#" title="Tambah soal">
+                                <a href="{{route('create_soal_satuan',$item->id)}}" title="Tambah soal">
                                         <button type="button" class="btn btn-success btn-sm">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
