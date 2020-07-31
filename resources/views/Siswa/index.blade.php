@@ -108,7 +108,7 @@ use App\Siswa;
                 </div>
 
                 <div class="card-footer justify-content-center" style="border-radius: 0px 0px 20px 20px ">
-                    <a href="{{route('guru.profil.edit')}}"><button class="btn btn-info"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
+                    <a href="{{route('siswa.profil.edit')}}"><button class="btn btn-info"  style="box-shadow: 3px 2px 5px grey;"> Edit Profil </button></a>
                 </div>
 
             </div>

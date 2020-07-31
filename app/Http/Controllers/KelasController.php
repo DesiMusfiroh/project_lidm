@@ -65,11 +65,12 @@ class KelasController extends Controller
       $kelompok_master->status = 0;
       $kelompok_master->save();
       //dd($kelompok_master);
-      for ($i=0; $i < $jml_kel ; $i++) {
+      for ($i=1; $i <= $jml_kel ; $i++) {
         $kelompok = new Kelompok;
         $kelompok->kelompok_master_id = $kelompok_master->id;
-        $kelompok->nama_kelompok = "Contoh";
+        $kelompok->nama_kelompok = "Kelompok ".$i;
         $kelompok->save();
+        
       }
       dd("oke");
     }

@@ -69,6 +69,7 @@ Route::group(['prefix' => 'guru'], function () {
         });
 
         Route::group(['prefix' => 'kelompok'],function(){
+            //route untuk buat kelompok master sekaligus kelompok (satuan) sama masukin anggotanya otomatis
             Route::post('/store','KelasController@storeKelompok')->name('storeKelompok');
         });
     });
