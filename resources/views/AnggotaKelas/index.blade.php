@@ -10,10 +10,16 @@
     <div>
       {{ Breadcrumbs::render('kelas') }}
     </div>
+    @if(session('pesan'))
+      <div class="alert alert-warning" role="alert">
+        {{session('pesan')}}
+      </div>
+    @endif
+    dfsfs
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12" >
-                
+
                 <div class="card" >
                     <div class="card-header">
                         <div class="row">
@@ -38,13 +44,13 @@
                             @csrf
                                 <div class="input-group">
                                 <input type="kode_kelas" id="kode_kelas" name="kode_kelas" required
-                                placeholder="Masukkan Kode Kelas" class="form-control">
+                                placeholder="Masukkan Kode Kelas" class="form-control" autocomplete="off">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-secondary"><i class="fa fa-plus mr-2"></i> <strong> Gabung</strong></button>
                                     </div>
                                 </div>
                             </form>
-                            </div>             
+                            </div>
                         </div>
                         <hr/>
                         @if($anggotaKelas->count() != 0)
@@ -78,8 +84,3 @@
     </div>
 </main>
 @endsection
-
-
-
-   
-

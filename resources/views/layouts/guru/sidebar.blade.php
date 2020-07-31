@@ -70,7 +70,7 @@
             </center>
 
                 <li>
-                    <a href="{{route('home')}}" class="mb-2  {{(request()->is('/home*')) ? 'mm-active' : ''}}">
+                    <a href="{{route('home')}}" class="mb-2  {{(request()->is('home')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-home"></i>
                         <b>Beranda</b>
                     </a>

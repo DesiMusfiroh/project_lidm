@@ -67,6 +67,10 @@ Route::group(['prefix' => 'guru'], function () {
             Route::post('/store','PertemuanController@store')->name('pertemuan.store');
             Route::get('/show/{kelas_id}/{id_pertemuan}','PertemuanController@show',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.show');
         });
+
+        Route::group(['prefix' => 'kelompok'],function(){
+            Route::post('/store','KelasController@storeKelompok')->name('storeKelompok');
+        });
     });
     // route kelola paketsoal
     Route::group(['prefix' => 'paketsoal'], function () {

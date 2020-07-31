@@ -23,7 +23,7 @@
                     Kode Akses Kelas : <strong>{{$kelas->kode_kelas}}</strong>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -124,7 +124,21 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
-                            kelompok
+                            <div class="card-body"><h5 class="card-title">Buat Kelompok</h5>
+                                <form class="" action="{{route('storeKelompok')}}" method="post">
+                                @csrf
+                                    <input type="hidden" name="kelas_id" value="{{$kelas->id}}">
+                                    <div class="position-relative form-group">
+                                      <label for="jumlah_kelompok" class="">Jumlah Kelompok</label>
+                                      <input name="jumlah_kelompok" id="jumlah_elompok" type="number" class="form-control">
+                                    </div>
+                                    <div class="position-relative form-group">
+                                      <label for="deskripsiKelompok" class="">Deskripsi Kelompok</label>
+                                      <textarea name="deskripsi" id="deskripsiKelompok" class="form-control"> </textarea>
+                                    </div>
+                                    <button class="mt-1 btn btn-primary" type="submit">Submit</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
                             tugas

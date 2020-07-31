@@ -10,7 +10,7 @@ use App\Pertemuan;
 
 
 use Auth;
-    
+
 
 class AnggotaKelasController extends Controller
 {
@@ -21,8 +21,13 @@ class AnggotaKelasController extends Controller
      */
     public function index()
     {
-        $anggotaKelas = AnggotaKelas::where('siswa_id',Auth::user()->siswa->id)->get();
-        return view('AnggotaKelas.index',['anggotaKelas' => $anggotaKelas]);
+        try {
+          $anggotaKelas = AnggotaKelas::where('siswa_id',Auth::user()->siswa->id)->get();
+          return view('AnggotaKelas.index',['anggotaKelas' => $anggotaKelas]);
+        } catch (\Exception $e) {
+          return redirect()->route('siswa.profil')->with('pesan','Mohon lengkapi profil anda');
+        }
+
     }
 
     public function gabungKelas(Request $request){
@@ -35,7 +40,7 @@ class AnggotaKelasController extends Controller
                   $id = $item->id;
               }
               $anggotaKelas->kelas_id = $id;
-              
+
               if (AnggotaKelas::where('kelas_id',$id)->where('siswa_id',auth()->user()->siswa->id)->exists()) {
                 return redirect()->route('siswa.kelas')->withSuccess('Kamu sudah tergabung dalam kelas ini');
               }else {
@@ -43,7 +48,7 @@ class AnggotaKelasController extends Controller
                 return redirect()->route('siswa.kelas')->withSuccess('Berhasil bergabung ke kelas baru');
               }
           }
-        
+
         // } catch (\Exception $e) {
         //   return redirect()->back()->with('tidakditemukan','Kode Kelas tidak ditemukan');
         // }
@@ -51,7 +56,7 @@ class AnggotaKelasController extends Controller
 
 
     public function showKelas($id){
-    
+
         $kelas = Kelas::find($id);
         $pertemuan = Pertemuan::where('kelas_id',$id)->get();
         $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();

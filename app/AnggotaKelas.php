@@ -20,4 +20,8 @@ class AnggotaKelas extends Model
     public function peserta_ujian(){
       return $this->hasMany(PesertaUjian::class,'anggota_kelas_id');
     }
+
+    public function anggota_kelompok(){
+        return $this->hasOne(AnggotaKelompok::class,'anggota_kelas_id');
+    }
 }
