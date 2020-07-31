@@ -30,8 +30,11 @@ class PertemuanController extends Controller
         $pertemuan      = Pertemuan::find($id_pertemuan);
         $kelas          = Kelas::find($kelas_id);
         $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
-        //dd($pertemuan);
-        return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, ], compact('pertemuan','kelas'));
+
+        date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
+        $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
+
+        return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, ], compact('pertemuan','kelas','waktu_mulai'));
     }
   
 

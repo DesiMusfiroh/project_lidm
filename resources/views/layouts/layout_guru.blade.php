@@ -12,6 +12,9 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <link href="{{asset('/')}}main.css" rel="stylesheet">
+    <!-- Jquery  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <style media="screen">
     .breadcrumb{
         background-color: white;
@@ -112,4 +115,3 @@
 @yield('js')
 @yield('chart')
 </html>
-@yield('modal')

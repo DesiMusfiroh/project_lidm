@@ -20,7 +20,7 @@
             <div class="col-md-4">
             <div class="card mb-3 ">
                 <div class="card-body">
-                    <h5 class="card-title">{{$item->nama_kelas}}</h5>
+                    <h5 class="card-title">{{$item->nama_kelas}}</h5> <hr class="mb-0 mt-0 pt-0 pb-0">
                     <p class="card-text">{{$item->deskripsi}}</p>
                     <div class="text-right"><a href="{{route('guru.kelas.show',$item->id)}}" class="btn btn-info"><i class="metismenu-icon pe-7s-monitor mr-1"></i> Masuk</a></div>
                 </div>
