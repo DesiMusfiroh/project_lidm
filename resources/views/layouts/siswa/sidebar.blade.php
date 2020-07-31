@@ -51,15 +51,15 @@
             @else
             <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
             @endif
-            <li class="app-sidebar__heading">{{auth()->user()->name}}</li> 
-            
-                <a  id="a-ku" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
+            <li class="app-sidebar__heading">{{auth()->user()->name}}</li>
+
+                <a  id="a-ku" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <button type="button" class="btn">
                     Logout
-                    
+
                     </button>
                 </a>
-            
+
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
             </form>
@@ -67,25 +67,25 @@
                 <li>
                     <a href="/home" class="active mb-2">
                         <i class="metismenu-icon pe-7s-home"></i>
-                        <b>Beranda</b>
+                        Beranda
                     </a>
                 </li>
                 <li>
                     <a href="{{route('siswa.profil')}}" class="mb-2  {{(request()->is('siswa/profil*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-user"></i>
-                        <b>Profil</b>
+                        Profil
                     </a>
                 </li>
                 <li>
                     <a href="{{route('siswa.kelas')}}" class="mb-2  {{(request()->is('siswa/kelas*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-monitor"></i>
-                        <b>Kelas</b>
+                        Kelas
                     </a>
                 </li>
                 <li>
                     <a href="" class="mb-2">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        <b>Ujian</b>
+                        Ujian
                     </a>
                 </li>
                 <li>

@@ -16,8 +16,13 @@ class AnggotaKelasController extends Controller
 
     public function index()
     {
-        $anggotaKelas = AnggotaKelas::where('siswa_id',Auth::user()->siswa->id)->get();
-        return view('AnggotaKelas.index',['anggotaKelas' => $anggotaKelas]);
+        try {
+          $anggotaKelas = AnggotaKelas::where('siswa_id',Auth::user()->siswa->id)->get();
+          return view('AnggotaKelas.index',['anggotaKelas' => $anggotaKelas]);
+        } catch (\Exception $e) {
+          return redirect()->route('siswa.profil')->with('pesan','Mohon lengkapi profil anda');
+        }
+
     }
 
     public function gabungKelas(Request $request)

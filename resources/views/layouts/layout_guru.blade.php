@@ -29,7 +29,7 @@
     .card{
         box-shadow: 2px 2px 10px rgba(48, 10, 64, 0.5);
         margin-bottom: 20px;
-    } 
+    }
     .card-header { background: rgba(26, 166, 65, 0.47);}
     .metismenu-icon {color: black; font-weight:bold;}
     </style>
@@ -96,7 +96,7 @@
                                     <li class="nav-item">
                                         <a href="javascript:void(0);" class="nav-link">
                                             <div class="badge badge-success mr-1 ml-0">
-                                                &copy 
+                                                &copy
                                             </div>
                                             Sistem Informasi UNJA
                                         </a>
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                 </div>
-			</div>      
+			</div>
         </div>
     </div>
     <script type="text/javascript" src="{{asset('/assets')}}/scripts/main.js"></script>

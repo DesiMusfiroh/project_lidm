@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Kelas;
 use App\Siswa;
 use App\Absensi;
+use App\AnggotaKelompok;
 
 class AnggotaKelas extends Model
 {
@@ -22,5 +23,8 @@ class AnggotaKelas extends Model
     }
     public function absensi(){
         return $this->hasMany(Absensi::class,'anggota_kelas_id');
+    }
+    public function anggota_kelompok(){
+        return $this->hasOne(AnggotaKelompok::class,'anggota_kelas_id');
     }
 }

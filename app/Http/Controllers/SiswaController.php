@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Siswa;
 use App\PesertaUjian;
+use App\Coba;
 
 class SiswaController extends Controller
 {
