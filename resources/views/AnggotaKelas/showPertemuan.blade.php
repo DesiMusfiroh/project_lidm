@@ -198,7 +198,22 @@
                                 </div>
                                 <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. 
+                                @if($chat_pertemuan->count() != 0)
+                                        @foreach ($chat_pertemuan as $item)
+                                            @if ($item->user_id == Auth::user()->id)
+                                            <div class="alert alert-sm alert-warning pb-0 pt-0 mb-1">{{$item->user->name}} - {{$item->pesan}}</div> 
+                                            @else
+                                            <div class="alert alert-sm alert-success pb-0 pt-0 mb-1">{{$item->user->name}} - {{$item->pesan}}</div> 
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    <div class="input-group mb-3">
+                                    <input type="text" id="isipesan" class="form-control" placeholder="..." aria-label="" aria-describedby="button-addon2">
+                                    <input type="hidden" id="user_id" value="{{Auth::user()->id}}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="sendMessage();">Button</button>
+                                    </div>
+                                    </div>
                                 </div>
                                 </div>
                             </div>
@@ -259,6 +274,27 @@
             },
             success: function(data) {
                 console.log(data);
+            }
+        });
+    }
+
+// kirim pesan live chat
+    function sendMessage() {
+        var pesan = $("#isipesan").val();
+        var pertemuan_id = $("#pertemuan_id").val();
+        var user_id = $("#user_id").val();
+        $.ajax({
+            url: "{{ url('chat_pertemuan/send') }}",
+            type: "GET",
+            dataType: 'json',
+            data: {
+                pertemuan_id: pertemuan_id,
+                user_id: user_id,
+                pesan: pesan
+            },
+            success: function(data) {
+                console.log(data);
+                $("#isipesan").val('');
             }
         });
     }

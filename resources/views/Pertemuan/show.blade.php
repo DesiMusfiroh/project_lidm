@@ -72,7 +72,7 @@
                     <div class="tab-content mr-3 ml-3">
                         <div class="tab-pane active" id="absensi" role="tabpanel" aria-labelledby="absensi-tab">
                             <div class="row">
-        
+
                                 @if($absensi->count() != 0)
                                     <table class="table table-bordered">
                                         <thead class="thead-dark thead">
@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                 @endif
-                            
+
                             </div>
                         </div>
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
@@ -202,7 +202,15 @@
 
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    @if($absensi->count() != 0)
+                                        <ul>
+                                        @foreach ($absensi as $item)
+                                            <li>{{$item->anggota_kelas->siswa->nama_lengkap}} </li>
+                                        @endforeach
+                                        </ul>
+                                    @else
+                                    Belum ada siswa yang memasuki ruang pertemuan
+                                    @endif
                                 </div>
                                 </div>
                             </div>
@@ -230,7 +238,23 @@
                                 </div>
                                 <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+                                    @if($chat_pertemuan->count() != 0)
+                                        @foreach ($chat_pertemuan as $item)
+                                            @if ($item->user_id == Auth::user()->id)
+                                            <div class="alert alert-sm alert-warning pb-0 pt-0 mb-1">{{$item->user->name}} - {{$item->pesan}}</div>
+                                            @else
+                                            <div class="alert alert-sm alert-success pb-0 pt-0 mb-1">{{$item->user->name}} - {{$item->pesan}}</div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    <div class="input-group mb-3">
+                                    <input type="text" id="isipesan" class="form-control" placeholder="..." aria-label="" aria-describedby="button-addon2">
+                                    <input type="hidden" id="user_id" value="{{Auth::user()->id}}">
+                                    <input type="hidden" id="pertemuan_id" value="{{$pertemuan->id}}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="sendMessage();">Button</button>
+                                    </div>
+                                    </div>
                                 </div>
                                 </div>
                             </div>
@@ -277,6 +301,27 @@
             function handleVideo(stream) { video.srcObject = stream; }
             function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
         }
+    }
+
+// kirim pesan live chat
+    function sendMessage() {
+        var pesan = $("#isipesan").val();
+        var pertemuan_id = $("#pertemuan_id").val();
+        var user_id = $("#user_id").val();
+        $.ajax({
+            url: "{{ url('chat_pertemuan/send') }}",
+            type: "GET",
+            dataType: 'json',
+            data: {
+                pertemuan_id: pertemuan_id,
+                user_id: user_id,
+                pesan: pesan
+            },
+            success: function(data) {
+                console.log(data);
+                $("#isipesan").val('');
+            }
+        });
     }
 
 // fungsi keluar dari fullscreen pertemuan

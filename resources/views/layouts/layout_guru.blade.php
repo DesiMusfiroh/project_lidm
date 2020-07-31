@@ -109,8 +109,8 @@
 			</div>
         </div>
     </div>
-    <script type="text/javascript" src="{{asset('/assets')}}/scripts/main.js"></script>
-    <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="{{asset('assets/scripts/main.js')}}"></script>
+    
 </body>
 @yield('js')
 @yield('chart')

@@ -78,8 +78,14 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/','QuestionController@index')->name('paketsoal.index');
         Route::get('/create','QuestionController@create')->name('guru.paketsoal.create');
         Route::post('/store','QuestionController@store')->name('guru.paketsoal.store');
-
+        // Buat Soal Satuan
+        Route::get('/create_soal_satuan/{paket_soal_id}','QuestionController@create_soal_satuan', ['$paket_soal_id' =>'paket_soal_id'])->name('create_soal_satuan'); // 
+        //Soal Essay
+        Route::post('question_store/essay_store','QuestionController@essay_store')->name('storeSingleQuestionEssay');
+        // Soal Pilgan
+        Route::post('question_store/pilgan_store','QuestionController@pilgan_store')->name('storeSingleQuestionPilgan');
     });
+
 
     Route::group(['prefix' => 'ujian'], function(){
       Route::get('/','UjianController@index')->name('guru.ujian.index');
@@ -94,3 +100,4 @@ Route::group(['prefix' => 'guru'], function () {
 
 // Route khusus untuk pertukaran data lewat ajax
 Route::get('absensi/create','AnggotaKelasController@absensi_create');
+Route::get('chat_pertemuan/send','ChatController@chat_pertemuan_send');
