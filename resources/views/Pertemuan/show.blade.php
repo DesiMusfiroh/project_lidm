@@ -72,11 +72,45 @@
                     <div class="tab-content mr-3 ml-3">
                         <div class="tab-pane active" id="absensi" role="tabpanel" aria-labelledby="absensi-tab">
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="alert alert-warning" role="alert">
-                                            Absesnsi belum ada
+        
+                                @if($absensi->count() != 0)
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark thead">
+                                            <tr>
+                                                <td width="30px">No</td>
+                                                <td>Nama Siswa</td>
+                                                <td>Keterangan</td>
+                                                <td width="30px"></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i=1; ?>
+                                            @foreach ($absensi as $item)
+                                                <tr>
+                                                    <td><?php echo $i; $i++?></td>
+                                                    <td>{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
+                                                    <td>Hadir</td>
+                                                    <td>
+                                                        <a href="#">
+                                                            <button type="button" class="btn btn-sm btn-info"  data-toggle="popover" title="{{$item->anggota_kelas->siswa->nama_lengkap}} ({{$item->anggota_kelas->siswa->nomor_induk}})"
+                                                            data-content="
+                                                            {{$item->anggota_kelas->siswa->jk}}">
+                                                                <i class="fa fa-eye"></i>
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="col-md-12">
+                                        <div class="alert alert-warning" role="alert">
+                                            Absensi belum ada
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
+                            
                             </div>
                         </div>
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">

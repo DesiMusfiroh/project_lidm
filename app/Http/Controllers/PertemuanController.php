@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Kelas;
 use App\Pertemuan;
 use App\AnggotaKelas;
+use App\Absensi;
 
 class PertemuanController extends Controller
 {
     public function create($id)
     {
-        $kelas = Kelas::find($id);
+        $kelas = Kelas::find($id);        
         return view('Pertemuan.create', compact('kelas'));
     }
     public function store(Request $request)
@@ -30,11 +31,12 @@ class PertemuanController extends Controller
         $pertemuan      = Pertemuan::find($id_pertemuan);
         $kelas          = Kelas::find($kelas_id);
         $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
+        $absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
 
-        return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, ], compact('pertemuan','kelas','waktu_mulai'));
+        return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi' =>$absensi ], compact('pertemuan','kelas','waktu_mulai'));
     }
   
 

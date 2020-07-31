@@ -87,5 +87,10 @@ Route::group(['prefix' => 'guru'], function () {
       Route::post('/store','UjianController@store')->name('guru.ujian.store');
       Route::get('/show/{id}','UjianController@show')->name('guru.ujian.show');
     });
-
 });
+
+
+
+
+// Route khusus untuk pertukaran data lewat ajax
+Route::get('absensi/create','AnggotaKelasController@absensi_create');
