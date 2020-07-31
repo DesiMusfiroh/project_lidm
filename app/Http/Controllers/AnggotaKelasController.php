@@ -8,6 +8,7 @@ use App\Siswa;
 use App\AnggotaKelas;
 use App\Pertemuan;
 use App\Absensi;
+use App\ChatPertemuan;
 
 use Auth;  
 
@@ -64,11 +65,12 @@ class AnggotaKelasController extends Controller
         $kelas          = Kelas::find($kelas_id);
         $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
         $anggota_kelas_id   = AnggotaKelas::where('kelas_id',$kelas_id)->where('siswa_id',Auth::user()->siswa->id)->value('id');
+        $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->get();
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
 
-        return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
+        return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
     }
 
     public function absensi_create(Request $request) 

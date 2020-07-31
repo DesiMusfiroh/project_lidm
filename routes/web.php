@@ -93,3 +93,4 @@ Route::group(['prefix' => 'guru'], function () {
 
 // Route khusus untuk pertukaran data lewat ajax
 Route::get('absensi/create','AnggotaKelasController@absensi_create');
+Route::get('chat_pertemuan/send','ChatController@chat_pertemuan_send');

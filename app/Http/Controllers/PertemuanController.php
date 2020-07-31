@@ -7,6 +7,7 @@ use App\Kelas;
 use App\Pertemuan;
 use App\AnggotaKelas;
 use App\Absensi;
+use App\ChatPertemuan;
 
 class PertemuanController extends Controller
 {
@@ -32,11 +33,12 @@ class PertemuanController extends Controller
         $kelas          = Kelas::find($kelas_id);
         $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
         $absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
+        $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->get();
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
 
-        return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi' =>$absensi ], compact('pertemuan','kelas','waktu_mulai'));
+        return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi' => $absensi, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
     }
   
 

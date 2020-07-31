@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Kelas;
 use App\Absensi;
+use App\ChatPertemuan;
 
 class Pertemuan extends Model
 {
@@ -15,5 +16,8 @@ class Pertemuan extends Model
     }
     public function absensi(){
         return $this->hasMany(Absensi::class,'pertemuan_id');
+    }
+    public function chat_pertemuan(){
+        return $this->hasMany(ChatPertemuan::class,'pertemuan_id');
     }
 }
