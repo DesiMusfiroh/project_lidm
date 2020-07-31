@@ -44,7 +44,7 @@
             </div>
             <div class="card-footer">
                 <div class="mr-auto">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-info">Simpan</button>
                 </div>
             </div>
             </form>

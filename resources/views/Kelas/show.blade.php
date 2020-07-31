@@ -46,7 +46,13 @@
                                         <td><?php echo $i; $i++?></td>
                                         <td>{{$item->siswa->nama_lengkap}}</td>
                                         <td>
-                                            <a href=""><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a>
+                                            <a href="#">
+                                                <button type="button" class="btn btn-sm btn-info"  data-toggle="popover" title="{{$item->siswa->nama_lengkap}} ({{$item->siswa->nomor_induk}})"
+                                                data-content="
+                                                {{$item->siswa->jk}}">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
