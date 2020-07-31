@@ -79,11 +79,14 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/create','QuestionController@create')->name('guru.paketsoal.create');
         Route::post('/store','QuestionController@store')->name('guru.paketsoal.store');
         // Buat Soal Satuan
-        Route::get('/create_soal_satuan/{paket_soal_id}','QuestionController@create_soal_satuan', ['$paket_soal_id' =>'paket_soal_id'])->name('create_soal_satuan'); // 
+        Route::get('/create_soal_satuan/{paket_soal_id}','QuestionController@create_soal_satuan', ['$paket_soal_id' =>'paket_soal_id'])->name('create_soal_satuan'); //
         //Soal Essay
         Route::post('question_store/essay_store','QuestionController@essay_store')->name('storeSingleQuestionEssay');
         // Soal Pilgan
         Route::post('question_store/pilgan_store','QuestionController@pilgan_store')->name('storeSingleQuestionPilgan');
+        Route::get('/export-soal/{id}','DocumentController@exportSoal')->name('exportSoal');
+        Route::get('/export-jawaban/{id}','DocumentController@exportJawaban')->name('exportJawaban');
+
     });
 
 

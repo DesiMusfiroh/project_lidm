@@ -66,15 +66,15 @@
                                     {{ $durasi_jam }} jam {{ $durasi_menit }} menit
                                  </td>
 
-                                <td class="text-center">#</td>
+                                <td class="text-center">{{$item->jumlah_soal()}}</td>
                                 <td class="text-center">
 
-                                <a  href="#" target="_blank" >
+                                <a  href="{{route('exportSoal',$item->id)}}" target="_blank" >
                                     <button type="button" class="btn btn-info btn-sm">
                                     <i class="fa fa-download" aria-hidden="true"> Soal</i>
                                         </button>
                                     </a>
-                                <a  href="#" target="_blank" >
+                                <a  href="{{route('exportJawaban',$item->id)}}" target="_blank" >
                                     <button type="button" class="btn btn-secondary btn-sm">
                                     <i class="fa fa-download" aria-hidden="true"> Kunci</i>
                                         </button>
