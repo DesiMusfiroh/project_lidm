@@ -114,7 +114,30 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
-                            kelompok
+
+                          <h3 class="text-center">Kelompok saya</h3>
+                          <div class="row">
+                            <div class="card-body"><h5 class="card-title">{{$kelompok_saya->nama_kelompok}}</h5>
+                              <table class="mb-0 table table-hover">
+                                  <thead>
+                                  <tr>
+                                      <th>No</th>
+                                      <th>Nama</th>
+
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  @foreach($anggota_kelompok as $item)
+                                  <tr>
+                                      <th scope="row">{{$loop->iteration}}</th>
+                                      <td>{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
+                                  </tr>
+                                  @endforeach
+                                  </tbody>
+                              </table>
+                            </div>
+                          </div>
+
                         </div>
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
                             tugas

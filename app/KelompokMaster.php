@@ -14,6 +14,6 @@ class KelompokMaster extends Model
     }
 
     public function kelompok(){
-      return $this->hasOne(Kelompok::class,'kelompok_master_id');
+      return $this->hasMany(Kelompok::class,'kelompok_master_id');
     }
 }
