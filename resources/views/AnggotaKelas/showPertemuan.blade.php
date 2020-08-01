@@ -36,12 +36,17 @@
                         {{$pertemuan->deskripsi}}
                         <br>
                         Waktu Mulai Pertemuan: {{$waktu_mulai}}
-                        <div class="text-center" id="teks"></div>  
+                        @if ($pertemuan->status == 0) 
+                        <div class="text-center"><div class="alert alert-info pt-0 pb-0 mt-2 mb-0" id="teks"></div></div> 
+                        @elseif ($pertemuan->status == 1)
                         <div class="text-right mt-2" id="start">
                             <input type="hidden" id="pertemuan_id" value="{{$pertemuan->id}}">
                             <input type="hidden" id="anggota_kelas_id" value="{{$anggota_kelas_id}}">
                             <button class="btn btn-success" id="masuk_pertemuan" onclick="openFullscreen();" style="width:40%; box-shadow: 3px 2px 5px grey;">Masuk Ruang Pertemuan</button>
-                        </div>  
+                        </div> 
+                        @elseif ($pertemuan->status == 2)
+                        <div class="text-center"> <div class="alert alert-warning pb-0 pt-0  mb-0 mt-2" id="end">Pertemuan Telah berakhir</div></div>
+                        @endif
                     </div>                      
                 </div>
             </div>
@@ -225,7 +230,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3">
-                        <button class="btn btn-warning" onclick="closeFullscreen();" >Akhiri Pertemuan</button>
+                        <button class="btn btn-warning" onclick="closeFullscreen();" >Leave</button>
                     </div>
                    
                 </div>
@@ -330,6 +335,21 @@
             clearInterval(hitung_mundur);
             teks.innerHTML = '';
             $("#start").show();
+            $("#teks").hide();
+            // jika telah masuk waktu mulai, status pertemuan berubah jadi 1
+            var pertemuan_id = $("#pertemuan_id").val();
+            $.ajax({
+                url: "{{ url('pertemuan/start') }}",
+                type: "GET",
+                dataType: 'json',
+                data: {
+                    pertemuan_id: pertemuan_id,
+                },
+                success: function(data) {
+                    console.log(data);
+                    location.reload(true); // refresh page otomatis         
+                }
+            });  
         }
     }, 1000);
 

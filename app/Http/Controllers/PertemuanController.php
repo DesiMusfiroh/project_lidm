@@ -41,6 +41,19 @@ class PertemuanController extends Controller
         return view('Pertemuan.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi' => $absensi, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
     }
   
-
+    public function pertemuan_start(Request $request) {
+        $update_status_pertemuan = [
+            'status' => 1
+        ];
+        $posts = Pertemuan::where('id',$request->pertemuan_id)->update($update_status_pertemuan);
+        return response()->json($posts);
+    }
+    public function pertemuan_end(Request $request) {
+        $update_status_pertemuan = [
+            'status' => 2
+        ];
+        $posts = Pertemuan::where('id',$request->pertemuan_id)->update($update_status_pertemuan);
+        return response()->json($posts);
+    }
 
 }

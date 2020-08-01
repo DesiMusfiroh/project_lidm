@@ -35,11 +35,16 @@
                     <div class="card-body">
                         {{$pertemuan->deskripsi}}
                         <br>
-                        Waktu Mulai Pertemuan: {{$waktu_mulai}}
-                        <div class="text-center" id="teks"></div>
-                        <div class="text-right mt-2" id="start">
+                        Waktu Mulai Pertemuan: {{$waktu_mulai}}              
+                        @if ($pertemuan->status == 0) 
+                        <div class="text-center"><div class="alert alert-info pt-0 pb-0 mt-2 mb-0" id="teks"></div></div> 
+                        @elseif ($pertemuan->status == 1)
+                        <div class="text-right mt-2" id="start">            
                             <button class="btn btn-success" id="masuk_pertemuan" onclick="openFullscreen();" style="width:40%; box-shadow: 3px 2px 5px grey;">Masuk Ruang Pertemuan</button>
                         </div>
+                        @elseif ($pertemuan->status == 2)
+                        <div class="text-center"> <div class="alert alert-warning pb-0 pt-0  mb-0 mt-2" id="end">Pertemuan Telah berakhir</div></div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -252,7 +257,7 @@
                                     <input type="hidden" id="user_id" value="{{Auth::user()->id}}">
                                     <input type="hidden" id="pertemuan_id" value="{{$pertemuan->id}}">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="sendMessage();">Button</button>
+                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="sendMessage();">Kirim</button>
                                     </div>
                                     </div>
                                 </div>
@@ -266,7 +271,8 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3">
-                        <button class="btn btn-warning" onclick="closeFullscreen();" >Akhiri Pertemuan</button>
+                        <button class="btn btn-warning" onclick="closeFullscreen();" >Leave</button>
+                        <button class="btn btn-danger" onclick="akhiriPertemuan();" >Akhiri Pertemuan</button>
                     </div>
 
                 </div>
@@ -332,6 +338,27 @@
         }
     }
 
+// fungsi untuk mengakhiri pertemuan, status pertemuan berubah jadi 2
+    function akhiriPertemuan() {
+        var pertemuan_id = $("#pertemuan_id").val();
+        $.ajax({
+            url: "{{ url('pertemuan/end') }}",
+            type: "GET",
+            dataType: 'json',
+            data: {
+                pertemuan_id: pertemuan_id,
+            },
+            success: function(data) {
+                console.log(data);
+                location.reload(true); // refresh page otomatis
+            }
+        });
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+            $("#fullscreenPertemuan").hide();
+        }      
+    }
+
 // keluar otomatis dari fullscreen saat klik esc atau x
     // $('#fullscreenPertemuan').mouseleave(function(){
     //     closeFullscreen();
@@ -354,7 +381,22 @@
         if( selisih < 0 ) {
             clearInterval(hitung_mundur);
             teks.innerHTML = '';
-            $("#start").show();
+            $("#teks").hide();
+            // jika telah masuk waktu mulai, status pertemuan otomatis berubah jadi 1
+            var pertemuan_id = $("#pertemuan_id").val();
+            $.ajax({
+                url: "{{ url('pertemuan/start') }}",
+                type: "GET",
+                dataType: 'json',
+                data: {
+                    pertemuan_id: pertemuan_id,
+                },
+                success: function(data) {
+                    console.log(data);
+                    location.reload(true); // refresh page otomatis         
+                    $("#start").show();
+                }
+            });  
         }
     }, 1000);
 
