@@ -7,7 +7,11 @@ use App\Kelas;
 use App\Siswa;
 use App\AnggotaKelas;
 use App\Pertemuan;
+use App\KelompokMaster;
+use App\Kelompok;
 use App\Absensi;
+use App\AnggotaKelompok;
+use App\User;
 use App\ChatPertemuan;
 
 use Auth;
@@ -57,7 +61,30 @@ class AnggotaKelasController extends Controller
         $pertemuan = Pertemuan::where('kelas_id',$id)->get();
         $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
                           ->orderBy('siswa.nama_lengkap')->get();
-        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas'));
+        // $kelompok_saya = AnggotaKelompok::where('siswa')
+        $kelompok_master_id = KelompokMaster::where('kelas_id',$id)->value('id');
+        $semua_kelompok = Kelompok::where('kelompok_master_id',$kelompok_master_id)->get();
+        $anggota_kelas_id = auth()->user()->siswa->anggota_kelas()->value('id');
+        //dd($anggota_kelas_id);
+        // $kelompok_saya = Kelompok::join('anggota_kelompok','kelompok.id','=','anggota_kelompok.kelompok_id')
+        //                 ->where('anggota_kelompok.anggota_kelas_id','=',$anggota_kelas_id)->first();
+        // $kelompok_saya = Kelompok::join('anggota_kelompok','kelompok.id','=','anggota_kelompok.kelompok_id')
+        //                   ->where('kelompok_master_id',$kelompok_master_id)->get();
+
+        //$kelompok_saya = AnggotaKelompok::join('kelompok','anggota_kelompok.kelompok_id','=','kelompok.id')->get();
+        $kelompok_saya = Kelompok::where('kelompok_master_id',$kelompok_master_id)->first();
+
+        //dd($kelompok_saya);
+        $anggota_kelompok = AnggotaKelompok::where('kelompok_id',$kelompok_saya->id)->get();
+        //dd($anggota_kelompok);
+
+         //dd($kelompok_saya);
+         // foreach ($kelompok_saya->anggota_kelompok as $item) {
+         //   $data['anggota_kelas_id'] = $item->anggota_kelas_id;
+         // }
+         // dd($data);
+        // $id_kelompok_saya = AnggotaKelompok::where('anggota_kelas_id',auth()->user);
+        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas','kelompok_saya','anggota_kelompok'));
 
     }
     public function showPertemuan($kelas_id, $id_pertemuan)
