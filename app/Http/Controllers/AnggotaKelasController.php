@@ -10,7 +10,7 @@ use App\Pertemuan;
 use App\Absensi;
 use App\ChatPertemuan;
 
-use Auth;  
+use Auth;
 
 class AnggotaKelasController extends Controller
 {
@@ -37,7 +37,7 @@ class AnggotaKelasController extends Controller
                 $id = $item->id;
             }
             $anggotaKelas->kelas_id = $id;
-              
+
             if (AnggotaKelas::where('kelas_id',$id)->where('siswa_id',auth()->user()->siswa->id)->exists()) {
                 return redirect()->route('siswa.kelas')->withSuccess('Kamu sudah tergabung dalam kelas ini');
             } else {
@@ -45,7 +45,7 @@ class AnggotaKelasController extends Controller
                 return redirect()->route('siswa.kelas')->withSuccess('Berhasil bergabung ke kelas baru');
             }
         }
-        
+
         // } catch (\Exception $e) {
         //   return redirect()->back()->with('tidakditemukan','Kode Kelas tidak ditemukan');
         // }
@@ -55,7 +55,8 @@ class AnggotaKelasController extends Controller
     {
         $kelas = Kelas::find($id);
         $pertemuan = Pertemuan::where('kelas_id',$id)->get();
-        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
+        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
+                          ->orderBy('siswa.nama_lengkap')->get();
         return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas'));
 
     }
@@ -73,8 +74,8 @@ class AnggotaKelasController extends Controller
         return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
     }
 
-    public function absensi_create(Request $request) 
-    {            
+    public function absensi_create(Request $request)
+    {
         if (Absensi::where('pertemuan_id',$request->pertemuan_id)->where('anggota_kelas_id',$request->anggota_kelas_id)->exists()) {
             $update_absensi = [
                 'status' => 1

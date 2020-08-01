@@ -7,6 +7,7 @@ use Auth;
 use Str;
 use App\Kelas;
 use App\Guru;
+use App\Siswa;
 use App\Pertemuan;
 use App\AnggotaKelas;
 use App\KelompokMaster;
@@ -58,8 +59,9 @@ class KelasController extends Controller
         //dd($kelompok_master);
         //dd($kelompok_master_id)
         //$kelompok = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
-
-        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
+        //join untuk mengurutkan data berdasarkan nama sisa
+        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
+                          ->orderBy('siswa.nama_lengkap')->get();
         return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas'));
     }
 
@@ -67,44 +69,39 @@ class KelasController extends Controller
     public function storeKelompok(Request $request)
     {
       $anggota_kelas = AnggotaKelas::where('kelas_id',$request->kelas_id)->inRandomOrder()->get('id');
-      //dd($anggota_kelas);
       $jumlah_anggota_kelas = count($anggota_kelas);
-      //dd($jumlah_anggota_kelas);
-      $jml_kel = intval(ceil($jumlah_anggota_kelas/ $request->jumlah_kelompok));
-      // dd($jml_kel);
-      $array_kelompok = $anggota_kelas->split($jml_kel);
+      $jml_kel = intval($request->jumlah_kelompok);
+      $array_kelompok = $anggota_kelas->split($jml_kel); //mengelompokkan array seluruh siswa tdi. menjadi beberapa kelompok
       $array_kelompok->toArray();
-      //dd($groups);
-      //dd($array_kelompok);
+
       $kelompok_master = new KelompokMaster;
       $kelompok_master->kelas_id = $request->kelas_id;
       $kelompok_master->deskripsi = $request->deskripsi;
       $kelompok_master->jumlah_kelompok = $jml_kel;
       $kelompok_master->status = 0;
       $kelompok_master->save();
-      //dd($kelompok_master);
+
       for ($i=0; $i < $jml_kel ; $i++) {
         $kelompok = new Kelompok;
         $kelompok->kelompok_master_id = $kelompok_master->id;
         $kelompok->nama_kelompok = "Kelompok ".$i;
         $kelompok->save();
 
+        foreach ($array_kelompok[$i] as $key=>$anggota_kelompok) {
+          //dd($anggota_kelompok);
+          $data = array(
+            'kelompok_id' => $kelompok->id,
+            'anggota_kelas_id' => $anggota_kelompok->id
+          );
+
+          AnggotaKelompok::create($data);
+        }
         // foreach ($array_kelompok as $key => $kel) {
         //   //dd($kel);
         //   $data['kelompok_id'] = $kelompok->id;
         //   $data['anggota_kelas_id'] = $kel->id;
         //   AnggotaKelompok::create($data);
         // }
-        foreach ($array_kelompok as $key=>$anggota_kelompok) {
-          //dd($anggota_kelompok);
-          $data = array(
-            'kelompok_id' => $kelompok->id,
-            'anggota_kelas_id' => $anggota_kelompok[$i]->id
-          );
-
-          AnggotaKelompok::create($data);
-        }
-
         //$anggota_kelompok = new AnggotaKelompok;
 
       }
