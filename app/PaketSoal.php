@@ -11,6 +11,7 @@ class PaketSoal extends Model
 {
     protected $table ='paket_soal';
     protected $fillable = ['guru_id','judul','durasi','isdelete'];
+    
     public function guru(){
         return $this->belongsTo(Guru::class);
     }

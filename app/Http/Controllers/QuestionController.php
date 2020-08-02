@@ -43,6 +43,7 @@ class QuestionController extends Controller
         ]);
         return redirect()->route('guru.paketsoal.create')->with('pesan','Paket Soal baru berhasil dibuat');
     }
+ 
 
     // SOAL SATUAN CRUD CONTROLLER
     public function create_soal_satuan($paket_soal_id){
@@ -59,6 +60,25 @@ class QuestionController extends Controller
           }
   
       }
+
+
+      //Update Paket Soal
+      public function updatePaketSoal(Request $request){
+        try {
+          $paket_soal = PaketSoal::FindOrFail($request->id);
+          $update_paket = [
+              'judul' => $request->judul,
+              'durasi' => $request->durasi,
+          ];
+          $paket_soal->update($update_paket);
+          return redirect()->back()->withSuccess('Perubahan berhasil disimpan');
+        } catch (\Exception $e) {
+          return redirect()->back()->with('pesan','Pastikan tidak ada kolom yang kosong');
+        }
+    }
+
+      
+
       //Simpan Soal Essay
       public function essay_store(Request $request)
       {
@@ -122,6 +142,52 @@ class QuestionController extends Controller
           $soal_satuan = SoalSatuan::where('paket_soal_id',$paket_soal_id)->orderBy('id','desc')->get();
           return redirect()->route('create_soal_satuan',['paket_soal_id' => $paket_soal_id])->with('success','Soal berhasil di simpan');;
       }
+
+      //Edit Soal Essay
+      public function update_soal_satuan_essay(Request $request, $paket_soal_id){
+        $paket_soal = PaketSoal::findorFail($paket_soal_id);
+        $essay      = Essay::findorFail($request->id);
+
+        $update_essay = [
+            'pertanyaan' => $request->pertanyaan,
+            'jawaban' => $request->jawaban,
+        ];
+        $essay->update($update_essay);
+
+        $update_poin = [
+            'poin' => $request->poin,
+        ];
+        SoalSatuan::whereId($essay->soal_satuan_id)->update($update_poin);
+
+        return redirect()->back()->withSuccess('Soal Essay berhasil di update !');
+    }
+
+    //Edit Soal Pilgan
+    public function update_soal_satuan_pilgan(Request $request, $paket_soal_id){
+        $paket_soal = PaketSoal::findorFail($paket_soal_id);
+        $pilgan      = Pilgan::findorFail($request->id);
+
+        $update_pilgan = [
+            'pertanyaan' => $request->pertanyaan,
+            'pil_a' => $request->pil_a,
+            'pil_b' => $request->pil_b,
+            'pil_c' => $request->pil_c,
+            'pil_d' => $request->pil_d,
+            'pil_e' => $request->pil_e,
+            'kunci' => $request->kunci,
+        ];
+        $pilgan->update($update_pilgan);
+
+        $update_poin = [
+            'poin' => $request->poin,
+        ];
+        SoalSatuan::whereId($pilgan->soal_satuan_id)->update($update_poin);
+
+        return redirect()->back()->with('success','Soal Pilgan berhasil diupdate !');
+    }
+
+      
+
   
    
 }
