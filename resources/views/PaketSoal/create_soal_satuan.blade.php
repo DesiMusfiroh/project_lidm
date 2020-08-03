@@ -132,8 +132,8 @@
                                     Edit <i class="fa fa-edit"></i>
                         </button>
                         @endif
-                        <a href="#" class="btn btn-sm btn-danger hapus"  style="box-shadow: 3px 2px 5px grey; margin:5px;" paket_soal_id="{{$paket_soal_id}}" soal_satuan_id="{{$item->id}}"> Hapus <i class="fa fa-trash"></i> </a>
-                    </div>
+                        <!-- <a href="#" class="btn btn-sm btn-danger hapus"  style="box-shadow: 3px 2px 5px grey; margin:5px;" paket_soal_id="{{$paket_soal_id}}" soal_satuan_id="{{$item->id}}"> Hapus <i class="fa fa-trash"></i> </a> -->
+                        </div>
                 </div>
                 <hr>
             @endforeach
@@ -143,6 +143,7 @@
 @endif
 
 
+</div>
 </div>
 
 <script>
@@ -156,10 +157,58 @@ $(document).ready(function(){
 
     });
 });
-
-
-
 </script>
+
+<!--edit essay-->
+<script>
+$(document).ready(function(){
+    $(document).on('click','#update', function(){
+    var id_essay_update                  = $(this).data('id_essay_update');
+    var soal_satuan_id_esaay_update      = $(this).data('soal_satuan_id_essay_update');
+    var pertanyaan_essay_update          = $(this).data('pertanyaan_essay_update');
+    var jawaban_essay_update             = $(this).data('jawaban_essay_update');
+    var poin_essay_update                = $(this).data('poin_essay_update');
+    $('#id_essay_update').val(id_essay_update);
+    $('#soal_satuan_id_essay_update').val(soal_satuan_id_essay_update);
+    $('#pertanyaan_essay_update').val(pertanyaan_essay_update);
+    $('#jawaban_essay_update').val(jawaban_essay_update);
+    $('#poin_essay_update').val(poin_essay_update);
+    });
+
+});
+</script>
+<!--edit-->
+
+<!--edit pilgan-->
+<script>
+$(document).ready(function(){
+    $(document).on('click','#update_pilgan', function(){
+    var id_pilgan_update                    = $(this).data('id_pilgan_update');
+    var soal_satuan_id_pilgan_update        = $(this).data('soal_satuan_id_pilgan_update');
+    var pertanyaan_pilgan_update            = $(this).data('pertanyaan_pilgan_update');
+    var pil_a_pilgan_update                 = $(this).data('pil_a_pilgan_update');
+    var pil_b_pilgan_update                 = $(this).data('pil_b_pilgan_update');
+    var pil_c_pilgan_update                 = $(this).data('pil_c_pilgan_update');
+    var pil_d_pilgan_update                 = $(this).data('pil_d_pilgan_update');
+    var pil_e_pilgan_update                 = $(this).data('pil_e_pilgan_update');
+    var kunci_pilgan_update                 = $(this).data('kunci_pilgan_update');
+    var poin_pilgan_update                 = $(this).data('poin_pilgan_update');
+    $('#id_pilgan_update').val(id_pilgan_update);
+    $('#soal_satuan_id_pilgan_update').val(soal_satuan_id_pilgan_update);
+    $('#pertanyaan_pilgan_update').val(pertanyaan_pilgan_update);
+    $('#pil_a_pilgan_update').val(pil_a_pilgan_update);
+    $('#pil_b_pilgan_update').val(pil_b_pilgan_update);
+    $('#pil_c_pilgan_update').val(pil_c_pilgan_update);
+    $('#pil_d_pilgan_update').val(pil_d_pilgan_update);
+    $('#pil_e_pilgan_update').val(pil_e_pilgan_update);
+    $('#kunci_pilgan_update').val(kunci_pilgan_update);
+    $('#poin_pilgan_update').val(poin_pilgan_update);
+    });
+
+});
+</script>
+<!--edit-->
+
 
 @endsection
 
@@ -316,3 +365,160 @@ $(document).ready(function(){
         </div>
     </div>
 <!-- Penutup Create Modal -->
+
+<!-- update Modal (essay)-->
+<div class="modal fade update_modal_essay"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="exampleModalLabel"> Soal No. </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('updateSoalSatuan',$paket_soal_id)}}" method="post">
+
+                    @csrf
+                    @method('PATCH')
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <input type="hidden" name="id" id="id_essay_update" value="">
+                            <input type="hidden" name="soal_satuan_id" id="soal_satuan_id_essay_update" value="">
+
+                            <div class="form-group row">
+                                <label for="nama" class="col-sm-2 col-form-label">No. 1</label>
+                                <div class="col-sm-6">
+                                <input type="text" class="form-control" id="jenis_essay_update" name="jenis" value="Essay" readonly >
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend" >
+                                            <div class="input-group-text">Poin</div>
+                                        </div>
+                                        <input type="text" name="poin" id="poin_essay_update" value=""  class="form-control text-right">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alamat"> Pertanyaan </label>
+                                <textarea class="form-control" id="pertanyaan_essay_update" rows="2" name="pertanyaan" placeholder=""> </textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="alamat"> Jawaban Benar</label>
+                                <textarea class="form-control" id="jawaban_essay_update" rows="2" name="jawaban" placeholder=""> </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- update essay-->
+
+    <!-- Update Modal (Pilgan)-->
+    <div class="modal fade update_modal_pilgan"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="exampleModalLabel"> Soal No. </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="{{route('updateSoalSatuanPil',$paket_soal_id)}}" method="post">
+
+                    @csrf
+                    @method('PATCH')
+                     <div class="modal-body">
+                        <div class="container">
+
+                            <input type="hidden" name="id" id="id_pilgan_update" value="">
+                            <input type="hidden" name="soal_satuan_id" id="soal_satuan_id_pilgan_update" value="">
+
+                            <div class="form-group row">
+                                <label for="nama" class="col-sm-2 col-form-label">No. 1</label>
+                                <div class="col-sm-6">
+                                <input type="text" class="form-control" id="jenis_pilgan_update" name="jenis" value="Pilihan Ganda" readonly>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend" >
+                                            <div class="input-group-text">Poin</div>
+                                        </div>
+                                        <input type="text" name="poin" id="poin_pilgan_update" value=""  class="form-control text-right">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="alamat"> Pertanyaan </label>
+                                <textarea class="form-control" id="pertanyaan_pilgan_update" rows="2" name="pertanyaan" placeholder=""> </textarea>
+                            </div>
+                            <div class="form-group" >
+                                <!-- Pilihan A-->
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend" style="border-radius:10px; border-color:#c4cdcf; box-shadow: 3px 3px 5px grey;">
+                                        <span class="input-group-text" > A </span>
+                                    </div>
+                                    <input type="text" name="pil_a" id="pil_a_pilgan_update" class="form-control" >
+                                </div>
+                                <!-- Pilihan B-->
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend" style="border-radius:10px; border-color:#c4cdcf; box-shadow: 3px 3px 5px grey;">
+                                        <span class="input-group-text"> B </span>
+                                    </div>
+                                    <input type="text" name="pil_b" id="pil_b_pilgan_update"  class="form-control" >
+                                </div>
+                                 <!-- Pilihan C-->
+                                 <div class="input-group mb-2">
+                                    <div class="input-group-prepend" style="border-radius:10px; border-color:#c4cdcf; box-shadow: 3px 3px 5px grey;">
+                                        <span class="input-group-text" > C </span>
+                                    </div>
+                                    <input type="text" name="pil_c" id="pil_c_pilgan_update"  class="form-control" >
+                                </div>
+                                 <!-- Pilihan D-->
+                                 <div class="input-group mb-2">
+                                    <div class="input-group-prepend" style="border-radius:10px; border-color:#c4cdcf; box-shadow: 3px 3px 5px grey;">
+                                        <span class="input-group-text"> D </span>
+                                    </div>
+                                    <input type="text" name="pil_d" id="pil_d_pilgan_update"  class="form-control" >
+                                </div>
+                                 <!-- Pilihan E-->
+                                 <div class="input-group mb-2">
+                                    <div class="input-group-prepend" style="border-radius:10px; border-color:#c4cdcf; box-shadow: 3px 3px 5px grey;">
+                                        <span class="input-group-text"> E </span>
+                                    </div>
+                                    <input type="text" name="pil_e" id="pil_e_pilgan_update" class="form-control" >
+                                </div>
+                                <div class="input-group-inline">
+                                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Jawaban Benar</label>
+                                        <select class="custom-select my-1 mr-sm-2" name="kunci" id="kunci_pilgan_update" >
+                                            <option selected id="kunci_pilgan_update"></option>
+                                            <option value="A" >A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="D">D</option>
+                                            <option value="E">E</option>
+                                        </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- Penutup Update Modal -->

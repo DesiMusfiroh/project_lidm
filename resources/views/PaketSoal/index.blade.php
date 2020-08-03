@@ -74,7 +74,7 @@
                                     <i class="fa fa-download" aria-hidden="true"> Soal</i>
                                         </button>
                                     </a>
-                                <a  href="{{route('exportJawaban',$item->id)}}" target="_blank" >
+                                <a  href="#" target="_blank" >
                                     <button type="button" class="btn btn-secondary btn-sm">
                                     <i class="fa fa-download" aria-hidden="true"> Kunci</i>
                                         </button>
@@ -82,16 +82,21 @@
 
                                 </td>
                                 <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-warning">
+                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".update_modal_paket"
+                                    id="update"
+                                    data-id_paket_update="{{ $item->id }}"
+                                    data-guru_id_paket_update="{{ $item->guru->id }}"
+                                    data-judul_paket_update="{!! $item->judul!!}"
+                                    data-durasi_paket_update="{!! $item->durasi !!}"
+                                     title="Ubah paket soal">
                                 <i class="fa fa-edit" aria-hidden="true"></i>
-                                Edit
                                 </button>
                                 <a href="{{route('create_soal_satuan',$item->id)}}" title="Tambah soal">
                                         <button type="button" class="btn btn-success btn-sm">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                     </a>
-                                    <a href="#" title="Hapus paket soal" class="hapus">
+                                    <a href="#" title="Hapus paket soal" class="hapus" paket_soal_id="{{$item->id}}" paket_soal_judul="{{$item->judul}}">
                                         <button type="button" class="btn btn-danger btn-sm">
                                             <i class="fa fa-trash fa-sm"></i>
                                         </button>
@@ -116,4 +121,94 @@
         </div>
     </div>
 </div>
+
+<!--edit essay-->
+<script type="text/javascript">
+$(document).ready(function(){
+    $(document).on('click','#update', function(){
+        var id_paket_update        = $(this).data('id_paket_update');
+        var guru_id_paket_update   = $(this).data('guru_id_paket_update');
+        var judul_paket_update     = $(this).data('judul_paket_update');
+        var durasi_paket_update    = $(this).data('durasi_paket_update');
+        $('#id_paket_update ').val(id_paket_update );
+        $('#guru_id_paket_update').val(guru_id_paket_update);
+        $('#judul_paket').val(judul_paket_update );
+        $('#durasi_paket_update').val(durasi_paket_update );
+
+        var durasi_awal = document.getElementById("durasi_paket_update").value;
+
+        // var timeControl = document.querySelector('input[type="time"]');
+        // timeControl.value = durasi_awal.toISOString().substring(7, 16);
+        console.log(durasi_awal);
+    });
+    $('.hapus').click(function(){
+
+      var paket_soal_id = $(this).attr('paket_soal_id');
+      var paket_soal_judul = $(this).attr('paket_soal_judul');
+      swal({
+        title: "Yakin?",
+        text: "Menghapus ujian "+paket_soal_judul+ " ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location = 'PaketSoal/delete/'+paket_soal_id;
+        }
+      });
+    });
+});
+
+</script>
+<!--edit-->
 @endsection
+
+
+<!-- update Modal (paket)-->
+<div class="modal fade update_modal_paket"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="exampleModalLabel"> <strong>Edit Paket Soal</strong> </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('guru.paketsoal.update')}}" method="post">
+
+                    @csrf
+                    @method('PATCH')
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <input type="hidden" name="id" id="id_paket_update" value="">
+                            <input type="hidden" name="guru_id" id="guru_id_paket_update" value="">
+
+                            <div class="form-row mb-0 mt-0 pt-0">
+                                <div class="form-group col-md-9">
+                                    <label for="judul"><b> Judul  : </b></label>
+                                    <input type="text" class="form-control" id="judul_paket" value="" name="judul" placeholder="Nama paket soal" style="border-radius:10px;  box-shadow: 3px 0px 5px grey;">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="durasi"> <b> Durasi </b> </label>
+                                    <input type="hidden" id="durasi_paket_update" value="">
+                                    @if($errors->has('durasi'))
+                                                <span class="help-block">{{$errors->first('durasi')}}</span>
+                                    @endif
+                                    <!-- <input  id="time" class="form-control"  type="time" name="durasi" onchange="ampm(this.value)"  style="border-radius:10px; box-shadow: 3px 0px 5px grey;"> -->
+                                    <input  id="time" class="form-control" type="time" name="durasi" style="border-radius:10px; box-shadow: 3px 0px 5px grey;">
+                                    <span id="display_time"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
