@@ -101,6 +101,20 @@ class AnggotaKelasController extends Controller
         return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
     }
 
+    public function ruangPertemuan($kelas_id,$id_pertemuan)
+    {
+        $pertemuan      = Pertemuan::find($id_pertemuan);
+        $kelas          = Kelas::find($kelas_id);
+        $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
+        $absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
+        $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->get();
+
+        date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
+        $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
+
+        return view('Anggotakelas.ruangPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi' => $absensi, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
+    }
+
     public function absensi_create(Request $request)
     {
         if (Absensi::where('pertemuan_id',$request->pertemuan_id)->where('anggota_kelas_id',$request->anggota_kelas_id)->exists()) {

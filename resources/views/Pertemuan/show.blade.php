@@ -40,7 +40,8 @@
                         <div class="text-center"><div class="alert alert-info pt-0 pb-0 mt-2 mb-0" id="teks"></div></div> 
                         @elseif ($pertemuan->status == 1)
                         <div class="text-right mt-2" id="start">            
-                            <button class="btn btn-success" id="masuk_pertemuan" onclick="openFullscreen();" style="width:40%; box-shadow: 3px 2px 5px grey;">Masuk Ruang Pertemuan</button>
+                            <!-- <button class="btn btn-success" id="masuk_pertemuan" onclick="openFullscreen();" style="width:40%; box-shadow: 3px 2px 5px grey;">Masuk Ruang Pertemuan</button> -->
+                            <a href="{{route('pertemuan.ruang',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"> <button class="btn btn-success" id="" style="width:40%; box-shadow: 3px 2px 5px grey;">Masuk Ruang Pertemuan</button> </a>
                         </div>
                         @elseif ($pertemuan->status == 2)
                         <div class="text-center"> <div class="alert alert-warning pb-0 pt-0  mb-0 mt-2" id="end">Pertemuan Telah berakhir</div></div>
@@ -146,7 +147,7 @@
         </div>
 
         <!-- fullscreen ruang pertemuan -->
-        <div id="fullscreenPertemuan">
+        <!-- <div id="fullscreenPertemuan">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3">
@@ -280,7 +281,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
 
     </div>
 </main>
@@ -291,81 +292,8 @@
         $('#myTab li:last-child a').tab('show')
     });
 
-// pengaturan JS untuk fullscreen pertemuan
-    $("#fullscreenPertemuan").hide();
-    var elem = document.querySelector("#fullscreenPertemuan");
-    function openFullscreen() {
-    $("#fullscreenPertemuan").show();
-        if (elem.requestFullscreen) {
-            elem.requestFullscreen();
-            // akses kamera user
-            var video = document.querySelector("#video-webcam");
-            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-            if (navigator.getUserMedia) {
-                navigator.getUserMedia({ video: true }, handleVideo, videoError);
-            }
-            function handleVideo(stream) { video.srcObject = stream; }
-            function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
-        }
-    }
-
-// kirim pesan live chat
-    function sendMessage() {
-        var pesan = $("#isipesan").val();
-        var pertemuan_id = $("#pertemuan_id").val();
-        var user_id = $("#user_id").val();
-        $.ajax({
-            url: "{{ url('chat_pertemuan/send') }}",
-            type: "GET",
-            dataType: 'json',
-            data: {
-                pertemuan_id: pertemuan_id,
-                user_id: user_id,
-                pesan: pesan
-            },
-            success: function(data) {
-                console.log(data);
-                $("#isipesan").val('');
-            }
-        });
-    }
-
-// fungsi keluar dari fullscreen pertemuan
-    function closeFullscreen() {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-            $("#fullscreenPertemuan").hide();
-        }
-    }
-
-// fungsi untuk mengakhiri pertemuan, status pertemuan berubah jadi 2
-    function akhiriPertemuan() {
-        var pertemuan_id = $("#pertemuan_id").val();
-        $.ajax({
-            url: "{{ url('pertemuan/end') }}",
-            type: "GET",
-            dataType: 'json',
-            data: {
-                pertemuan_id: pertemuan_id,
-            },
-            success: function(data) {
-                console.log(data);
-                location.reload(true); // refresh page otomatis
-            }
-        });
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-            $("#fullscreenPertemuan").hide();
-        }      
-    }
-
-// keluar otomatis dari fullscreen saat klik esc atau x
-    // $('#fullscreenPertemuan').mouseleave(function(){
-    //     closeFullscreen();
-    // });
-
 // pengaturan JS untuk hitung waktu mulai pertemuan
-    const waktu_mulai = new Date('<?php echo $waktu_mulai ?>').getTime();
+const waktu_mulai = new Date('<?php echo $waktu_mulai ?>').getTime();
     const hitung_mundur = setInterval(function() {
         const waktu_sekarang = new Date().getTime();
         const selisih = waktu_mulai - waktu_sekarang;
@@ -399,6 +327,80 @@
             });  
         }
     }, 1000);
+    
+// pengaturan JS untuk fullscreen pertemuan
+    //  $("#fullscreenPertemuan").hide();
+    // var elem = document.querySelector("#fullscreenPertemuan");
+    // function openFullscreen() {
+    // $("#fullscreenPertemuan").show();
+    //     if (elem.requestFullscreen) {
+    //         elem.requestFullscreen();
+    //         // akses kamera user
+    //         var video = document.querySelector("#video-webcam");
+    //         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+    //         if (navigator.getUserMedia) {
+    //             navigator.getUserMedia({ video: true }, handleVideo, videoError);
+    //         }
+    //         function handleVideo(stream) { video.srcObject = stream; }
+    //         function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
+    //     }
+    // }
+
+// kirim pesan live chat
+    // function sendMessage() {
+    //     var pesan = $("#isipesan").val();
+    //     var pertemuan_id = $("#pertemuan_id").val();
+    //     var user_id = $("#user_id").val();
+    //     $.ajax({
+    //         url: "{{ url('chat_pertemuan/send') }}",
+    //         type: "GET",
+    //         dataType: 'json',
+    //         data: {
+    //             pertemuan_id: pertemuan_id,
+    //             user_id: user_id,
+    //             pesan: pesan
+    //         },
+    //         success: function(data) {
+    //             console.log(data);
+    //             $("#isipesan").val('');
+    //         }
+    //     });
+    // }
+
+// fungsi keluar dari fullscreen pertemuan
+    // function closeFullscreen() {
+    //     if (document.exitFullscreen) {
+    //         document.exitFullscreen();
+    //         $("#fullscreenPertemuan").hide();
+    //     }
+    // }
+
+// fungsi untuk mengakhiri pertemuan, status pertemuan berubah jadi 2
+    // function akhiriPertemuan() {
+    //     var pertemuan_id = $("#pertemuan_id").val();
+    //     $.ajax({
+    //         url: "{{ url('pertemuan/end') }}",
+    //         type: "GET",
+    //         dataType: 'json',
+    //         data: {
+    //             pertemuan_id: pertemuan_id,
+    //         },
+    //         success: function(data) {
+    //             console.log(data);
+    //             location.reload(true); // refresh page otomatis
+    //         }
+    //     });
+    //     if (document.exitFullscreen) {
+    //         document.exitFullscreen();
+    //         $("#fullscreenPertemuan").hide();
+    //     }      
+    // }
+
+// keluar otomatis dari fullscreen saat klik esc atau x
+    // $('#fullscreenPertemuan').mouseleave(function(){
+    //     closeFullscreen();
+    // });
+
 
 </script>
 
