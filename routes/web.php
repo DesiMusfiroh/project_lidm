@@ -82,16 +82,23 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/','QuestionController@index')->name('paketsoal.index');
         Route::get('/create','QuestionController@create')->name('guru.paketsoal.create');
         Route::post('/store','QuestionController@store')->name('guru.paketsoal.store');
+        Route::patch('/update','QuestionController@updatePaketSoal')->name('guru.paketsoal.update'); 
+       
         // Buat Soal Satuan
         Route::get('/create_soal_satuan/{paket_soal_id}','QuestionController@create_soal_satuan', ['$paket_soal_id' =>'paket_soal_id'])->name('create_soal_satuan'); //
+       
         //Soal Essay
         Route::post('question_store/essay_store','QuestionController@essay_store')->name('storeSingleQuestionEssay');
+        Route::patch('/create_soal_satuan/{paket_soal_id}/updateessay','QuestionController@update_soal_satuan_essay', ['$paket_soal_id' =>'paket_soal_id'])->name('updateSoalSatuan');
+
         // Soal Pilgan
         Route::post('question_store/pilgan_store','QuestionController@pilgan_store')->name('storeSingleQuestionPilgan');
+        Route::patch('/create_soal_satuan/{paket_soal_id}/updatepil','QuestionController@update_soal_satuan_pilgan', ['$paket_soal_id' =>'paket_soal_id'])->name('updateSoalSatuanPil');
+       
+        //Download
         Route::get('/export-soal/{id}','DocumentController@exportSoal')->name('exportSoal');
-        Route::get('/export-jawaban/{id}','DocumentController@exportJawaban')->name('exportJawaban');
-
-    });
+        // Route::get('/export-jawaban/{id}','DocumentController@exportJawaban')->name('exportJawaban');
+       });
 
 
     Route::group(['prefix' => 'ujian'], function(){
