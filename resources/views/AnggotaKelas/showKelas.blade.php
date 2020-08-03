@@ -12,7 +12,7 @@
     <div class="container-fluid">
 
         <div class="alert alert-success" role="alert">
-            <h5 class="alert-heading">{{$kelas->nama_kelas}}</h5>
+            <h5 class="alert-heading"><strong>{{$kelas->nama_kelas}}</strong> </h5>
             <p>{{$kelas->deskripsi}}</p>
         </div>
         <div class="row">

@@ -36,6 +36,7 @@ Route::group(['prefix' => 'siswa'], function () {
     // route kelola pertemuan
     Route::group(['prefix' => 'pertemuan'], function () {
         Route::get('/show/{kelas_id}/{id_pertemuan}','AnggotaKelasController@showPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.show');
+        Route::get('/ruang/{kelas_id}/{id_pertemuan}','AnggotaKelasController@ruangPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.ruang');
     });
 
     Route::group(['prefix' => 'ujian'], function () {
@@ -66,6 +67,9 @@ Route::group(['prefix' => 'guru'], function () {
             Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
             Route::post('/store','PertemuanController@store')->name('pertemuan.store');
             Route::get('/show/{kelas_id}/{id_pertemuan}','PertemuanController@show',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.show');
+            Route::get('/ruang/{kelas_id}/{id_pertemuan}','PertemuanController@ruang',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang');
+            Route::get('/end/{id}','PertemuanController@end')->name('pertemuan.end');
+
         });
 
         Route::group(['prefix' => 'kelompok'],function(){
