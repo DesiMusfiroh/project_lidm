@@ -102,27 +102,5 @@ class SiswaController extends Controller
         return redirect()->route('siswa.profil')->with('success','Data Profil berhasil di update');
     }
 
-    public function indexUjian(){
-        // $id = auth()->user()->siswa->anggota_kelas()->first()->id;
-        // dd($id);
-        //($id);
-        // $id = auth()->user()->siswa->with('anggota_kelas:id')->get();
-        // dd($id);
-
-        // $current_user = PesertaUjian::where('anggota_kelas_id',auth()->user()->siswa->anggota_kelas->id)->get();
-        // $current_user = PesertaUjian::where('anggota_kelas_id',auth()->user()->siswa->id)->with('anggota_kelas:auth')->get();
-        // $current_user = PesertaUjian::where('anggota_kelas_id',$id->anggota_kelas()->id)->get();
-
-        //dd($current_user);
-        //$anggota_kelas_id = $current_user->siswa->anggota_kelas->id->get();
-        //dd($anggota_kelas_id);
-        $id = auth()->user()->siswa->anggota_kelas()->value('id');
-        //dd($id);
-        //dd($id);
-        $peserta = PesertaUjian::where('anggota_kelas_id',$id)->get();
-        //dd($ujian_yg_saya_ikuti);
-
-        return view('Ujian-Siswa.index',compact(['peserta']));
-    }
 
 }

@@ -39,7 +39,11 @@ Route::group(['prefix' => 'siswa'], function () {
     });
 
     Route::group(['prefix' => 'ujian'], function () {
-        Route::get('/index','SiswaController@indexUjian')->name('siswa.ujian.index');
+        Route::get('/index','UjianController@indexUjian')->name('siswa.ujian.index');
+        Route::get('/wait/{id}','UjianController@waitUjian')->name('waitUjian');
+        Route::get('/run/{id}','UjianController@runUjian',['id'=> 'id'])->name('runUjian');
+        Route::get('/finish/{id}','UjianController@finishUjian',['id'=> 'id'])->name('finishUjian');
+        Route::get('pagination/fetch_data', 'UjianController@fetch_data');
     });
 
 

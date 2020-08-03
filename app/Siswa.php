@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\EssayJawab;
+use App\PilganJawab;
 use App\AnggotaKelas;
 
 class Siswa extends Model
@@ -15,5 +17,13 @@ class Siswa extends Model
     }
     public function anggota_kelas(){
         return $this->hasMany(AnggotaKelas::class,'siswa_id');
+    }
+
+    public function essay_jawab(){
+      return $this->hasMany(EssayJawab::class,'siswa_id');
+    }
+
+    public function pilgan_jawab(){
+      return $this->hasMany(PilganJawab::class,'siswa_id');
     }
 }

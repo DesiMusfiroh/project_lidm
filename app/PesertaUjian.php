@@ -17,4 +17,11 @@ class PesertaUjian extends Model
     public function anggota_kelas(){
       return $this->belongsTo(AnggotaKelas::class);
     }
+
+    public function essay_jawab(){
+      return $this->hasMany(EssayJawab::class,'peserta_ujian_id');
+    }
+    public function pilgan_jawab(){
+      return $this->hasMany(PilganJawab::class,'peserta_ujian_id');
+    }
 }

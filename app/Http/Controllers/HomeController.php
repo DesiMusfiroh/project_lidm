@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\PesertaUjian;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -18,7 +18,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard. 
+     * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -28,7 +28,9 @@ class HomeController extends Controller
             return view('home_guru');
         } else{
             // $users['users'] = \App\user::all();
-            return view('home_siswa');
+            $anggota_kelas_id = auth()->user()->siswa->anggota_kelas()->value('id');
+            $peserta_ujian = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status','!=',1)->get();
+            return view('home_siswa',compact(['peserta_ujian']));
         }
     }
 }

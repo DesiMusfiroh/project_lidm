@@ -12,4 +12,8 @@ class Pilgan extends Model
     public function soal_satuan() {
         return $this->belongsTo(SoalSatuan::class);
     }
+
+    public function pilgan_jawab(){
+        return $this->hasMany(PilganJawab::class,'pilgan_id');
+    }
 }
