@@ -4,6 +4,9 @@
 
 
 <div class="container">
+  <div>
+    {{ Breadcrumbs::render('guru.ujian.index') }}
+  </div>
     <div class="row justify-content-center">
         <div class="col-md-12" >
             <div class="card">
@@ -12,7 +15,7 @@
                 </div>
 
                 <div class="card-body pb-0">
-        
+
                 @if($ujian->count() != 0)
                 <div class="table-inside">
                     <table class="table table-striped table-bordered table-sm">

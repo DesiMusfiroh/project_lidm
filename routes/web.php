@@ -34,17 +34,17 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/show/{id}','AnggotaKelasController@showKelas')->name('siswa.kelas.show');
         Route::get('/hasilujian/{id}','AnggotaKelasController@hasilUjian')->name('hasilUjian');
 
+        Route::group(['prefix' => 'pertemuan'], function () {
+          Route::get('/show/{kelas_id}/{id_pertemuan}','AnggotaKelasController@showPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.show');
+          Route::get('/ruang/{kelas_id}/{id_pertemuan}','AnggotaKelasController@ruangPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.ruang');
+        });
     });
     // route kelola pertemuan
-    Route::group(['prefix' => 'pertemuan'], function () {
-        Route::get('/show/{kelas_id}/{id_pertemuan}','AnggotaKelasController@showPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.show');
-        Route::get('/ruang/{kelas_id}/{id_pertemuan}','AnggotaKelasController@ruangPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.ruang');
-    });
 
     Route::group(['prefix' => 'ujian'], function () {
         Route::get('/index','UjianController@indexUjian')->name('siswa.ujian.index');
         Route::get('/wait/{id}','UjianController@waitUjian')->name('waitUjian');
-        
+
         Route::get('/finish/{id}','UjianController@finishUjian',['id'=> 'id'])->name('finishUjian');
 
     });

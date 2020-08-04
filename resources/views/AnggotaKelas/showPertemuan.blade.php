@@ -17,11 +17,14 @@
     }
 </style>
 
-<?php 
+<?php
     Use App\Kelas;
 ?>
 @section('content')
 <main class="main">
+  <div>
+    {{ Breadcrumbs::render('pertemuanSiswa.show',$pertemuan->kelas,$pertemuan) }}
+  </div>
     <div>
       <!-- {{ Breadcrumbs::render('pertemuan.show',$pertemuan->kelas,$pertemuan) }} -->
     </div>
@@ -31,24 +34,24 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card" >
-                    <div class="card-header"><strong> {{$pertemuan->nama_pertemuan}}</strong></div> 
+                    <div class="card-header"><strong> {{$pertemuan->nama_pertemuan}}</strong></div>
                     <div class="card-body">
                         {{$pertemuan->deskripsi}}
                         <br>
                         Waktu Mulai Pertemuan: {{$waktu_mulai}}
-                        @if ($pertemuan->status == 0) 
-                        <div class="text-center"><div class="alert alert-info pt-0 pb-0 mt-2 mb-0" id="teks"></div></div> 
+                        @if ($pertemuan->status == 0)
+                        <div class="text-center"><div class="alert alert-info pt-0 pb-0 mt-2 mb-0" id="teks"></div></div>
                         @elseif ($pertemuan->status == 1)
                         <div class="text-right mt-2" id="start">
                             <input type="hidden" id="pertemuan_id" value="{{$pertemuan->id}}">
                             <input type="hidden" id="anggota_kelas_id" value="{{$anggota_kelas_id}}">
                             <!-- <button class="btn btn-success" id="masuk_pertemuan" onclick="openFullscreen();" style="width:40%; box-shadow: 3px 2px 5px grey;">Masuk Ruang Pertemuan</button> -->
                             <a href="{{route('pertemuanSiswa.ruang',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}} "><button class="btn btn-success" style="width:40%; box-shadow: 3px 2px 5px grey;" onclick="absensi()">Masuk Ruang Pertemuan</button> </a>
-                        </div> 
+                        </div>
                         @elseif ($pertemuan->status == 2)
                         <div class="text-center"> <div class="alert alert-warning pb-0 pt-0  mb-0 mt-2" id="end">Pertemuan Telah berakhir</div></div>
                         @endif
-                    </div>                      
+                    </div>
                 </div>
             </div>
             <div class="col-md-4">
@@ -122,14 +125,14 @@
                         <div class="row">
                             <div class="col text-center"><h4><strong>{{$pertemuan->kelas->nama_kelas}}</strong></h4></div>
                             <div class="col col-md-3 text-right"><h5><strong> {{$pertemuan->nama_pertemuan}}</strong></h5></div>
-                        </div>                   
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-9 pl-3">
-                
+
                     <div id="carouselExampleIndicators" class="carousel slide ml-5" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -160,8 +163,8 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
-                </div> 
-               
+                </div>
+
                 <div class="col-md-3">
                     <div class="card bg-heavy-rain mr-3 ml-3 pt-3 pb-2 pr-3 pl-3">
                         <div class="accordion" id="accordionExample">
@@ -169,7 +172,7 @@
                                 <div class="card-header" id="headingOne">
                                 <h2 class="mb-0">
                                     <button class="btn text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        <strong>Daftar Siswa</strong> 
+                                        <strong>Daftar Siswa</strong>
                                     </button>
                                 </h2>
                                 </div>
@@ -184,7 +187,7 @@
                                 <div class="card-header" id="headingTwo">
                                 <h2 class="mb-0">
                                     <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <strong>Daftar Kelompok</strong> 
+                                        <strong>Daftar Kelompok</strong>
                                     </button>
                                 </h2>
                                 </div>
@@ -198,7 +201,7 @@
                                 <div class="card-header" id="headingThree">
                                 <h2 class="mb-0">
                                     <button class="btn btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                        <strong>Live Chat</strong> 
+                                        <strong>Live Chat</strong>
                                     </button>
                                 </h2>
                                 </div>
@@ -207,9 +210,9 @@
                                 @if($chat_pertemuan->count() != 0)
                                         @foreach ($chat_pertemuan as $item)
                                             @if ($item->user_id == Auth::user()->id)
-                                            <div class="alert alert-sm alert-warning pb-0 pt-0 mb-1">{{$item->user->name}} - {{$item->pesan}}</div> 
+                                            <div class="alert alert-sm alert-warning pb-0 pt-0 mb-1">{{$item->user->name}} - {{$item->pesan}}</div>
                                             @else
-                                            <div class="alert alert-sm alert-success pb-0 pt-0 mb-1">{{$item->user->name}} - {{$item->pesan}}</div> 
+                                            <div class="alert alert-sm alert-success pb-0 pt-0 mb-1">{{$item->user->name}} - {{$item->pesan}}</div>
                                             @endif
                                         @endforeach
                                     @endif
@@ -227,16 +230,16 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-2">
                     <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3">
                         <button class="btn btn-warning" onclick="closeFullscreen();" >Leave</button>
                     </div>
-                   
+
                 </div>
                 <div class="col-md-10">
-                
+
                 </div>
             </div>
         </div> -->
@@ -280,9 +283,9 @@ const waktu_mulai = new Date('<?php echo $waktu_mulai ?>').getTime();
                 },
                 success: function(data) {
                     console.log(data);
-                    location.reload(true); // refresh page otomatis         
+                    location.reload(true); // refresh page otomatis
                 }
-            });  
+            });
         }
     }, 1000);
 
@@ -304,14 +307,14 @@ const waktu_mulai = new Date('<?php echo $waktu_mulai ?>').getTime();
         });
     }
 // pengaturan JS untuk fullscreen pertemuan
-    // $("#fullscreenPertemuan").hide(); 
+    // $("#fullscreenPertemuan").hide();
     // var elem = document.querySelector("#fullscreenPertemuan");
     // function openFullscreen() {
     //     $("#fullscreenPertemuan").show();
 
     //     if (elem.requestFullscreen) {
-    //         elem.requestFullscreen();   
-    //         // akses kamera user           
+    //         elem.requestFullscreen();
+    //         // akses kamera user
     //         var video = document.querySelector("#video-webcam");
     //         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
     //         if (navigator.getUserMedia) {
