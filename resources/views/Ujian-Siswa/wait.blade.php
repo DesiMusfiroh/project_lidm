@@ -23,7 +23,7 @@
   background:linear-gradient(180deg, #80F7FF 1.74%, #D7E8E9 96.02%);
 }
 .head_exam {
-  background: linear-gradient(180deg, rgba(17, 0, 23, 0.96) -83.9%, rgba(44, 5, 60, 0.96) -2.49%, #5E2575 54.53%, #BEA2CF 111.53%);
+  background: linear-gradient(180deg, rgba(0, 109, 18, 0.65) 0%, rgba(42, 191, 67, 0.65) 45.36%, rgba(37, 216, 67, 0.65) 62.5%, rgba(242, 252, 245, 0.65) 100%);
   border-radius: 20px 20px 0px 0px;
   border: none;
 }
@@ -31,7 +31,6 @@ video{
     background: #ccc;
     border: 5px solid grey;
     margin-right: 10px;
-
 }
 </style>
 
@@ -86,9 +85,9 @@ video{
     <div class="row">
       <div class="col-md-12">
         <div class="card pt-3 pl-5 pr-5 pb-3 head_exam">
-          <div class="text-center"> <h4 style="color:white;"> <strong>{{ $ujian->nama_ujian }}</strong></h4> </div>
-          <h6  style="color:#6fedae;"> <strong> Durasi Pengerjaan : {{ $durasi_jam }} jam {{ $durasi_menit }} menit </strong> </h6>
-          <div style="color:#6fedae; font-weight:bold;" id="teks_durasi"></div>
+          <div class="text-center"> <h4 style="color:black;"> <strong>{{ $ujian->nama_ujian }}</strong></h4> </div>
+          <h6  style="color:black;"> <strong> Durasi Pengerjaan : {{ $durasi_jam }} jam {{ $durasi_menit }} menit </strong> </h6>
+          <div style="color:black; font-weight:bold;" id="teks_durasi"></div>
         </div>
       </div>
     </div>

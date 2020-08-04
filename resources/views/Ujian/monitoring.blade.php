@@ -86,7 +86,7 @@
 <!-- fullscreen monitoring ujian   -->
 <div id="fullscreenExam">
 
-      <div class="row">
+      <!-- <div class="row">
             <div class="card pl-7 pt-7 pt-3 text-center" style="border-radius:0px; height:120px; width:100%; background: linear-gradient(180deg, rgba(247, 253, 251, 0.85) 0%, rgba(39, 182, 130, 0.85) 100%);" >
                 <div class="row">
                     <div class="col-md-9 offset-sm-1">
@@ -98,7 +98,21 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3" style="min-height:80px;">
+                    <div class="row">
+                        <div class="col md-12 text-center">
+                            <h4><strong><span id="nama_ujian"></span></strong></h4>
+                            <strong><span id="teks_durasi"></span></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="row">
             <div class="col-md-9">
                 <div class="row justify-content-center">
@@ -108,14 +122,14 @@
                 </div>
                 <div class="row">
 
-
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card pt-20" style="border-radius:0px; height:650px; background: linear-gradient(180deg, rgba(17, 0, 23, 0.96) -83.9%, rgba(44, 5, 60, 0.96) -2.49%, #5E2575 54.53%, #BEA2CF 111.53%);">
-                    <div class="container">
-
-                        <div class="row text-center ml-4 mr-4"  style="font-size:18px; font-weight:bold; color:white;"> <strong>Peserta Ujian</strong> </div> <hr>
+                <div class="card mr-3" style="height:650px; background: linear-gradient(180deg, #80F7FF 1.74%, #D7E8E9 96.02%);">
+                    <div class="card-header">
+                        <div class="row text-center ml-4 mr-4"  style="font-size:18px; font-weight:bold; color:white;"> <strong>Peserta Ujian</strong> </div> 
+                    </div>
+                    <div class="card-body">
                         <div id="teks_peserta" class="ml-4 mr-4 " style="font-size:16px; font-weight:bold; color:white;"></div>
                     </div>
                 </div>

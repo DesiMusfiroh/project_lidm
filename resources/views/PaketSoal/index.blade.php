@@ -68,21 +68,20 @@
 
                                 <td class="text-center">{{$item->jumlah_soal()}}</td>
                                 <td class="text-center">
-
-                                <a  href="{{route('exportSoal',$item->id)}}" target="_blank" >
-                                    <button type="button" class="btn btn-info btn-sm">
-                                    <i class="fa fa-download" aria-hidden="true"> Soal</i>
-                                        </button>
-                                    </a>
-                                <a  href="#" target="_blank" >
-                                    <button type="button" class="btn btn-secondary btn-sm">
-                                    <i class="fa fa-download" aria-hidden="true"> Kunci</i>
-                                        </button>
-                                    </a>
-
+                                <a  href="{{route('exportSoal',$item->id)}}"  target="_blank">
+                                    <button type="button" class="btn btn-sm btn-info">
+                                        <i class="fa fa-download" aria-hidden="true"></i> Soal
+                                    </button>
+                                </a>
+                                <a  href="{{route('exportSoal',$item->id)}}"  target="_blank">
+                                    <button type="button" class="btn btn-sm btn-secondary">
+                                        <i class="fa fa-download" aria-hidden="true"></i> Kunci
+                                    </button>
+                                </a>
+                               
                                 </td>
                                 <td class="text-center">
-                                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target=".update_modal_paket"
+                                <button type="button" class="btn  btn-warning" data-toggle="modal" data-target=".update_modal_paket"
                                     id="update"
                                     data-id_paket_update="{{ $item->id }}"
                                     data-guru_id_paket_update="{{ $item->guru->id }}"
@@ -92,12 +91,12 @@
                                 <i class="fa fa-edit" aria-hidden="true"></i>
                                 </button>
                                 <a href="{{route('create_soal_satuan',$item->id)}}" title="Tambah soal">
-                                        <button type="button" class="btn btn-success btn-sm">
+                                        <button type="button" class="btn btn-success">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                     </a>
                                     <a href="#" title="Hapus paket soal" class="hapus" paket_soal_id="{{$item->id}}" paket_soal_judul="{{$item->judul}}">
-                                        <button type="button" class="btn btn-danger btn-sm">
+                                        <button type="button" class="btn btn-danger ">
                                             <i class="fa fa-trash fa-sm"></i>
                                         </button>
                                     </a>
