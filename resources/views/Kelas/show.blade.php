@@ -32,8 +32,8 @@
                     <div class="card-header" >Daftar Siswa</div>
                     <div class="card-body">
                         @if($anggotakelas->count() != 0)
-                        <table class="table table-striped">
-                            <thead class="thead-dark thead">
+                        <table class="table table-striped table-bordered">
+                            <thead class="bg-dark thead text-center"  style="font-weight:bold; color:white">
                                 <tr>
                                     <td width="30px">No</td>
                                     <td>Nama Siswa</td>
@@ -92,14 +92,15 @@
                             <div class="mb-3 text-right">
                                 <a href="{{route('pertemuan.create',$kelas->id)}}"> <button class="btn btn-success">Buat Pertemuan</button> </a>
                             </div>
-                            <div class="row">
+                            <div class="row table-inside">
                                 @if($pertemuan->count() != 0)
-                                <table class="table table-striped">
-                                    <thead class="thead-dark thead">
+                                <table class="table table-striped  table-bordered">
+                                    <thead class="bg-dark thead text-center"  style="font-weight:bold; color:white">
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Nama Pertemuan</td>
                                             <td>Jadwal</td>
+                                            <td>Keterangan</td>
                                             <td align="center">Opsi</td>
                                         </tr>
                                     </thead>
@@ -111,6 +112,13 @@
                                             <td><?php echo $i; $i++?></td>
                                             <td>{{$item->nama_pertemuan}}</td>
                                             <td>{{$item->waktu_mulai}}</td>
+                                            @if($item->status == 0)
+                                            <td>Belum dimulai</td>
+                                            @elseif($item->status == 1)
+                                            <td>Sedang Berlangsung</td>
+                                            @elseif($item->status ==2)
+                                            <td>Selesai</td>
+                                            @endif
                                             <td>
                                             <a href="#">
                                                 <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>

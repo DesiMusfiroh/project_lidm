@@ -135,8 +135,14 @@
                 </a>
                 <ul>
                     <li>
+                        <a href="{{route('guru.ujian.create')}}">
+                          <b>Buat Ujian</b>
+                            <i class="metismenu-icon"></i>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{route('guru.ujian.index')}}">
-                          <b>Ujian</b>
+                          <b>Riwayat Ujian</b>
                             <i class="metismenu-icon"></i>
                         </a>
                     </li>

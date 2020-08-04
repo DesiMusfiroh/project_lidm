@@ -5,17 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="container-fluid mt-2">
-                  <div class="row">
-                    <div class="col-md-8"><strong style="font-size: 18px;">{{$ujian->nama_ujian}}</strong> </div>
-                    <div class="col-md-4 text-right">
-                        <a  href=""  target="_blank">
-                          <button type="button" class="btn btn-sm btn-info">
-                              <i class="fa fa-download" aria-hidden="true"></i> Download Rekap Nilai
-                          </button>
-                        </a>
-                    </div>
-                  </div>
+                <div class="card-header ">
+                  <strong style="font-size: 18px;">{{$ujian->nama_ujian}}</strong>
                 </div>
 
                 <?php
@@ -52,16 +43,14 @@
                       </div>
 
                       <div class="col-md-4 status-ujian">
-                          <div class="alert alert-secondary alert-sm mt-0 pt-0 pb-0 text-center"><strong>Ujian telah berakhir !</strong></div>
+                        <div class="alert alert-secondary alert-sm mt-0 pt-0 pb-0 text-center"><strong>Ujian telah berakhir !</strong></div>
                         <div class="row text-right">
                           <div class="col-sm-9 offset-md-3">
-                            <strong>Kode Akses Ujian :</strong>
-                            <div class="input-group mb-3">
-                              <input type="text" class="form-control" value="" id="kode_ujian" style="background:#f0f5c1" readonly />
-                              <div class="input-group-append">
-                                <a href=""> <button type="button" class="btn btn-warning">Salin</button> </a>
-                              </div>
-                            </div>
+                            <a  href=""  target="_blank">
+                                <button type="button" class="btn btn-sm btn-success">
+                                    <i class="fa fa-download" aria-hidden="true"></i> Download Rekap Nilai
+                                </button>
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -72,7 +61,7 @@
 
 
                   <div class="table-inside">
-                  <table class="table table-striped table-bordered table-sm">
+                    <table class="table table-striped table-bordered table-sm">
                         <thead class="thead-dark text-center">
                             <tr>
                                 <th scope="col" style="width:50px">No.</th>
@@ -108,8 +97,9 @@
 
                         </tbody>
                     </table>
-                    </div>
-
+                  </div>
+                  
+                 
                 </div>
             </div>
         </div>

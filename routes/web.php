@@ -40,7 +40,7 @@ Route::group(['prefix' => 'siswa'], function () {
     });
 
     Route::group(['prefix' => 'ujian'], function () {
-        Route::get('/index','SiswaController@indexUjian')->name('siswa.ujian.index');
+        Route::get('/index','SiswaController@indexUjian')->name('siswa.ujian');
     });
 
 

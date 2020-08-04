@@ -103,6 +103,11 @@ class SiswaController extends Controller
     }
 
     public function indexUjian(){
+        $anggota_kelas_id = AnggotaKelas::where('siswa_id', auth()->user()->siswa->id)->get('id');
+        foreach ($anggota_kelas_id as $item) {
+            $peserta_ujian = PesertaUjian::where('anggota_kelas_id', $item)->get();
+        }
+
         // $id = auth()->user()->siswa->anggota_kelas()->first()->id;
         // dd($id);
         //($id);
@@ -116,10 +121,10 @@ class SiswaController extends Controller
         //dd($current_user);
         //$anggota_kelas_id = $current_user->siswa->anggota_kelas->id->get();
         //dd($anggota_kelas_id);
-        $id = auth()->user()->siswa->anggota_kelas()->value('id');
-        //dd($id);
-        //dd($id);
-        $peserta = PesertaUjian::where('anggota_kelas_id',$id)->get();
+        // $id = auth()->user()->siswa->anggota_kelas()->value('id');
+        // //dd($id);
+        // //dd($id);
+        // $peserta = PesertaUjian::where('anggota_kelas_id',$id)->get();
         //dd($ujian_yg_saya_ikuti);
 
         return view('Ujian-Siswa.index',compact(['peserta']));

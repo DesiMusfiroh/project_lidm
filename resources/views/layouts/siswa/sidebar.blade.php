@@ -67,25 +67,25 @@
                 <li>
                     <a href="/home" class="active mb-2">
                         <i class="metismenu-icon pe-7s-home"></i>
-                        Beranda
+                        <b>Beranda</b>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('siswa.profil')}}" class="mb-2  {{(request()->is('siswa/profil*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-user"></i>
-                        Profil
+                        <b>Profil</b>
                     </a>
                 </li>
                 <li>
                     <a href="{{route('siswa.kelas')}}" class="mb-2  {{(request()->is('siswa/kelas*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-monitor"></i>
-                        Kelas
+                        <b>Kelas</b>
                     </a>
                 </li>
                 <li>
-                    <a href="" class="mb-2">
+                    <a href="{{route('siswa.ujian')}}" class="mb-2  {{(request()->is('siswa/ujian*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
-                        Ujian
+                        <b>Ujian</b>
                     </a>
                 </li>
                 <li>
