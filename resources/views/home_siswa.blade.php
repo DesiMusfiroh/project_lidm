@@ -10,6 +10,7 @@
     <div>
       {{ Breadcrumbs::render('home') }}
     </div>
+
     <div class="animated fadeIn">
     </div>
 </main>

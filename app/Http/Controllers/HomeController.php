@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\PesertaUjian;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -18,7 +18,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard. 
+     * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
@@ -26,9 +26,9 @@ class HomeController extends Controller
     {
         if (Auth::user()->role == 1){
             return view('home_guru');
-        } else{
-            // $users['users'] = \App\user::all();
+        } else {
             return view('home_siswa');
         }
+       
     }
 }

@@ -13,6 +13,7 @@ use App\Absensi;
 use App\AnggotaKelompok;
 use App\User;
 use App\ChatPertemuan;
+use App\PesertaUjian;
 
 use Auth;
 
@@ -84,7 +85,9 @@ class AnggotaKelasController extends Controller
          // }
          // dd($data);
         // $id_kelompok_saya = AnggotaKelompok::where('anggota_kelas_id',auth()->user);
-        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas','kelompok_saya','anggota_kelompok'));
+        $hasil_ujian = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',0)->get();
+       
+        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'hasil_ujian'=> $hasil_ujian], compact('kelas','kelompok_saya','anggota_kelompok'));
 
     }
     public function showPertemuan($kelas_id, $id_pertemuan)

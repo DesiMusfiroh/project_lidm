@@ -12,5 +12,9 @@ class Essay extends Model
     
     public function soal_satuan() {
         return $this->belongsTo(SoalSatuan::class);
+    }
+
+    public function essay_jawab(){
+        return $this->hasMany(EssayJawab::class,'essay_id');
     }  
 }

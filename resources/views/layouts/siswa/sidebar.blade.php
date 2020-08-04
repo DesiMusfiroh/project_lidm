@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('siswa.ujian')}}" class="mb-2  {{(request()->is('siswa/ujian*')) ? 'mm-active' : ''}}">
+                    <a href="{{route('siswa.ujian.index')}}" class="mb-2  {{(request()->is('siswa/ujian*')) ? 'mm-active' : ''}}">
                         <i class="metismenu-icon pe-7s-bookmarks"></i>
                         <b>Ujian</b>
                     </a>

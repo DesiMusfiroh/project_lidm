@@ -71,8 +71,8 @@
                     <div class="tab-content mr-3 ml-3">
                         <div class="tab-pane active" id="pertemuan" role="tabpanel" aria-labelledby="pertemuan-tab">
                             <div class="row">
-                                <table class="table table-striped">
-                                    <thead class="thead-dark thead">
+                                <table class="table table-striped table-bordered table-sm">
+                                    <thead class="thead-dark text-center">
                                         <tr>
                                             <td>No</td>
                                             <td>Nama Pertemuan</td>
@@ -82,7 +82,7 @@
                                         </tr>
                                     </thead>
                                     @if($pertemuan->count() != 0)
-                                    <tbody>
+                                    <tbody class="text-center">
                                     <?php $i=1; ?>
                                     @foreach ($pertemuan as $item)
                                         <tr>
@@ -118,8 +118,8 @@
                           <h3 class="text-center">Kelompok saya</h3>
                           <div class="row">
                             <div class="card-body"><h5 class="card-title">{{$kelompok_saya->nama_kelompok}}</h5>
-                              <table class="mb-0 table table-hover">
-                                  <thead>
+                              <table class="mb-0 table  table-hover">
+                                  <thead class="thead-dark">
                                   <tr>
                                       <th>No</th>
                                       <th>Nama</th>
@@ -143,7 +143,48 @@
                             tugas
                         </div>
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
-                            hasil ujian
+                            <div class="table-inside">
+                            @if($hasil_ujian->count() != 0)
+                            <table class="table table-striped table-bordered table-sm" >
+                                    <thead class="thead-dark text-center">
+                                        <tr>
+                                            <th scope="col" style="width:50px">No</th>
+                                            <th scope="col" >Nama Ujian </th>
+                                            <th scope="col" >Tanggal Ujian </th>
+                                            <th scope="col" >Nilai Ujian </th>
+                                            <th scope="col" >Opsi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i=1; ?>
+                                        @foreach ($hasil_ujian as $item)
+                                        <tr>
+                                            <td scope="row" class="text-center"><?php echo $i; $i++; ?></td>
+                                            <?php $i++; ?>
+                                            <td >{{$item->ujian->nama_ujian}}</td>
+                                            <td class="text-center"> {{date("d-m-Y",strtotime($item->ujian->waktu_mulai))}} </td>
+                                            <td class="text-center">  </td>
+                                            <td class="text-center">
+                                                <a href="">
+                                                    <button type="button" class="btn btn-info btn-sm">
+                                                        <i class="fa fa-eye fa-sm"></i> Detail
+                                                    </button>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                @else
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <strong> Belum ada ujian yang di telah dikerjakan. </strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                                </div>
                         </div>
                     </div>
 

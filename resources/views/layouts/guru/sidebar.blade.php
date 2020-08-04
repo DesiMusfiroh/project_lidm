@@ -147,7 +147,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="{{route('guru.ujian.monitoring')}}">
                             <b>Monitoring Ujian</b>
                             <i class="metismenu-icon pe-7s-monitor"></i>
                         </a>
