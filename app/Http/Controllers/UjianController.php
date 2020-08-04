@@ -7,6 +7,8 @@ use App\Ujian;
 use App\SoalSatuan;
 use App\AnggotaKelas;
 use App\PesertaUjian;
+use App\PilganJawab;
+use App\EssayJawab;
 use Illuminate\Http\Request;
 
 class UjianController extends Controller
@@ -110,7 +112,7 @@ class UjianController extends Controller
     }
 
     public function fetch_data(Request $request){
-        $peserta = PesertaUjian::find($request->peserta_id);
+        $peserta = PesertaUjian::find($request->peserta_ujian_id);
         $ujian = Ujian::where('id',$peserta->ujian_id)->first();
         $paket_soal_id = $ujian->paket_soal_id;
         $paket_soal = PaketSoal::where('id',$paket_soal_id)->get();
@@ -119,5 +121,97 @@ class UjianController extends Controller
         {
             return view('Ujian-Siswa.pagination_data', ['soal_satuan' => $soal_satuan, 'ujian' => $ujian, 'peserta' => $peserta ], compact('paket_soal_id'))->render();
         }
+    }
+
+
+
+    public function storePilgan(Request $request)
+    {
+        $this->validate($request,[
+            'user_id' => 'required',
+            'peserta_ujian_id' => 'required',
+            'pilgan_id' => 'required',
+            'jawab_pilgan' => 'required',
+            'score' => 'required',
+            'status' => 'required'
+        ]);
+        $check_jawaban = PilganJawab::where('siswa_id', Auth::user()->siswa->id)
+                                    ->where('pilgan_id', $request->pilgan_id)
+                                    ->where('peserta_ujian_id', $request->peserta_id)->first();
+        if (!$check_jawaban) {
+            $posts = PilganJawab::create([
+                'siswa_id' => $request->siswa_id,
+                'peserta_ujian_id' => $request->peserta_id,
+                'pilgan_id' => $request->pilgan_id,
+                'jawab' => $request->jawab_pilgan,
+                'score' => $request->score,
+                'status' => $request->status
+            ]);
+
+        } elseif ($check_jawaban) {
+            $update_pilgan_jawab = [
+                'siswa_id' => $request->siswa_id,
+                'peserta_ujian_id' => $request->peserta_id,
+                'pilgan_id' => $request->pilgan_id,
+                'jawab' => $request->jawab_pilgan,
+                'score' => $request->score,
+                'status' => $request->status
+            ];
+            $posts = PilganJawab::where('user_id', Auth::user()->id)
+                                ->where('pilgan_id', $request->pilgan_id)
+                                ->where('peserta_ujian_id', $request->peserta_id)->update($update_pilgan_jawab);
+        }
+
+        return response()->json($posts);
+
+    }
+
+
+    public function storeEssay(Request $request)
+    {
+
+        $this->validate($request,[
+            'siswa_id' => 'required',
+            'peserta_ujian_id' => 'required',
+            'essay_id' => 'required',
+            'jawab_essay' => 'required'
+        ]);
+        $check_jawaban = EssayJawab::where('siswa_id', Auth::user()->siswa->id)
+                                ->where('essay_id', $request->essay_id)
+                                ->where('peserta_ujian_id', $request->peserta_ujian_id)->first();
+        if (!$check_jawaban) {
+            $posts = EssayJawab::create([
+                'siswa_id' => $request->siswa_id,
+                'peserta_ujian_id' => $request->peserta_ujian_id,
+                'essay_id' => $request->essay_id,
+                'jawab' => $request->jawab_essay,
+            ]);
+        } elseif ($check_jawaban) {
+            $update_essay_jawab = [
+                'siswa_id' => $request->siswa_id,
+                'peserta_ujian_id' => $request->peserta_ujian_id,
+                'essay_id' => $request->essay_id,
+                'jawab' => $request->jawab_essay,
+            ];
+            $posts = EssayJawab::where('siswa_id', Auth::user()->siswa->id)
+                                ->where('essay_id', $request->essay_id)
+                                ->where('peserta_ujian_id', $request->peserta_ujian_id)->update($update_essay_jawab);
+        }
+
+        return response()->json($posts);
+    }
+
+
+
+
+
+
+    public function finishUjian($id){
+        $peserta = PesertaUjian::find($id);
+        $update_finish_peserta = [
+            'status' => 1,
+        ];
+        PesertaUjian::where('id', $id)->update($update_finish_peserta);
+        return redirect()->route('home')->with('info','Ujian telah diselesaikan, jawaban anda telah tersimpan !');
     }
 }

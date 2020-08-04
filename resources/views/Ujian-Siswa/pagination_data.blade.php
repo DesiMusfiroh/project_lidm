@@ -66,14 +66,14 @@
     </div>
 
     <input type="hidden" value="{{ $ujian->id }}" id="ujian_id">
-    <input type="hidden" value="{{ $peserta->id }}" id="peserta_id">
+    <input type="hidden" value="{{ $peserta->id }}" id="peserta_ujian_id">
 
 <script>
 // Pengaturan JS untuk simpan jawaban essay
 $("#jawaban_essay").change(function(){
     var jawab_essay  = $("#jawaban_essay").val();
     var essay_id     = $("#essay_id").val();
-    var peserta_id   = $("#peserta_id").val();
+    var peserta_ujian_id   = $("#peserta_ujian_id").val();
     var siswa_id      = $("#siswa_id").val();
     const ujian_id   = $('#ujian_id').val();
 
@@ -84,8 +84,8 @@ $("#jawaban_essay").change(function(){
         data: {
             jawab_essay: jawab_essay,
             essay_id: essay_id,
-            peserta_id: peserta_id,
-            user_id: user_id,
+            peserta_ujian_id: peserta_ujian_id,
+            siswa_id: siswa_id,
             ujian_id: ujian_id
         },
         success: function(data) {
@@ -98,8 +98,8 @@ $("#jawaban_essay").change(function(){
 $('input[type=radio][name="pilihan"]').click(function() {
     var jawab_pilgan = document.querySelector('input[name = "pilihan"]:checked').value;
     var pilgan_id    = $("#pilgan_id").val();
-    var peserta_id   = $("#peserta_id").val();
-    var user_id      = $("#user_id").val();
+    var peserta_ujian_id   = $("#peserta_ujian_id").val();
+    var siswa_id      = $("#siswa_id").val();
     const ujian_id   = $('#ujian_id').val();
 
     var poin        = $("#poin").val();
@@ -118,8 +118,8 @@ $('input[type=radio][name="pilihan"]').click(function() {
         data: {
             jawab_pilgan: jawab_pilgan,
             pilgan_id: pilgan_id,
-            peserta_id: peserta_id,
-            user_id: user_id,
+            peserta_ujian_id: peserta_ujian_id,
+            siswa_id: siswa_id,
             score: score,
             status: status,
             ujian_id: ujian_id

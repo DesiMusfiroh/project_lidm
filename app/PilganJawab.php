@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Siswa;
 use App\Pilgan;
-use App\Peserta;
+use App\PesertaUjian;
 use App\Pilgan;
 
 class PilganJawab extends Model

@@ -60,7 +60,6 @@ video{
 
     </div>
     <div class="card-footer  text-center " id="start">
-        <!-- <a href="{{route('runUjian',$ujian->id)}}"><button  class="btn btn-warning">Mulai</button></a> -->
         <button class="btn btn-success" id="mulai-ujian" onclick="openFullscreen();" style="width:400px; box-shadow: 3px 2px 5px grey;">Mulai Ujian</button>
     </div>
 </div>
@@ -103,7 +102,7 @@ video{
     <div class="row">
       <div class="col-md-8"></div>
       <div class="col-md-4">
-        <a href="{{route('finishUjian',$peserta->id)}}"> <button class="btn btn-danger" onclick="closeFullscreen();" peserta_id="{{$peserta->id}}"> Akhiri Ujian </button> </a>
+        <a href="{{route('finishUjian',$peserta->id)}}"> <button class="btn btn-danger" onclick="closeFullscreen();" peserta_ujian_id="{{$peserta->id}}"> Akhiri Ujian </button> </a>
       </div>
     </div>
 
@@ -157,23 +156,7 @@ function openFullscreen() {
     //   closeFullscreen();
     // });
 
-    $('#fullscreenExam').mouseleave(function(){
-      const peserta_id = $(this).attr('peserta_id');
-      closeFullscreen();
-      swal({
-        title: "Yakin?",
-        text: "Ketika meninggalkan ujian, anda tidak bisa mengulangi ujian lagi.Tekan cancel untuk kembali ujian",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          window.location = "/finish/"+peserta_id;
-        }
-      });
 
-    });
 }
 function closeFullscreen() {
     if (document.exitFullscreen) {
@@ -230,12 +213,12 @@ $(document).ready(function(){
     });
     function fetch_data(page)
     {
-        const peserta_id = $('#peserta_id').val();
+        const peserta_ujian_id = $('#peserta_ujian_id').val();
         $.ajax({
             url:"/pagination/fetch_data?page="+page,
             type: "GET",
             data: {
-              peserta_id: peserta_id
+              peserta_ujian_id: peserta_ujian_id
             },
             success: function(soal_satuan)
             {
