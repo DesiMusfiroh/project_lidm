@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 <div>
-  {{ Breadcrumbs::render('guru.kelas') }}
+  {{ Breadcrumbs::render('siswa.ujian.index') }}
 </div>
 <div class="container-fluid">
     @if($peserta_ujian->count() != 0)
@@ -16,8 +16,8 @@
                 </div>
                 <div class="card-body">
                     <div class="table-inside">
-                        <table class="table table-striped table-bordered table-sm">
-                            <thead class="thead-dark text-center">
+                        <table class="table table-striped table-sm">
+                            <thead class="text-center"  style="background-color:#393A3C; color:white; font-weight:bold">
                                 <tr>
                                     <th scope="col" style="width:50px">No</th>
                                     <th scope="col" >Nama Ujian </th>

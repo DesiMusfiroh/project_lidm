@@ -21,10 +21,10 @@
                     <div class="card-header">Daftar Siswa</div>
                     <div class="card-body">
                         @if($anggotakelas->count() != 0)
-                        <table class="table table-striped">
-                            <thead class="thead-dark thead">
+                        <table class="table table-striped table-sm">
+                            <thead class="thead-dark thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
                                 <tr>
-                                    <td width="30px">No</td>
+                                    <td width="40px">No</td>
                                     <td>Nama Siswa</td>
                                     <td width="30px"></td>
                                 </tr>
@@ -33,7 +33,7 @@
                                 <?php $i=1; ?>
                                 @foreach ($anggotakelas as $item)
                                     <tr>
-                                        <td><?php echo $i; $i++?></td>
+                                        <td class="text-center"><?php echo $i; $i++?></td>
                                         <td>{{$item->siswa->nama_lengkap}}</td>
                                         <td><a href=""><button class="btn btn-sm btn-info"><i class="fa fa-eye"></i></button></a> </td>
                                     </tr>
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="card pt-3 pr-3 pl-3 pb-3">
+                <div class="card pt-3 pr-3 pl-3 pb-0">
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -70,9 +70,10 @@
 
                     <div class="tab-content mr-3 ml-3">
                         <div class="tab-pane active" id="pertemuan" role="tabpanel" aria-labelledby="pertemuan-tab">
-                            <div class="row">
-                                <table class="table table-striped table-bordered table-sm">
-                                    <thead class="thead-dark text-center">
+        
+                            <div class="row table-inside">
+                                <table class="table table-striped table-sm" >
+                                    <thead class="thead-dark text-center" style="background-color:#393A3C; color:white; font-weight:bold">
                                         <tr>
                                             <td>No</td>
                                             <td>Nama Pertemuan</td>
@@ -92,7 +93,7 @@
                                             @if($item->status == 0)
                                             <td>Belum dimulai</td>
                                             @elseif($item->status == 1)
-                                            <td>Sedang Berlangsung</td>
+                                            <td>Berlangsung</td>
                                             @elseif($item->status ==2)
                                             <td>Selesai</td>
                                             @endif
@@ -112,6 +113,8 @@
                                     @endif
                                 </table>
                             </div>
+                            <div class="row justify-content-center">{{$pertemuan->links()}}</div>
+                           
                         </div>
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
 
@@ -143,10 +146,10 @@
                             tugas
                         </div>
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
-                            <div class="table-inside">
+                            <div class="row table-inside">
                             @if($hasil_ujian->count() != 0)
-                            <table class="table table-striped table-bordered table-sm" >
-                                    <thead class="thead-dark text-center">
+                            <table class="table table-striped table-sm" >
+                                    <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
                                         <tr>
                                             <th scope="col" style="width:50px">No</th>
                                             <th scope="col" >Nama Ujian </th>
@@ -165,7 +168,7 @@
                                             <td class="text-center"> {{date("d-m-Y",strtotime($item->ujian->waktu_mulai))}} </td>
                                             <td class="text-center">  </td>
                                             <td class="text-center">
-                                                <a href="">
+                                                <a href="{{route('hasilUjian',$item->id)}}">
                                                     <button type="button" class="btn btn-info btn-sm">
                                                         <i class="fa fa-eye fa-sm"></i> Detail
                                                     </button>

@@ -30,7 +30,7 @@
         @foreach ($ujian_run as $item)
         <div class="col-sm-4">
             <div class="card text-center mb-4">
-                <div class="card-header"  style="border-radius: 20px 20px 0px 0px; background: #EDE5E5; "><strong style="color:black">{{$item->nama_ujian}}</strong></div>
+                <div class="card-header justify-content-center" ><strong style="color:black">{{$item->nama_ujian}}</strong></div>
                 <div class="card-body">
 
                     <p class="card-text">

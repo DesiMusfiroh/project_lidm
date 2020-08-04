@@ -16,8 +16,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <style media="screen">
+    @import url('https://fonts.googleapis.com/css2?family=Palanquin:wght@500&display=swap');
+    /* body {font-family: 'Palanquin', sans-serif;} */
     .breadcrumb{
         background-color: white;
+        box-shadow: 2px 2px 7px grey;
     }
     @media screen and (max-width: 1000px) {
         .table-inside {
@@ -29,9 +32,13 @@
     .card{
         box-shadow: 2px 2px 10px rgba(48, 10, 64, 0.5);
         margin-bottom: 20px;
+        border-radius: 0px 0px 15px 15px;
     }
-    .card-header { background: rgba(26, 166, 65, 0.47);}
+    .card-header { 
+        background: rgba(26, 166, 65, 0.47);
+    }
     .metismenu-icon {color: black; font-weight:bold;}
+    thead{background-color:#393A3C; color:white; font-weight:bold}
     </style>
 </head>
 

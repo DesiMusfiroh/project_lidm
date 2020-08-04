@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body pb-0">
                         @if (session('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>{{ session('success') }}</strong>
@@ -57,12 +57,10 @@
                         <div class="row">
                             @foreach ($anggotaKelas as $item)
                                 <div class="col-md-4">
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{$item->kelas->nama_kelas}}</h5>
-                                            <p class="card-text">{{$item->kelas->deskripsi}}</p>
-                                            <a href="{{route('siswa.kelas.show',$item->kelas->id)}}" class="btn btn-info">Masuk</a>
-                                        </div>
+                                    <div class="alert alert-success mb-3">
+                                        <h5 class="card-title">{{$item->kelas->nama_kelas}}</h5>
+                                        <p >{{$item->kelas->deskripsi}}</p>
+                                        <div class="text-right"><a href="{{route('siswa.kelas.show',$item->kelas->id)}}" class="btn btn-info">Masuk</a></div>
                                     </div>
                                 </div>
                             @endforeach

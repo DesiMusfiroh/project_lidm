@@ -20,7 +20,7 @@ class UjianController extends Controller
     }
 
     public function index(){
-      $ujian = Ujian::where('guru_id',auth()->user()->guru->id)->get();
+      $ujian = Ujian::where('guru_id',auth()->user()->guru->id)->paginate(7);
       //dd($ujian);
       return view('Ujian.index',compact(['ujian']));
     }
@@ -175,6 +175,7 @@ class UjianController extends Controller
         ));
     }
 
+    
     //Method untuk aktor SISWA -------------------------------------------------------------------------------------
     public function indexUjian(){
         $peserta_ujian = PesertaUjian::where('siswa_id',auth()->user()->siswa->id)->where('status', 0)->get();

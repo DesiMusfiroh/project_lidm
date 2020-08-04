@@ -2,7 +2,9 @@
 @section('title')
 <title>Wait Ujian</title>
 @stop
+
 @section('content')
+
 <style>
 @media screen and (max-width: 1000px) {
    #mulai-ujian {max-width:100%;}

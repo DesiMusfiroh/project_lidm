@@ -14,6 +14,9 @@ use App\AnggotaKelompok;
 use App\User;
 use App\ChatPertemuan;
 use App\PesertaUjian;
+use App\EssayJawab;
+use App\PilganJawab;
+use App\SoalSatuan;
 
 use Auth;
 
@@ -59,7 +62,7 @@ class AnggotaKelasController extends Controller
     public function showKelas($id)
     {
         $kelas = Kelas::find($id);
-        $pertemuan = Pertemuan::where('kelas_id',$id)->get();
+        $pertemuan = Pertemuan::where('kelas_id',$id)->paginate(4);
         $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
                           ->orderBy('siswa.nama_lengkap')->get();
         // $kelompok_saya = AnggotaKelompok::where('siswa')
@@ -135,4 +138,30 @@ class AnggotaKelasController extends Controller
             return response()->json($posts);
         }
     }
+
+
+    public function hasilUjian($id){
+        $peserta_ujian = PesertaUjian::find($id); 
+        //soal yang belum di koreksi
+        $essay_jawab = EssayJawab::where('peserta_ujian_id', $peserta_ujian->id)->where('score','!=',null)->get();
+        $pilgan_jawab = PilganJawab::where('peserta_ujian_id', $peserta_ujian->id)->get();
+        $koreksi_jawaban = EssayJawab::where('peserta_ujian_id', $peserta_ujian->id)->where('score','=',null)->get();
+  
+        $total_poin = SoalSatuan::where('paket_soal_id',$peserta_ujian->ujian->paket_soal->id)->sum('poin');
+  
+        $score_pilgan = PilganJawab::where('peserta_ujian_id',$peserta_ujian->id)->sum('score');
+  
+        if($koreksi_jawaban->count() == 0) {
+            $score_essay = EssayJawab::where('peserta_ujian_id',$peserta_ujian->id)->sum('score');
+            $total_score = $score_essay + $score_pilgan;
+            $nilai_akhir = $total_score / $total_poin * 100;
+            $nilai_akhir = substr($nilai_akhir, 0, 5);
+            PesertaUjian::where('id',$id)->update([
+                'nilai' => $total_score
+            ]);
+            return view('AnggotaKelas.hasilUjian', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban], compact('nilai_akhir','total_poin'));
+        }
+  
+        return view('AnggotaKelas.hasilUjian', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban]);
+      }
 }

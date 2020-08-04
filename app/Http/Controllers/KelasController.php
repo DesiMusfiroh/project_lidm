@@ -47,7 +47,7 @@ class KelasController extends Controller
         $kelas          = Kelas::find($id);
         //dd($kelas);
         //dd($kelas);
-        $pertemuan      = Pertemuan::where('kelas_id',$id)->get();
+        $pertemuan      = Pertemuan::where('kelas_id',$id)->paginate(5);
         if (KelompokMaster::where('kelas_id',$kelas->id)->exists()) {
 
           $kelompok_master = KelompokMaster::where('kelas_id',$kelas->id)->first();

@@ -11,7 +11,7 @@
                   <strong style="font-size:18px"> Riwayat Ujian </strong>
                 </div>
 
-                <div class="card-body">
+                <div class="card-body pb-0">
         
                 @if($ujian->count() != 0)
                 <div class="table-inside">
@@ -39,8 +39,8 @@
                         @endforeach
                       </tbody>
                     </table>
-                   
                 </div>
+                <div class=" row justify-content-right"> <div class="col-md-12"> {{$ujian->links()}}</div></div>
                 @else
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong> Belum ada ujian yang di buat. Silahkan buat ujian baru!</strong>

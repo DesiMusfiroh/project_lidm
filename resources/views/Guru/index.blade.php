@@ -22,7 +22,7 @@
                 <div class="card-header pt-3 pb-2 text-center">
                     <strong style="font-size:18px; "> Profil</strong>
                 </div>
-                <div class="card-body ">
+                <div class="card-body pb-0 ">
                         @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ session('success') }}</strong>
@@ -126,7 +126,7 @@
                     <div class="card-header  pt-3 pb-2 text-center"  >
                         <strong style="font-size:18px"> Profil </strong>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body pb-0">
                         @if (session('success'))
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
@@ -220,7 +220,7 @@
                     <div class="card-header  pt-3 pb-2 text-center" >
                         <strong style="font-size:18px"> Foto Profil </strong>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body  pb-0">
                         <div class="form-group">
                             <label for="file_foto"> <b> Foto : </b> </label>
                             <div class="custom-file">
