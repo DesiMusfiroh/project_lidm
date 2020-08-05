@@ -14,7 +14,7 @@
 <div class="app-sidebar sidebar-shadow"  style="background: linear-gradient(180deg, #12C3CE 0%, #D7E8E9 100%); box-shadow: 10px 0px 10px rgba(0, 0, 0, 0.25);">
     <div class="app-header__logo">
         <img src="/images/logoa.png" alt="" width="170px">
-        
+
         <div class="header__pane ml-auto">
             <div>
                 <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -48,7 +48,7 @@
             <ul class="vertical-nav-menu">
             <center>
             @if( Siswa::where('user_id', Auth::user()->id )->first() != null )
-                <li class="app-sidebar__heading"> <img class="rounded-circle" style="width: 100px; height: 100px; display: block; margin: auto;" src="/images/{{$siswa->foto}}" alt=""></li>
+                <li class="app-sidebar__heading"> <img class="" style="width: 100px; height: 100px; display: block; margin: auto; border: 5px; border-color: #a3a3a3; border-style: solid; border-radius: 50%;" src="/images/{{$siswa->foto}}" alt=""></li>
             @else
             <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
             @endif
