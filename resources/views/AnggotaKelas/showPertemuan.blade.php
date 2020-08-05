@@ -39,9 +39,8 @@
                         {{$pertemuan->deskripsi}}
                         <br>
                         Waktu Mulai Pertemuan: {{$waktu_mulai}}
-                        @if ($pertemuan->status == 0)
+                        @if ($pertemuan->status == 0 || $pertemuan->status == 1  )
                         <div class="text-center"><div class="alert alert-info pt-0 pb-0 mt-2 mb-0" id="teks"></div></div>
-                        @elseif ($pertemuan->status == 1)
                         <div class="text-right mt-2" id="start">
                             <input type="hidden" id="pertemuan_id" value="{{$pertemuan->id}}">
                             <input type="hidden" id="anggota_kelas_id" value="{{$anggota_kelas_id}}">
@@ -252,6 +251,7 @@
     $(function () {
         $('#myTab li:last-child a').tab('show')
     });
+    $("#start").hide();
 
 // pengaturan JS untuk hitung waktu mulai pertemuan
 const waktu_mulai = new Date('<?php echo $waktu_mulai ?>').getTime();
@@ -283,7 +283,7 @@ const waktu_mulai = new Date('<?php echo $waktu_mulai ?>').getTime();
                 },
                 success: function(data) {
                     console.log(data);
-                    location.reload(true); // refresh page otomatis
+                    // location.reload(true); // refresh page otomatis
                 }
             });
         }

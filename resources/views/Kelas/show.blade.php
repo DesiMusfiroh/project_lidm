@@ -95,6 +95,7 @@
                     </ul>
 
                     <div class="tab-content mr-3 ml-3">
+                        <!-- pertemuan -->
                         <div class="tab-pane active" id="pertemuan" role="tabpanel" aria-labelledby="pertemuan-tab">
                             <div class="mb-3 text-right">
                                 <a href="{{route('pertemuan.create',$kelas->id)}}"> <button class="btn btn-success">Buat Pertemuan</button> </a>
@@ -146,52 +147,54 @@
                             </div>
                             <div class="row ">{{$pertemuan->links()}}</div>
                         </div>
+                        <!-- kelompok  -->
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
-                          @if(KelompokMaster::where('kelas_id',$kelas->id)->count() == null)
-                            <div class="card-body"><h5 class="card-title">Buat Kelompok</h5>
-                                <form class="" action="{{route('storeKelompok')}}" method="post">
-                                @csrf
-                                    <input type="hidden" name="kelas_id" value="{{$kelas->id}}">
-                                    <div class="position-relative form-group">
-                                      <label for="jumlah_kelompok" class="">Jumlah Kelompok</label>
-                                      <input name="jumlah_kelompok" id="jumlah_elompok" type="number" class="form-control">
-                                    </div>
-                                    <div class="position-relative form-group">
-                                      <label for="deskripsiKelompok" class="">Deskripsi Kelompok</label>
-                                      <textarea name="deskripsi" id="deskripsiKelompok" class="form-control"> </textarea>
-                                    </div>
-                                    <button class="mt-1 btn btn-primary" type="submit">Submit</button>
-                                </form>
+                            <div class="mb-3 text-right">
+                                <a href="{{route('kelompok.create',$kelas->id)}}"> <button class="btn btn-success">Buat Kelompok</button> </a>
                             </div>
-                          @else
-                            @foreach($kelompok as $kel)
-                            <div class="row">
-                              <div class="card-body"><h5 class="card-title">{{$kel->nama_kelompok}}</h5>
-                                <table class="mb-0 table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-
-                                    </tr>
+                            <div class="row table-inside">
+                            @if($kelompok_master->count() != 0)
+                                <table class="table table-striped table-sm text-center">
+                                    <thead class=" thead text-center">
+                                        <tr>
+                                            <td width="30px">No</td>
+                                            <td>Deskripsi Kelompok</td>
+                                            <td>Jumlah Kelompok</td>
+                                            <td align="center">Opsi</td>
+                                        </tr>
                                     </thead>
+
                                     <tbody>
-                                    @foreach($kel->anggota_kelompok as $item)
-                                    <tr>
-                                        <th scope="row">{{$loop->iteration}}</th>
-                                        <td>{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
-                                    </tr>
+                                    <?php $i=1; ?>
+                                    @foreach ($kelompok_master as $item)
+                                        <tr>
+                                            <td><?php echo $i; $i++?></td>
+                                            <td>{{$item->deskripsi}}</td>
+                                            <td>{{$item->jumlah_kelompok}}</td>
+                                            <td>
+                                            <a href="{{route('kelompok.show',$item->id )}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
-                              </div>
+                            @else
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        Belum ada kelompok yang dibuat
+                                    </div>
+                                </div>
+                            @endif
                             </div>
-                            @endforeach
-                          @endif
+                            <div class="row ">{{$kelompok_master->links()}}</div>
                         </div>
+
+                        <!-- tugas -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
                             tugas
                         </div>
+
+                        <!-- hasil ujian -->
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
                             hasil ujian
                         </div>

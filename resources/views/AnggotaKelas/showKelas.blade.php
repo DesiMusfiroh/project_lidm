@@ -69,8 +69,8 @@
                     </ul>
 
                     <div class="tab-content mr-3 ml-3">
+                        <!-- pertemuan -->
                         <div class="tab-pane active" id="pertemuan" role="tabpanel" aria-labelledby="pertemuan-tab">
-
                             <div class="row table-inside">
                                 <table class="table table-striped table-sm" >
                                     <thead class="thead-dark text-center" style="background-color:#393A3C; color:white; font-weight:bold">
@@ -114,32 +114,42 @@
                                 </table>
                             </div>
                             <div class="row justify-content-center">{{$pertemuan->links()}}</div>
-
                         </div>
+                        <!-- kelompok -->
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
+                            
+                            @if($kelompok_master->count() != 0)
+                                <table class="table table-striped table-sm text-center">
+                                    <thead class="thead text-center">
+                                        <tr>
+                                            <td width="30px">No</td>
+                                            <td>Deskripsi Kelompok</td>
+                                            <td>Jumlah Kelompok</td>
+                                            <td align="center">Opsi</td>
+                                        </tr>
+                                    </thead>
 
-                          <h3 class="text-center">Kelompok saya</h3>
-                          <div class="row">
-                            <div class="card-body"><h5 class="card-title">{{$kelompok_saya->nama_kelompok}}</h5>
-                              <table class="mb-0 table  table-hover">
-                                  <thead class="thead-dark">
-                                  <tr>
-                                      <th>No</th>
-                                      <th>Nama</th>
-
-                                  </tr>
-                                  </thead>
-                                  <tbody>
-                                  @foreach($anggota_kelompok as $item)
-                                  <tr>
-                                      <th scope="row">{{$loop->iteration}}</th>
-                                      <td>{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
-                                  </tr>
-                                  @endforeach
-                                  </tbody>
-                              </table>
-                            </div>
-                          </div>
+                                    <tbody>
+                                    <?php $i=1; ?>
+                                    @foreach ($kelompok_master as $item)
+                                        <tr>
+                                            <td><?php echo $i; $i++?></td>
+                                            <td>{{$item->deskripsi}}</td>
+                                            <td>{{$item->jumlah_kelompok}}</td>
+                                            <td>
+                                            <a href="{{route('kelompok.show',$item->id )}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                
+                            @else
+                                <div class="alert alert-warning" role="alert">
+                                    Belum ada kelompok dalam kelas ini
+                                </div>
+                            @endif
+                           
 
                         </div>
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
@@ -148,7 +158,7 @@
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
                             <div class="row table-inside">
                             @if($hasil_ujian->count() != 0)
-                            <table class="table table-striped table-sm" >
+                                <table class="table table-striped table-sm" >
                                     <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
                                         <tr>
                                             <th scope="col" style="width:50px">No</th>

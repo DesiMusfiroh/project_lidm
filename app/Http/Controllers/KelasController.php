@@ -44,69 +44,23 @@ class KelasController extends Controller
 
     public function show($id)
     {
-        $kelas          = Kelas::find($id);
-        //dd($kelas);
-        //dd($kelas);
-        $pertemuan      = Pertemuan::where('kelas_id',$id)->paginate(5);
-        if (KelompokMaster::where('kelas_id',$kelas->id)->exists()) {
-
-          $kelompok_master = KelompokMaster::where('kelas_id',$kelas->id)->first();
-          $kelompok = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
-          $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
-          return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas','kelompok_master','kelompok'));
-        }
-
-        //dd($kelompok_master);
-        //dd($kelompok_master_id)
-        //$kelompok = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
-        //join untuk mengurutkan data berdasarkan nama sisa
-        $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
+        $kelas           = Kelas::find($id);
+        $pertemuan       = Pertemuan::where('kelas_id',$id)->paginate(5);
+        $anggotakelas    = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
                           ->orderBy('siswa.nama_lengkap')->get();
-        return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas'));
-    }
+        $kelompok_master = KelompokMaster::where('kelas_id',$id)->paginate(5);
 
+        // if (KelompokMaster::where('kelas_id',$kelas->id)->exists()) {
 
-    public function storeKelompok(Request $request)
-    {
-      $anggota_kelas = AnggotaKelas::where('kelas_id',$request->kelas_id)->inRandomOrder()->get('id');
-      $jumlah_anggota_kelas = count($anggota_kelas);
-      $jml_kel = intval($request->jumlah_kelompok);
-      $array_kelompok = $anggota_kelas->split($jml_kel); //mengelompokkan array seluruh siswa tdi. menjadi beberapa kelompok
-      $array_kelompok->toArray();
-
-      $kelompok_master = new KelompokMaster;
-      $kelompok_master->kelas_id = $request->kelas_id;
-      $kelompok_master->deskripsi = $request->deskripsi;
-      $kelompok_master->jumlah_kelompok = $jml_kel;
-      $kelompok_master->status = 0;
-      $kelompok_master->save();
-
-      for ($i=0; $i < $jml_kel ; $i++) {
-        $kelompok = new Kelompok;
-        $kelompok->kelompok_master_id = $kelompok_master->id;
-        $kelompok->nama_kelompok = "Kelompok ".$i;
-        $kelompok->save();
-
-        foreach ($array_kelompok[$i] as $key=>$anggota_kelompok) {
-          //dd($anggota_kelompok);
-          $data = array(
-            'kelompok_id' => $kelompok->id,
-            'anggota_kelas_id' => $anggota_kelompok->id
-          );
-
-          AnggotaKelompok::create($data);
-        }
-        // foreach ($array_kelompok as $key => $kel) {
-        //   //dd($kel);
-        //   $data['kelompok_id'] = $kelompok->id;
-        //   $data['anggota_kelas_id'] = $kel->id;
-        //   AnggotaKelompok::create($data);
+        //   $kelompok_master = KelompokMaster::where('kelas_id',$kelas->id)->first();
+        //   $kelompok = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
+        //   $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
+        //   return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas','kelompok_master','kelompok'));
         // }
-        //$anggota_kelompok = new AnggotaKelompok;
-
-      }
-      return redirect()->back();
+        
+        return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master], compact('kelas'));
     }
+
     public function edit($id)
     {
         //
