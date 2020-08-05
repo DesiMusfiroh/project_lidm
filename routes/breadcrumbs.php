@@ -20,14 +20,23 @@ Breadcrumbs::register('kelas', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Kelas', route('siswa.kelas'));
 });
-Breadcrumbs::register('showkelas', function ($breadcrumbs, $kelas) {
+Breadcrumbs::register('siswa.kelas.show', function ($breadcrumbs, $kelas) {
     $breadcrumbs->parent('kelas');
     $breadcrumbs->push($kelas->nama_kelas, route('siswa.kelas.show', $kelas->id));
 });
+Breadcrumbs::register('pertemuanSiswa.show', function ($breadcrumbs, $kelas, $pertemuan) {
+    $breadcrumbs->parent('siswa.kelas.show',$kelas);
+    $breadcrumbs->push($pertemuan->nama_pertemuan, url('siswa/kelas/pertemuan/show/{kelas_id}/{id_pertemuan}'));
+});
 
+//Siswa Ujian
 Breadcrumbs::register('siswa.ujian.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Ujian', route('siswa.ujian.index'));
+});
+Breadcrumbs::register('waitUjian', function ($breadcrumbs,$ujian) {
+    $breadcrumbs->parent('siswa.ujian.index');
+    $breadcrumbs->push($ujian->nama_ujian, route('waitUjian',$ujian->id));
 });
 
 
@@ -51,6 +60,10 @@ Breadcrumbs::register('paketsoal.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Paket Soal', route('paketsoal.index'));
 });
+Breadcrumbs::register('create_soal_satuan', function ($breadcrumbs, $paket_soal) {
+    $breadcrumbs->parent('paketsoal.index');
+    $breadcrumbs->push($paket_soal->judul, route('create_soal_satuan',$paket_soal->id));
+});
 
 
 Breadcrumbs::register('guru.kelas.create', function ($breadcrumbs) {
@@ -70,6 +83,23 @@ Breadcrumbs::register('pertemuan.show', function ($breadcrumbs, $kelas, $pertemu
     $breadcrumbs->push($pertemuan->nama_pertemuan, url('guru/kelas/pertemuan/show/{kelas_id}/{id_pertemuan}'));
 });
 
+
+Breadcrumbs::register('guru.ujian.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Buat Ujian', route('guru.ujian.create'));
+});
+Breadcrumbs::register('guru.ujian.index', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Daftar Riwayat Ujian', route('guru.ujian.index'));
+});
+Breadcrumbs::register('guru.ujian.show', function ($breadcrumbs,$ujian) {
+    $breadcrumbs->parent('guru.ujian.index');
+    $breadcrumbs->push($ujian->nama_ujian, route('guru.ujian.show',$ujian->id));
+});
+Breadcrumbs::register('guru.ujian.monitoring', function ($breadcrumbs) {
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push('Monitoring Ujian', route('guru.ujian.monitoring'));
+});
 
 
  ?>

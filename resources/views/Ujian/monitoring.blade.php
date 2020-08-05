@@ -24,6 +24,10 @@
     {{session('sukses')}}
   </div>
 @endif
+
+<div>
+  {{ Breadcrumbs::render('guru.ujian.monitoring') }}
+</div>
 <div class="container">
     @if($ujian_run->count() != 0)
     <div class="row justify-content-center">

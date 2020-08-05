@@ -19,13 +19,13 @@
         margin-left:30px;
     }
 </style>
-<!-- 
-      <div>
-        {{ Breadcrumbs::render('buat-paketsoal') }}
-      </div> -->
       
 <main class="main">
-<div class="container">
+
+    <div>
+        {{ Breadcrumbs::render('create_soal_satuan',$paket_soal) }}
+    </div>
+<div class="container-fluid">
     <div class="card">
         <div class="card-header  pt-3 pb-2 text-center" >
             <strong style="font-size:18px;"> Paket Soal : {{$paket_soal->judul}}  </strong>

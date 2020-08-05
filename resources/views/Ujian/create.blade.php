@@ -1,6 +1,9 @@
 @extends('layouts.layout_guru')
 @section('title','Buat Ujian')
 @section('content')
+<div>
+  {{ Breadcrumbs::render('guru.ujian.create') }}
+</div>
 <div class="container ">
 <div class="row justify-content-center">
 <div class="col-md-10">

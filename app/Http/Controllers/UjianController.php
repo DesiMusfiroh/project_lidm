@@ -175,7 +175,7 @@ class UjianController extends Controller
         ));
     }
 
-    
+
     //Method untuk aktor SISWA -------------------------------------------------------------------------------------
     public function indexUjian(){
         $peserta_ujian = PesertaUjian::where('siswa_id',auth()->user()->siswa->id)->where('status', 0)->get();

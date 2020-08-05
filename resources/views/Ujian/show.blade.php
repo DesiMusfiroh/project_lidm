@@ -2,6 +2,9 @@
 @section('title','nama ujian')
 @section('content')
 <div class="container">
+  <div>
+    {{ Breadcrumbs::render('guru.ujian.show',$ujian) }}
+  </div>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -98,8 +101,8 @@
                         </tbody>
                     </table>
                   </div>
-                  
-                 
+
+
                 </div>
             </div>
         </div>

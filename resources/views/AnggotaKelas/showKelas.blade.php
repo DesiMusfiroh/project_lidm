@@ -7,7 +7,7 @@
 @section('content')
 <main class="main">
     <div>
-        {{ Breadcrumbs::render('showkelas',$kelas) }}
+        {{ Breadcrumbs::render('siswa.kelas.show',$kelas) }}
     </div>
     <div class="container-fluid">
 
@@ -70,7 +70,7 @@
 
                     <div class="tab-content mr-3 ml-3">
                         <div class="tab-pane active" id="pertemuan" role="tabpanel" aria-labelledby="pertemuan-tab">
-        
+
                             <div class="row table-inside">
                                 <table class="table table-striped table-sm" >
                                     <thead class="thead-dark text-center" style="background-color:#393A3C; color:white; font-weight:bold">
@@ -114,7 +114,7 @@
                                 </table>
                             </div>
                             <div class="row justify-content-center">{{$pertemuan->links()}}</div>
-                           
+
                         </div>
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
 

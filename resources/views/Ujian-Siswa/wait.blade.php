@@ -33,7 +33,9 @@ video{
     margin-right: 10px;
 }
 </style>
-
+<div>
+  {{ Breadcrumbs::render('waitUjian',$ujian) }}
+</div>
 <div class="row">
 <div class="col-md-8">
 <div class="card" >
