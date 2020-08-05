@@ -1,10 +1,12 @@
 @extends('layouts.layout_guru')
 @section('title','nama ujian')
 @section('content')
-<div class="container">
-  <div>
+<main class="main">
+<div>
     {{ Breadcrumbs::render('guru.ujian.show',$ujian) }}
   </div>
+<div class="container">
+
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -82,12 +84,16 @@
                               <td class="text-center">{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
                               <td class="text-center">{{number_format($item->nilai,0)}}</td>
                               <td class="text-center">
-                                  <a href="">
-
+                                  <a href="{{route('koreksi',$item->id)}}">
+                                    @if ($item->nilai !== null)
                                     <button type="button" class="btn btn-info btn-sm" >
                                         <i class="fa-fa-eye"></i> Detail Hasil
                                     </button>
-
+                                    @else
+                                    <button type="button" class="btn btn-warning btn-sm" >
+                                        <i class="fa-fa-eye"></i> Koreksi Jawaban
+                                    </button>
+                                    @endif
                                   </a>
                               </td>
                             </tr>
@@ -108,4 +114,5 @@
         </div>
     </div>
 </div>
+</main>
 @stop
