@@ -6,7 +6,6 @@ body {
 .form-control {
     border-radius: 20px;
 }
-.card{background: linear-gradient(180deg, rgba(24, 248, 86, 0.5265) 0%, rgba(219, 242, 226, 0.4745) 100%); box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.25); }
 
 </style>
 @section('content')
@@ -18,7 +17,7 @@ body {
         <div class="col-md-6">
             <div class="card text-center" style="border-radius:30px;">
             
-                <div class="card-body">
+                <div class="card-body" style=" background: linear-gradient(180deg, #12C3CE 0%, #D7E8E9 100%); box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.4);   border-radius: 22px;" >
                     <div class="row text-center mt-3 mb-3">
                         <div class="col-md-12">
                             <h2><strong>Login</strong></h2>
@@ -31,7 +30,7 @@ body {
                             <div class="col-md-12">
                                 <div class="input-group mb-2 " style="box-shadow: 3px 3px 5px grey; border-radius:30px;">
                                     <div class="input-group-prepend" >
-                                        <span class="input-group-text" id="basic-addon1" style="border-radius: 30px 0px 0px 30px ">@</span>
+                                        <span class="input-group-text" id="basic-addon1" style="border-radius: 30px 0px 0px 30px "><i class="fa fa-envelope ml-2 mr-1" width="20px" style="font-size:18px"></i></span>
                                     </div>
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email" style="border-radius:1px 30px 30px 0px; height:45px;">
                                     @error('email')
@@ -47,7 +46,7 @@ body {
                             <div class="col-md-12">
                                 <div class="input-group mb-2 " style="box-shadow: 3px 3px 5px grey; border-radius:30px;">
                                     <div class="input-group-prepend" >
-                                        <span class="input-group-text" id="basic-addon1" style="border-radius: 30px 0px 0px 30px ">@</span>
+                                        <span class="input-group-text" id="basic-addon1" style="border-radius: 30px 0px 0px 30px "><i class="fa fa-lock ml-2 mr-2" width="20px" style="font-size:18px"></i></span>
                                     </div>
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password"  style="border-radius:1px 30px 30px 0px; height:45px; ">
                                     @error('password')
@@ -74,7 +73,7 @@ body {
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-info" style="border-radius:30px; height:45px; width:150px; box-shadow: 5px 5px 10px grey;">
+                                <button type="submit" class="btn btn-success" style="border-radius:30px; height:45px; width:150px; box-shadow: 5px 5px 10px grey;">
                                     {{ __('Login') }}
                                 </button>
                             </div>

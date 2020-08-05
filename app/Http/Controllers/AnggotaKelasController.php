@@ -67,7 +67,7 @@ class AnggotaKelasController extends Controller
                             ->orderBy('siswa.nama_lengkap')->get();
         $anggota_kelas_id   = auth()->user()->siswa->anggota_kelas()->value('id');
         $kelompok_master    = KelompokMaster::where('kelas_id',$id)->get();
-        $hasil_ujian        = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',0)->get();
+        $hasil_ujian        = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->get();
     
         return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian], compact('kelas'));
     }
