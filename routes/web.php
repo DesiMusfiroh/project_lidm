@@ -82,9 +82,10 @@ Route::group(['prefix' => 'guru'], function () {
             Route::get('/create/{id}','KelompokController@create')->name('kelompok.create');
             Route::post('/store','KelompokController@store')->name('kelompok.store');
             Route::get('/show/{id}','KelompokController@show')->name('kelompok.show');
-
-            //route untuk buat kelompok master sekaligus kelompok (satuan) sama masukin anggotanya otomatis
-            // Route::post('/store','KelasController@storeKelompok')->name('storeKelompok');
+        });
+        Route::group(['prefix' => 'tugas'],function(){
+            Route::get('/create/{id}','TugasController@create')->name('tugas.create');
+            Route::post('/store','TugasController@store')->name('tugas.store');
         });
     });
     // route kelola paketsoal

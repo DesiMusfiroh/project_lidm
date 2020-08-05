@@ -191,7 +191,9 @@
 
                         <!-- tugas -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
-                            tugas
+                            <div class="mb-3 text-right">
+                                <a href="{{route('tugas.create',$kelas->id)}}"> <button class="btn btn-success">Buat Tugas</button> </a>
+                            </div>
                         </div>
 
                         <!-- hasil ujian -->

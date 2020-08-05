@@ -117,10 +117,10 @@
                         </div>
                         <!-- kelompok -->
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
-                            
+                            <div class="row table-inside"> 
                             @if($kelompok_master->count() != 0)
-                                <table class="table table-striped table-sm text-center">
-                                    <thead class="thead text-center">
+                                <table class="table table-striped table-sm text-center" >
+                                    <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Deskripsi Kelompok</td>
@@ -142,19 +142,19 @@
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                </table>
-                                
+                                </table>            
                             @else
                                 <div class="alert alert-warning" role="alert">
                                     Belum ada kelompok dalam kelas ini
                                 </div>
                             @endif
-                           
-
+                            </div>
                         </div>
+                        <!-- tugas  -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
                             tugas
                         </div>
+                        <!-- hasil ujian  -->
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
                             <div class="row table-inside">
                             @if($hasil_ujian->count() != 0)
@@ -190,11 +190,13 @@
                                     </tbody>
                                 </table>
                                 @else
+                                    <div class="row">
                                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                        <strong> Belum ada ujian yang di telah dikerjakan. </strong>
+                                        <strong> Belum ada hasil ujian </strong>
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
+                                    </div>
                                     </div>
                                 @endif
                                 </div>
