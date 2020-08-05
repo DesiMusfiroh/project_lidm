@@ -117,6 +117,8 @@ Route::group(['prefix' => 'guru'], function () {
         Route::post('/store','UjianController@store')->name('guru.ujian.store');
         Route::get('/show/{id}','UjianController@show')->name('guru.ujian.show');
         Route::get('/monitoring','UjianController@monitoring')->name('guru.ujian.monitoring');
+        Route::get('/koreksi/{id}','UjianController@koreksi')->name('koreksi');
+
 
     });
 });
@@ -137,3 +139,6 @@ Route::get('store/pilgan_jawab', 'UjianController@storePilgan');
 Route::get('run/exam','UjianController@run_exam');
 Route::get('stop/exam','UjianController@stop_exam');
 Route::get('fullscreen/room/exam','UjianController@fullscreen_room');
+
+Route::patch('/essay_jawab/score/update', 'UjianController@updateScoreEssay');
+

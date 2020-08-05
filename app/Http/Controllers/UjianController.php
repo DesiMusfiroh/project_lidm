@@ -175,6 +175,39 @@ class UjianController extends Controller
         ));
     }
 
+    public function koreksi($id){
+        $peserta_ujian = PesertaUjian::find($id);
+        //soal yang belum di koreksi
+        $essay_jawab = EssayJawab::where('peserta_ujian_id', $peserta_ujian->id)->where('score','!=',null)->get();
+        $pilgan_jawab = PilganJawab::where('peserta_ujian_id', $peserta_ujian->id)->get();
+        $koreksi_jawaban = EssayJawab::where('peserta_ujian_id', $peserta_ujian->id)->where('score','=',null)->get();
+
+        $total_poin = SoalSatuan::where('paket_soal_id',$peserta_ujian->ujian->paket_soal->id)->sum('poin');
+
+        $score_pilgan = PilganJawab::where('peserta_ujian_id',$peserta_ujian->id)->sum('score');
+
+        if($koreksi_jawaban->count() == 0) {
+            $score_essay = EssayJawab::where('peserta_ujian_id',$peserta_ujian->id)->sum('score');
+            $total_score = $score_essay + $score_pilgan;
+            $nilai_akhir = $total_score / $total_poin * 100;
+            PesertaUjian::where('id',$id)->update([
+                'nilai' => $total_score
+            ]);
+            return view('Ujian.koreksi', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban], compact('nilai_akhir','total_poin'));
+        }
+
+        return view('Ujian.koreksi', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban]);
+    }
+
+    public function updateScoreEssay(Request $request)
+    {
+        $essay_jawab = EssayJawab::findOrFail($request->id);
+        $update_essay_jawab = [
+            'score' => $request->score
+        ];
+        EssayJawab::where('id', $request->id)->update($update_essay_jawab);
+        return redirect()->back();
+    }
 
     //Method untuk aktor SISWA -------------------------------------------------------------------------------------
     public function indexUjian(){
@@ -249,7 +282,7 @@ class UjianController extends Controller
                 'score' => $request->score,
                 'status' => $request->status
             ];
-            $posts = PilganJawab::where('user_id', Auth::user()->id)
+            $posts = PilganJawab::where('siswa_id', Auth::user()->siswa->id)
                                 ->where('pilgan_id', $request->pilgan_id)
                                 ->where('peserta_ujian_id', $request->peserta_ujian_id)->update($update_pilgan_jawab);
         }
