@@ -19,14 +19,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   
 </head>
 <body>
-<style>
-.navbar {
-    background: linear-gradient(180deg, #D4DED7 0%, rgba(209, 218, 216, 0.9) 100%);
-    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
-}
-</style>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
