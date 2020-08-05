@@ -124,6 +124,10 @@ $('input[type=radio][name="pilihan"]').click(function() {
             status: status,
             ujian_id: ujian_id
         },
+        error: function(xhr, status, error) {
+          var err = eval("(" + xhr.responseText + ")");
+          console.log(err.Message);
+        },
         success: function(data) {
 					  console.log(data);
 				}
