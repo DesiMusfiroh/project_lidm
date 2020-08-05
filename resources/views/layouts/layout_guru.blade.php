@@ -14,6 +14,7 @@
     <link href="{{asset('/')}}main.css" rel="stylesheet">
     <!-- Jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <style media="screen">
     @import url('https://fonts.googleapis.com/css2?family=Palanquin:wght@500&display=swap');
@@ -34,7 +35,7 @@
         margin-bottom: 20px;
         border-radius: 0px 0px 15px 15px;
     }
-    .card-header { 
+    .card-header {
         background: rgba(26, 166, 65, 0.47);
     }
     .metismenu-icon {color: black; font-weight:bold;}
@@ -117,7 +118,7 @@
         </div>
     </div>
     <script type="text/javascript" src="{{asset('assets/scripts/main.js')}}"></script>
-    
+
 </body>
 @yield('js')
 @yield('chart')

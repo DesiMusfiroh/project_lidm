@@ -12,8 +12,9 @@
     <meta name="msapplication-tap-highlight" content="no">
     <!-- Jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    
+
     <link href="{{asset('/')}}main.css" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style media="screen">
     .breadcrumb{
         background-color: white;
@@ -30,7 +31,7 @@
         margin-bottom: 20px;
         border-radius: 0px 0px 15px 15px;
     }
-    .card-header { 
+    .card-header {
         background: rgba(26, 166, 65, 0.47);
     }
     .metismenu-icon {color: black; font-weight:bold;}

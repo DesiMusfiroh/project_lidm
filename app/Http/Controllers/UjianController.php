@@ -220,7 +220,7 @@ class UjianController extends Controller
     public function storePilgan(Request $request)
     {
         $this->validate($request,[
-            'user_id' => 'required',
+            'siswa_id' => 'required',
             'peserta_ujian_id' => 'required',
             'pilgan_id' => 'required',
             'jawab_pilgan' => 'required',
