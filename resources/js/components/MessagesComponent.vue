@@ -49,10 +49,26 @@ export default {
     created(){
         this.fetchMessages();
         Echo.join('chat')
+        .here(user => {
+            this.users = user;
+        })
+        .joining(user => {
+            this.users.push(user);
+        })
+        .leaving(user => {
+            this.users = this.users.filter(u => u.id != user.id);
+        })
         .listen('ChatEvent',(event) => {
-            console.log(event.chat);
-            
             this.messages.push(event.chat);
+        })
+        .listenForWhisper('typing', user => {
+        this.activeUser = user;
+            if(this.typingTimer) {
+                clearTimeout(this.typingTimer);
+            }
+        this.typingTimer = setTimeout(() => {
+            this.activeUser = false;
+        }, 1000);
         })
         
         
