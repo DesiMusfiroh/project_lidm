@@ -10,8 +10,10 @@
     <div>
       {{ Breadcrumbs::render('home') }}
     </div>
+    <index-component></index-component>
       <div class="container-fluid">
 
       </div>
+
   </main>
 @endsection

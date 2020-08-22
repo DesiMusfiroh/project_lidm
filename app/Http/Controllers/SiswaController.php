@@ -33,7 +33,7 @@ class SiswaController extends Controller
             'alamat' => 'required',
             'jk' => 'required',
             'angkatan' => 'required',
-            'foto' => 'required|file|image|mimes:png,jpg,jpeg|max:2048',
+            'foto' => 'required|file|image|mimes:png,jpg,jpeg,gif|max:2048',
         ]);
 
         $file = $request->file('foto');

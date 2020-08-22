@@ -21,6 +21,7 @@
     Use App\Kelas;
 ?>
 @section('content')
+
 <main class="main">
     <div>
       {{ Breadcrumbs::render('pertemuan.show',$pertemuan->kelas,$pertemuan) }}
