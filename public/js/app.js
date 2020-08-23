@@ -1991,8 +1991,107 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['user', 'kelas_id', 'id_pertemuan'],
+  props: ['user', 'kelas_id', 'id_pertemuan', 'current_time'],
   data: function data() {
     return {
       messages: [],
@@ -2006,10 +2105,26 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.fetchMessages();
-    Echo.join('chat').listen('ChatEvent', function (event) {
-      console.log(event.chat);
-
+    Echo.join('chat').here(function (user) {
+      _this.users = user;
+    }).joining(function (user) {
+      _this.users.push(user);
+    }).leaving(function (user) {
+      _this.users = _this.users.filter(function (u) {
+        return u.id != user.id;
+      });
+    }).listen('ChatEvent', function (event) {
       _this.messages.push(event.chat);
+    }).listenForWhisper('typing', function (user) {
+      _this.activeUser = user;
+
+      if (_this.typingTimer) {
+        clearTimeout(_this.typingTimer);
+      }
+
+      _this.typingTimer = setTimeout(function () {
+        _this.activeUser = false;
+      }, 1000);
     });
   },
   methods: {
@@ -2024,7 +2139,8 @@ __webpack_require__.r(__webpack_exports__);
     sendMessage: function sendMessage() {
       this.messages.push({
         user: this.user,
-        pesan: this.newMessage
+        pesan: this.newMessage,
+        created_at: this.current_time
       });
       axios.post("../../../../../chat/".concat(this.kelas_id, "/").concat(this.id_pertemuan), {
         pesan: this.newMessage,
@@ -2034,6 +2150,10 @@ __webpack_require__.r(__webpack_exports__);
       // axios.post('messages', {message: this.newMessage});
 
       this.newMessage = '';
+    },
+    sendTypingEvent: function sendTypingEvent() {
+      Echo.join('chat').whisper('typing', this.user);
+      console.log(this.user.name + ' is typing now');
     }
   }
 });
@@ -6587,7 +6707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#chat-area{\n    overflow-y: scroll;\n}\n", ""]);
+exports.push([module.i, "\n/* #chat-area{\n    overflow-y: scroll;\n} */\n#chat{\n    right:20px;\n    bottom: 20px;\n    position:fixed;\n}\n#end{\n    left:20px;\n    bottom: 20px;\n    position:fixed;\n}\n#leave{\n    right:20px;\n    top: 20px;\n    position:fixed;\n}\n    /* The popup chat - hidden by default */\n.chat-popup {\ndisplay: none;\nposition: fixed;\nbottom: 0;\nright: 15px;\nborder: 3px solid #f1f1f1;\nz-index: 9;\n}\n/* Add styles to the form container */\n.form-container {\nmax-width: 300px;\npadding: 10px;\nbackground-color: white;\n}\n#chatarea {\n    overflow-y:scroll;\n    overflow-x:auto;\n}\n/* Full-width textarea */\n.form-container #chatarea {\nwidth: 100%;\npadding: 15px;\nmargin: 5px 0 22px 0;\nborder: none;\nbackground: #f1f1f1;\nresize: none;\nheight: 360px;\n}\n/* When the textarea gets focus, do something */\n.form-container textarea:focus {\nbackground-color: #ddd;\noutline: none;\n}\n/* Set a style for the submit/send button */\n.form-container .tombol {\nbackground-color: #4CAF50;\ncolor: white;\npadding: 10px 10px;\nborder: none;\ncursor: pointer;\nwidth: 100%;\nmargin-bottom:10px;\nopacity: 0.8;\n}\n/* Add a red background color to the cancel button */\n.form-container .cancel {\nbackground-color: red;\n}\n/* Add some hover effects to buttons */\n.form-container .btn:hover, .open-button:hover {\nopacity: 1;\n}\n.display-right {\n    display: flex;\n    flex-direction: row-reverse;\n}\n.my-chat {\n    background-color: #80F7FF;\n    min-width:20px;\n    border-radius: 15px 0px 15px 15px;\n    padding: 0px 7px 3px 7px;\n    margin: 0px 0px 7px 0px;\n    box-shadow: 2px 2px 7px grey;\n}\n.display-left {\n    display: flex;\n    flex-direction: row;\n}\n.other-chat {\n    background-color: #9FF1B6;\n    min-width:20px;\n    border-radius: 0px 15px 15px 15px;\n    padding: 0px 7px 3px 7px;\n    margin: 0px 0px 7px 0px;\n    box-shadow: 2px 2px 7px grey;\n}\n", ""]);
 
 // exports
 

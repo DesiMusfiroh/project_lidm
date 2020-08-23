@@ -1,3 +1,102 @@
+<style>
+    /* #chat-area{
+        overflow-y: scroll;
+    } */
+
+    #chat{
+        right:20px;
+        bottom: 20px;
+        position:fixed;
+    }
+    #end{
+        left:20px;
+        bottom: 20px;
+        position:fixed;
+    }
+    #leave{
+        right:20px;
+        top: 20px;
+        position:fixed;
+    }
+        /* The popup chat - hidden by default */
+    .chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    }
+    /* Add styles to the form container */
+    .form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+    }
+    #chatarea {
+        overflow-y:scroll;
+        overflow-x:auto;
+    }
+    /* Full-width textarea */
+    .form-container #chatarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    resize: none;
+    height: 360px;
+    }
+    /* When the textarea gets focus, do something */
+    .form-container textarea:focus {
+    background-color: #ddd;
+    outline: none;
+    }
+    /* Set a style for the submit/send button */
+    .form-container .tombol {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+    }
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+    background-color: red;
+    }
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+    }
+    .display-right {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+    .my-chat {
+        background-color: #80F7FF;
+        min-width:20px;
+        border-radius: 15px 0px 15px 15px;
+        padding: 0px 7px 3px 7px;
+        margin: 0px 0px 7px 0px;
+        box-shadow: 2px 2px 7px grey;
+    }
+    .display-left {
+        display: flex;
+        flex-direction: row;
+    }
+    .other-chat {
+        background-color: #9FF1B6;
+        min-width:20px;
+        border-radius: 0px 15px 15px 15px;
+        padding: 0px 7px 3px 7px;
+        margin: 0px 0px 7px 0px;
+        box-shadow: 2px 2px 7px grey;
+    }
+</style>
+
 <template>
 <div>
     <div id="chat-area">
@@ -34,7 +133,7 @@
 <script>
 export default {
     
-    props: ['user','kelas_id','id_pertemuan'],
+    props: ['user','kelas_id','id_pertemuan','current_time'],
 
     data(){
         return {
@@ -48,6 +147,7 @@ export default {
     },
     created(){
         this.fetchMessages();
+        
         Echo.join('chat')
         .here(user => {
             this.users = user;
@@ -84,7 +184,9 @@ export default {
         sendMessage(){
             this.messages.push({
                 user: this.user,
-                pesan: this.newMessage
+                pesan: this.newMessage,
+                created_at: this.current_time
+                
             });
             
             
@@ -96,13 +198,13 @@ export default {
             //this.newMessage = ''
             // axios.post('messages', {message: this.newMessage});
             this.newMessage = '';
+        },
+        sendTypingEvent() {
+            Echo.join('chat')
+                .whisper('typing', this.user);
+            console.log(this.user.name + ' is typing now')
         }
     }
 }
 </script>
 
-<style>
-    #chat-area{
-        overflow-y: scroll;
-    }
-</style>
