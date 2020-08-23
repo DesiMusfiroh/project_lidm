@@ -39,10 +39,14 @@ Route::group(['prefix' => 'siswa'], function () {
           Route::get('/ruang/{kelas_id}/{id_pertemuan}','AnggotaKelasController@ruangPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.ruang');
           Route::get('/chat/{kelas_id}/{id_pertemuan}','AnggotaKelasController@fetchMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
           Route::post('/chat/{kelas_id}/{id_pertemuan}','AnggotaKelasController@storeMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
-
+          //serahkan tugas individu
+          Route::post('serahkan/serahkan_tugas_individu','AnggotaKelasController@serahkan_tugas_individu')->name('serahkanTugasIndividu');
+          
         });
     });
     // route kelola pertemuan
+  
+    
 
     Route::group(['prefix' => 'ujian'], function () {
         Route::get('/index','UjianController@indexUjian')->name('siswa.ujian.index');
@@ -90,8 +94,11 @@ Route::group(['prefix' => 'guru'], function () {
             Route::get('/show/{id}','KelompokController@show')->name('kelompok.show');
         });
         Route::group(['prefix' => 'tugas'],function(){
-            Route::get('/create/{id}','TugasController@create')->name('tugas.create');
-            Route::post('/store','TugasController@store')->name('tugas.store');
+            //Route::get('/create/{id}','TugasController@create',['$kelas_id' =>'kelas_id'])->name('tugas.create');
+            Route::get('/create/{kelas_id}','TugasController@create', ['$kelas_id' =>'kelas_id'])->name('tugas.create'); //
+            Route::post('create/tugas_store','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
+            // Route::post('serahkan/serahkan_tugas','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
+         
         });
     });
     // route kelola paketsoal
@@ -99,10 +106,12 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/','QuestionController@index')->name('paketsoal.index');
         Route::get('/create','QuestionController@create')->name('guru.paketsoal.create');
         Route::post('/store','QuestionController@store')->name('guru.paketsoal.store');
+        Route::get('/delete/{id}','QuestionController@deletePaketSoal')->name('guru.paketsoal.delete');
         Route::patch('/update','QuestionController@updatePaketSoal')->name('guru.paketsoal.update');
 
         // Buat Soal Satuan
         Route::get('/create_soal_satuan/{paket_soal_id}','QuestionController@create_soal_satuan', ['$paket_soal_id' =>'paket_soal_id'])->name('create_soal_satuan'); //
+        Route::get('/create_soal_satuan/hapus/{paket_soal_id}/{soal_satuan_id}','QuestionController@delete_soal_satuan', ['$paket_soal_id' =>'paket_soal_id','$soal_satuan_id'=>'soal_satuan_id'])->name('deleteSoalSatuan');
 
         //Soal Essay
         Route::post('question_store/essay_store','QuestionController@essay_store')->name('storeSingleQuestionEssay');

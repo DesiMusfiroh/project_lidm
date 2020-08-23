@@ -17,12 +17,16 @@ use App\PesertaUjian;
 use App\EssayJawab;
 use App\PilganJawab;
 use App\SoalSatuan;
+use App\TugasIndividuMaster;
+use App\TugasIndividu;
+
 
 use Auth;
 
 class AnggotaKelasController extends Controller
 {
 
+    private $allowedExt = ["jpg", "png", "jpeg", "svg","doc","pdf"];
     public function index()
     {
         try {
@@ -68,7 +72,6 @@ class AnggotaKelasController extends Controller
         $anggota_kelas_id   = auth()->user()->siswa->anggota_kelas()->value('id');
         $kelompok_master    = KelompokMaster::where('kelas_id',$id)->get();
         $hasil_ujian        = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->get();
-    
         return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian], compact('kelas'));
     }
 
@@ -82,10 +85,39 @@ class AnggotaKelasController extends Controller
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
-
-        return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
+        $tugas_individu_master     = TugasIndividuMaster::where('kelas_id',$kelas_id)->paginate(5);
+        return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan,'tugas_individu_master' => $tugas_individu_master  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
     }
 
+    public function serahkan_tugas_individu(Request $request)
+    {
+  
+        if($request->hasFile('tugas')) {
+            $ext = strtolower($request->file('tugas')->getClientOriginalExtension());
+            $originalName = $request->file('tugas')->getClientOriginalName();
+            $originalName = pathinfo($originalName, PATHINFO_FILENAME);
+            if(!in_array($ext, $this->allowedExt)) {
+                return redirect()->back()->with('error', 'Format file tidak didukung');
+            }else{
+                $filenameToStore = $originalName . '_' . time() . '.' . $ext;
+                $request->file('tugas')->move(public_path('uploads/tugas'), $filenameToStore);
+                Helper::generateThumbnail('uploads/tugas', $filenameToStore);
+            }
+        }else{
+            return redirect()->back()->with('error', 'File tidak ditemukan');
+        }
+
+    	$tugas_individu = new TugasIndividu;
+        $tugas_individu = TugasIndividu::create([
+            'tugas_individu_master_id'        => $tugas_individu_master_id, 
+            'anggota_kelas_id'                => $anggota_kelas_id,
+            'tugas'                           => $filenameToStore,
+            'status'                          => '',
+            'nilai'                           => '', 
+       ]);
+       dd($tugas_individu);
+        return redirect()->back()->with('success', 'Tugas Berhasil Diserahkan');
+    }
     public function ruangPertemuan($kelas_id,$id_pertemuan)
     {
         $pertemuan      = Pertemuan::whereId($id_pertemuan)->first();

@@ -131,7 +131,7 @@
                                                 Edit <i class="fa fa-edit"></i>
                                     </button>
                                     @endif
-                                    <!-- <a href="#" class="btn btn-sm btn-danger hapus"  style="box-shadow: 3px 2px 5px grey; margin:5px;" paket_soal_id="{{$paket_soal_id}}" soal_satuan_id="{{$item->id}}"> Hapus <i class="fa fa-trash"></i> </a> -->
+                                    <a href="#" class="hapus btn btn-sm btn-danger "  style="box-shadow: 3px 2px 5px grey; margin:5px;" paket_soal_id="{{$paket_soal_id}}" soal_satuan_id="{{$item->id}}"> Hapus <i class="fa fa-trash"></i> </a>
                                 </div>
                             </div>
                             <hr>
@@ -156,7 +156,24 @@
 
         });
     });
-    </script>
+    
+    $('.hapus').click(function(){
+      var paket_soal_id = $(this).attr('paket_soal_id');
+      var soal_satuan_id = $(this).attr('soal_satuan_id');
+      swal({
+        title: "Yakin?",
+        text: "Menghapus soal ini ?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      });
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location = "/question_create_soal_satuan/hapus/"+paket_soal_id+"/"+soal_satuan_id;
+        }
+      });
+    });
+</script>
 
     <!--edit essay-->
     <script>
