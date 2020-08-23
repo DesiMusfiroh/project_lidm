@@ -87,7 +87,7 @@
                             <a class="nav-link" id="kelompok-tab" data-toggle="tab" href="#kelompok" role="tab" aria-controls="kelompok" aria-selected="false">Kelompok</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas</a>
+                            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas </a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="hasil-ujian-tab" data-toggle="tab" href="#hasil-ujian" role="tab" aria-controls="hasil-ujian" aria-selected="false">Hasil Ujian</a>
@@ -194,6 +194,45 @@
                             <div class="mb-3 text-right">
                                 <a href="{{route('tugas.create',$kelas->id)}}"> <button class="btn btn-success">Buat Tugas</button> </a>
                             </div>
+                            <div class="row table-inside">
+                            @if($tugas_individu_master->count() != 0)
+                                <table class="table table-striped table-sm text-center">
+                                    <thead class=" thead text-center">
+                                        <tr>
+                                            <td width="30px">No</td>
+                                            <td>Nama Tugas</td>
+                                            <td>Tipe Tugas</td>
+                                            <td>Deadline</td>
+                                            <td align="center">Opsi</td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php $i=1; ?>
+                                    @foreach ($tugas_individu_master as $item)
+                                        <tr>
+                                            <td><?php echo $i; $i++?></td>
+                                            <td>{{$item->nama_tugas}}</td>
+                                            <td>{{$item->jenis}}</td>
+                                            <td>{{$item->deadline}}</td>
+
+                                            <td>
+                                            <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> 
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        Belum ada tugas yang dibuat
+                                    </div>
+                                </div>
+                            @endif
+                            </div>
+                            <div class="row ">{{$tugas_individu_master->links()}}</div>
+                        
                         </div>
 
                         <!-- hasil ujian -->

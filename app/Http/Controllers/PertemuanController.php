@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Kelas;
 use App\Pertemuan;
 use App\AnggotaKelas;
 use App\Absensi;
 use App\ChatPertemuan;
+use App\Events\ChatEvent;
 
 class PertemuanController extends Controller
 {
@@ -48,7 +50,7 @@ class PertemuanController extends Controller
         $posts = Pertemuan::where('id',$request->pertemuan_id)->update($update_status_pertemuan);
         return response()->json($posts);
     }
-    public function pertemuan_end(Request $request) {
+    public function pertemuan_end(Request $request) {  
         $update_status_pertemuan = [
             'status' => 2
         ];
@@ -58,7 +60,10 @@ class PertemuanController extends Controller
 
     public function ruang($kelas_id,$id_pertemuan)
     {
-        $pertemuan      = Pertemuan::find($id_pertemuan);
+        //dd($kelas_id);
+        //dd($id_pertemuan);
+        $pertemuan      = Pertemuan::whereId($id_pertemuan)->first();
+        
         $kelas          = Kelas::find($kelas_id);
         $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
         $absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
@@ -67,7 +72,27 @@ class PertemuanController extends Controller
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
 
-        return view('Pertemuan.ruang', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi' => $absensi, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
+        return view('Pertemuan.ruang', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi'=> $absensi, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
+    }
+
+    public function fetchMessages($kelas_id,$id_pertemuan){
+        $pertemuan      = Pertemuan::find($id_pertemuan);
+        //dd($pertemuan->id);
+        $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->with('user')->get();
+
+        return $chat_pertemuan;
+    }
+
+    public function storeMessages(Request $request,$kelas_id,$id_pertemuan){
+        //dd($request);
+        $chat = auth()->user()->chat_pertemuan()->create([
+            
+            'pertemuan_id' => $request->pertemuan_id,
+            'pesan' => $request->pesan
+        ]);
+        broadcast(new ChatEvent($chat->load('user')))->toOthers();
+        
+        return ['status' => 'success'];
     }
 
     public function end($id) {

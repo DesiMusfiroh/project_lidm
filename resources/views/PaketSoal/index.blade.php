@@ -153,7 +153,7 @@ $(document).ready(function(){
       })
       .then((willDelete) => {
         if (willDelete) {
-          window.location = 'PaketSoal/delete/'+paket_soal_id;
+          window.location = 'paketsoal/delete/'+paket_soal_id;
         }
       });
     });

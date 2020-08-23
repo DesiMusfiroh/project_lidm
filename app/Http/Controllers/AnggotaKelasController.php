@@ -17,12 +17,16 @@ use App\PesertaUjian;
 use App\EssayJawab;
 use App\PilganJawab;
 use App\SoalSatuan;
+use App\TugasIndividuMaster;
+use App\TugasIndividu;
+
 
 use Auth;
 
 class AnggotaKelasController extends Controller
 {
 
+    private $allowedExt = ["jpg", "png", "jpeg", "svg","doc","pdf"];
     public function index()
     {
         try {
@@ -68,7 +72,6 @@ class AnggotaKelasController extends Controller
         $anggota_kelas_id   = auth()->user()->siswa->anggota_kelas()->value('id');
         $kelompok_master    = KelompokMaster::where('kelas_id',$id)->get();
         $hasil_ujian        = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->get();
-    
         return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian], compact('kelas'));
     }
 
@@ -82,22 +85,51 @@ class AnggotaKelasController extends Controller
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
-
-        return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
+        $tugas_individu_master     = TugasIndividuMaster::where('kelas_id',$kelas_id)->paginate(5);
+        return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan,'tugas_individu_master' => $tugas_individu_master  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
     }
 
+    public function serahkan_tugas_individu(Request $request)
+    {
+  
+        if($request->hasFile('tugas')) {
+            $ext = strtolower($request->file('tugas')->getClientOriginalExtension());
+            $originalName = $request->file('tugas')->getClientOriginalName();
+            $originalName = pathinfo($originalName, PATHINFO_FILENAME);
+            if(!in_array($ext, $this->allowedExt)) {
+                return redirect()->back()->with('error', 'Format file tidak didukung');
+            }else{
+                $filenameToStore = $originalName . '_' . time() . '.' . $ext;
+                $request->file('tugas')->move(public_path('uploads/tugas'), $filenameToStore);
+                Helper::generateThumbnail('uploads/tugas', $filenameToStore);
+            }
+        }else{
+            return redirect()->back()->with('error', 'File tidak ditemukan');
+        }
+
+    	$tugas_individu = new TugasIndividu;
+        $tugas_individu = TugasIndividu::create([
+            'tugas_individu_master_id'        => $tugas_individu_master_id, 
+            'anggota_kelas_id'                => $anggota_kelas_id,
+            'tugas'                           => $filenameToStore,
+            'status'                          => '',
+            'nilai'                           => '', 
+       ]);
+       dd($tugas_individu);
+        return redirect()->back()->with('success', 'Tugas Berhasil Diserahkan');
+    }
     public function ruangPertemuan($kelas_id,$id_pertemuan)
     {
-        $pertemuan      = Pertemuan::find($id_pertemuan);
+        $pertemuan      = Pertemuan::whereId($id_pertemuan)->first();
         $kelas          = Kelas::find($kelas_id);
         $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
-        $absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
-        $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->get();
+        //$absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
+        $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan)->get();
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
 
-        return view('Anggotakelas.ruangPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi' => $absensi, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
+        return view('Anggotakelas.ruangPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
     }
 
     public function absensi_create(Request $request)
@@ -143,4 +175,22 @@ class AnggotaKelasController extends Controller
   
         return view('AnggotaKelas.hasilUjian', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban]);
       }
+
+    public function fetchMessages($kelas_id,$id_pertemuan){
+    $pertemuan      = Pertemuan::find($id_pertemuan);
+    //dd($pertemuan->id);
+    $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->with('user')->get();
+
+    return $chat_pertemuan;
+    }
+
+    public function storeMessages(Request $request,$kelas_id,$id_pertemuan){
+        //dd($request);
+        $chat_pertemuan = ChatPertemuan::create([
+            'user_id' => $request->user_id,
+            'pertemuan_id' => $request->pertemuan_id,
+            'pesan' => $request->pesan
+        ]);
+        return $chat_pertemuan;
+    }
 }

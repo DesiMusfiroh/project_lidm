@@ -30,7 +30,8 @@ class QuestionController extends Controller
         return view('PaketSoal.create');
     }
 
-    
+   
+
     public function store(Request $request)
     {
         $guru_id = Auth::user()->guru->id;
@@ -76,8 +77,22 @@ class QuestionController extends Controller
           return redirect()->back()->with('pesan','Pastikan tidak ada kolom yang kosong');
         }
     }
+    //Delete Paket Soal
+    public function deletePaketSoal($id){
+        $paket_soal = PaketSoal::find($id);
+        PaketSoal::where('id',$paket_soal->id)->update([
+          'isdelete' => true,
+        ]);
+  
+        return redirect()->back()->withSuccess('Berhasil Menghapus Paket Soal');
+      }
+      //Delete Soal Satuan
+      public function delete_soal_satuan($paket_soal_id,$soal_satuan_id){
+        $soal_satuan = SoalSatuan::find($soal_satuan_id);
 
-      
+        $soal_satuan->delete();
+        return redirect()->back()->withSuccess('Soal berhasil dihapus');
+    }
 
       //Simpan Soal Essay
       public function essay_store(Request $request)
