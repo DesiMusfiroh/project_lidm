@@ -32,12 +32,12 @@ max-width: 300px;
 padding: 10px;
 background-color: white;
 }
-#chatarea {
+#chat-area {
     overflow-y:scroll;
     overflow-x:auto;
 }
 /* Full-width textarea */
-.form-container #chatarea {
+.form-container #chat-area {
 width: 100%;
 padding: 15px;
 margin: 5px 0 22px 0;

@@ -291,7 +291,7 @@
 <script>
 // menampilkan isi navbar
     $(function () {
-        $('#myTab li:last-child a').tab('show')
+        $('#myTab li:first-child a').tab('show')
     });
     $("#start").hide();
 
