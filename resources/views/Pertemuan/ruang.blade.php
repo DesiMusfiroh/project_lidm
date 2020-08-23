@@ -102,6 +102,12 @@
     margin: 0px 0px 7px 0px;
     box-shadow: 2px 2px 7px grey;
 }
+#kamerasiswa{
+    bottom:3%;
+    right: 30%;
+    left:30%;
+    position:fixed;
+}
 </style>
 <div id="fullscreenPertemuan">
             <div class="row">
@@ -209,6 +215,11 @@
                 <button class="btn-warning btn"  onclick="openChat()"><i class="fa fa-comments"></i> Chat</button>
             </div>
 
+            <div id="kamerasiswa">
+                <img src="/images/siswa1 (1).jpg" alt="" width="150px">
+                <img src="/images/siswa1 (2).jpg" alt="" width="150px">
+            </div>
+
             <div class="chat-popup " id="myForm">
               
                 <div class="form-container">
@@ -260,7 +271,7 @@
     var video = document.querySelector("#video-webcam");
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
     if (navigator.getUserMedia) {
-        navigator.getUserMedia({ video: true }, handleVideo, videoError);
+        navigator.getUserMedia({ video: true, audio:true }, handleVideo, videoError);
     }
     function handleVideo(stream) { video.srcObject = stream; }
     function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }

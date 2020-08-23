@@ -6,7 +6,11 @@
 
 @section('content')
 <main class="main">
-   
+    <ol class="breadcrumb bg-white">
+        <li class="breadcrumb-item"><a href="{{route('guru.kelas')}}">Kelas</a> </li>
+        <li class="breadcrumb-item"><a href=""> A1TI - Kelas Teknologi Informasi </a></li>
+        <li class="breadcrumb-item active">Buat Tugas</li>
+    </ol>
     <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-10">

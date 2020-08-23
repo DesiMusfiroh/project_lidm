@@ -55,7 +55,7 @@
             }
             #kotak {
                 background: linear-gradient(180deg, #12C3CE 0%, #D7E8E9 100%);
-                box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.4);
+                box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.4);
                 border-radius: 22px;
                 width: 80%;
                 height: 75%;
@@ -75,9 +75,9 @@
                 <div class="col-md-4 text-center">
                     <img src="/images/study.png" alt="" id="studyicon">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 pr-4">
                     <img src="/images/logoa.png" alt="" id="linesroom">
-                    <h5>LinesRoom merupakan aplikasi pembelajaran daring berbasis web dengan sejumlah inovasi fitur, yang dapat menjadikan penilaian kompetensi siswa diperoleh dari berbagai aspek secara lebih komprehensif, sehingga akan membantu mewujudkan implementasi pendidikan holistik di indonesia, terutama pada masa pandemi ini. </h5>
+                    <h5 style="text-indent:60px;"> LinesRoom merupakan aplikasi pembelajaran daring berbasis web dengan sejumlah inovasi fitur, yang dapat menjadikan penilaian kompetensi siswa diperoleh dari berbagai aspek secara lebih komprehensif, sehingga akan membantu mewujudkan implementasi pendidikan holistik di indonesia, terutama pada masa pandemi ini. </h5>
                     @if (Route::has('login'))
                         <div class="links mt-5">
                             @auth

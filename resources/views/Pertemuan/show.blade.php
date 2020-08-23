@@ -97,12 +97,12 @@
                                                     <td><?php echo $i; $i++?></td>
                                                     <td>{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
                                                     <td>Hadir</td>
-                                                    <td>
+                                                    <td class="text-center">
                                                         <a href="#">
                                                             <button type="button" class="btn btn-sm btn-info"  data-toggle="popover" title="{{$item->anggota_kelas->siswa->nama_lengkap}} ({{$item->anggota_kelas->siswa->nomor_induk}})"
                                                             data-content="
                                                             {{$item->anggota_kelas->siswa->jk}}">
-                                                                <i class="fa fa-eye"></i>
+                                                                <i class="fa fa-eye"></i> Detail
                                                             </button>
                                                         </a>
                                                     </td>
