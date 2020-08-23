@@ -7,9 +7,10 @@
 
 
   <main class="main">
-        <div>
-            {{ Breadcrumbs::render('home') }}
-        </div>
+    <div>
+      {{ Breadcrumbs::render('home') }}
+    </div>
+    <index-component></index-component>
       <div class="container-fluid">
 
                             <div class="divider mt-0" style="margin-bottom: 30px;">&nbsp;</div>
@@ -55,6 +56,7 @@
                                 </div>
                             </div>
       </div>
+
   </main>
 
 @endsection

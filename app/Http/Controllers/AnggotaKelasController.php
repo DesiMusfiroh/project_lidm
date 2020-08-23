@@ -120,16 +120,16 @@ class AnggotaKelasController extends Controller
     }
     public function ruangPertemuan($kelas_id,$id_pertemuan)
     {
-        $pertemuan      = Pertemuan::find($id_pertemuan);
+        $pertemuan      = Pertemuan::whereId($id_pertemuan)->first();
         $kelas          = Kelas::find($kelas_id);
         $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
-        $absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
-        $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->get();
+        //$absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
+        $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan)->get();
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
 
-        return view('Anggotakelas.ruangPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi' => $absensi, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
+        return view('Anggotakelas.ruangPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
     }
 
     public function absensi_create(Request $request)
@@ -175,4 +175,22 @@ class AnggotaKelasController extends Controller
   
         return view('AnggotaKelas.hasilUjian', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban]);
       }
+
+    public function fetchMessages($kelas_id,$id_pertemuan){
+    $pertemuan      = Pertemuan::find($id_pertemuan);
+    //dd($pertemuan->id);
+    $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->with('user')->get();
+
+    return $chat_pertemuan;
+    }
+
+    public function storeMessages(Request $request,$kelas_id,$id_pertemuan){
+        //dd($request);
+        $chat_pertemuan = ChatPertemuan::create([
+            'user_id' => $request->user_id,
+            'pertemuan_id' => $request->pertemuan_id,
+            'pesan' => $request->pesan
+        ]);
+        return $chat_pertemuan;
+    }
 }

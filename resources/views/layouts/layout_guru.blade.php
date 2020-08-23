@@ -14,7 +14,8 @@
     <link href="{{asset('/')}}main.css" rel="stylesheet">
     <!-- Jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script defer src="https://unpkg.com/ziggy-js@0.9.x/dist/js/route.min.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 
     <style media="screen">
     @import url('https://fonts.googleapis.com/css2?family=Palanquin:wght@500&display=swap');
@@ -118,6 +119,7 @@
         </div>
     </div>
     <script type="text/javascript" src="{{asset('assets/scripts/main.js')}}"></script>
+    <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
 
 </body>
 @yield('js')

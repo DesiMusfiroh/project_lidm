@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-*/
+*/ 
 
 Route::get('/', function () {
     return view('welcome');
@@ -37,7 +37,11 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::group(['prefix' => 'pertemuan'], function () {
           Route::get('/show/{kelas_id}/{id_pertemuan}','AnggotaKelasController@showPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.show');
           Route::get('/ruang/{kelas_id}/{id_pertemuan}','AnggotaKelasController@ruangPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.ruang');
+          Route::get('/chat/{kelas_id}/{id_pertemuan}','AnggotaKelasController@fetchMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
+          Route::post('/chat/{kelas_id}/{id_pertemuan}','AnggotaKelasController@storeMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
+          //serahkan tugas individu
           Route::post('serahkan/serahkan_tugas_individu','AnggotaKelasController@serahkan_tugas_individu')->name('serahkanTugasIndividu');
+          
         });
     });
     // route kelola pertemuan
@@ -78,6 +82,9 @@ Route::group(['prefix' => 'guru'], function () {
             Route::get('/show/{kelas_id}/{id_pertemuan}','PertemuanController@show',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.show');
             Route::get('/ruang/{kelas_id}/{id_pertemuan}','PertemuanController@ruang',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang');
             Route::get('/end/{id}','PertemuanController@end')->name('pertemuan.end');
+            Route::get('guru/kelas/pertemuan/ruang/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchPesan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
+            
+            
 
         });
 
@@ -151,3 +158,10 @@ Route::get('fullscreen/room/exam','UjianController@fullscreen_room');
 
 Route::patch('/essay_jawab/score/update', 'UjianController@updateScoreEssay');
 
+
+Route::get('index',function(){
+    return view('index');
+});
+
+Route::get('/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang.chat');
+Route::post('/chat/{kelas_id}/{id_pertemuan}','PertemuanController@storeMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang.chatPost');
