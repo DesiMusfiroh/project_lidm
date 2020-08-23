@@ -61,7 +61,8 @@
                             <a class="nav-link" id="kelompok-tab" data-toggle="tab" href="#kelompok" role="tab" aria-controls="kelompok" aria-selected="false">Kelompok</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas</a>
+                            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas 
+                            <span class="badge badge-pill badge-info">New</span></a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="hasil-ujian-tab" data-toggle="tab" href="#hasil-ujian" role="tab" aria-controls="hasil-ujian" aria-selected="false">Hasil Ujian</a>
@@ -152,7 +153,14 @@
                         </div>
                         <!-- tugas  -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
-                            tugas
+                        <div class="row table-inside">
+
+                        <!-- isi -->
+                        </div>
+                           
+                         
+
+
                         </div>
                         <!-- hasil ujian  -->
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
@@ -216,5 +224,16 @@
   $(function () {
     $('#myTab li:last-child a').tab('show')
   })
+
+
+  $(document).ready(function(){
+        $(document).on('click','#create', function(){
+            var id              = $(this).data('id');
+          
+            $('#id').val(id);
+        });
+    });
+    
 </script>
 @endsection
+
