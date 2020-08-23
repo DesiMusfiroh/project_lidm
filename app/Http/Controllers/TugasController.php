@@ -19,9 +19,9 @@ use App\TugasIndividu;
 class TugasController extends Controller
 {
 
-    public function create($id)
+    public function create($kelas_id)
     {
-        $kelas_id = $id;
+        //$kelas_id = $id;
         $pertemuan = Pertemuan::where('kelas_id', $kelas_id)->get();
         return view('Tugas.create', ['pertemuan' => $pertemuan], compact('kelas_id'));
     }
@@ -48,8 +48,21 @@ class TugasController extends Controller
           'deadline'                => $request->deadline,
           ]);
 
-      $kelas_id = $request->kelas_id;
-      $tugas_individu_master = TugasIndividuMaster::where('kelas_id',$kelas_id)->orderBy('id','asc')->get();
+        $anggota_kelas = AnggotaKelas::where('kelas_id',$request->kelas_id)->get();
+        foreach ($anggota_kelas as $e => $anggota) {
+            $data['tugas_individu_master_id'] = $tugas_individu_master->id;
+            $data['anggota_kelas_id'] = $anggota->id;
+            $data['tugas'] = '';
+            $data['status'] = false;
+            $data['nilai'] = 0;
+        
+            TugasIndividu::create($data);
+            }
+
+    //   $kelas_id = $request->kelas_id;
+    //   $tugas_individu_master = TugasIndividuMaster::where('kelas_id',$kelas_id)->orderBy('id','asc')->get();
+    //dd("oke");
+
       return redirect()->route('tugas.create',['kelas_id' => $kelas_id])->with('success','Tugas Individu Berhasil Dibuat');;
   }
 

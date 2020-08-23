@@ -51,9 +51,7 @@
     <h5><strong>Daftar Kelas</strong> </h5>
     </div>
     @if($kelas->count() != 0)
-    <?php
-        $anggota=0;
-    ?>
+   
         <div class="row">
             @foreach ($kelas as $item)
             <div class="col-md-4">
@@ -63,7 +61,7 @@
                     <p class="card-text">{{$item->deskripsi}}</p>
                     <div class="row">
                   
-                        <div class="col-md-7"> <div class="alert alert-sm alert-warning mb-0 mt-0 pb-0 pt-0"> Jumlah Siswa : <?php echo number_format($anggota);?>  </div> </div>
+                        <div class="col-md-7"> <div class="alert alert-sm alert-warning mb-0 mt-0 pb-0 pt-0"> Jumlah Siswa : {{number_format($item->jumlah_anggota_kelas(),0)}}  </div> </div>
                         <div class="col-md-5"><div class="text-right"><a href="{{route('guru.kelas.show',$item->id)}}" class="btn btn-info"><i class="metismenu-icon pe-7s-monitor mr-1"></i> Masuk</a></div></div>
                     </div>
                     
