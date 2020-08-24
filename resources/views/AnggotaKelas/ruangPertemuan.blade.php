@@ -32,12 +32,12 @@ max-width: 300px;
 padding: 10px;
 background-color: white;
 }
-#chatarea {
+#chat-area {
     overflow-y:scroll;
     overflow-x:auto;
 }
 /* Full-width textarea */
-.form-container #chatarea {
+.form-container #chat-area {
 width: 100%;
 padding: 15px;
 margin: 5px 0 22px 0;
@@ -260,18 +260,23 @@ opacity: 1;
 <!-- receive notifications -->
 <script src="{{ asset('js/echo.js') }}"></script>
  
-<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script> -->
      
 <script>
     Pusher.logToConsole = true;
- 
-    Echo.private('anggota_kelas.{{ $kelas->id }}')
-    .listen('StartDiskusi', (e) => {
-        alert(e);
+         
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: '0917886ecc5a7a459a92',
+        cluster: 'ap1',
+        encrypted: true,
+        logToConsole: true
     });
-
- 
     
+        Echo.private('kelas.{{ $pertemuan->kelas->id }}')
+        .listen('NewMessageNotification', (e) => {
+            alert(e);
+        });
 </script>
-<!-- receive notifications -->
+
 @endsection

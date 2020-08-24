@@ -68,8 +68,14 @@ class KelompokController extends Controller
         $kelompok_master    = KelompokMaster::find($id);
         $kelompok           = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
         $anggotakelas       = AnggotaKelas::where('kelas_id',$id)->get();
-        return view('Kelompok.start', ['anggotakelas' => $anggotakelas], compact('kelompok_master','kelompok'));
         // want to broadcast StartDiskusi event
+        $update_status = [
+            'id' =>$id,
+            'status' => 1,
+        ];
+        $kelompok_aktif = KelompokMaster::whereId($id)->update($update_status);
         event(new StartDiskusi($kelompok_master));
+
+        return view('Kelompok.start', ['anggotakelas' => $anggotakelas], compact('kelompok_master','kelompok'));
     }
 }

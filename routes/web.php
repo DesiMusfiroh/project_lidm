@@ -136,8 +136,6 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/show/{id}','UjianController@show')->name('guru.ujian.show');
         Route::get('/monitoring','UjianController@monitoring')->name('guru.ujian.monitoring');
         Route::get('/koreksi/{id}','UjianController@koreksi')->name('koreksi');
-
-
     });
 });
 

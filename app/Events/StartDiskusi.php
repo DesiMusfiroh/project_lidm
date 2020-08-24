@@ -36,7 +36,7 @@ class StartDiskusi implements ShouldBroadcast
     {
         // return ['start-diskusi'];
         // hanya akan diterima oleh anggota kelas dari kelompok master yang dipilih
-        return new PrivateChannel('anggota_kelas.'.$this->kelompok_master->kelas_id); 
+        return new PrivateChannel('kelas.'.$this->kelompok_master->kelas_id); 
 
 
          //call your name channel from env

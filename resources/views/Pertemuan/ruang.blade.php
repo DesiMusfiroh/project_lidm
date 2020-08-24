@@ -2,6 +2,10 @@
 
 @section('content')
 <style>
+ul li:hover{
+    color:blue;
+    cursor:pointer;
+}
 #chat{
     right:20px;
     bottom: 20px;
@@ -184,9 +188,11 @@ opacity: 1;
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                 <div class="card-body">
+                                    <ul>
                                     @foreach($kelompok_master as $item)
-                                    <li>  <a id="masuk_ruang_diskusi"  kelompok_master_id="{{ $item->id }}" deskripsi = "{{$item->deskripsi}}">{{$item->deskripsi}}</a> </li>
+                                        <li>  <a id="masuk_ruang_diskusi"  kelompok_master_id="{{ $item->id }}" deskripsi = "{{$item->deskripsi}}">{{$item->deskripsi}}</a> </li>
                                     @endforeach
+                                    </ul>
                                 </div>
                                 </div>
                             </div>
@@ -235,11 +241,11 @@ opacity: 1;
             buttons: true,
             dangerMode: false,
         })
-        .then((startDiskusi) => {
-        if (startDiskusi) {
-          window.location = "/guru/kelas/diskusi/start/"+kelompok_master_id;
-        }
-      });
+            .then((startDiskusi) => {
+            if (startDiskusi) {
+            window.location = "/guru/kelas/diskusi/start/"+kelompok_master_id;
+            }
+        });
     });
 
     var video = document.querySelector("#video-webcam");
