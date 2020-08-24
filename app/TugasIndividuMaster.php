@@ -10,7 +10,7 @@ use App\TugasIndividu;
 class TugasIndividuMaster extends Model
 {
     protected $table ='tugas_individu_master';
-    protected $fillable = ['kelas_id','jenis','nama_tugas','pertemuan','deadline'];
+    protected $fillable = ['kelas_id','nama_tugas','pertemuan','deadline'];
 
     public function kelas() {
         return $this->belongsTo(Kelas::class);

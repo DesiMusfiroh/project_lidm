@@ -2006,10 +2006,26 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.fetchMessages();
-    Echo.join('chat').listen('ChatEvent', function (event) {
-      console.log(event.chat);
-
+    Echo.join('chat').here(function (user) {
+      _this.users = user;
+    }).joining(function (user) {
+      _this.users.push(user);
+    }).leaving(function (user) {
+      _this.users = _this.users.filter(function (u) {
+        return u.id != user.id;
+      });
+    }).listen('ChatEvent', function (event) {
       _this.messages.push(event.chat);
+    }).listenForWhisper('typing', function (user) {
+      _this.activeUser = user;
+
+      if (_this.typingTimer) {
+        clearTimeout(_this.typingTimer);
+      }
+
+      _this.typingTimer = setTimeout(function () {
+        _this.activeUser = false;
+      }, 1000);
     });
   },
   methods: {
@@ -57431,8 +57447,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\WebXampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\WebXampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -44,10 +44,9 @@ use App\Kelas;
 <script>
     $(document).ready(function(){
         $(document).on('click','#create', function(){
-            var id              = $(this).data('id');
+           
             var kelas_id   = $(this).data('kelas_id');
 
-            $('#id').val(id);
             $('.kelas_id').val(kelas_id);
 
         });
@@ -73,7 +72,6 @@ use App\Kelas;
                         <div class="container">
 
                             <input type="hidden" name="kelas_id" class="kelas_id" value="">
-                            <input type="hidden" name="jenis" value="Individu" >
 
                             <div class="form-group">
                                 <label for="alamat"> Nama Tugas </label>
@@ -105,7 +103,8 @@ use App\Kelas;
         </div>
     </div>
 <!-- Penutup Create Modal -->
-<!-- Create Modal (Tugas Kelompok)
+
+<!-- Create Modal (Tugas Kelompok)-->
 <div class="modal fade create_modal_kelompok"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" >
             <div class="modal-content">
@@ -116,28 +115,30 @@ use App\Kelas;
                     </button>
                 </div>
 
-                <form action="#" enctype="multipart/form-data" method="post">
+                <form action="{{route('storeTugasKelompok')}}" enctype="multipart/form-data" method="post">
                    @csrf
                     <div class="modal-body">
                         <div class="container">
 
-                            <input type="hidden" name="kelas_id" id="kelas_id" value="">
+                            <input type="hidden" name="kelas_id" class="kelas_id" value="">
 
                             <div class="form-group">
-                                <label for="alamat"> Nama Tugas </label>
-                                <input type="text" class="form-control" id="namatugas"  name="nama_tugas" >
+                                <label for="nama_tugas"> Nama Tugas </label>
+                                <input type="text" class="form-control"  name="nama_tugas" >
                             </div>
                             <div class="form-group">
-                            <label for="kelompok"> Kelompok</label>
-                            <select class="form-control" name="kelompok">
+                            <label for="elompok_master_id"> Pilih Kelompok Master</label>
+                            <select class="form-control" name="kelompok_master_id">
                                 <option disabled selected>Pilih ...</option>
-                                
+                                @foreach($kelompok_master as $item)
+                                <option value="{{$item->id}}">{{$item->deskripsi}}</option>
+                                @endforeach
                             </select>
                             </div>
-                           
+
                             <div class="form-group">
                             <label for="deadline"> Deadline </label>
-                                <input type="datetime-local"  class="form-control" name="waktu_mulai" value="" id="jam">
+                                <input type="datetime-local"  class="form-control" name="deadline" >
                             </div>
                         </div>
                     </div>
@@ -150,4 +151,4 @@ use App\Kelas;
             </div>
         </div>
     </div>
-Penutup Create Modal -->
+<!-- Penutup Create Modal -->
