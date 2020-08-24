@@ -32,12 +32,12 @@ max-width: 300px;
 padding: 10px;
 background-color: white;
 }
-#chatarea {
+#chat-area {
     overflow-y:scroll;
     overflow-x:auto;
 }
 /* Full-width textarea */
-.form-container #chatarea {
+.form-container #chat-area {
 width: 100%;
 padding: 15px;
 margin: 5px 0 22px 0;
@@ -93,6 +93,12 @@ opacity: 1;
     padding: 0px 7px 3px 7px;
     margin: 0px 0px 7px 0px;
     box-shadow: 2px 2px 7px grey;
+}
+#kamerasiswa{
+    bottom:3%;
+    right: 30%;
+    left:30%;
+    position:fixed;
 }
 </style>
 
@@ -178,7 +184,9 @@ opacity: 1;
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    @foreach($kelompok_master as $item)
+                                    <li>  <a id="masuk_ruang_diskusi"  kelompok_master_id="{{ $item->id }}" deskripsi = "{{$item->deskripsi}}">{{$item->deskripsi}}</a> </li>
+                                    @endforeach
                                 </div>
                                 </div>
                             </div>
@@ -200,22 +208,40 @@ opacity: 1;
                 <button class="btn-warning btn"  onclick="openChat()"><i class="fa fa-comments"></i> Chat</button>
             </div>
 
+            <div id="kamerasiswa">
+            
+            </div>
+
             <div class="chat-popup " id="myForm">
               
                 <div class="form-container" id="app">
                     <h5><strong>Chat Pertemuan</strong> </h5>
-        
-                    
+                      
                     <messages-component :kelas_id="{{$kelas->id}}" :id_pertemuan="{{$pertemuan->id}}" :user="{{auth()->user()}}"></messages-component>
                     <button type="button" class="tombol cancel" onclick="closeChat()">Close</button>
                 </div>
             </div>
         </div>
 
-
 <script>
 
-    
+    $(document).on('click','#masuk_ruang_diskusi', function(){       
+        var kelompok_master_id      = $(this).attr('kelompok_master_id');
+        var deskripsi               = $(this).attr('deskripsi');
+        swal({
+            title: "Yakin?",
+            text: "Beralih ke ruang diskusi "+deskripsi,
+            icon: "warning",
+            buttons: true,
+            dangerMode: false,
+        })
+        .then((startDiskusi) => {
+        if (startDiskusi) {
+          window.location = "/guru/kelas/diskusi/start/"+kelompok_master_id;
+        }
+      });
+    });
+
     var video = document.querySelector("#video-webcam");
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
         if (navigator.getUserMedia) {

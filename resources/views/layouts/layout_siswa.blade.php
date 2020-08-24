@@ -44,7 +44,7 @@
             <div class="app-header__logo">
               <!-- dibawah ini logonya nanti -->
 
-                <img src="{{asset('images/logoa.png')}}" alt="" class="logo-src" style="width: 200px; height: 100px;">
+                <img src="{{asset('images/logoa.png')}}" alt="" class="logo-src" style="width: 200px; height: 70px;">
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">

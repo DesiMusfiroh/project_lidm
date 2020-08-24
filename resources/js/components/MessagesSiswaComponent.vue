@@ -1,17 +1,17 @@
 <template>
     <div id="chat-area">
         <div v-for="(message, index) in messages" :key="index" >
-            <div v-if="message.user_id === message.user.id" class="text-right display-right">
+            <div v-if="message.user_id === message.user.id" class="text-right display-left">
                 <div class="my-chat">
-                    <span style="font-size:10px;">{{message.created_at}} </span>
+                    <span style="font-size:10px;">{{ moment(message.created_at).format('h:mm a')}}</span>
                     <strong style="font-size:11px;">{{message.user.name}} </strong>  <br>  
                     {{message.pesan}}
                 </div>
             </div>
-            <div v-else class="text-left display-left">
+            <div v-else class="text-left display-right">
                 <div class="other-chat">
                     <strong style="font-size:11px;">{{message.user.name}} </strong> 
-                    <span style="font-size:10px;">{{message.created_at}} </span><br> 
+                    <span style="font-size:10px;">{{ moment(message.created_at).format('h:mm a')}} </span><br> 
                     {{message.pesan}}
                 </div>
             </div>
@@ -28,6 +28,9 @@
 </template>
 
 <script>
+import moment from 'moment';
+Vue.prototype.moment = moment;
+
 export default {
     
     props: ['user','kelas_id','id_pertemuan'],
