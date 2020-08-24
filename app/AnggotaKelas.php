@@ -7,6 +7,8 @@ use App\Kelas;
 use App\Siswa;
 use App\Absensi;
 use App\AnggotaKelompok;
+use App\TugasIndividu;
+use App\KumpulTugasIndividu;
 
 class AnggotaKelas extends Model
 {
@@ -27,4 +29,9 @@ class AnggotaKelas extends Model
     public function anggota_kelompok(){
         return $this->hasMany(AnggotaKelompok::class,'anggota_kelas_id');
     }
+    public function kumpul_tugas_individu() {
+        return $this->hasMany(KumpulTugasIndividu::class,'anggota_kelas_id');
+    }
+    
+
 }

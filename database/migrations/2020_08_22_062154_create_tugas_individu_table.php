@@ -16,10 +16,7 @@ class CreateTugasIndividuTable extends Migration
         Schema::create('tugas_individu', function (Blueprint $table) {
             $table->id();
             $table->integer('tugas_individu_master_id');
-            $table->integer('anggota_kelas_id');
-            $table->string('tugas');
             $table->boolean('status')->nullable();
-            $table->integer('nilai')->nullable();
             $table->timestamps();
         });
     }

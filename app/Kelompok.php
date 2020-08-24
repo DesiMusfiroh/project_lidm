@@ -16,4 +16,8 @@ class Kelompok extends Model
     public function anggota_kelompok(){
     	return $this->hasMany(AnggotaKelompok::class,'kelompok_id');
     }
+    public function kumpul_tugas_kelompok() {
+        return $this->hasMany(KumpulTugasKelompok::class,'kelompok_id');
+    }
 }
+

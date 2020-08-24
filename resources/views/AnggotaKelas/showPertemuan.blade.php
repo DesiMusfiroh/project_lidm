@@ -102,45 +102,12 @@
 
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
                             <div class="row">
-                                <div class="col-md-12">
-                                 @if($tugas_individu_master->count() != 0)
-                                    <table class="table table-striped table-sm text-center">
-                                        <thead class=" thead text-center">
-                                            <tr>
-                                                <td width="30px">No</td>
-                                                <td>Nama Tugas</td>
-                                                <td>Tipe Tugas</td>
-                                                <td>Deadline</td>
-                                                <td align="center">Opsi</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php $i=1; ?>
-                                        @foreach ($tugas_individu_master as $item)
-                                            <tr>
-                                                <td><?php echo $i; $i++?></td>
-                                                <td>{{$item->nama_tugas}}</td>
-                                                <td>{{$item->jenis}}</td>
-                                                <td>{{$item->deadline}}</td>
-
-                                                <td>
-                                                <button class="btn btn-info btn-sm"  data-toggle="modal" data-target=".create_modal_serahkantugas"
-                                                id="create"
-                                                data-tugas_individu_master_id = "{{ $item->id }}"
-                                                data-anggota_kelas_id = "{{ $item->kelas->anggota_kelas_id }}">Serahkan Tugas</button> 
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                 @else
-                                    <div class="col-md-12">
+                            <div class="col-md-12">
                                         <div class="alert alert-warning" role="alert">
-                                            Belum ada tugas yang dibuat
+                                            Anda tidak memiliki tugas
                                         </div>
-                                    </div>
-                                 @endif
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

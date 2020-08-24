@@ -14,6 +14,7 @@ use App\KelompokMaster;
 use App\Kelompok;
 use App\AnggotaKelompok;
 use App\TugasIndividuMaster;
+use App\TugasKelompokMaster;
 
 class KelasController extends Controller
 {
@@ -51,6 +52,7 @@ class KelasController extends Controller
                           ->orderBy('siswa.nama_lengkap')->get();
         $kelompok_master = KelompokMaster::where('kelas_id',$id)->paginate(5);
         $tugas_individu_master = TugasIndividuMaster::where('kelas_id',$id)->paginate(5);
+        $tugas_kelompok_master = TugasKelompokMaster::where('kelas_id',$id)->paginate(5);
 
         // if (KelompokMaster::where('kelas_id',$kelas->id)->exists()) {
 
@@ -60,7 +62,7 @@ class KelasController extends Controller
         //   return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas','kelompok_master','kelompok'));
         // }
         
-        return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master,'tugas_individu_master' => $tugas_individu_master], compact('kelas'));
+        return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master,'tugas_individu_master' => $tugas_individu_master,'tugas_kelompok_master' => $tugas_kelompok_master], compact('kelas'));
     }
 
     public function edit($id)
