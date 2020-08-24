@@ -82,10 +82,12 @@ Route::group(['prefix' => 'guru'], function () {
             Route::get('/show/{kelas_id}/{id_pertemuan}','PertemuanController@show',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.show');
             Route::get('/ruang/{kelas_id}/{id_pertemuan}','PertemuanController@ruang',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang');
             Route::get('/end/{id}','PertemuanController@end')->name('pertemuan.end');
-            Route::get('guru/kelas/pertemuan/ruang/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchPesan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
-            
-            
-
+            Route::get('guru/kelas/pertemuan/ruang/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchPesan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);           
+        });
+        
+        Route::group(['prefix' => 'diskusi'],function(){
+            Route::get('/start/{id}','KelompokController@startDiskusi')->name('guru.diskusi.start');
+            Route::get('/ruang/{id}','KelompokController@ruangDiskusi')->name('guru.diskusi.ruang');
         });
 
         Route::group(['prefix' => 'kelompok'],function(){

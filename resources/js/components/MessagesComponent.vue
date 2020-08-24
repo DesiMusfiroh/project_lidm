@@ -104,7 +104,5 @@ export default {
 </script>
 
 <style>
-    #chat-area{
-        overflow-y: scroll;
-    }
+
 </style>

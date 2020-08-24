@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
-Broadcast::channel('chat', function ($user) {
-    
+Broadcast::channel('chat', function ($user) { 
     return $user;
-    
+});
+Broadcast::channel('anggota_kelas.{kelas_id}', function ($anggota_kelas, $kelas_id) {
+    // broadcast ke seluruh anggota kelas. 
+    return $anggota_kelas->kelas_id == $kelas_id;
 });

@@ -255,4 +255,23 @@ opacity: 1;
 // akses kamera user
     
 </script>
+
+
+<!-- receive notifications -->
+<script src="{{ asset('js/echo.js') }}"></script>
+ 
+<script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+     
+<script>
+    Pusher.logToConsole = true;
+ 
+    Echo.private('anggota_kelas.{{ $kelas->id }}')
+    .listen('StartDiskusi', (e) => {
+        alert(e);
+    });
+
+ 
+    
+</script>
+<!-- receive notifications -->
 @endsection
