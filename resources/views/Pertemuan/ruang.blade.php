@@ -32,12 +32,12 @@ max-width: 300px;
 padding: 10px;
 background-color: white;
 }
-#chatarea {
+#chat-area {
     overflow-y:scroll;
     overflow-x:auto;
 }
 /* Full-width textarea */
-.form-container #chatarea {
+.form-container #chat-area {
 width: 100%;
 padding: 15px;
 margin: 5px 0 22px 0;
@@ -93,6 +93,12 @@ opacity: 1;
     padding: 0px 7px 3px 7px;
     margin: 0px 0px 7px 0px;
     box-shadow: 2px 2px 7px grey;
+}
+#kamerasiswa{
+    bottom:3%;
+    right: 30%;
+    left:30%;
+    position:fixed;
 }
 </style>
 
@@ -198,6 +204,10 @@ opacity: 1;
 
             <div id="chat">
                 <button class="btn-warning btn"  onclick="openChat()"><i class="fa fa-comments"></i> Chat</button>
+            </div>
+
+            <div id="kamerasiswa">
+            
             </div>
 
             <div class="chat-popup " id="myForm">

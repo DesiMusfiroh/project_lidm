@@ -22,10 +22,10 @@ body {
 
                     <ul class="nav nav-tabs mr-4 ml-4 text-center justify-content-center" id="myTab" role="tablist">
                     <li class="nav-item" role="guru">
-                        <a class="nav-link active" id="guru-tab" data-toggle="tab" href="#guru" role="tab" aria-controls="guru" aria-selected="true">Register Sebagai Guru</a>
+                        <a class="nav-link active" id="guru-tab" data-toggle="tab" href="#guru" role="tab" aria-controls="guru" aria-selected="true" style="color: black; font-weight:bold; font-size: 15px">Register Sebagai Guru</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="siswa-tab" data-toggle="tab" href="#siswa" role="tab" aria-controls="siswa" aria-selected="false">Register Sebagai Siswa</a>
+                        <a class="nav-link" id="siswa-tab" data-toggle="tab" href="#siswa" role="tab" aria-controls="siswa" aria-selected="false" style="color: black; font-weight:bold; font-size: 15px">Register Sebagai Siswa</a>
                     </li>
                     </ul>
 

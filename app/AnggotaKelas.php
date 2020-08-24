@@ -27,4 +27,6 @@ class AnggotaKelas extends Model
     public function anggota_kelompok(){
         return $this->hasMany(AnggotaKelompok::class,'anggota_kelas_id');
     }
+
+    
 }

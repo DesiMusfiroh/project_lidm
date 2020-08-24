@@ -252,8 +252,8 @@
 
 <script>
   $(function () {
-    $('#myTab li:last-child a').tab('show')
-  })
+    $('#myTab li:first-child a').tab('show')
+  });
 
   function copy_text() {
         document.getElementById("kode_kelas").select();

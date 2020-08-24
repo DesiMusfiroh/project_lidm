@@ -49,7 +49,8 @@
         <div class="app-header header-shadow bg-heavy-rain header-text-dark" style="box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.25);">
             <div class="app-header__logo">
               <!-- dibawah ini logonya nanti -->
-                <div class="logo-src"></div>
+              <img src="{{asset('images/logoa.png')}}" alt="" class="logo-src" style="width: 200px; height: 70px;">
+
                 <div class="header__pane ml-auto">
                     <div>
                         <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
