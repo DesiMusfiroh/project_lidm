@@ -9,6 +9,7 @@ use App\Pertemuan;
 use App\AnggotaKelas;
 use App\Absensi;
 use App\ChatPertemuan;
+use App\KelompokMaster;
 use App\Events\ChatEvent;
 
 class PertemuanController extends Controller
@@ -68,11 +69,12 @@ class PertemuanController extends Controller
         $anggotakelas   = AnggotaKelas::where('kelas_id',$kelas_id)->get();
         $absensi        = Absensi::where('pertemuan_id',$pertemuan->id)->get();
         $chat_pertemuan = ChatPertemuan::where('pertemuan_id',$pertemuan->id)->get();
+        $kelompok_master= KelompokMaster::where('kelas_id',$kelas_id)->get();
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
 
-        return view('Pertemuan.ruang', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi'=> $absensi, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai'));
+        return view('Pertemuan.ruang', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'absensi'=> $absensi, 'chat_pertemuan' => $chat_pertemuan, 'kelompok_master' =>$kelompok_master ], compact('pertemuan','kelas','waktu_mulai'));
     }
 
     public function fetchMessages($kelas_id,$id_pertemuan){

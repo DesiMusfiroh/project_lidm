@@ -184,7 +184,9 @@ opacity: 1;
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                    @foreach($kelompok_master as $item)
+                                    <li>  <a id="masuk_ruang_diskusi"  kelompok_master_id="{{ $item->id }}" deskripsi = "{{$item->deskripsi}}">{{$item->deskripsi}}</a> </li>
+                                    @endforeach
                                 </div>
                                 </div>
                             </div>
@@ -214,18 +216,32 @@ opacity: 1;
               
                 <div class="form-container" id="app">
                     <h5><strong>Chat Pertemuan</strong> </h5>
-        
-                    
+                      
                     <messages-component :kelas_id="{{$kelas->id}}" :id_pertemuan="{{$pertemuan->id}}" :user="{{auth()->user()}}"></messages-component>
                     <button type="button" class="tombol cancel" onclick="closeChat()">Close</button>
                 </div>
             </div>
         </div>
 
-
 <script>
 
-    
+    $(document).on('click','#masuk_ruang_diskusi', function(){       
+        var kelompok_master_id      = $(this).attr('kelompok_master_id');
+        var deskripsi               = $(this).attr('deskripsi');
+        swal({
+            title: "Yakin?",
+            text: "Beralih ke ruang diskusi "+deskripsi,
+            icon: "warning",
+            buttons: true,
+            dangerMode: false,
+        })
+        .then((startDiskusi) => {
+        if (startDiskusi) {
+          window.location = "/guru/kelas/diskusi/start/"+kelompok_master_id;
+        }
+      });
+    });
+
     var video = document.querySelector("#video-webcam");
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
         if (navigator.getUserMedia) {

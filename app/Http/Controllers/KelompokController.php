@@ -12,7 +12,7 @@ use App\AnggotaKelas;
 use App\KelompokMaster;
 use App\Kelompok;
 use App\AnggotaKelompok;
-
+use App\Events\StartDiskusi;
 class KelompokController extends Controller
 {
 
@@ -62,4 +62,14 @@ class KelompokController extends Controller
         return view('Kelompok.show', ['anggotakelas' => $anggotakelas], compact('kelompok_master','kelompok'));
     }
 
+    // ruang diskusi kelompok tampilan GURU
+    public function startDiskusi($id) 
+    {
+        $kelompok_master    = KelompokMaster::find($id);
+        $kelompok           = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
+        $anggotakelas       = AnggotaKelas::where('kelas_id',$id)->get();
+        return view('Kelompok.start', ['anggotakelas' => $anggotakelas], compact('kelompok_master','kelompok'));
+        // want to broadcast StartDiskusi event
+        event(new StartDiskusi($kelompok_master));
+    }
 }
