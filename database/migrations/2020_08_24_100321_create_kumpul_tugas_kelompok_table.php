@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTugasIndividuMasterTable extends Migration
+class CreateKumpulTugasKelompokTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateTugasIndividuMasterTable extends Migration
      */
     public function up()
     {
-        Schema::create('tugas_individu_master', function (Blueprint $table) {
+        Schema::create('kumpul_tugas_kelompok', function (Blueprint $table) {
             $table->id();
-            $table->integer('kelas_id');
-            $table->string('nama_tugas');
-            $table->string('pertemuan');
-            $table->timestamp('deadline');
+            $table->integer('tugas_kelompok_id');
+            $table->integer('kelompok_id');
+            $table->string('tugas')->nullable();
+            $table->integer('nilai')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateTugasIndividuMasterTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tugas_individu_master');
+        Schema::dropIfExists('kumpul_tugas_kelompok');
     }
 }

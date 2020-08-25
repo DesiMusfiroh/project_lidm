@@ -201,7 +201,6 @@
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Nama Tugas</td>
-                                            <td>Tipe Tugas</td>
                                             <td>Deadline</td>
                                             <td align="center">Opsi</td>
                                         </tr>
@@ -213,7 +212,6 @@
                                         <tr>
                                             <td><?php echo $i; $i++?></td>
                                             <td>{{$item->nama_tugas}}</td>
-                                            <td>{{$item->jenis}}</td>
                                             <td>{{$item->deadline}}</td>
 
                                             <td>
@@ -232,6 +230,44 @@
                             @endif
                             </div>
                             <div class="row ">{{$tugas_individu_master->links()}}</div>
+
+        
+                            <div class="row table-inside">
+                            @if($tugas_kelompok_master->count() != 0)
+                                <table class="table table-striped table-sm text-center">
+                                    <thead class=" thead text-center">
+                                        <tr>
+                                            <td width="30px">No</td>
+                                            <td>Nama Tugas</td>
+                                            <td>Deadline</td>
+                                            <td align="center">Opsi</td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php $i=1; ?>
+                                    @foreach ($tugas_kelompok_master as $item)
+                                        <tr>
+                                            <td><?php echo $i; $i++?></td>
+                                            <td>{{$item->nama_tugas}}</td>
+                                            <td>{{$item->deadline}}</td>
+
+                                            <td>
+                                            <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> 
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        Belum ada tugas kelompok yang dibuat
+                                    </div>
+                                </div>
+                            @endif
+                            </div>
+                            <div class="row ">{{$tugas_kelompok_master->links()}}</div>
                         
                         </div>
 
@@ -253,7 +289,8 @@
 <script>
   $(function () {
     $('#myTab li:first-child a').tab('show')
-  });
+  })
+    $("#start").hide();
 
   function copy_text() {
         document.getElementById("kode_kelas").select();

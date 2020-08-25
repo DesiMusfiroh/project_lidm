@@ -61,7 +61,7 @@
                             <a class="nav-link" id="kelompok-tab" data-toggle="tab" href="#kelompok" role="tab" aria-controls="kelompok" aria-selected="false">Kelompok</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="messages-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas 
+                            <a class="nav-link" id="tugas-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas 
                             <span class="badge badge-pill badge-info">New</span></a>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -154,11 +154,72 @@
                         <!-- tugas  -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
                         <div class="row table-inside">
+                        @if($kumpul_tugas_individu->count() != 0)
+                                <table class="table table-striped table-sm" >
+                                    <thead class="thead-dark text-center" style="background-color:#393A3C; color:white; font-weight:bold">
+                                        <tr>
+                                            <td>No</td>
+                                            <td>Nama Tugas</td>
+                                            <td>Deadline</td>
+                                            <td> Tugas </td>
+                                            <td>Aksi</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                    <?php $i=1; ?>
+                                    @foreach ($kumpul_tugas_individu as $item)
+                                        <tr>
+                                            <td><?php echo $i; $i++?></td>
+                                            <td>{{$item->tugas_individu->tugas_individu_master->nama_tugas}}</td>
+                                            <td>{{$item->tugas_individu->tugas_individu_master->deadline}}</td>
+                                            <!--Aksi-->
+                                            @if($item->tugas == null)
+                                            <td>
+                                            <form action="{{route('serahTugas')}}" method="post" enctype="multipart/form-data" >
+                                            @csrf
+                                            @method('PATCH')
+                                    
+                                            <input type="hidden" name="id"  value="{{$item->id}}">         
+                                            <input type="file" name="tugas">
+                                            
+                                            <td>
+                                            
+                                                <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
+                                            </td>
+                                            </div>
+                                        </form>
+                                            @else
+                                            <td> Diserahkan </td>
+                                            <td>
+                                             
+                                            <button type="submit" class="btn btn-info" data-toggle="modal" data-target=".ubah_modal_serahTugasIndividu"
+                                            id="update"
+                                            data-kumpul_tugas_individu_id_update = "{{ $item->id }}"
+                                            data-tugas_individu_id_update = "{{ $item->tugas_individu_id }}"
+                                            data-anggota_kelas_id_update = "{{ $item->anggota_kelas_id }}"
+                                            data-tugas_update = "{{ $item->tugas }}"
+                                            data-nilai_update = "{{ $item->nilai }}"
 
-                        <!-- isi -->
-                        </div>
-                           
-                         
+                                            style="box-shadow: 3px 2px 5px grey; margin:5px;">Ubah Tugas</button>
+                                            
+                                            </td>
+                                            @endif
+                                            
+                                            </td>
+                                            
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                    @else
+                                    <tbody>
+                                    <div class="alert alert-warning" role="alert">
+                                        Belum ada tugas
+                                    </div>
+                                    </tbody>
+                                    @endif
+                                </table>
+                            </div>
+                            <div class="row justify-content-center">{{$kumpul_tugas_individu->links()}}</div>
 
 
                         </div>
@@ -215,6 +276,8 @@
             </div>
         </div>
 
+
+      
     </div>
 </main>
 
@@ -224,16 +287,70 @@
   $(function () {
     $('#myTab li:first-child a').tab('show')
   })
+  $("#start").hide();
 
 
-  $(document).ready(function(){
-        $(document).on('click','#create', function(){
-            var id              = $(this).data('id');
-          
-            $('#id').val(id);
-        });
-    });
-    
+
 </script>
+<!--edit essay-->
+<script>
+    $(document).ready(function(){
+        $(document).on('click','#update', function(){
+        var kumpul_tugas_individu_id_update                 = $(this).data('kumpul_tugas_individu_id_update');
+        var tugas_individu_id_update                        = $(this).data('tugas_individu_id_update');
+        var anggota_kelas_id_update                         = $(this).data('anggota_kelas_id_update');
+        var tugas_update                                    = $(this).data('tugas_update');
+        var nilai_update                                    = $(this).data('nilai_update');
+       
+        $('#kumpul_tugas_individu_id_update').val(kumpul_tugas_individu_id_update);
+        $('#tugas_individu_id_update').val(tugas_individu_id_update);
+        $('#anggota_kelas_id_update').val(anggota_kelas_id_update);
+        $('#tugas_update').val(tugas_update);
+        $('#nilai_update').val(nilai_update);
+
+
+        });
+
+    });
+    </script>
+    <!--edit-->
 @endsection
 
+<!-- Create Modal (Tugas Individu)-->
+<div class="modal fade ubah_modal_serahTugasIndividu"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="exampleModalLabel">Ubah Tugas </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="{{route('ubahTugas')}}" enctype="multipart/form-data" method="post">
+                @csrf
+                @method('PATCH')
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <div class="form-group">
+                            <input type="hidden" name="id" id="kumpul_tugas_individu_id_update" value=""> 
+                            <input type="hidden" name="tugas_individu_id" id="tugas_individu_id_update" value=""> 
+                            <input type="hidden" name="anggota_kelas_id" id="anggota_kelas_id_update" value=""> 
+                            <input type="hidden" name="nilai" id="nilai_update" value=""> 
+                                <label for="alamat"> Pilih Tugas </label>
+                                <input type="file" class="form-control" id="tugas_update" name="tugas"  >
+                            </div>
+                      
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<!-- Penutup Create Modal -->

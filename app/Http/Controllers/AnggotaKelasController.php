@@ -19,6 +19,7 @@ use App\PilganJawab;
 use App\SoalSatuan;
 use App\TugasIndividuMaster;
 use App\TugasIndividu;
+use App\KumpulTugasIndividu;
 
 
 use Auth;
@@ -69,10 +70,18 @@ class AnggotaKelasController extends Controller
         $pertemuan          = Pertemuan::where('kelas_id',$id)->paginate(4);
         $anggotakelas       = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
                             ->orderBy('siswa.nama_lengkap')->get();
-        $anggota_kelas_id   = auth()->user()->siswa->anggota_kelas()->value('id');
+        $siswa_id = auth()->user()->siswa->id;
+
+        $anggota_kelas_id   = AnggotaKelas::where('siswa_id',$siswa_id)->where('kelas_id',$id)->value('id');
+
+        //dd($anggota_kelas_id);
         $kelompok_master    = KelompokMaster::where('kelas_id',$id)->get();
         $hasil_ujian        = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->get();
-        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian], compact('kelas'));
+        $kumpul_tugas_individu     = KumpulTugasIndividu::where('anggota_kelas_id',$anggota_kelas_id)->paginate(5);
+        //dd($tugas_individu);
+        //$kumpul_tugas_individu = KumpulTugasIndividu::all();
+        //dd($kumpul_tugas_individu);
+        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu], compact('kelas'));
     }
 
     public function showPertemuan($kelas_id, $id_pertemuan)
@@ -85,8 +94,9 @@ class AnggotaKelasController extends Controller
 
         date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
         $waktu_mulai = date('F d, Y H:i:s', strtotime($pertemuan->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
-        $tugas_individu_master     = TugasIndividuMaster::where('kelas_id',$kelas_id)->paginate(5);
-        return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan,'tugas_individu_master' => $tugas_individu_master  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
+       // $tugas_individu_master     = TugasIndividuMaster::where('kelas_id',$kelas_id)->paginate(5);
+       // return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan,'tugas_individu_master' => $tugas_individu_master  ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
+       return view('AnggotaKelas.showPertemuan', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'chat_pertemuan' => $chat_pertemuan ], compact('pertemuan','kelas','waktu_mulai','anggota_kelas_id'));
     }
 
     public function serahkan_tugas_individu(Request $request)

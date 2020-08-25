@@ -99,8 +99,13 @@ Route::group(['prefix' => 'guru'], function () {
             //Route::get('/create/{id}','TugasController@create',['$kelas_id' =>'kelas_id'])->name('tugas.create');
             Route::get('/create/{kelas_id}','TugasController@create', ['$kelas_id' =>'kelas_id'])->name('tugas.create'); //
             Route::post('create/tugas_store','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
+            Route::post('create/tugaskelompok_store','TugasController@tugas_kelompok_master_store')->name('storeTugasKelompok');
             // Route::post('serahkan/serahkan_tugas','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
-         
+            Route::patch('/kumpul_tugas/tugas/serahkan', 'TugasController@serahkan_tugas_individu')->name('serahTugas');
+            Route::patch('/updatetugas','TugasController@update_tugas_individu')->name('ubahTugas');
+
+            
+
         });
     });
     // route kelola paketsoal
