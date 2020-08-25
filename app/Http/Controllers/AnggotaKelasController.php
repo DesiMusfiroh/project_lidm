@@ -86,19 +86,22 @@ class AnggotaKelasController extends Controller
         //dd($kelompok_master);
         $kelompok_saya = AnggotaKelompok::where('anggota_kelas_id',$anggota_kelas_id)->get('kelompok_id');
         //dd($kelompok_saya);
-        foreach ($kelompok_saya as $e=>$kel) {
-            //dd($kel->kelompok_id);
-            $kelompok_saya_ikuti[] = Kelompok::where('id',$kel->kelompok_id)->get();
-        }
-        dd($kelompok_saya_ikuti);
+        //dd($kelompok_saya);
+        // foreach ($kelompok_saya as $e=>$kel) {
+        //     //dd($kel->kelompok_id);
+        //     $kelompok_saya_ikuti[] = Kelompok::where('id',$kel->kelompok_id)->get();
+        // }
+        $kelompok_saya_ikuti = Kelompok::whereIn('id',$kelompok_saya)->get();
+        //dd($kelompok_saya_ikuti);
 
-
+        $kumpul_tugas_kelompok = KumpulTugasKelompok::whereIn('kelompok_id',$kelompok_saya)->get();
+        //dd($kumpul_tugas_kelompok);
         $hasil_ujian               = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->get();
         $kumpul_tugas_individu     = KumpulTugasIndividu::where('anggota_kelas_id',$anggota_kelas_id)->paginate(5);
         //$kumpul_tugas_kelompok     = KumpulTugasKelompok::where('anggota_kelompok_id',$anggota_kelompok_id)->paginate(5);
         
         // return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu,'kumpul_tugas_kelompok'=> $kumpul_tugas_kelompok], compact('kelas'));
-        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu], compact('kelas','kelompok_saya_ikuti'));
+        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu], compact('kelas','kelompok_saya_ikuti','kumpul_tugas_kelompok'));
     }
 
     public function showPertemuan($kelas_id, $id_pertemuan)

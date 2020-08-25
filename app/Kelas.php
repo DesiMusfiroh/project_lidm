@@ -31,5 +31,9 @@ class Kelas extends Model
       return $this->hasMany(KelompokMaster::class,'kelas_id');
     }
 
-   
+    public function jumlah_anggota_kelas(){
+      $kelas_id = $this->id;
+      $jumlah_anggota_kelas = AnggotaKelas::where('kelas_id',$kelas_id)->count();
+      return $jumlah_anggota_kelas;
+  }
 }

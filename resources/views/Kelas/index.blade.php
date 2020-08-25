@@ -51,9 +51,7 @@
     <h5><strong>Daftar Kelas</strong> </h5>
     </div>
     @if($kelas->count() != 0)
-    <?php
-        $anggota=0;
-    ?>
+   
         <div class="row">
             @foreach ($kelas as $item)
             <div class="col-md-4">
