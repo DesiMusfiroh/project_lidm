@@ -26,11 +26,7 @@ class TugasController extends Controller
 
     public function create($kelas_id)
     {
-<<<<<<< HEAD
-        //$kelas_id = $id;
-=======
         // $kelas_id = $id;
->>>>>>> 589cd91486bc4ef24f4c29f9a0026d370d9a4c55
         $pertemuan = Pertemuan::where('kelas_id', $kelas_id)->get();
         $kelompok_master = KelompokMaster::where('kelas_id', $kelas_id)->get();
         return view('Tugas.create', ['pertemuan' => $pertemuan,'kelompok_master' => $kelompok_master], compact('kelas_id'));
