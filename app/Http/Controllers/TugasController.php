@@ -67,8 +67,9 @@ class TugasController extends Controller
 
     $kelas_id = $request->kelas_id;
     //   $tugas_individu_master = TugasIndividuMaster::where('kelas_id',$kelas_id)->orderBy('id','asc')->get();
-      return redirect()->route('tugas.create',['kelas_id' => $kelas_id])->with('success','Tugas Individu Berhasil Dibuat');;
-  }
+      
+      return redirect()->route('guru.kelas.show', $request->kelas_id)->with('success','Tugas Individu Berhasil Dibuat');
+    }
  
   public function serahkan_tugas_individu(Request $request){
       
@@ -132,11 +133,25 @@ class TugasController extends Controller
            KumpulTugasKelompok::create($data);
          }
 
-   $kelas_id = $request->kelas_id;
-   //   $tugas_individu_master = TugasIndividuMaster::where('kelas_id',$kelas_id)->orderBy('id','asc')->get();
-     return redirect()->route('tugas.create',['kelas_id' => $kelas_id])->with('success','Tugas Kelompok Berhasil Dibuat');;
- }
+            $kelas_id = $request->kelas_id;
+            return redirect()->route('guru.kelas.show', $request->kelas_id)->with('success','Tugas Kelompok Berhasil Dibuat');
+    }
+    //Serahkan Tugas Kelompok
+    public function serahkan_tugas_kelompok(Request $request){
+      
+        $kumpul_tugas_kelompok = KumpulTugasKelompok::findOrFail($request->id);
+        
+        $file = $request->file('tugas');
+        $nama_file = time()."_".$file->getClientOriginalName();
+        $tujuan_upload = 'tugas';
+        $file->move($tujuan_upload,$nama_file);
 
+        $update_kumpul_tugas_kelompok= [
+            'tugas' => $file
+        ];
+        KumpulTugasKelompok::where('id', $request->id)->update($update_kumpul_tugas_kelompok);
+        return redirect()->back();
+    }
 
     public function store(Request $request)
     {

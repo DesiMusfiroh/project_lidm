@@ -102,6 +102,7 @@ Route::group(['prefix' => 'guru'], function () {
             Route::post('create/tugaskelompok_store','TugasController@tugas_kelompok_master_store')->name('storeTugasKelompok');
             // Route::post('serahkan/serahkan_tugas','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
             Route::patch('/kumpul_tugas/tugas/serahkan', 'TugasController@serahkan_tugas_individu')->name('serahTugas');
+            Route::patch('/kumpul_tugas/tugaskelompok/serahkan', 'TugasController@serahkan_tugas_kelompok')->name('serahTugasKelompok');
             Route::patch('/updatetugas','TugasController@update_tugas_individu')->name('ubahTugas');
 
             
