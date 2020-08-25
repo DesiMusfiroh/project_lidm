@@ -64,7 +64,7 @@
                     <div class="row">
                   
                         <div class="col-md-7"> <div class="alert alert-sm alert-warning mb-0 mt-0 pb-0 pt-0"> 
-                        Jumlah Siswa : 
+                        Jumlah Siswa : {{$item->total_anggota_kelas->id}}
                         
                         
                          </div> </div>

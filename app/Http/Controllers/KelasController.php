@@ -15,8 +15,7 @@ use App\Kelompok;
 use App\AnggotaKelompok;
 use App\TugasIndividuMaster;
 use App\TugasKelompokMaster;
-use DB;
-use App\TotalAnggotaKelas;
+
 
 class KelasController extends Controller
 {
@@ -26,7 +25,6 @@ class KelasController extends Controller
     {
         
         $kelas         = Kelas::where('guru_id',Auth::user()->guru->id)->get();
-        // $total_anggota_kelas    = TotalAnggotaKelas::all();
         return view('Kelas.index',['kelas' => $kelas]);
     }
 
