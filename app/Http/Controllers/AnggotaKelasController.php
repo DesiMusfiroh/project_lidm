@@ -20,6 +20,7 @@ use App\SoalSatuan;
 use App\TugasIndividuMaster;
 use App\TugasIndividu;
 use App\KumpulTugasIndividu;
+use App\KumpulTugasKelompok;
 
 
 use Auth;
@@ -66,22 +67,38 @@ class AnggotaKelasController extends Controller
 
     public function showKelas($id)
     {
+
         $kelas              = Kelas::find($id);
         $pertemuan          = Pertemuan::where('kelas_id',$id)->paginate(4);
         $anggotakelas       = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
                             ->orderBy('siswa.nama_lengkap')->get();
-        $siswa_id = auth()->user()->siswa->id;
 
-        $anggota_kelas_id   = AnggotaKelas::where('siswa_id',$siswa_id)->where('kelas_id',$id)->value('id');
-
+        $siswa_id                   = auth()->user()->siswa->id;
+        $anggota_kelas_id           = AnggotaKelas::where('siswa_id',$siswa_id)->where('kelas_id',$id)->value('id');
         //dd($anggota_kelas_id);
-        $kelompok_master    = KelompokMaster::where('kelas_id',$id)->get();
-        $hasil_ujian        = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->get();
+
+        // $kelompok_master_id        = KelompokMaster::where('kelas_id',$id)->get();
+        // $kelompok_id               = Kelompok::where('kelompok_master_id',$kelompok_master_id)->get();
+        //$anggota_kelompok_id       = AnggotaKelompok::where('kelompok_id',$kelompok_id)->where('anggota_kelas_id',$anggota_kelas_id)->get();
+
+        $kelompok_master           = KelompokMaster::where('kelas_id',$id)->get();  
+        // $kelompok_id = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
+        //dd($kelompok_master);
+        $kelompok_saya = AnggotaKelompok::where('anggota_kelas_id',$anggota_kelas_id)->get('kelompok_id');
+        //dd($kelompok_saya);
+        foreach ($kelompok_saya as $e=>$kel) {
+            //dd($kel->kelompok_id);
+            $kelompok_saya_ikuti[] = Kelompok::where('id',$kel->kelompok_id)->get();
+        }
+        dd($kelompok_saya_ikuti);
+
+
+        $hasil_ujian               = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->get();
         $kumpul_tugas_individu     = KumpulTugasIndividu::where('anggota_kelas_id',$anggota_kelas_id)->paginate(5);
-        //dd($tugas_individu);
-        //$kumpul_tugas_individu = KumpulTugasIndividu::all();
-        //dd($kumpul_tugas_individu);
-        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu], compact('kelas'));
+        //$kumpul_tugas_kelompok     = KumpulTugasKelompok::where('anggota_kelompok_id',$anggota_kelompok_id)->paginate(5);
+        
+        // return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu,'kumpul_tugas_kelompok'=> $kumpul_tugas_kelompok], compact('kelas'));
+        return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu], compact('kelas','kelompok_saya_ikuti'));
     }
 
     public function showPertemuan($kelas_id, $id_pertemuan)

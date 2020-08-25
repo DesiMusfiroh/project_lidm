@@ -131,7 +131,7 @@ use App\Kelas;
                                 <input type="text" class="form-control"  name="nama_tugas" >
                             </div>
                             <div class="form-group">
-                            <label for="elompok_master_id"> Pilih Kelompok Master</label>
+                            <label for="kelompok_master_id"> Pilih Kelompok Master</label>
                             <select class="form-control" name="kelompok_master_id">
                                 <option disabled selected>Pilih ...</option>
                                 @foreach($kelompok_master as $item)
