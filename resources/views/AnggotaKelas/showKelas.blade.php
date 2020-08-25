@@ -151,12 +151,13 @@
                             @endif
                             </div>
                             <div class="row table-inside"> 
-                            
+                            <center>Kelompok yang saya ikuti</center>
+                            @if($kelompok_saya_ikuti->count() != 0)
                                 <table class="table table-striped table-sm text-center" >
                                     <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
                                         <tr>
                                             <td width="30px">No</td>
-                                            <td>Nama Kelompok</td>
+                                            <td>Nama kelompok</td>
                                             
                                         </tr>
                                     </thead>
@@ -172,7 +173,11 @@
                                     @endforeach
                                     </tbody>
                                 </table>            
-                            
+                            @else
+                                <div class="alert alert-warning" role="alert">
+                                    Belum ada kelompok dalam kelas ini
+                                </div>
+                            @endif
                             </div>
                         </div>
                         <!-- tugas  -->
@@ -211,7 +216,7 @@
                                                 <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
                                             </td>
                                             </div>
-                                        </form>
+                                        	</form>
                                             @else
                                             <td> Diserahkan </td>
                                             <td>
@@ -242,14 +247,39 @@
                                     </tbody>
                                     @endif
                                 </table>
-                            </div>
                             <div class="row justify-content-center">{{$kumpul_tugas_individu->links()}}</div>
-
-
-                         
-
-
                         </div>
+                        <div class="row table-inside"> 
+                            <center>Tugas Kelompok saya</center>
+                            @if($kumpul_tugas_kelompok->count() != 0)
+                                <table class="table table-striped table-sm text-center" >
+                                    <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
+                                        <tr>
+                                            <td width="30px">No</td>
+                                            <td>Nama tugas</td>
+                                            
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <?php $i=1; ?>
+                                    @foreach ($kumpul_tugas_kelompok as $item)
+                                        <tr>
+                                            <td><?php echo $i; $i++?></td>
+                                            <td>{{$item->tugas_kelompok->tugas_kelompok_master->nama_tugas}}</td>
+                                            
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>            
+                            @else
+                                <div class="alert alert-warning" role="alert">
+                                    Belum ada kelompok dalam kelas ini
+                                </div>
+                            @endif
+                            </div>
+                    	</div>
+                        
                         <!-- hasil ujian  -->
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
                             <div class="row table-inside">
