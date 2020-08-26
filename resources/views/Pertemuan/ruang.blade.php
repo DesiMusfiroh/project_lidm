@@ -230,7 +230,7 @@ opacity: 1;
         </div>
 
 <script>
-
+    // guru memulai diskusi kelompok
     $(document).on('click','#masuk_ruang_diskusi', function(){       
         var kelompok_master_id      = $(this).attr('kelompok_master_id');
         var deskripsi               = $(this).attr('deskripsi');
@@ -243,18 +243,20 @@ opacity: 1;
         })
             .then((startDiskusi) => {
             if (startDiskusi) {
-            window.location = "/guru/kelas/diskusi/start/"+kelompok_master_id;
+            window.location = "/guru/kelas/diskusi/start/"+<?php echo $pertemuan->id ?>+"/"+kelompok_master_id;
             }
         });
     });
 
+    // akses kamera user
     var video = document.querySelector("#video-webcam");
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-        if (navigator.getUserMedia) {
-            navigator.getUserMedia({ video: true }, handleVideo, videoError);
-        }
-        function handleVideo(stream) { video.srcObject = stream; }
-        function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({ video: true }, handleVideo, videoError);
+    }
+    function handleVideo(stream) { video.srcObject = stream; }
+    function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
+
     // kirim pesan live chat
         function sendMessage() {
             var pesan = $("#isipesan").val();
@@ -284,7 +286,6 @@ opacity: 1;
         document.getElementById("myForm").style.display = "none";
         }
 
-// akses kamera user
     
 </script>
 @endsection

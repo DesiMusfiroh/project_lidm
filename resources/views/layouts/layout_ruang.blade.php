@@ -29,7 +29,7 @@
 <body>
 @yield('content')
     <script type="text/javascript" src="{{asset('assets/scripts/main.js')}}"></script>
-    <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>    
+    <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>    
 </body>
 @yield('js')
 @yield('chart')

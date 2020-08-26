@@ -9,9 +9,8 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\KelompokMaster;
 
-class StartDiskusi implements ShouldBroadcast
+class TaskEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,11 +19,11 @@ class StartDiskusi implements ShouldBroadcast
      *
      * @return void
      */
-    public $kelompok_master;
-
-    public function __construct(KelompokMaster $kelompok_master)
+    public $message;
+    
+    public function __construct($message)
     {
-        $this->kelompok_master = $kelompok_master;
+        $this->message =$message;
     }
 
     /**
@@ -34,12 +33,6 @@ class StartDiskusi implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // return ['start-diskusi'];
-        // hanya akan diterima oleh anggota kelas dari kelompok master yang dipilih
-        // return new PrivateChannel('kelas.'.$this->kelompok_master->kelas_id); 
-
-        return new PrivateChannel('startDiskusiChannel.'.$this->kelompok_master->kelas_id);
-         //call your name channel from env
-        //  return config('test.channel');
+        return new PrivateChannel('testChannel');
     }
 }

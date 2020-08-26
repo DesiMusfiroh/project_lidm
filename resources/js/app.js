@@ -29,9 +29,21 @@ Vue.component('messagessiswa-component', require('./components/MessagesSiswaComp
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import VueChatScroll from 'vue-chat-scroll'
+import Echo from 'laravel-echo';
 Vue.use(VueChatScroll)
 
 
 const app = new Vue({
     el: '#app',
 });
+
+// const testapp = new Vue({
+//     el: '#testapp',
+//     created() {
+//         window.Echo.private('testChannel')
+//         .listen(TaskEvent), (e) => {
+//             console.log(e);
+//         }
+//     }
+// });
+

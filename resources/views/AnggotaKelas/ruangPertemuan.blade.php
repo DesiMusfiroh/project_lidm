@@ -95,7 +95,11 @@ opacity: 1;
     box-shadow: 2px 2px 7px grey;
 }
 </style>
-
+<?php 
+    use App\AnggotaKelas;
+    $siswa_id = auth()->user()->siswa->id ;
+    $anggota_kelas_id = AnggotaKelas::where('siswa_id', $siswa_id)->value('id');
+?>
 
 <div id="fullscreenPertemuan">
             <div class="row">
@@ -189,7 +193,7 @@ opacity: 1;
             </div>
 
             <div id="leave">
-                <a href="{{route('pertemuan.show',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"><button class="btn-danger btn"><i class="fa fa-times" style="margin-right:10px"></i> Keluar</button> </a>
+                <a href="{{route('pertemuanSiswa.show',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"><button class="btn-danger btn"><i class="fa fa-times" style="margin-right:10px"></i> Keluar</button> </a>
             </div> 
 
             <div id="end">
@@ -215,68 +219,68 @@ opacity: 1;
 
 <script>
 
-    
+    // akses kamera user
     var video = document.querySelector("#video-webcam");
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-        if (navigator.getUserMedia) {
-            navigator.getUserMedia({ video: true }, handleVideo, videoError);
-        }
-        function handleVideo(stream) { video.srcObject = stream; }
-        function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+    if (navigator.getUserMedia) {
+        navigator.getUserMedia({ video: true }, handleVideo, videoError);
+    }
+    function handleVideo(stream) { video.srcObject = stream; }
+    function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
+
     // kirim pesan live chat
-        function sendMessage() {
-            var pesan = $("#isipesan").val();
-            var pertemuan_id = $("#pertemuan_id").val();
-            var user_id = $("#user_id").val();
-            $.ajax({
-                url: "{{ url('chat_pertemuan/send') }}",
-                type: "GET",
-                dataType: 'json',
-                data: {
-                    pertemuan_id: pertemuan_id,
-                    user_id: user_id,
-                    pesan: pesan
-                },
-                success: function(data) {
-                    console.log(data);
-                    $("#isipesan").val('');
-                    location.reload(true); // refresh page otomatis
-                }
-            });
-        }
+    function sendMessage() {
+        var pesan = $("#isipesan").val();
+        var pertemuan_id = $("#pertemuan_id").val();
+        var user_id = $("#user_id").val();
+        $.ajax({
+            url: "{{ url('chat_pertemuan/send') }}",
+            type: "GET",
+            dataType: 'json',
+            data: {
+                pertemuan_id: pertemuan_id,
+                user_id: user_id,
+                pesan: pesan
+            },
+            success: function(data) {
+                console.log(data);
+                $("#isipesan").val('');
+                location.reload(true); // refresh page otomatis
+            }
+        });
+    }
     // chat pop up
     function openChat() {
         document.getElementById("myForm").style.display = "block";
-        }
-        function closeChat() {
+    }
+    function closeChat() {
         document.getElementById("myForm").style.display = "none";
-        }
-
-// akses kamera user
-    
+    }
 </script>
 
+@endsection
 
-<!-- receive notifications -->
-<script src="{{ asset('js/echo.js') }}"></script>
- 
-<script src="https://js.pusher.com/4.1/pusher.min.js"></script> -->
-     
+@section('js')
+
 <script>
-    Pusher.logToConsole = true;
-         
-    window.Echo = new Echo({
-        broadcaster: 'pusher',
-        key: '0917886ecc5a7a459a92',
-        cluster: 'ap1',
-        encrypted: true,
-        logToConsole: true
-    });
-    
-        Echo.private('kelas.{{ $pertemuan->kelas->id }}')
-        .listen('NewMessageNotification', (e) => {
-            alert(e);
+    Echo.private('startDiskusiChannel.{{ $pertemuan->kelas->id}}')
+    .listen('StartDiskusi', (e) => {
+        console.log(e);
+        array_data = Object.values(e);
+        $kelompok_master_id = array_data[0]['id'];
+        $deskripsi = array_data[0]['deskripsi'];
+        swal({
+            title: "Beralih ke ruang diskusi",
+            text: "Diskusi " + $deskripsi + "akan dimulai",
+            icon: "info",
+            buttons: true,
+            dangerMode: false,
+        })
+        .then((startDiskusi) => {
+            if (startDiskusi) {
+            window.location = "/siswa/kelas/diskusi/"+<?php echo $pertemuan->id ?>+"/"+$kelompok_master_id+"/"+<?php echo $anggota_kelas_id ?>;
+            }
         });
+    });
 </script>
-
 @endsection

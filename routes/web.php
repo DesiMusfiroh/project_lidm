@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Events\TaskEvent;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,12 @@ Route::group(['prefix' => 'siswa'], function () {
           Route::post('serahkan/serahkan_tugas_individu','AnggotaKelasController@serahkan_tugas_individu')->name('serahkanTugasIndividu');
           
         });
+
+        Route::group(['prefix' => 'diskusi'], function () {
+            Route::get('/{pertemuan_id}/{kelompok_master_id}/{anggota_kelas_id}','KelompokController@setRuangDiskusi',['$kelompok_master_id'=>'kelompok_master_id','$anggota_kelas_id'=>'anggota_kelas_id', '$pertemuan_id' =>'pertemuan_id']);
+            Route::get('/ruang/{pertemuan_id}/{kelompok_id}/{anggota_kelompok_id}', 'KelompokController@ruangDiskusi', ['$kelompok_id' =>'kelompok_id', '$anggota_kelompok_id' => 'anggota_kelompok_id', '$pertemuan_id' => 'pertemuan_id'])->name('ruangDiskusi');
+        });
+
     });
     // route kelola pertemuan
   
@@ -84,10 +91,11 @@ Route::group(['prefix' => 'guru'], function () {
             Route::get('/end/{id}','PertemuanController@end')->name('pertemuan.end');
             Route::get('guru/kelas/pertemuan/ruang/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchPesan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);           
         });
-        
+        // route untuk mengatur jalannnya diskusi kelompok
         Route::group(['prefix' => 'diskusi'],function(){
-            Route::get('/start/{id}','KelompokController@startDiskusi')->name('guru.diskusi.start');
-            Route::get('/ruang/{id}','KelompokController@ruangDiskusi')->name('guru.diskusi.ruang');
+            Route::get('/start/{pertemuan_id}/{kelompok_master_id}','KelompokController@startDiskusi',['$kelompok_master_id'=>'kelompok_master_id', '$pertemuan_id' =>'pertemuan_id'])->name('guru.diskusi.start');
+            // Route::get('/monitor/{id}','KelompokController@monitorDiskusi')->name('guru.diskusi.monitor');
+            Route::get('/end/{pertemuan_id}/{kelompok_master_id}','KelompokController@endDiskusi',['$kelompok_master_id'=>'kelompok_master_id', '$pertemuan_id' =>'pertemuan_id'])->name('guru.diskusi.end');
         });
 
         Route::group(['prefix' => 'kelompok'],function(){
@@ -170,3 +178,13 @@ Route::get('index',function(){
 
 Route::get('/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang.chat');
 Route::post('/chat/{kelas_id}/{id_pertemuan}','PertemuanController@storeMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang.chatPost');
+
+
+
+// test event jalan atau enggak
+Route::get('event', function(){
+    event(new TaskEvent('ini mau coba coba'));
+});
+Route::get('listen', function(){
+    return view('listenBroadcast');
+});
