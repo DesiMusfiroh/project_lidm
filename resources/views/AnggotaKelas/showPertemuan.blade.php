@@ -207,7 +207,7 @@ const waktu_mulai = new Date('<?php echo $waktu_mulai ?>').getTime();
                     </button>
                 </div>
 
-                <form action="{{route('serahkanTugasIndividu')}}" enctype="multipart/form-data" method="post">
+                <form action="{{route('serahTugas')}}" enctype="multipart/form-data" method="post">
                 {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="container">

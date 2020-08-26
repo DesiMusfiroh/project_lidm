@@ -194,11 +194,7 @@ opacity: 1;
 
             <div id="leave">
                 <a href="{{route('pertemuanSiswa.show',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"><button class="btn-danger btn"><i class="fa fa-times" style="margin-right:10px"></i> Keluar</button> </a>
-<<<<<<< HEAD
-            </div> 
-=======
             </div>
->>>>>>> b49ecd0d12327ab395624b1d4b366dcb7cdcf472
 
             <div id="chat">
                 <button class="btn-warning btn"  onclick="openChat()"><i class="fa fa-comments"></i> Chat</button>
@@ -219,11 +215,7 @@ opacity: 1;
 
 <script>
 
-<<<<<<< HEAD
     // akses kamera user
-=======
-
->>>>>>> b49ecd0d12327ab395624b1d4b366dcb7cdcf472
     var video = document.querySelector("#video-webcam");
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
     if (navigator.getUserMedia) {
