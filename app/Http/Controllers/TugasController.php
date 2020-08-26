@@ -40,9 +40,9 @@ class TugasController extends Controller
 
   //Simpan Tugas Individu Master
   public function tugas_individu_master_store(Request $request)
-  {     
+  {
 //   dd($request);
-      
+
       $this->validate($request,[
           'kelas_id'  => 'required',
           'nama_tugas'   => 'required',
@@ -67,34 +67,36 @@ class TugasController extends Controller
             $data['anggota_kelas_id'] = $anggota->id;
             $data['tugas'] = null;
             $data['nilai'] = 0;
-  
+
             KumpulTugasIndividu::create($data);
           }
 
     $kelas_id = $request->kelas_id;
     //   $tugas_individu_master = TugasIndividuMaster::where('kelas_id',$kelas_id)->orderBy('id','asc')->get();
-      
+
       return redirect()->route('guru.kelas.show', $request->kelas_id)->with('success','Tugas Individu Berhasil Dibuat');
     }
- 
+
+  // SISWA-----------------------
   public function serahkan_tugas_individu(Request $request){
-      
+
         $kumpul_tugas_individu = KumpulTugasIndividu::findOrFail($request->id);
-        
+
         $file = $request->file('tugas');
         $nama_file = time()."_".$file->getClientOriginalName();
         $tujuan_upload = 'tugas';
         $file->move($tujuan_upload,$nama_file);
 
         $update_kumpul_tugas_individu= [
-            'tugas' => $file
+            'tugas' => $nama_file
         ];
         KumpulTugasIndividu::where('id', $request->id)->update($update_kumpul_tugas_individu);
         return redirect()->back()->with('success','Tugas Berhasil Diserahkan');
     }
-    
+
+    //SISWA ---------------------------------
     public function update_tugas_individu(Request $request){
-        $kumpul_tugas_individu = KumpulTugasIndividu::findOrFail($request->id);  
+        $kumpul_tugas_individu = KumpulTugasIndividu::findOrFail($request->id);
         $file = $request->file('tugas');
         $nama_file = time()."_".$file->getClientOriginalName();
         $tujuan_upload = 'tugas';
@@ -107,10 +109,10 @@ class TugasController extends Controller
         return redirect()->back()->with('success','Tugas Berhasil Diubah');
     }
 
- //Simpan Tugas Kelompok Master
+ //Simpan Tugas Kelompok Master GURU -------------------
  public function tugas_kelompok_master_store(Request $request)
- {     
-     
+ {
+
      $this->validate($request,[
          'kelas_id'             => 'required',
          'kelompok_master_id'   => 'required',
@@ -118,9 +120,9 @@ class TugasController extends Controller
          'deadline'             => 'required',
 
      ]);
-     
+
       $tugas_kelompok_master = TugasKelompokMaster::create([
-         'kelas_id'                         => $request->kelas_id,         
+         'kelas_id'                         => $request->kelas_id,
          'kelompok_master_id'               => $request->kelompok_master_id,
          'nama_tugas'                       => $request->nama_tugas,
          'deadline'                         => $request->deadline,
@@ -135,7 +137,7 @@ class TugasController extends Controller
            $data['kelompok_id'] = $kel->id;
            $data['tugas'] = null;
            $data['nilai'] = 0;
- 
+
            KumpulTugasKelompok::create($data);
          }
 
@@ -144,9 +146,9 @@ class TugasController extends Controller
     }
     //Serahkan Tugas Kelompok
     public function serahkan_tugas_kelompok(Request $request){
-      
+
         $kumpul_tugas_kelompok = KumpulTugasKelompok::findOrFail($request->id);
-        
+
         $file = $request->file('tugas');
         $nama_file = time()."_".$file->getClientOriginalName();
         $tujuan_upload = 'tugas';
@@ -159,19 +161,28 @@ class TugasController extends Controller
         return redirect()->back()->with('success','Tugas Berhasil Diserahkan');
     }
 
+
+
+    public function showTugasIndividu($id)
+    {
+      $tugas_individu_master = TugasIndividuMaster::find($id);
+      $tugas_individu_master_id = TugasIndividuMaster::whereId($id)->value('id');
+      $tugas_individu = TugasIndividu::where('tugas_individu_master_id',$tugas_individu_master_id)->first();
+      //dd($tugas_individu);
+      $kumpul_tugas_individu = KumpulTugasIndividu::where('tugas_individu_id',$tugas_individu->id)->get();
+
+      //
+      return view('Tugas.showTugasIndividu',compact(['tugas_individu_master','tugas_individu','kumpul_tugas_individu']));
+    }
     public function store(Request $request)
     {
-        //
+
     }
 
-    public function show($id)
+    public function editNilaiTugasIndividu(Request $request,$id_kumpul_tugas_individu)
     {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
+      return $request->all();
+      //dd("oke");
     }
 
     public function update(Request $request, $id)
