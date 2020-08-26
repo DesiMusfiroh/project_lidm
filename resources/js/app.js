@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('index-component', require('./components/IndexComponent.vue').default);
 Vue.component('messages-component', require('./components/MessagesComponent.vue').default);
+Vue.component('messages-kelompok', require('./components/MessagesKelompok.vue').default);
 Vue.component('messagessiswa-component', require('./components/MessagesSiswaComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to

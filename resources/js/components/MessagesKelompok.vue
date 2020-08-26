@@ -1,8 +1,7 @@
 <template>
-<div>
     <div id="chat-area">
         <div v-for="(message, index) in messages" :key="index" >
-            <div v-if="message.user_id === user.id" class="text-right display-right">
+            <div v-if="message.user_id === message.user.id" class="text-right display-right">
                 <div class="my-chat">
                     <span style="font-size:10px;">{{ moment(message.created_at).format('h:mm a')}}</span>
                     <strong style="font-size:11px;">{{message.user.name}} </strong>  <br>  
@@ -17,26 +16,24 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div id="kirim-pesan">
         <div class="input-group mb-3">
-            <input type="text" id="isipesan" class="form-control" placeholder="Ketik pesan " aria-label="" aria-describedby="button-addon2" v-model="newMessage" name="pesan" @keyup.enter="sendMessage">
+            <input type="text" id="isipesan" class="form-control" placeholder="Ketik pesan " aria-label="" aria-describedby="button-addon2" v-model="newMessage" name="pesan">
             <input type="hidden" id="user_id" v-bind:user_id="user.id">
-            <input type="hidden" id="id_pertemuan" v-bind:id_pertemuan="id_pertemuan">
+            <input type="hidden" id="id_kelompok" v-bind:id_kelompok="id_kelompok">
             <div class="input-group-append">
                 <button class="btn btn-success" type="button" id="button-addon2" @click="sendMessage">Kirim</button>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
 import moment from 'moment';
 Vue.prototype.moment = moment;
+
 export default {
     
-    props: ['user','kelas_id','id_pertemuan','current_time'],
+    props: ['user','kelas_id','id_kelompok','current_time'],
 
     data(){
         return {
@@ -45,13 +42,11 @@ export default {
             users:[],
             activeUser: false,
             typingTimer: false,
-
         }
     },
     created(){
         this.fetchMessages();
-        
-        Echo.join('chat')
+        Echo.join('chatKelompok')
         .here(user => {
             this.users = user;
         })
@@ -61,7 +56,7 @@ export default {
         .leaving(user => {
             this.users = this.users.filter(u => u.id != user.id);
         })
-        .listen('ChatEvent',(event) => {
+        .listen('ChatKelompokEvent',(event) => {
             this.messages.push(event.chat);
         })
         .listenForWhisper('typing', user => {
@@ -74,11 +69,10 @@ export default {
         }, 1000);
         })
         
-        
     },
     methods: {
         fetchMessages(){
-            axios.get(`../../../../../chat/${this.kelas_id}/${this.id_pertemuan}`).then(response => {
+            axios.get(`/../../../../../chat/kelompok/${this.kelas_id}/${this.id_kelompok}`).then(response => {
                 this.messages = response.data;
                 console.log(response.data);
                 
@@ -87,16 +81,14 @@ export default {
         sendMessage(){
             this.messages.push({
                 user: this.user,
-                pesan: this.newMessage,
-                created_at: this.current_time
-                
+                pesan: this.newMessage
             });
             
             
-            axios.post(`../../../../../chat/${this.kelas_id}/${this.id_pertemuan}`,
-                        {pesan: this.newMessage,
+            axios.post(`/../../../../../chat/kelompok/${this.kelas_id}/${this.id_kelompok}`,
+                       {pesan: this.newMessage,
                         user_id: this.user.id,
-                        pertemuan_id: this.id_pertemuan})
+                        kelompok_id: this.id_kelompok})
             
             //this.newMessage = ''
             // axios.post('messages', {message: this.newMessage});
@@ -106,6 +98,7 @@ export default {
             Echo.join('chat')
                 .whisper('typing', this.user);
             console.log(this.user.name + ' is typing now')
+        
         }
     }
 }

@@ -262,6 +262,7 @@ opacity: 1;
     Echo.private('startDiskusiChannel.{{ $pertemuan->kelas->id}}')
     .listen('StartDiskusi', (e) => {
         console.log(e);
+        console.log(<?php echo $pertemuan->id ?>);
         array_data = Object.values(e);
         $kelompok_master_id = array_data[0]['id'];
         $deskripsi = array_data[0]['deskripsi'];

@@ -35,6 +35,7 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/show/{id}','AnggotaKelasController@showKelas')->name('siswa.kelas.show');
         Route::get('/hasilujian/{id}','AnggotaKelasController@hasilUjian')->name('hasilUjian');
 
+        // route kelola pertemuan
         Route::group(['prefix' => 'pertemuan'], function () {
           Route::get('/show/{kelas_id}/{id_pertemuan}','AnggotaKelasController@showPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.show');
           Route::get('/ruang/{kelas_id}/{id_pertemuan}','AnggotaKelasController@ruangPertemuan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuanSiswa.ruang');
@@ -52,15 +53,12 @@ Route::group(['prefix' => 'siswa'], function () {
         });
 
         Route::group(['prefix' => 'diskusi'], function () {
-            Route::get('/{pertemuan_id}/{kelompok_master_id}/{anggota_kelas_id}','KelompokController@setRuangDiskusi',['$kelompok_master_id'=>'kelompok_master_id','$anggota_kelas_id'=>'anggota_kelas_id', '$pertemuan_id' =>'pertemuan_id']);
-            Route::get('/ruang/{pertemuan_id}/{kelompok_id}/{anggota_kelompok_id}', 'KelompokController@ruangDiskusi', ['$kelompok_id' =>'kelompok_id', '$anggota_kelompok_id' => 'anggota_kelompok_id', '$pertemuan_id' => 'pertemuan_id'])->name('ruangDiskusi');
+            Route::get('/{pertemuan_id}/{kelompok_master_id}/{anggota_kelas_id}','KelompokController@setRuangDiskusi',[ '$pertemuan_id' =>'pertemuan_id','$kelompok_master_id'=>'kelompok_master_id','$anggota_kelas_id'=>'anggota_kelas_id']);
+            Route::get('/ruang/{pertemuan_id}/{kelompok_id}/{anggota_kelompok_id}', 'KelompokController@ruangDiskusi', [ '$pertemuan_id' => 'pertemuan_id', '$kelompok_id' =>'kelompok_id', '$anggota_kelompok_id' => 'anggota_kelompok_id'])->name('ruangDiskusi');
         });
 
     });
-    // route kelola pertemuan
-
-
-
+   
     Route::group(['prefix' => 'ujian'], function () {
         Route::get('/index','UjianController@indexUjian')->name('siswa.ujian.index');
         Route::get('/wait/{id}','UjianController@waitUjian')->name('waitUjian');
@@ -68,8 +66,6 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/finish/{id}','UjianController@finishUjian',['id'=> 'id'])->name('finishUjian');
 
     });
-
-
 });
 
 // ROUTE GURU  ------------------------------------------------------------------------------------------
@@ -186,10 +182,12 @@ Route::get('index',function(){
     return view('index');
 });
 
+// route CHAT
 Route::get('/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang.chat');
 Route::post('/chat/{kelas_id}/{id_pertemuan}','PertemuanController@storeMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang.chatPost');
 
-
+Route::get('/chat/kelompok/{kelas_id}/{id_kelompok}','KelompokController@fetchMessages',['$kelas_id'=>'kelas_id','$id_kelompok'=>'id_kelompok'])->name('kelompok.ruang.chat');
+Route::post('/chat/kelompok/{kelas_id}/{id_kelompok}','KelompokController@storeMessages',['$kelas_id'=>'kelas_id','$id_kelompok'=>'id_kelompok'])->name('kelompok.ruang.chatPost');
 
 // test event jalan atau enggak
 Route::get('event', function(){

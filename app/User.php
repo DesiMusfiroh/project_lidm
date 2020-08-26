@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Guru;
 use App\Siswa;
 use App\ChatPertemuan;
+use App\ChatKelompok;
 
 class User extends Authenticatable
 {
@@ -32,5 +33,8 @@ class User extends Authenticatable
     }
     public function chat_pertemuan(){
         return $this->hasMany(ChatPertemuan::class,'user_id');
+    }
+    public function chat_kelompok(){
+        return $this->hasMany(ChatKelompok::class,'user_id');
     }
 }
