@@ -8,13 +8,15 @@ use Str;
 use App\Kelas;
 use App\Guru;
 use App\Siswa;
-use App\Pertemuan;
+use App\Pertemuan; 
 use App\AnggotaKelas;
 use App\KelompokMaster;
 use App\Kelompok;
 use App\AnggotaKelompok;
 use App\TugasIndividuMaster;
 use App\TugasKelompokMaster;
+use DB;
+use App\TotalAnggotaKelas;
 
 class KelasController extends Controller
 {
@@ -22,7 +24,9 @@ class KelasController extends Controller
 
     public function index()
     {
-        $kelas = Kelas::where('guru_id',Auth::user()->guru->id)->get();
+
+        $kelas         = Kelas::where('guru_id',Auth::user()->guru->id)->get();
+        // $total_anggota_kelas    = TotalAnggotaKelas::all();
         return view('Kelas.index',['kelas' => $kelas]);
     }
 
@@ -61,7 +65,7 @@ class KelasController extends Controller
         //   $anggotakelas   = AnggotaKelas::where('kelas_id',$id)->get();
         //   return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas], compact('kelas','kelompok_master','kelompok'));
         // }
-        
+
         return view('Kelas.show', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master,'tugas_individu_master' => $tugas_individu_master,'tugas_kelompok_master' => $tugas_kelompok_master], compact('kelas'));
     }
 

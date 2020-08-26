@@ -15,6 +15,7 @@
     <script defer src="https://unpkg.com/ziggy-js@0.9.x/dist/js/route.min.js"></script>
     <link href="{{asset('/')}}main.css" rel="stylesheet">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    @yield('linkhead')
     <style media="screen">
     .breadcrumb{
         background-color: white;
@@ -116,6 +117,7 @@
     <script type="text/javascript" src="{{asset('/assets')}}/scripts/main.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+    @yield('linkfooter')
 </body>
 @yield('js')
 @yield('chart')

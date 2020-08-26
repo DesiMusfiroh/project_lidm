@@ -7,7 +7,7 @@ use App\Events\TaskEvent;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-*/ 
+*/
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,8 +41,14 @@ Route::group(['prefix' => 'siswa'], function () {
           Route::get('/chat/{kelas_id}/{id_pertemuan}','AnggotaKelasController@fetchMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
           Route::post('/chat/{kelas_id}/{id_pertemuan}','AnggotaKelasController@storeMessages',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
           //serahkan tugas individu
-          Route::post('serahkan/serahkan_tugas_individu','AnggotaKelasController@serahkan_tugas_individu')->name('serahkanTugasIndividu');
-          
+          //Route::post('serahkan/serahkan_tugas_individu','AnggotaKelasController@serahkan_tugas_individu')->name('serahkanTugasIndividu');
+
+        });
+
+        Route::group(['prefix' => 'tugas'],function(){
+
+            Route::patch('/kumpul_tugas/tugas/serahkan', 'TugasController@serahkan_tugas_individu')->name('serahTugas');
+            Route::patch('/kumpul_tugas/tugaskelompok/serahkan', 'TugasController@serahkan_tugas_kelompok')->name('serahTugasKelompok');
         });
 
         Route::group(['prefix' => 'diskusi'], function () {
@@ -52,8 +58,8 @@ Route::group(['prefix' => 'siswa'], function () {
 
     });
     // route kelola pertemuan
-  
-    
+
+
 
     Route::group(['prefix' => 'ujian'], function () {
         Route::get('/index','UjianController@indexUjian')->name('siswa.ujian.index');
@@ -89,9 +95,8 @@ Route::group(['prefix' => 'guru'], function () {
             Route::get('/show/{kelas_id}/{id_pertemuan}','PertemuanController@show',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.show');
             Route::get('/ruang/{kelas_id}/{id_pertemuan}','PertemuanController@ruang',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang');
             Route::get('/end/{id}','PertemuanController@end')->name('pertemuan.end');
-            Route::get('guru/kelas/pertemuan/ruang/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchPesan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);           
+            Route::get('guru/kelas/pertemuan/ruang/chat/{kelas_id}/{id_pertemuan}','PertemuanController@fetchPesan',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan']);
         });
-        // route untuk mengatur jalannnya diskusi kelompok
         Route::group(['prefix' => 'diskusi'],function(){
             Route::get('/start/{pertemuan_id}/{kelompok_master_id}','KelompokController@startDiskusi',['$kelompok_master_id'=>'kelompok_master_id', '$pertemuan_id' =>'pertemuan_id'])->name('guru.diskusi.start');
             // Route::get('/monitor/{id}','KelompokController@monitorDiskusi')->name('guru.diskusi.monitor');
@@ -109,10 +114,13 @@ Route::group(['prefix' => 'guru'], function () {
             Route::post('create/tugas_store','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
             Route::post('create/tugaskelompok_store','TugasController@tugas_kelompok_master_store')->name('storeTugasKelompok');
             // Route::post('serahkan/serahkan_tugas','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
-            Route::patch('/kumpul_tugas/tugas/serahkan', 'TugasController@serahkan_tugas_individu')->name('serahTugas');
-            Route::patch('/updatetugas','TugasController@update_tugas_individu')->name('ubahTugas');
 
-            
+            Route::patch('/updatetugas','TugasController@update_tugas_individu')->name('ubahTugas');
+            Route::get('/detail/{id}','TugasController@showTugasIndividu')->name('showTugasIndividu');
+            Route::post('detail/edit/{id_kumpul_tugas_individu}','TugasController@updateNilai')->name('editNilaiTugasIndividu');
+
+
+
 
         });
     });

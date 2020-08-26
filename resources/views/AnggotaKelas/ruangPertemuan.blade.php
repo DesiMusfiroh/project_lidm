@@ -111,7 +111,7 @@ opacity: 1;
                             </div>
                         </div>
                         <div class="row">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -166,9 +166,9 @@ opacity: 1;
 
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    
+
                                     Belum ada siswa yang memasuki ruang pertemuan
-                                   
+
                                 </div>
                                 </div>
                             </div>
@@ -186,7 +186,7 @@ opacity: 1;
                                 </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -194,7 +194,11 @@ opacity: 1;
 
             <div id="leave">
                 <a href="{{route('pertemuanSiswa.show',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"><button class="btn-danger btn"><i class="fa fa-times" style="margin-right:10px"></i> Keluar</button> </a>
+<<<<<<< HEAD
             </div> 
+=======
+            </div>
+>>>>>>> b49ecd0d12327ab395624b1d4b366dcb7cdcf472
 
             <div id="end">
                 <a href="{{route('pertemuan.end',$pertemuan->id)}}"><button class="btn-danger btn"> Akhiri Pertemuan</button> </a>
@@ -205,11 +209,11 @@ opacity: 1;
             </div>
 
             <div class="chat-popup " id="myForm">
-              
+
                 <div class="form-container" id="app">
                     <h5><strong>Chat Pertemuan</strong> </h5>
-        
-                    
+
+
                     <messages-component :kelas_id="{{$kelas->id}}" :id_pertemuan="{{$pertemuan->id}}" :user="{{auth()->user()}}"></messages-component>
                     <button type="button" class="tombol cancel" onclick="closeChat()">Close</button>
                 </div>
@@ -219,7 +223,11 @@ opacity: 1;
 
 <script>
 
+<<<<<<< HEAD
     // akses kamera user
+=======
+
+>>>>>>> b49ecd0d12327ab395624b1d4b366dcb7cdcf472
     var video = document.querySelector("#video-webcam");
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
     if (navigator.getUserMedia) {
