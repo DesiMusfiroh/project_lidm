@@ -107,7 +107,7 @@ opacity: 1;
                             </div>
                         </div>
                         <div class="row">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -162,9 +162,9 @@ opacity: 1;
 
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    
+
                                     Belum ada siswa yang memasuki ruang pertemuan
-                                   
+
                                 </div>
                                 </div>
                             </div>
@@ -182,15 +182,15 @@ opacity: 1;
                                 </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
 
             <div id="leave">
-                <a href="{{route('pertemuan.show',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"><button class="btn-danger btn"><i class="fa fa-times" style="margin-right:10px"></i> Keluar</button> </a>
-            </div> 
+                <a href="{{route('pertemuanSiswa.show',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"><button class="btn-danger btn"><i class="fa fa-times" style="margin-right:10px"></i> Keluar</button> </a>
+            </div>
 
             <div id="end">
                 <a href="{{route('pertemuan.end',$pertemuan->id)}}"><button class="btn-danger btn"> Akhiri Pertemuan</button> </a>
@@ -201,11 +201,11 @@ opacity: 1;
             </div>
 
             <div class="chat-popup " id="myForm">
-              
+
                 <div class="form-container" id="app">
                     <h5><strong>Chat Pertemuan</strong> </h5>
-        
-                    
+
+
                     <messages-component :kelas_id="{{$kelas->id}}" :id_pertemuan="{{$pertemuan->id}}" :user="{{auth()->user()}}"></messages-component>
                     <button type="button" class="tombol cancel" onclick="closeChat()">Close</button>
                 </div>
@@ -215,7 +215,7 @@ opacity: 1;
 
 <script>
 
-    
+
     var video = document.querySelector("#video-webcam");
         navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
         if (navigator.getUserMedia) {
@@ -253,25 +253,25 @@ opacity: 1;
         }
 
 // akses kamera user
-    
+
 </script>
 
 
 <!-- receive notifications -->
 <script src="{{ asset('js/echo.js') }}"></script>
- 
+
 <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-     
+
 <script>
     Pusher.logToConsole = true;
- 
+
     Echo.private('anggota_kelas.{{ $kelas->id }}')
     .listen('StartDiskusi', (e) => {
         alert(e);
     });
 
- 
-    
+
+
 </script>
 <!-- receive notifications -->
 @endsection

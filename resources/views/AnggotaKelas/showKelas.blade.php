@@ -257,7 +257,7 @@
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Nama tugas</td>
-                                            
+                                            <td></td>                                            
                                         </tr>
                                     </thead>
 
@@ -267,6 +267,23 @@
                                         <tr>
                                             <td><?php echo $i; $i++?></td>
                                             <td>{{$item->tugas_kelompok->tugas_kelompok_master->nama_tugas}}</td>
+                                            @if($item->tugas == null)
+                                            <form action="{{route('serahTugasKelompok')}}" method="post" enctype="multipart/form-data" >
+                                            @csrf
+                                            @method('PATCH')
+                                    
+                                            
+                                            <td>
+                                            <input type="hidden" name="id"  value="{{$item->id}}">         
+                                            <input type="file" name="tugas">
+                                            
+                                                <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
+                                            </td>
+                                            </div>
+                                        	</form>
+                                        	@else
+                                            <td> Diserahkan </td>
+                                            @endif
                                             
                                         </tr>
                                     @endforeach

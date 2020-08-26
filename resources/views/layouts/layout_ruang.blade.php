@@ -16,6 +16,7 @@
     <!-- Jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script defer src="https://unpkg.com/ziggy-js@0.9.x/dist/js/route.min.js"></script>
+    @yield('linkhead')
     <style>
     body {background: linear-gradient(180deg, #12C3CE 0%, #D7E8E9 100% ) no-repeat center  fixed;}
     .card{
@@ -29,7 +30,8 @@
 <body>
 @yield('content')
     <script type="text/javascript" src="{{asset('assets/scripts/main.js')}}"></script>
-    <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>    
+    <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+@yield('linkfooter')
 </body>
 @yield('js')
 @yield('chart')

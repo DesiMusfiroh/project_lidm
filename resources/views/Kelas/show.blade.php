@@ -30,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         <div class="row">
@@ -215,7 +215,7 @@
                                             <td>{{$item->deadline}}</td>
 
                                             <td>
-                                            <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> 
+                                            <a href="{{route('showTugasIndividu',$item->id)}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -231,7 +231,7 @@
                             </div>
                             <div class="row ">{{$tugas_individu_master->links()}}</div>
 
-        
+
                             <div class="row table-inside">
                             @if($tugas_kelompok_master->count() != 0)
                                 <table class="table table-striped table-sm text-center">
@@ -253,7 +253,7 @@
                                             <td>{{$item->deadline}}</td>
 
                                             <td>
-                                            <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> 
+                                            <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -268,7 +268,7 @@
                             @endif
                             </div>
                             <div class="row ">{{$tugas_kelompok_master->links()}}</div>
-                        
+
                         </div>
 
                         <!-- hasil ujian -->
