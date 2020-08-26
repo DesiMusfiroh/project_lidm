@@ -10,17 +10,17 @@
         {{ Breadcrumbs::render('siswa.kelas.show',$kelas) }}
     </div>
     <div class="container-fluid">
-                        @if (session('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ session('success') }}</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        @endif
-                        @if (session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
+        @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session('success') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
 
 
         <div class="alert alert-success" role="alert">
@@ -73,7 +73,7 @@
                             <a class="nav-link" id="kelompok-tab" data-toggle="tab" href="#kelompok" role="tab" aria-controls="kelompok" aria-selected="false">Kelompok</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="tugas-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas 
+                            <a class="nav-link" id="tugas-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas
                             <span class="badge badge-pill badge-info">New</span></a>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -130,7 +130,7 @@
                         </div>
                         <!-- kelompok -->
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
-                            <div class="row table-inside"> 
+                            <div class="row table-inside">
                             @if($kelompok_master->count() != 0)
                                 <table class="table table-striped table-sm text-center" >
                                     <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
@@ -155,14 +155,14 @@
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                </table>            
+                                </table>
                             @else
                                 <div class="alert alert-warning" role="alert">
                                     Belum ada kelompok dalam kelas ini
                                 </div>
                             @endif
                             </div>
-                            <div class="row table-inside"> 
+                            <div class="row table-inside">
                             <center>Kelompok yang saya ikuti</center>
                             @if($kelompok_saya_ikuti->count() != 0)
                                 <table class="table table-striped table-sm text-center" >
@@ -170,7 +170,7 @@
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Nama kelompok</td>
-                                            
+
                                         </tr>
                                     </thead>
 
@@ -180,11 +180,11 @@
                                         <tr>
                                             <td><?php echo $i; $i++?></td>
                                             <td>{{$item->nama_kelompok}}</td>
-                                            
+
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                </table>            
+                                </table>
                             @else
                                 <div class="alert alert-warning" role="alert">
                                     Belum ada kelompok dalam kelas ini
@@ -194,6 +194,7 @@
                         </div>
                         <!-- tugas  -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
+                          <a href="{{route('semuaTugas',$kelas->id)}}"><button type="button" name="button" class="btn btn-primary"> Tugas selesai</button></a> 
                         <div class="row table-inside">
                         @if($kumpul_tugas_individu->count() != 0)
                                 <table class="table table-striped table-sm" >
@@ -219,12 +220,12 @@
                                             <form action="{{route('serahTugas')}}" method="post" enctype="multipart/form-data" >
                                             @csrf
                                             @method('PATCH')
-                                    
-                                            <input type="hidden" name="id"  value="{{$item->id}}">         
+
+                                            <input type="hidden" name="id"  value="{{$item->id}}">
                                             <input type="file" name="tugas">
-                                            
+
                                             <td>
-                                            
+
                                                 <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
                                             </td>
                                             </div>
@@ -232,7 +233,7 @@
                                             @else
                                             <td> Diserahkan </td>
                                             <td>
-                                             
+
                                             <button type="submit" class="btn btn-info" data-toggle="modal" data-target=".ubah_modal_serahTugasIndividu"
                                             id="update"
                                             data-kumpul_tugas_individu_id_update = "{{ $item->id }}"
@@ -242,12 +243,12 @@
                                             data-nilai_update = "{{ $item->nilai }}"
 
                                             style="box-shadow: 3px 2px 5px grey; margin:5px;">Ubah Tugas</button>
-                                            
+
                                             </td>
                                             @endif
-                                            
+
                                             </td>
-                                            
+
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -261,7 +262,7 @@
                                 </table>
                             <div class="row justify-content-center">{{$kumpul_tugas_individu->links()}}</div>
                         </div>
-                        <div class="row table-inside"> 
+                        <div class="row table-inside">
                             <center>Tugas Kelompok saya</center>
                             @if($kumpul_tugas_kelompok->count() != 0)
                                 <table class="table table-striped table-sm text-center" >
@@ -269,7 +270,7 @@
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Nama tugas</td>
-                                            <td></td>                                            
+                                            <td></td>
                                         </tr>
                                     </thead>
 
@@ -283,12 +284,12 @@
                                             <form action="{{route('serahTugasKelompok')}}" method="post" enctype="multipart/form-data" >
                                             @csrf
                                             @method('PATCH')
-                                    
-                                            
+
+
                                             <td>
-                                            <input type="hidden" name="id"  value="{{$item->id}}">         
+                                            <input type="hidden" name="id"  value="{{$item->id}}">
                                             <input type="file" name="tugas">
-                                            
+
                                                 <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
                                             </td>
                                             </div>
@@ -296,11 +297,11 @@
                                         	@else
                                             <td> Diserahkan </td>
                                             @endif
-                                            
+
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                </table>            
+                                </table>
                             @else
                                 <div class="alert alert-warning" role="alert">
                                     Belum ada kelompok dalam kelas ini
@@ -308,7 +309,7 @@
                             @endif
                             </div>
                     	</div>
-                        
+
                         <!-- hasil ujian  -->
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
                             <div class="row table-inside">
@@ -363,7 +364,7 @@
         </div>
 
 
-      
+
     </div>
 </main>
 
@@ -387,7 +388,7 @@
         var anggota_kelas_id_update                         = $(this).data('anggota_kelas_id_update');
         var tugas_update                                    = $(this).data('tugas_update');
         var nilai_update                                    = $(this).data('nilai_update');
-       
+
         $('#kumpul_tugas_individu_id_update').val(kumpul_tugas_individu_id_update);
         $('#tugas_individu_id_update').val(tugas_individu_id_update);
         $('#anggota_kelas_id_update').val(anggota_kelas_id_update);
@@ -420,14 +421,14 @@
                         <div class="container">
 
                             <div class="form-group">
-                            <input type="hidden" name="id" id="kumpul_tugas_individu_id_update" value=""> 
-                            <input type="hidden" name="tugas_individu_id" id="tugas_individu_id_update" value=""> 
-                            <input type="hidden" name="anggota_kelas_id" id="anggota_kelas_id_update" value=""> 
-                            <input type="hidden" name="nilai" id="nilai_update" value=""> 
+                            <input type="hidden" name="id" id="kumpul_tugas_individu_id_update" value="">
+                            <input type="hidden" name="tugas_individu_id" id="tugas_individu_id_update" value="">
+                            <input type="hidden" name="anggota_kelas_id" id="anggota_kelas_id_update" value="">
+                            <input type="hidden" name="nilai" id="nilai_update" value="">
                                 <label for="alamat"> Pilih Tugas </label>
                                 <input type="file" class="form-control" id="tugas_update" name="tugas"  >
                             </div>
-                      
+
                         </div>
                     </div>
 
