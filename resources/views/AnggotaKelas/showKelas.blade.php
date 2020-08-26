@@ -10,6 +10,18 @@
         {{ Breadcrumbs::render('siswa.kelas.show',$kelas) }}
     </div>
     <div class="container-fluid">
+                        @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('success') }}</strong>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
+
 
         <div class="alert alert-success" role="alert">
             <h5 class="alert-heading"><strong>{{$kelas->nama_kelas}}</strong> </h5>

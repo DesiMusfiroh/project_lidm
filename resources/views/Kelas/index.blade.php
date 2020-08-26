@@ -50,6 +50,14 @@
     <div class="alert alert-success pb-1 pt-2" role="alert">
     <h5><strong>Daftar Kelas</strong> </h5>
     </div>
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{session('success')}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
     @if($kelas->count() != 0)
    
         <div class="row">
@@ -62,7 +70,7 @@
                     <div class="row">
                   
                         <div class="col-md-7"> <div class="alert alert-sm alert-warning mb-0 mt-0 pb-0 pt-0"> 
-                        Jumlah Siswa : {{$item->total_anggota_kelas->id}}
+                        Jumlah Siswa : {{$item->jumlah_anggota_kelas()}}
                         
                         
                          </div> </div>

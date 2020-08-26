@@ -30,6 +30,14 @@
         <div class="card-header  pt-3 pb-2 text-center" >
             <strong style="font-size:18px;"> Paket Soal : {{$paket_soal->judul}}  </strong>
         </div>
+        @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{session('success')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
         <div class="card-body">
             <div class="container">
                 <input type="hidden" name="paket_soal_id" value="{{ $paket_soal_id }}">
@@ -49,14 +57,7 @@
                 </div>
                 <hr>
 
-                @if(session('sukses'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>{{session('sukses')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
+                
                 @if($errors->has('poin'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>{{$errors->first('poin')}}</strong>
@@ -130,9 +131,11 @@
                                                 >
                                                 Edit <i class="fa fa-edit"></i>
                                     </button>
+                                    
                                     @endif
                                     <button  class=" btn btn-sm btn-danger " id="hapus"  style="box-shadow: 3px 2px 5px grey; margin:5px;" paket_soal_id="{{$paket_soal_id}}" soal_satuan_id="{{$item->id}}"> Hapus <i class="fa fa-trash"></i> </button>
                                 </div>
+                               
                             </div>
                             <hr>
                         @endforeach

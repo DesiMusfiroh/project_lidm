@@ -37,4 +37,23 @@ class DocumentController extends Controller
     }
 
   }
+  public function exportKunci($id){
+
+        $soal_satuan = SoalSatuan::where('paket_soal_id',$id)->orderBy('id','asc')->get();
+        $ownuser = PaketSoal::where('id',$id)->value('guru_id');
+        if (auth()->user()->id == $ownuser) {
+
+          $soal_pilgan = SoalSatuan::where('jenis','Pilihan Ganda')->where('paket_soal_id',$id)->orderBy('id','asc')->get();
+          $soal_essay = SoalSatuan::where('jenis','Essay')->where('paket_soal_id',$id)->orderBy('id','asc')->get();
+
+          $paket_soal = PaketSoal::find($id);
+
+          $pdf = PDF::loadView('Export/Kunci',compact(['soal_satuan','paket_soal','soal_pilgan','soal_essay',]));
+          return $pdf->stream();
+        }else {
+          $error = "Tidak dapat mengakses halaman";
+          return view('error',compact(['error']));
+        }
+
+  }
 }

@@ -44,6 +44,7 @@ class QuestionController extends Controller
         ]);
         return redirect()->route('guru.paketsoal.create')->with('pesan','Paket Soal baru berhasil dibuat');
     }
+
  
 
     // SOAL SATUAN CRUD CONTROLLER
@@ -55,7 +56,8 @@ class QuestionController extends Controller
             $paket_soal = PaketSoal::find($paket_soal_id);
             $paket_soal_id = $paket_soal->id;
             return view('PaketSoal.create_soal_satuan',['soal_satuan' => $soal_satuan, 'paket_soal' => $paket_soal], compact('paket_soal_id'));
-          }else {
+      
+        }else {
             $error = "Tidak bisa mengakses halaman";
             return view('error',compact(['error']));
           }

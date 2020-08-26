@@ -189,12 +189,8 @@ opacity: 1;
             </div>
 
             <div id="leave">
-                <a href="{{route('pertemuan.show',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"><button class="btn-danger btn"><i class="fa fa-times" style="margin-right:10px"></i> Keluar</button> </a>
+                <a href="{{route('pertemuanSiswa.show',['kelas_id'=>$pertemuan->kelas->id,'id_pertemuan'=>$pertemuan->id])}}"><button class="btn-danger btn"><i class="fa fa-times" style="margin-right:10px"></i> Keluar</button> </a>
             </div> 
-
-            <div id="end">
-                <a href="{{route('pertemuan.end',$pertemuan->id)}}"><button class="btn-danger btn"> Akhiri Pertemuan</button> </a>
-            </div>
 
             <div id="chat">
                 <button class="btn-warning btn"  onclick="openChat()"><i class="fa fa-comments"></i> Chat</button>

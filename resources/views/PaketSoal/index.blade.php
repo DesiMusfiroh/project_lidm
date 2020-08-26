@@ -9,14 +9,6 @@
   <div>
     {{ Breadcrumbs::render('paketsoal.index') }}
   </div>
-@if(session('pesan'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{session('pesan')}}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12" >
@@ -37,6 +29,14 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                @endif
+                @if(session('pesan'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>{{session('pesan')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 @endif
                 @if($paketsoal->count() != 0)
                 <div class="table-inside">
@@ -73,7 +73,7 @@
                                         <i class="fa fa-download" aria-hidden="true"></i> Soal
                                     </button>
                                 </a>
-                                <a  href="{{route('exportSoal',$item->id)}}"  target="_blank">
+                                <a  href="{{route('exportKunci',$item->id)}}"  target="_blank">
                                     <button type="button" class="btn btn-sm btn-secondary">
                                         <i class="fa fa-download" aria-hidden="true"></i> Kunci
                                     </button>
