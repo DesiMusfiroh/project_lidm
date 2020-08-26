@@ -60,6 +60,7 @@
                                     <div class="alert alert-success mb-3">
                                         <h5 class="card-title">{{$item->kelas->nama_kelas}}</h5>
                                         <p >{{$item->kelas->deskripsi}}</p>
+                                       
                                         <div class="text-right"><a href="{{route('siswa.kelas.show',$item->kelas->id)}}" class="btn btn-info">Masuk</a></div>
                                     </div>
                                 </div>

@@ -20,7 +20,8 @@ class KelompokController extends Controller
     public function create($id)
     {
         $kelas_id = $id;
-        return view('Kelompok.create', compact('kelas_id'));
+        $kelas = Kelas::find($id);
+        return view('Kelompok.create', compact('kelas_id','kelas'));
     }
 
     public function store(Request $request)
@@ -52,7 +53,7 @@ class KelompokController extends Controller
             AnggotaKelompok::create($data);
             }
         }
-        return redirect()->route('guru.kelas.show', $request->kelas_id);
+        return redirect()->route('guru.kelas.show', $request->kelas_id)->with('success','Kelompok baru berhasil dibuat');
     }
 
     public function show($id)

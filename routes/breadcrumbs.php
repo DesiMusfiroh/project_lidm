@@ -83,6 +83,16 @@ Breadcrumbs::register('pertemuan.show', function ($breadcrumbs, $kelas, $pertemu
     $breadcrumbs->push($pertemuan->nama_pertemuan, url('guru/kelas/pertemuan/show/{kelas_id}/{id_pertemuan}'));
 });
 
+Breadcrumbs::register('tugas.create', function ($breadcrumbs, $kelas) {
+    $breadcrumbs->parent('guru.kelas.show',$kelas);
+    $breadcrumbs->push("Buat Tugas", route('tugas.create', $kelas->id));
+});
+
+Breadcrumbs::register('kelompok.create', function ($breadcrumbs, $kelas) {
+    $breadcrumbs->parent('guru.kelas.show',$kelas);
+    $breadcrumbs->push("Buat kelompok", route('kelompok.create', $kelas->id));
+});
+
 
 Breadcrumbs::register('guru.ujian.create', function ($breadcrumbs) {
     $breadcrumbs->parent('home');

@@ -27,9 +27,15 @@ class TugasController extends Controller
     public function create($kelas_id)
     {
         // $kelas_id = $id;
+        //dd($kelas_id);
+        intval($kelas_id);
+        //dd($kelas_id);
+        $kelas = Kelas::whereId($kelas_id)->first();
+        //dd($kelas);
+        //dd($kelas);
         $pertemuan = Pertemuan::where('kelas_id', $kelas_id)->get();
         $kelompok_master = KelompokMaster::where('kelas_id', $kelas_id)->get();
-        return view('Tugas.create', ['pertemuan' => $pertemuan,'kelompok_master' => $kelompok_master], compact('kelas_id'));
+        return view('Tugas.create', ['pertemuan' => $pertemuan,'kelompok_master' => $kelompok_master], compact('kelas_id','kelas'));
     }
 
   //Simpan Tugas Individu Master
@@ -85,7 +91,7 @@ class TugasController extends Controller
             'tugas' => $nama_file
         ];
         KumpulTugasIndividu::where('id', $request->id)->update($update_kumpul_tugas_individu);
-        return redirect()->back();
+        return redirect()->back()->with('success','Tugas Berhasil Diserahkan');
     }
 
     //SISWA ---------------------------------
@@ -100,7 +106,7 @@ class TugasController extends Controller
             'tugas' => $file,
         ];
         $kumpul_tugas_individu->update($update_tugas);
-        return redirect()->back();
+        return redirect()->back()->with('success','Tugas Berhasil Diubah');
     }
 
  //Simpan Tugas Kelompok Master GURU -------------------
@@ -152,7 +158,7 @@ class TugasController extends Controller
             'tugas' => $file
         ];
         KumpulTugasKelompok::where('id', $request->id)->update($update_kumpul_tugas_kelompok);
-        return redirect()->back();
+        return redirect()->back()->with('success','Tugas Berhasil Diserahkan');
     }
 
 

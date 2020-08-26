@@ -144,8 +144,10 @@ Route::group(['prefix' => 'guru'], function () {
         Route::post('question_store/pilgan_store','QuestionController@pilgan_store')->name('storeSingleQuestionPilgan');
         Route::patch('/create_soal_satuan/{paket_soal_id}/updatepil','QuestionController@update_soal_satuan_pilgan', ['$paket_soal_id' =>'paket_soal_id'])->name('updateSoalSatuanPil');
 
-        //Download
+        //Download Soal
         Route::get('/export-soal/{id}','DocumentController@exportSoal')->name('exportSoal');
+        //Download Kunci
+        Route::get('/export-kunci/{id}','DocumentController@exportKunci')->name('exportKunci');
         // Route::get('/export-jawaban/{id}','DocumentController@exportJawaban')->name('exportJawaban');
        });
 

@@ -142,7 +142,7 @@
                     </li>
                     <li>
                         <a href="{{route('guru.ujian.index')}}">
-                          <b>Riwayat Ujian</b>
+                          <b>Daftar Riwayat Ujian</b>
                             <i class="metismenu-icon"></i>
                         </a>
                     </li>

@@ -200,10 +200,6 @@ opacity: 1;
             </div>
 >>>>>>> b49ecd0d12327ab395624b1d4b366dcb7cdcf472
 
-            <div id="end">
-                <a href="{{route('pertemuan.end',$pertemuan->id)}}"><button class="btn-danger btn"> Akhiri Pertemuan</button> </a>
-            </div>
-
             <div id="chat">
                 <button class="btn-warning btn"  onclick="openChat()"><i class="fa fa-comments"></i> Chat</button>
             </div>
