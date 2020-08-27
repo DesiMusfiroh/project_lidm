@@ -3,6 +3,7 @@
 namespace App;
 use App\KelompokMaster;
 use Illuminate\Database\Eloquent\Model;
+use App\ChatKelompok;
 
 class Kelompok extends Model
 {
@@ -18,6 +19,9 @@ class Kelompok extends Model
     }
     public function kumpul_tugas_kelompok() {
         return $this->hasMany(KumpulTugasKelompok::class,'kelompok_id');
+    }
+    public function chat_kelompok(){
+        return $this->hasMany(ChatKelompok::class,'kelompok_id');
     }
 }
 

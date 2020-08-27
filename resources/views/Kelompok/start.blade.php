@@ -42,11 +42,25 @@
     </div> 
 
     <div id="end">
-        <a href=""><button class="btn-danger btn"> Akhiri Diskusi Kelompok</button> </a>
+        <button class="btn-danger btn" id="akhiri_diskusi_kelompok"> Akhiri Diskusi Kelompok</button>
     </div>
 
-    
 </div>
 
-
+<script>
+    $(document).on('click','#akhiri_diskusi_kelompok', function(){       
+        swal({
+            title: "Akhiri diskusi kelompok",
+            text: "kembali ke ruang pertemuan ",
+            icon: "warning",
+            buttons: true,
+            dangerMode: false,
+        })
+            .then((endDiskusi) => {
+            if (endDiskusi) {
+            window.location = "/guru/kelas/diskusi/end/"+<?php echo $pertemuan->id ?>+"/"+<?php echo $kelompok_master->id ?>;
+            }
+        });
+    });
+</script>
 @endsection

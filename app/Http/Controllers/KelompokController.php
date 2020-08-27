@@ -13,6 +13,8 @@ use App\KelompokMaster;
 use App\Kelompok;
 use App\AnggotaKelompok;
 use App\Events\StartDiskusi;
+use App\Events\EndDiskusi;
+use App\ChatKelompok;
 class KelompokController extends Controller
 {
 
@@ -64,13 +66,81 @@ class KelompokController extends Controller
     }
 
     // ruang diskusi kelompok tampilan GURU
-    public function startDiskusi($id) 
+    public function startDiskusi($pertemuan_id, $kelompok_master_id) 
     {
-        $kelompok_master    = KelompokMaster::find($id);
+        $kelompok_master    = KelompokMaster::find($kelompok_master_id);
         $kelompok           = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
-        $anggotakelas       = AnggotaKelas::where('kelas_id',$id)->get();
-        return view('Kelompok.start', ['anggotakelas' => $anggotakelas], compact('kelompok_master','kelompok'));
+        $anggotakelas       = AnggotaKelas::where('kelas_id',$kelompok_master_id)->get();    
+        $update_status = [
+            'status' => 1,
+        ];
+        $kelompok_aktif = KelompokMaster::whereId($kelompok_master_id)->update($update_status);
         // want to broadcast StartDiskusi event
         event(new StartDiskusi($kelompok_master));
+
+        $pertemuan    = Pertemuan::find($pertemuan_id);
+        return view('Kelompok.start', ['anggotakelas' => $anggotakelas], compact('kelompok_master','kelompok','pertemuan'));
+    }
+    public function monitorDiskusi() 
+    {
+
+    }
+
+    public function endDiskusi($pertemuan_id, $kelompok_master_id) 
+    {
+        $kelompok_master    = KelompokMaster::find($kelompok_master_id);
+        $kelompok           = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
+        $anggotakelas       = AnggotaKelas::where('kelas_id',$kelompok_master->kelas_id)->get();
+        
+        $update_status = [
+            'status' => 0,
+        ];
+        $kelompok_nonaktif = KelompokMaster::whereId($kelompok_master_id)->update($update_status);
+        $pertemuan    = Pertemuan::find($pertemuan_id);
+     
+        event(new EndDiskusi($kelompok_master));
+        return redirect()->route('pertemuan.ruang', ['id_pertemuan' =>$pertemuan_id, 'kelas_id' => $kelompok_master->kelas_id]);
+
+    }
+
+    // ruang diskusi kelompok SISWA
+    public function setRuangDiskusi($pertemuan_id, $kelompok_master_id, $anggota_kelas_id) 
+    {
+        $kelompok = Kelompok::where('kelompok_master_id', $kelompok_master_id)->get(); 
+        foreach ($kelompok as $kel) { 
+            $anggotakelompok = AnggotaKelompok::where('kelompok_id', $kel->id)->get(); 
+            foreach ($anggotakelompok as $anggota_kel) {
+                if ($anggota_kel->anggota_kelas_id == $anggota_kelas_id) {
+                    $anggota_kelompok_id = $anggota_kel->id;
+                }
+            }         
+        }
+        $anggota_kelompok = AnggotaKelompok::where('id', $anggota_kelompok_id)->first();
+        $kelompok_id = $anggota_kelompok->kelompok_id;
+        // dd(" pertemuan = $pertemuan_id ---- kelompok =  $kelompok_id ---- anggotalmpok = $anggota_kelompok_id -----");
+        return redirect()->route('ruangDiskusi', ['pertemuan_id' =>$pertemuan_id, 'kelompok_id' => $kelompok_id, 'anggota_kelompok_id' => $anggota_kelompok_id] );
+    }
+
+    public function ruangDiskusi($pertemuan_id, $kelompok_id, $anggota_kelompok_id) 
+    {
+        $kelompok   = Kelompok::find($kelompok_id);
+        $pertemuan  = Pertemuan::find($pertemuan_id);
+        $anggota    = AnggotaKelompok::find($anggota_kelompok_id);
+        return view('AnggotaKelas.ruangDiskusi', compact('kelompok','pertemuan'));
+    }
+
+    public function fetchMessages($kelas_id,$id_kelompok){
+        $kelompok      = Kelompok::find($id_kelompok);
+        $chat_kelompok = ChatKelompok::where('kelompok_id',$kelompok->id)->with('user')->get();
+        return $chat_kelompok;
+    }
+
+    public function storeMessages(Request $request,$kelas_id,$id_kelompok){
+        $chat = auth()->user()->chat_kelompok()->create([        
+            'kelompok_id' => $request->kelompok_id,
+            'pesan' => $request->pesan
+        ]);
+        broadcast(new ChatKelompokEvent($chat->load('user')))->toOthers();      
+        return ['status' => 'success'];
     }
 }

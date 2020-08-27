@@ -22,6 +22,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('index-component', require('./components/IndexComponent.vue').default);
 Vue.component('messages-component', require('./components/MessagesComponent.vue').default);
+Vue.component('messages-kelompok', require('./components/MessagesKelompok.vue').default);
 Vue.component('messagessiswa-component', require('./components/MessagesSiswaComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,9 +30,21 @@ Vue.component('messagessiswa-component', require('./components/MessagesSiswaComp
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import VueChatScroll from 'vue-chat-scroll'
+import Echo from 'laravel-echo';
 Vue.use(VueChatScroll)
 
 
 const app = new Vue({
     el: '#app',
 });
+
+// const testapp = new Vue({
+//     el: '#testapp',
+//     created() {
+//         window.Echo.private('testChannel')
+//         .listen(TaskEvent), (e) => {
+//             console.log(e);
+//         }
+//     }
+// });
+

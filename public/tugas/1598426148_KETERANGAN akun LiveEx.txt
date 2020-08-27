@@ -1,0 +1,18 @@
+KETERANGAN 
+
+untuk mengaktifkan akun baru (register) pada aplikasi LiveEx ini memerlukan 
+verifikasi akun yang hanya dapat diakses melalui akun mailtrap developer LiveEx. 
+
+Maka dari itu kami cantumkan data akun yang sudah aktif dan dapat langsung 
+digunakan untuk mengakses fitur-fitur yang ada pada aplikasi LiveEx ini.
+
+berikut email dan password akun yang dapat digunakan : . 
+--------------------------------------------------------------------
+email : desi.musfiroh@gmail.com
+password : 12345678
+
+email : repaldi.handi@gmail.com
+password : 12345678
+
+email : krisman.pratama@gmail.com
+password : 12345678
