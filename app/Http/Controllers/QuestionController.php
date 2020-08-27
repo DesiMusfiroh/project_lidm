@@ -20,14 +20,25 @@ class QuestionController extends Controller
   
     public function index()
     {
-        $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->where('isdelete',false)->paginate(8);
-        return view('PaketSoal.index',compact(['paketsoal']));
+        try {
+            $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->where('isdelete',false)->paginate(8);
+            return view('PaketSoal.index',compact(['paketsoal']));
+          } catch (\Exception $e) {
+            return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
+          }
+        
     }
 
     
     public function create()
     {
-        return view('PaketSoal.create');
+        try {
+            $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->where('isdelete',false)->paginate(8);
+            return view('PaketSoal.create',compact(['paketsoal']));
+          } catch (\Exception $e) {
+            return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
+          }
+       
     }
 
    

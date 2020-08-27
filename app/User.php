@@ -33,4 +33,5 @@ class User extends Authenticatable
     public function chat_pertemuan(){
         return $this->hasMany(ChatPertemuan::class,'user_id');
     }
+  
 }

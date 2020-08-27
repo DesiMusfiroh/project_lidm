@@ -20,16 +20,26 @@ class UjianController extends Controller
     }
 
     public function index(){
-      $ujian = Ujian::where('guru_id',auth()->user()->guru->id)->paginate(7);
-      //dd($ujian);
-      return view('Ujian.index',compact(['ujian']));
+        try {
+            $ujian = Ujian::where('guru_id',auth()->user()->guru->id)->paginate(7);
+            return view('Ujian.index',compact(['ujian']));
+          } catch (\Exception $e) {
+            return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
+          }
+     
     }
 
     public function create(){
-      $kelas = Kelas::where('guru_id',auth()->user()->guru->id)->get();
-      $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->get();
+        try {   
+            $kelas = Kelas::where('guru_id',auth()->user()->guru->id)->get();
+            $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->get();
+            return view('Ujian.create',compact(['kelas','paketsoal']));
+          } catch (\Exception $e) {
+            return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
+          }
+     
 
-      return view('Ujian.create',compact(['kelas','paketsoal']));
+    
     }
 
     public function store(Request $request){
@@ -65,7 +75,9 @@ class UjianController extends Controller
     }
 
     public function monitoring() {
-        $ujian_aktif = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',0)->where('isdelete',0)->get();
+        try {   
+
+            $ujian_aktif = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',0)->where('isdelete',0)->get();
         $ujian_run = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',1)->where('isdelete',0)->get();
         date_default_timezone_set("Asia/Jakarta");
 
@@ -118,7 +130,14 @@ class UjianController extends Controller
         }
 
         return view('Ujian.monitoring',compact('ujian_aktif','ujian_run'))->with('tabel',json_encode($array))->with('run',json_encode($run));
-    }
+   
+            
+          } catch (\Exception $e) {
+            return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
+          }
+     
+        
+         }
 
 
     public function run_exam(Request $request) {
@@ -211,8 +230,15 @@ class UjianController extends Controller
 
     //Method untuk aktor SISWA -------------------------------------------------------------------------------------
     public function indexUjian(){
-        $peserta_ujian = PesertaUjian::where('siswa_id',auth()->user()->siswa->id)->where('status', 0)->get();
-        return view('Ujian-Siswa.index',compact(['peserta_ujian']));
+
+        try {
+            $peserta_ujian = PesertaUjian::where('siswa_id',auth()->user()->siswa->id)->where('status', 0)->get();
+            return view('Ujian-Siswa.index',compact(['peserta_ujian']));
+          } catch (\Exception $e) {
+            return redirect()->route('siswa.profil')->with('error','Mohon lengkapi profil anda');
+          }
+     
+       
     }
 
     public function waitUjian($id)

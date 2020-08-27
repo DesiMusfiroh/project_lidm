@@ -24,25 +24,14 @@
 
     <div class="card-header" > 
         <strong style="font-size:18px">Hasil Ujian Peserta</strong>
-        <!-- <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3 text-right">
-            @if($peserta_ujian->nilai != null )
-                <a  href="{{route('hasil_pdf',$peserta->id)}}"  target="_blank">
-                    <button type="button" class="btn btn-info">
-                    <i class="fa fa-download" aria-hidden="true"></i> Download PDF
-                    </button>
-                </a>
-            @endif
-            </div>
-        </div> -->
+       
 
     </div>
 
     <div class="card-body text-center">
-      @if ($peserta_ujian->nilai !== null)
+      @if ($peserta_ujian->nilai != null)
         <div id="hasil">
-            @if ($peserta_ujian->nilai !== null)
+            @if ($peserta_ujian->nilai != null)
                 <div class="row justify-content-center">
                     <div class="col-md-3">
                         <div class="alert alert-success" role="alert">

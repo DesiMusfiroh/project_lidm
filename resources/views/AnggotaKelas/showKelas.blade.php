@@ -6,9 +6,9 @@
 
 @section('content')
 <main class="main">
-    <div>
+   <div>
         {{ Breadcrumbs::render('siswa.kelas.show',$kelas) }}
-    </div>
+    </div> 
     <div class="container-fluid">
                         @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -163,7 +163,6 @@
                             @endif
                             </div>
                             <div class="row table-inside"> 
-                            <center>Kelompok yang saya ikuti</center>
                             @if($kelompok_saya_ikuti->count() != 0)
                                 <table class="table table-striped table-sm text-center" >
                                     <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
@@ -378,7 +377,7 @@
 
 
 </script>
-<!--edit essay-->
+<!--edit -->
 <script>
     $(document).ready(function(){
         $(document).on('click','#update', function(){

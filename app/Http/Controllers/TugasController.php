@@ -41,7 +41,6 @@ class TugasController extends Controller
   //Simpan Tugas Individu Master
   public function tugas_individu_master_store(Request $request)
   {
-//   dd($request);
 
       $this->validate($request,[
           'kelas_id'  => 'required',
@@ -103,16 +102,27 @@ class TugasController extends Controller
         $file->move($tujuan_upload,$nama_file);
 
         $update_tugas= [
-            'tugas' => $file,
+            'tugas' => $nama_file,
         ];
         $kumpul_tugas_individu->update($update_tugas);
         return redirect()->back()->with('success','Tugas Berhasil Diubah');
     }
 
+    public function beri_nilai_tugas_individu(Request $request){
+        $kumpul_tugas_individu = KumpulTugasIndividu::findOrFail($request->id);
+        
+        $update_tugas= [
+            'nilai' => $request->nilai,
+        ];
+        $kumpul_tugas_individu->update($update_tugas);
+        return redirect()->back()->with('success','Nilai Telah diberikan');
+    }
+
  //Simpan Tugas Kelompok Master GURU -------------------
  public function tugas_kelompok_master_store(Request $request)
  {
-
+ 
+// dd($request);
      $this->validate($request,[
          'kelas_id'             => 'required',
          'kelompok_master_id'   => 'required',
@@ -163,8 +173,13 @@ class TugasController extends Controller
 
 
 
-    public function showTugasIndividu($id)
+    public function showTugasIndividu($id, Kelas $kelas_id)
     {
+        // intval($kelas_id);
+        // dd($kelas_id);
+
+      $kelas = TugasIndividuMaster::whereId($id)->value('kelas_id');
+    //   dd($kelas);
       $tugas_individu_master = TugasIndividuMaster::find($id);
       $tugas_individu_master_id = TugasIndividuMaster::whereId($id)->value('id');
       $tugas_individu = TugasIndividu::where('tugas_individu_master_id',$tugas_individu_master_id)->first();
@@ -172,7 +187,7 @@ class TugasController extends Controller
       $kumpul_tugas_individu = KumpulTugasIndividu::where('tugas_individu_id',$tugas_individu->id)->get();
 
       //
-      return view('Tugas.showTugasIndividu',compact(['tugas_individu_master','tugas_individu','kumpul_tugas_individu']));
+      return view('Tugas.showTugasIndividu',compact(['tugas_individu_master','tugas_individu','kumpul_tugas_individu','kelas','kelas_id']));
     }
     public function store(Request $request)
     {
