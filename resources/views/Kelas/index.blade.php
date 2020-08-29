@@ -11,42 +11,6 @@
     </div>
 
     <div class="container-fluid">
-<!--
-    <div class="card" >
-        <div class="card-header">
-            <div class="row">
-                <div class="col-md-12">
-                    <strong style="font-size:18px"> Daftar Kelas </strong>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-body pb-0">
-
-            @if($kelas->count() != 0)
-            <div class="row">
-                @foreach ($kelas as $item)
-                    <div class="col-md-4">
-                        <div class="alert alert-success mb-3">
-                            <h5 class="card-title">{{$item->nama_kelas}}</h5>
-                            <p >{{$item->deskripsi}}</p>
-                            <div class="text-right"><a href="{{route('guru.kelas.show',$item->id)}}" class="btn btn-info"><i class="metismenu-icon pe-7s-monitor mr-1"></i> Masuk</a></div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            @else
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong> Belum ada kelas yang di buat. Silahkan buat kelas baru !</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            @endif
-
-        </div>
-    </div> -->
-
     <div class="alert alert-success pb-1 pt-2" role="alert">
     <h5><strong>Daftar Kelas</strong> </h5>
     </div>
@@ -56,8 +20,11 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-    </div>
+    </div> 
 @endif
+                        @if (session('error'))
+                            <div class="alert alert-danger">{{ session('error') }}</div>
+                        @endif
     @if($kelas->count() != 0)
 
         <div class="row">

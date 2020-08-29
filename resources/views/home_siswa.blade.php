@@ -1,4 +1,7 @@
 @extends('layouts.layout_siswa')
+<?php  use App\Siswa;
+    $siswa = Siswa::where('user_id', Auth::user()->id )->first();
+?>
 
 @section('title')
     <title>Unbreakable</title>
@@ -7,54 +10,113 @@
 @section('content')
 
 <main class="main">
-    <div>
+    <!-- <div>
       {{ Breadcrumbs::render('home') }}
-    </div>
+    </div> -->
+    <index-component></index-component>
+    <div class="container-fluid">
+      <div class="card bg-heavy-rain " >
+        <div class="card-body" >
+         <div class="media">
+            @if( $siswa != null )
+                <img style="width: 150px; height: 150px; display: block;  margin: auto;" src="/images/{{$siswa->foto}}" alt="">
+           
+            <div class="media-body ml-4">
+                <h5 class="mt-0 text-uppercase font-weight-bold">Selamat Datang : {{auth()->user()->name}} </h5>
+               
+                 <table width="80%" style="font-size:16px; ">
+                    
+                    <tr>
+                        <td width="30%">Nomor Induk</td>
+                        <td>:</td>
+                        <td>{{auth()->user()->siswa->nomor_induk}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Nama</td>
+                        <td>:</td>
+                        <td class="text-uppercase font-weight-bold">{{auth()->user()->siswa->nama_lengkap}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Instansi</td>
+                        <td>:</td>
+                        <td>{{auth()->user()->siswa->instansi}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Alamat</td>
+                        <td>:</td>
+                        <td>{{auth()->user()->siswa->alamat}}</td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Email</td>
+                        <td>:</td>
+                        <td>{{auth()->user()->email}}</td>
+                    </tr>
+                 
+                    </tbody>
+                </table>
+                @else
+                <img style="width: 150px; height: 150px; display: block;  margin: auto;" src="assets/images/1.png" alt="">
+           
+                <div class="media-body ml-4">
+                <h5 class="mt-0 text-uppercase font-weight-bold">Selamat Datang : {{auth()->user()->name}} </h5>
+                <table width="80%" style="font-size:16px; ">
+                    
+                    <tr>
+                        <td width="30%">Nomor Induk</td>
+                        <td>:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Nama</td>
+                        <td>:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Instansi</td>
+                        <td>:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Alamat</td>
+                        <td>:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td width="30%">Email</td>
+                        <td>:</td>
+                        <td></td>
+                    </tr>
+                 
+                    </tbody>
+                </table>
 
+                @endif
+            </div>
+            
+        </div>
+          
+  </div>
+</div>
+@if($siswa != null)
+                            
 
-    <div class="animated fadeIn">
-    <div class="divider mt-0" style="margin-bottom: 30px;">&nbsp;</div>
-                            <div class="row">
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="card mb-3 widget-content bg-night-fade">
-                                        <div class="widget-content-wrapper text-white">
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Jumlah Kelas</div>
-                                                <div class="widget-subheading">Last year expenses</div>
-                                            </div>
-                                            <div class="widget-content-right">
-                                                <div class="widget-numbers text-white"><span>1896</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="card mb-3 widget-content bg-arielle-smile">
-                                        <div class="widget-content-wrapper text-white">
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Jumlah Siswa</div>
-                                                <div class="widget-subheading">Total Clients Profit</div>
-                                            </div>
-                                            <div class="widget-content-right">
-                                                <div class="widget-numbers text-white"><span>$ 568</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="card mb-3 widget-content bg-premium-dark">
-                                        <div class="widget-content-wrapper text-white">
-                                            <div class="widget-content-left">
-                                                <div class="widget-heading">Jumlah Ujian</div>
-                                                <div class="widget-subheading">Total revenue streams</div>
-                                            </div>
-                                            <div class="widget-content-right">
-                                                <div class="widget-numbers text-warning"><span>$14M</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+@else
+                    <div class="row">
+                            <div class="col-md-12 ">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Silahkan Lengkapi Profil Anda!</strong> Klik pada bagian profil
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-    </div>
-</main>
+                            <div>
+                        </div>
+                       
+
+
+@endif
+      </div>
+
+  </main>
+
 @endsection

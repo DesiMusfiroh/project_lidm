@@ -247,7 +247,6 @@ opacity: 1;
             }
         });
     });
-
     // akses kamera user
     var video = document.querySelector("#video-webcam");
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
@@ -256,7 +255,6 @@ opacity: 1;
     }
     function handleVideo(stream) { video.srcObject = stream; }
     function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
-
     // kirim pesan live chat
         function sendMessage() {
             var pesan = $("#isipesan").val();
@@ -285,7 +283,6 @@ opacity: 1;
         function closeChat() {
         document.getElementById("myForm").style.display = "none";
         }
-
     
 </script>
 @endsection

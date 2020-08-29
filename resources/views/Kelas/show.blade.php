@@ -89,7 +89,7 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist" >
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="pertemuan-tab" data-toggle="tab" href="#pertemuan" role="tab" aria-controls="pertemuan" aria-selected="true">Pertemuan</a>
+                            <a class="nav-link" id="pertemuan-tab" data-toggle="tab" href="#pertemuan" role="tab" aria-controls="pertemuan" aria-selected="true">Pertemuan</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="kelompok-tab" data-toggle="tab" href="#kelompok" role="tab" aria-controls="kelompok" aria-selected="false">Kelompok</a>
@@ -104,7 +104,7 @@
 
                     <div class="tab-content mr-3 ml-3">
                         <!-- pertemuan -->
-                        <div class="tab-pane active" id="pertemuan" role="tabpanel" aria-labelledby="pertemuan-tab">
+                        <div class="tab-pane" id="pertemuan" role="tabpanel" aria-labelledby="pertemuan-tab">
                             <div class="mb-3 text-right">
                                 <a href="{{route('pertemuan.create',$kelas->id)}}"> <button class="btn btn-success">Buat Pertemuan</button> </a>
                             </div>
@@ -199,55 +199,61 @@
 
                         <!-- tugas -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
-                            <div class="mb-3 text-right">
+                            <div class="mb-0 text-right">
                                 <a href="{{route('tugas.create',$kelas->id)}}"> <button class="btn btn-success">Buat Tugas</button> </a>
                             </div>
-                            <div class="row table-inside">
-                            @if($tugas_individu_master->count() != 0)
-                                <table class="table table-striped table-sm text-center">
-                                    <thead class=" thead text-center">
-                                        <tr>
-                                            <td width="30px">No</td>
-                                            <td>Nama Tugas</td>
-                                            <td>Deadline</td>
-                                            <td align="center">Opsi</td>
-                                        </tr>
-                                    </thead>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist" >
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="tugasindividu-tab" data-toggle="tab" href="#tugasindividu" role="tab" aria-controls="tugasindividu" aria-selected="true">Individu</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="tugaskelompok-tab" data-toggle="tab" href="#tugaskelompok" role="tab" aria-controls="tugaskelompok" aria-selected="false">Kelompok</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                <div class="tab-pane active" id="tugasindividu" role="tabpanel" aria-labelledby="tugasindividu-tab">
+                                        <div class="row table-inside">
+                                        @if($tugas_individu_master->count() != 0)
+                                            <table class="table table-striped table-sm">
+                                                <thead class=" thead text-center">
+                                                    <tr>
+                                                        <td width="30px">No</td>
+                                                        <td>Nama Tugas</td>
+                                                        <td align="center">Opsi</td>
+                                                    </tr>
+                                                </thead>
 
-                                    <tbody>
-                                    <?php $i=1; ?>
-                                    @foreach ($tugas_individu_master as $item)
-                                        <tr>
-                                            <td><?php echo $i; $i++?></td>
-                                            <td>{{$item->nama_tugas}}</td>
-                                            <td>{{$item->deadline}}</td>
-
-                                            <td>
-                                            <a href="{{route('showTugasIndividu',$item->id)}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            @else
-                                <div class="col-md-12">
-                                    <div class="alert alert-warning" role="alert">
-                                        Belum ada tugas yang dibuat
-                                    </div>
+                                                <tbody>
+                                                <?php $i=1; ?>
+                                                @foreach ($tugas_individu_master as $item)
+                                                    <tr>
+                                                        <td  align="center"><?php echo $i; $i++?></td>
+                                                        <td>{{$item->nama_tugas}}</td>
+                                                        <td  align="center">
+                                                        <a href="{{route('showTugasIndividu',$item->id)}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        @else
+                                            <div class="col-md-12">
+                                                <div class="alert alert-warning" role="alert">
+                                                    Belum ada tugas yang dibuat
+                                                </div>
+                                            </div>
+                                        @endif
+                                        </div>
+                                        <div class="row ">{{$tugas_individu_master->links()}}</div>
                                 </div>
-                            @endif
-                            </div>
-                            <div class="row ">{{$tugas_individu_master->links()}}</div>
-
-
-                            <div class="row table-inside">
+                                <div class="tab-pane" id="tugaskelompok" role="tabpanel" aria-labelledby="tugaskelompok-tab">
+                                <div class="row table-inside">
                             @if($tugas_kelompok_master->count() != 0)
                                 <table class="table table-striped table-sm text-center">
                                     <thead class=" thead text-center">
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Nama Tugas</td>
-                                            <td>Deadline</td>
                                             <td align="center">Opsi</td>
                                         </tr>
                                     </thead>
@@ -258,7 +264,6 @@
                                         <tr>
                                             <td><?php echo $i; $i++?></td>
                                             <td>{{$item->nama_tugas}}</td>
-                                            <td>{{$item->deadline}}</td>
 
                                             <td>
                                             <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button>
@@ -276,12 +281,18 @@
                             @endif
                             </div>
                             <div class="row ">{{$tugas_kelompok_master->links()}}</div>
-
+                                </div>
+                                </div>
                         </div>
 
                         <!-- hasil ujian -->
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
-                            hasil ujian
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" role="alert">
+                                   Belum ada hasil ujian 
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 

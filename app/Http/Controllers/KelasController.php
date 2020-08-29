@@ -8,13 +8,14 @@ use Str;
 use App\Kelas;
 use App\Guru;
 use App\Siswa;
-use App\Pertemuan; 
+use App\Pertemuan;
 use App\AnggotaKelas;
 use App\KelompokMaster;
 use App\Kelompok;
 use App\AnggotaKelompok;
 use App\TugasIndividuMaster;
 use App\TugasKelompokMaster;
+use Alert2;
 
 
 class KelasController extends Controller
@@ -23,14 +24,26 @@ class KelasController extends Controller
 
     public function index()
     {
+        try {
+            $kelas         = Kelas::where('guru_id',Auth::user()->guru->id)->get();
+            return view('Kelas.index',['kelas' => $kelas]);
+          } catch (\Exception $e) {
+            return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
+          }
 
-        $kelas         = Kelas::where('guru_id',Auth::user()->guru->id)->get();
-        return view('Kelas.index',['kelas' => $kelas]);
+
+
     }
 
     public function create()
     {
-        return view('Kelas.create');
+        try {
+        $kelas         = Kelas::where('guru_id',Auth::user()->guru->id)->get();
+        return view('Kelas.create',['kelas' => $kelas]);
+      } catch (\Exception $e) {
+        return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
+      }
+
     }
 
     public function store(Request $request)

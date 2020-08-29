@@ -56,8 +56,10 @@ export default {
         .leaving(user => {
             this.users = this.users.filter(u => u.id != user.id);
         })
-        .listen('ChatKelompokEvent',(event) => {
+        .listen('ChatEvent',(event) => {
             this.messages.push(event.chat);
+            console.log("oke");
+            
         })
         .listenForWhisper('typing', user => {
         this.activeUser = user;

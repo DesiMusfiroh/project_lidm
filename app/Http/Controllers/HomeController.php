@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\PesertaUjian;
 use Illuminate\Http\Request;
 use Auth;
-
+use Alert2;
 class HomeController extends Controller
 {
     /**
@@ -29,6 +29,6 @@ class HomeController extends Controller
         } else {
             return view('home_siswa');
         }
-       
+
     }
 }

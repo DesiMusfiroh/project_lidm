@@ -36,4 +36,5 @@ class Kelas extends Model
       $jumlah_anggota_kelas = AnggotaKelas::where('kelas_id',$kelas_id)->count();
       return $jumlah_anggota_kelas;
   }
+  
 }

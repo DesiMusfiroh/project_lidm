@@ -6,7 +6,7 @@
 
 @section('content')
 <main class="main">
-    <div>
+   <div>
         {{ Breadcrumbs::render('siswa.kelas.show',$kelas) }}
     </div>
     <div class="container-fluid">
@@ -163,7 +163,6 @@
                             @endif
                             </div>
                             <div class="row table-inside">
-                            <center>Kelompok yang saya ikuti</center>
                             @if($kelompok_saya_ikuti->count() != 0)
                                 <table class="table table-striped table-sm text-center" >
                                     <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
@@ -194,7 +193,7 @@
                         </div>
                         <!-- tugas  -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
-                          <a href="{{route('semuaTugas',$kelas->id)}}"><button type="button" name="button" class="btn btn-primary"> Tugas selesai</button></a> 
+                          <a href="{{route('semuaTugas',$kelas->id)}}"><button type="button" name="button" class="btn btn-primary"> Tugas selesai</button></a>
                         <div class="row table-inside">
                         @if($kumpul_tugas_individu->count() != 0)
                                 <table class="table table-striped table-sm" >
@@ -379,7 +378,7 @@
 
 
 </script>
-<!--edit essay-->
+<!--edit -->
 <script>
     $(document).ready(function(){
         $(document).on('click','#update', function(){

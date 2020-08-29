@@ -14,7 +14,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script defer src="https://unpkg.com/ziggy-js@0.9.x/dist/js/route.min.js"></script>
     <link href="{{asset('/')}}main.css" rel="stylesheet">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @yield('linkhead')
     <style media="screen">
     .breadcrumb{
@@ -117,6 +116,7 @@
     <script type="text/javascript" src="{{asset('/assets')}}/scripts/main.js"></script>
     <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+    @include('sweetalert::alert')
     @yield('linkfooter')
 </body>
 @yield('js')

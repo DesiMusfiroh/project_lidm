@@ -50,7 +50,7 @@
             @if( Siswa::where('user_id', Auth::user()->id )->first() != null )
                 <li class="app-sidebar__heading"> <img class="" style="width: 100px; height: 100px; display: block; margin: auto; border: 5px; border-color: #a3a3a3; border-style: solid; border-radius: 50%;" src="/images/{{$siswa->foto}}" alt=""></li>
             @else
-            <li class="app-sidebar__heading"> <img width="42" class="rounded-circle" src="{{asset('assets/images/1.jpg')}}" alt=""></li>
+            <li class="app-sidebar__heading"> <img style="width: 100px; height: 100px; display: block; margin: auto;" class="rounded-circle" src="{{asset('assets/images/1.png')}}" alt=""></li>
             @endif
             <li class="app-sidebar__heading">{{auth()->user()->name}}</li>
 

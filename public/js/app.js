@@ -2014,6 +2014,8 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
       _this.users = user;
     }).joining(function (user) {
       _this.users.push(user);
+
+      console.log(_this.users);
     }).leaving(function (user) {
       _this.users = _this.users.filter(function (u) {
         return u.id != user.id;
@@ -2130,8 +2132,10 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
       _this.users = _this.users.filter(function (u) {
         return u.id != user.id;
       });
-    }).listen('ChatKelompokEvent', function (event) {
+    }).listen('ChatEvent', function (event) {
       _this.messages.push(event.chat);
+
+      console.log("oke");
     }).listenForWhisper('typing', function (user) {
       _this.activeUser = user;
 
@@ -65335,7 +65339,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(
-                    "  \r\n                    " +
+                    "\r\n                    " +
                       _vm._s(message.pesan) +
                       "\r\n                "
                   )
@@ -65355,7 +65359,7 @@ var render = function() {
                   ]),
                   _c("br"),
                   _vm._v(
-                    " \r\n                    " +
+                    "\r\n                    " +
                       _vm._s(message.pesan) +
                       "\r\n                "
                   )
@@ -77962,7 +77966,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "0917886ecc5a7a459a92",
+  key: "cad66aeb7e557ebd0303",
   cluster: "ap1",
   forceTLS: true,
   encrypted: true
@@ -78335,8 +78339,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\WebXampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\WebXampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

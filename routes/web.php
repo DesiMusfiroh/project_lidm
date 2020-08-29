@@ -115,7 +115,8 @@ Route::group(['prefix' => 'guru'], function () {
             Route::get('/detail/{id}','TugasController@showTugasIndividu')->name('showTugasIndividu');
             Route::post('detail/edit/{id_kumpul_tugas_individu}','TugasController@updateNilai')->name('editNilaiTugasIndividu');
 
-
+            //Beri Nilai
+            Route::patch('/BeriNilai','TugasController@beri_nilai_tugas_individu')->name('beriNilai');
 
 
         });
