@@ -51,7 +51,7 @@
                         <div class="alert alert-secondary alert-sm mt-0 pt-0 pb-0 text-center"><strong>Ujian telah berakhir !</strong></div>
                         <div class="row text-right">
                           <div class="col-sm-9 offset-md-3">
-                            <a  href=""  target="_blank">
+                          <a  href="{{route('exportRekap',$ujian->id)}}"  target="_blank">
                                 <button type="button" class="btn btn-sm btn-success">
                                     <i class="fa fa-download" aria-hidden="true"></i> Download Rekap Nilai
                                 </button>

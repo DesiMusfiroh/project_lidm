@@ -193,120 +193,138 @@
                         </div>
                         <!-- tugas  -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
-                        <div class="row table-inside">
-                        @if($kumpul_tugas_individu->count() != 0)
-                                <table class="table table-striped table-sm" >
-                                    <thead class="thead-dark text-center" style="background-color:#393A3C; color:white; font-weight:bold">
-                                        <tr>
-                                            <td>No</td>
-                                            <td>Nama Tugas</td>
-                                            <td>Deadline</td>
-                                            <td> Tugas </td>
-                                            <td>Aksi</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="text-center">
-                                    <?php $i=1; ?>
-                                    @foreach ($kumpul_tugas_individu as $item)
-                                        <tr>
-                                            <td><?php echo $i; $i++?></td>
-                                            <td>{{$item->tugas_individu->tugas_individu_master->nama_tugas}}</td>
-                                            <td>{{$item->tugas_individu->tugas_individu_master->deadline}}</td>
-                                            <!--Aksi-->
-                                            @if($item->tugas == null)
-                                            <td>
-                                            <form action="{{route('serahTugas')}}" method="post" enctype="multipart/form-data" >
-                                            @csrf
-                                            @method('PATCH')
-                                    
-                                            <input type="hidden" name="id"  value="{{$item->id}}">         
-                                            <input type="file" name="tugas">
-                                            
-                                            <td>
-                                            
-                                                <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
-                                            </td>
-                                            </div>
-                                        	</form>
-                                            @else
-                                            <td> Diserahkan </td>
-                                            <td>
-                                             
-                                            <button type="submit" class="btn btn-info" data-toggle="modal" data-target=".ubah_modal_serahTugasIndividu"
-                                            id="update"
-                                            data-kumpul_tugas_individu_id_update = "{{ $item->id }}"
-                                            data-tugas_individu_id_update = "{{ $item->tugas_individu_id }}"
-                                            data-anggota_kelas_id_update = "{{ $item->anggota_kelas_id }}"
-                                            data-tugas_update = "{{ $item->tugas }}"
-                                            data-nilai_update = "{{ $item->nilai }}"
 
-                                            style="box-shadow: 3px 2px 5px grey; margin:5px;">Ubah Tugas</button>
-                                            
-                                            </td>
-                                            @endif
-                                            
-                                            </td>
-                                            
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                    @else
-                                    <tbody>
-                                    <div class="alert alert-warning" role="alert">
-                                        Belum ada tugas
-                                    </div>
-                                    </tbody>
-                                    @endif
-                                </table>
-                            <div class="row justify-content-center">{{$kumpul_tugas_individu->links()}}</div>
-                        </div>
-                        <div class="row table-inside"> 
-                            <center>Tugas Kelompok saya</center>
-                            @if($kumpul_tugas_kelompok->count() != 0)
-                                <table class="table table-striped table-sm text-center" >
-                                    <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
-                                        <tr>
-                                            <td width="30px">No</td>
-                                            <td>Nama tugas</td>
-                                            <td></td>                                            
-                                        </tr>
-                                    </thead>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="tugasIndividu-tab" data-toggle="tab" href="#tugasIndividu" role="tab" aria-controls="tugasIndividu" aria-selected="true">Individu</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="tugasKelompok-tab" data-toggle="tab" href="#tugasKelompok" role="tab" aria-controls="tugasKelompok" aria-selected="false">Kelompok</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                        <div class="tab-pane active" id="tugasIndividu" role="tabpanel" aria-labelledby="tugasIndividu-tab">
+                            <div class="row table-inside">
+                            @if($kumpul_tugas_individu->count() != 0)
+                                    <table class="table table-striped table-sm" >
+                                        <thead class="thead-dark text-center" style="background-color:#393A3C; color:white; font-weight:bold">
+                                            <tr>
+                                                <td>No</td>
+                                                <td>Nama Tugas</td>
+                                                <td>Deadline</td>
+                                                <td> Tugas </td>
+                                                <td>Aksi</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-center">
+                                        <?php $i=1; ?>
+                                        @foreach ($kumpul_tugas_individu as $item)
+                                            <tr>
+                                                <td><?php echo $i; $i++?></td>
+                                                <td>{{$item->tugas_individu->tugas_individu_master->nama_tugas}}</td>
+                                                <td>{{$item->tugas_individu->tugas_individu_master->deadline}}</td>
+                                                <!--Aksi-->
+                                                @if($item->tugas == null)
+                                                <td>
+                                                <form action="{{route('serahTugas')}}" method="post" enctype="multipart/form-data" >
+                                                @csrf
+                                                @method('PATCH')
+                                        
+                                                <input type="hidden" name="id"  value="{{$item->id}}">         
+                                                <input type="file" name="tugas">
+                                                
+                                                <td>
+                                                
+                                                    <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
+                                                </td>
+                                                </div>
+                                                </form>
+                                                @else
+                                                <td> Diserahkan </td>
+                                                <td>
+                                                
+                                                <button type="submit" class="btn btn-info" data-toggle="modal" data-target=".ubah_modal_serahTugasIndividu"
+                                                id="update"
+                                                data-kumpul_tugas_individu_id_update = "{{ $item->id }}"
+                                                data-tugas_individu_id_update = "{{ $item->tugas_individu_id }}"
+                                                data-anggota_kelas_id_update = "{{ $item->anggota_kelas_id }}"
+                                                data-tugas_update = "{{ $item->tugas }}"
+                                                data-nilai_update = "{{ $item->nilai }}"
 
-                                    <tbody>
-                                    <?php $i=1; ?>
-                                    @foreach ($kumpul_tugas_kelompok as $item)
-                                        <tr>
-                                            <td><?php echo $i; $i++?></td>
-                                            <td>{{$item->tugas_kelompok->tugas_kelompok_master->nama_tugas}}</td>
-                                            @if($item->tugas == null)
-                                            <form action="{{route('serahTugasKelompok')}}" method="post" enctype="multipart/form-data" >
-                                            @csrf
-                                            @method('PATCH')
-                                    
-                                            
-                                            <td>
-                                            <input type="hidden" name="id"  value="{{$item->id}}">         
-                                            <input type="file" name="tugas">
-                                            
-                                                <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
-                                            </td>
-                                            </div>
-                                        	</form>
-                                        	@else
-                                            <td> Diserahkan </td>
-                                            @endif
-                                            
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>            
-                            @else
-                                <div class="alert alert-warning" role="alert">
-                                    Belum ada kelompok dalam kelas ini
-                                </div>
-                            @endif
+                                                style="box-shadow: 3px 2px 5px grey; margin:5px;">Ubah Tugas</button>
+                                                
+                                                </td>
+                                                @endif
+                                                
+                                                </td>
+                                                
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                        @else
+                                        <tbody>
+                                        <div class="alert alert-warning" role="alert">
+                                            Belum ada tugas
+                                        </div>
+                                        </tbody>
+                                        @endif
+                                    </table>
+                                <div class="row justify-content-center">{{$kumpul_tugas_individu->links()}}</div>
                             </div>
-                    	</div>
+                        </div>
+                        <div class="tab-pane" id="tugasKelompok" role="tabpanel" aria-labelledby="tugasKelompok-tab">
+                            <div class="row table-inside"> 
+                                @if($kumpul_tugas_kelompok->count() != 0)
+                                    <table class="table table-striped table-sm text-center" >
+                                        <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
+                                            <tr>
+                                                <td width="30px">No</td>
+                                                <td>Nama tugas</td>
+                                                <td></td>                                            
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <?php $i=1; ?>
+                                        @foreach ($kumpul_tugas_kelompok as $item)
+                                            <tr>
+                                                <td><?php echo $i; $i++?></td>
+                                                <td>{{$item->tugas_kelompok->tugas_kelompok_master->nama_tugas}}</td>
+                                                @if($item->tugas == null)
+                                                <form action="{{route('serahTugasKelompok')}}" method="post" enctype="multipart/form-data" >
+                                                @csrf
+                                                @method('PATCH')
+                                        
+                                                
+                                                <td>
+                                                <input type="hidden" name="id"  value="{{$item->id}}">         
+                                                <input type="file" name="tugas">
+                                                
+                                                    <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
+                                                </td>
+                                                </div>
+                                                </form>
+                                                @else
+                                                <td> Diserahkan </td>
+                                                @endif
+                                                
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>            
+                                @else
+                                    <div class="alert alert-warning" role="alert">
+                                        Belum ada kelompok dalam kelas ini
+                                    </div>
+                                @endif
+                                </div>
+                            </div>
+                               
+                            </div>
+                      
+
+                        </div>
+                       
                         
                         <!-- hasil ujian  -->
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
