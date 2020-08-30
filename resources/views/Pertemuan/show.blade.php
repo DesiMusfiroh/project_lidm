@@ -73,17 +73,17 @@
                             <a class="nav-link " id="kelompok-tab" data-toggle="tab" href="#kelompok" role="tab" aria-controls="kelompok" aria-selected="false">Kelompok</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link " id="messages-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas</a>
+                            <a class="nav-link " id="tugas-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas</a>
                         </li>
                     </ul>
 
                     <div class="tab-content mr-3 ml-3">
-                        <div class="tab-pane active" id="absensi" role="tabpanel" aria-labelledby="absensi-tab">
+                        <div class="tab-pane active container" id="absensi" role="tabpanel" aria-labelledby="absensi-tab">
                             <div class="row">
 
                                 @if($absensi->count() != 0)
                                     <table class="table table-bordered">
-                                        <thead class="thead-dark thead">
+                                        <thead class="thead-dark thead text-center">
                                             <tr>
                                                 <td width="30px">No</td>
                                                 <td>Nama Siswa</td>

@@ -164,6 +164,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Tightenco\Ziggy\ZiggyServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

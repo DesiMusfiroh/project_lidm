@@ -89,19 +89,23 @@ opacity: 1;
 <div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3">
+            <div class="card bg-heavy-rain ml-3 mr-3 mt-3 pt-3 pb-2 pr-3 pl-3">
                 <div class="row">
                     <div class="col text-center">
                     <h4><strong>Ruang Diskusi {{$kelompok->kelompok_master->deskripsi}} - {{$kelompok->nama_kelompok}}</strong>  </h4>
                     </div>
                 </div>
-                <div class="row">
-                    
-                </div>
             </div>
         </div>
     </div>
-
+    <div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div id="local-videos-container"></div>
+            <div id="remote-videos-container"></div>
+        </div>     
+    </div>
+    </div>
     <div id="chat">
         <button class="btn-warning btn"  onclick="openChat()"><i class="fa fa-comments"></i> Chat</button>
     </div>
@@ -146,4 +150,41 @@ opacity: 1;
     });
 </script>
 
+<script src="https://unpkg.com/rtcmulticonnection@latest/dist/RTCMultiConnection.min.js"></script>
+<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+<script type= 'text/javascript'>
+
+var connection = new RTCMultiConnection();
+
+// v3.4.7 or newer
+
+connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+connection.session = {
+    audio: true,
+    video: true
+};
+
+connection.sdpConstraints.mandatory = {
+OfferToReceiveAudio: true,
+OfferToReceiveVideo: true
+};
+
+var localVideosContainer = document.getElementById('local-videos-container');
+var remoteVideosContainer = document.getElementById('remote-videos-container');
+
+connection.onstream = function(event) {
+    var video = event.mediaElement;
+    if(event.type === 'local') {
+        localVideosContainer.appendChild( video ).style.width = "300px";
+    }
+    if(event.type === 'remote') {
+        remoteVideosContainer.appendChild( video ).style.width = "300px";
+    }
+}
+
+$( document ).ready(function() {
+    this.disable = true;
+    connection.openOrJoin('predefiend-roomid');
+});
+</script>
 @endsection

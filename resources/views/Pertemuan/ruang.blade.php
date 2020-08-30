@@ -104,6 +104,7 @@ opacity: 1;
     left:30%;
     position:fixed;
 }
+/* video {width:100px;} */
 </style>
 
 <!-- Stelah diedit krisman -->
@@ -126,36 +127,22 @@ opacity: 1;
             <div class="row">
                 <div class="col-md-9 pl-3">
 
-                    <div id="carouselExampleIndicators" class="carousel slide ml-5" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active" width="500px">
-                                <div class="container video"  style="background:black">
-                                    <div class="row justify-content-center">
-                                        <video autoplay="true" id="video-webcam" height="400px" > </video>
-                                    </div>
+                    <div class="row ml-3" width="500px">
+                        <div class="container video"  style="background:black">
+                            <div class="row justify-content-center">
+                                <div id="local-videos-container">
+                
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                            <!-- <img src="..." class="d-block w-100" alt="..."> -->
-                            </div>
-                            <div class="carousel-item">
-                            <!-- <img src="..." class="d-block w-100" alt="..."> -->
+                                <!-- <video autoplay="true" id="video-webcam" height="400px" > </video> -->
                             </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
                     </div>
+
+                    <hr>
+                    <div class="row justify-content-center">
+                        <div id="remote-videos-container"></div>
+                    </div>
+                   
                 </div>
 
                 <div class="col-md-3">
@@ -172,9 +159,11 @@ opacity: 1;
 
                                 <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
-                                    
-                                    Belum ada siswa yang memasuki ruang pertemuan
-                                   
+                                    <ul>
+                                    @foreach ($anggotakelas as $item)
+                                        <li>{{$item->siswa->nama_lengkap}}</li>
+                                    @endforeach
+                                    </ul>
                                 </div>
                                 </div>
                             </div>
@@ -249,13 +238,13 @@ opacity: 1;
     });
 
     // akses kamera user
-    var video = document.querySelector("#video-webcam");
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-    if (navigator.getUserMedia) {
-        navigator.getUserMedia({ video: true }, handleVideo, videoError);
-    }
-    function handleVideo(stream) { video.srcObject = stream; }
-    function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
+    // var video = document.querySelector("#video-webcam");
+    // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+    // if (navigator.getUserMedia) {
+    //     navigator.getUserMedia({ video: true }, handleVideo, videoError);
+    // }
+    // function handleVideo(stream) { video.srcObject = stream; }
+    // function videoError(e) { alert("Izinkan menggunakan webcam untuk demo!") }
 
     // kirim pesan live chat
         function sendMessage() {
@@ -287,5 +276,43 @@ opacity: 1;
         }
 
     
+</script>
+
+<script src="https://unpkg.com/rtcmulticonnection@latest/dist/RTCMultiConnection.min.js"></script>
+<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+<script type= 'text/javascript'>
+
+var connection = new RTCMultiConnection();
+
+// v3.4.7 or newer
+
+connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+connection.session = {
+    audio: true,
+    video: true
+};
+
+connection.sdpConstraints.mandatory = {
+OfferToReceiveAudio: true,
+OfferToReceiveVideo: true
+};
+
+var localVideosContainer = document.getElementById('local-videos-container');
+var remoteVideosContainer = document.getElementById('remote-videos-container');
+
+connection.onstream = function(event) {
+    var video = event.mediaElement;
+    if(event.type === 'local') {
+        localVideosContainer.appendChild( video ).style.width = "500px";
+    }
+    if(event.type === 'remote') {
+        remoteVideosContainer.appendChild( video ).style.width = "200px";
+    }
+}
+
+$( document ).ready(function() {
+    this.disable = true;
+    connection.openOrJoin('predefiend-roomid');
+});
 </script>
 @endsection

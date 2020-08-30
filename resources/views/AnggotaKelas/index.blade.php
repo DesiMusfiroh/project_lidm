@@ -46,7 +46,7 @@
                                 <input type="kode_kelas" id="kode_kelas" name="kode_kelas" required
                                 placeholder="Masukkan Kode Kelas" class="form-control" autocomplete="off">
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-secondary"><i class="fa fa-plus mr-2"></i> <strong> Gabung</strong></button>
+                                        <button type="submit"  onclick="alert()" class="btn btn-secondary"><i class="fa fa-plus mr-2"></i> <strong> Gabung</strong></button>
                                     </div>
                                 </div>
                             </form>
@@ -69,7 +69,7 @@
                         @else
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong> Anda belum tergabung dalam kelas manapun. Silahkan gabung kedalam kelas!</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <button type="button"   class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
@@ -82,4 +82,15 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('js')
+<script>
+function alert() {
+    swal({
+        title: "Berhasil gabung ke dalam kelas !",
+        icon: "success",
+    });
+}
+</script>
 @endsection
