@@ -38,11 +38,11 @@
         <th width="20%">Nilai</th>
     </tr>
     
-    @foreach($ujian->peserta_ujian as $item)
+    @foreach($peserta_ujian as $item)
 	<tr>
 
 		<td align="center">{{$loop->iteration}}</td>
-		<td > </td>
+		<td >  </td>
 		<td align="center"></td>
       
     </tr>
