@@ -108,8 +108,7 @@ public function deleteUjian($id){
 
     public function monitoring() {
         try {   
-
-            $ujian_aktif = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',0)->where('isdelete',0)->get();
+        $ujian_aktif = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',0)->where('isdelete',0)->get();
         $ujian_run = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',1)->where('isdelete',0)->get();
         date_default_timezone_set("Asia/Jakarta");
 
@@ -162,15 +161,31 @@ public function deleteUjian($id){
         }
 
         return view('Ujian.monitoring',compact('ujian_aktif','ujian_run'))->with('tabel',json_encode($array))->with('run',json_encode($run));
-   
-            
-          } catch (\Exception $e) {
+           
+        } catch (\Exception $e) {
             return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
-          }
-     
-        
-         }
+        }
+           
+    }
 
+    public function monitoring_room($id) {
+        $ujian = Ujian::find($id);
+        $peserta_ujian = PesertaUjian::where('ujian_id',$id)->get();
+
+        date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
+        $waktu_mulai = date('F d, Y H:i:s', strtotime($ujian->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
+
+        $durasi_jam   =  date('H', strtotime($ujian->paket_soal->durasi));
+        $durasi_menit =  date('i', strtotime($ujian->paket_soal->durasi));
+        $durasi_detik =  date('s', strtotime($ujian->paket_soal->durasi));
+
+        // waktu selesai = waktu mulai + durasi
+        $selesai = date_create($ujian->waktu_mulai);
+        date_add($selesai, date_interval_create_from_date_string("$durasi_jam hours, $durasi_menit minutes, $durasi_detik seconds"));
+        $waktu_selesai = date_format($selesai, 'Y-m-d H:i:s');
+
+        return view('Ujian.monitoringroom',['peserta_ujian' => $peserta_ujian] ,compact('ujian', 'waktu_mulai', 'waktu_selesai'));
+    }
 
     public function run_exam(Request $request) {
 

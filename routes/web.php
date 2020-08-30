@@ -165,6 +165,7 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/delete/{id}','UjianController@deleteUjian')->name('guru.ujian.delete');
         Route::get('/show/{id}','UjianController@show')->name('guru.ujian.show');
         Route::get('/monitoring','UjianController@monitoring')->name('guru.ujian.monitoring');
+        Route::get('/monitoring/room/{id}','UjianController@monitoring_room')->name('guru.ujian.monitoring.room');
         Route::get('/koreksi/{id}','UjianController@koreksi')->name('koreksi');
         Route::get('/export-rekap/{id}','DocumentController@exportRekap')->name('exportRekap');
     });
