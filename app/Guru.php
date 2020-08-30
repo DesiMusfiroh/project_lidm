@@ -32,7 +32,7 @@ class Guru extends Model
     }
     public function jumlah_ujian(){
         $guru_id  = $this->id;
-        $jumlah_ujian = Ujian::where('guru_id',$guru_id)->count();
+        $jumlah_ujian = Ujian::where('guru_id',$guru_id)->where('isdelete',0)->count();
         return $jumlah_ujian;
     }
 

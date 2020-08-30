@@ -273,7 +273,7 @@
                                             <td>{{$item->nama_tugas}}</td>
 
                                             <td>
-                                            <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button>
+                                            <a href="{{route('showTugasKelompok',$item->id)}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
                                             </td>
                                         </tr>
                                     @endforeach
