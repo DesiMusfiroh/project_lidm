@@ -24,6 +24,15 @@
 
     <div class="card-header" > 
         <strong style="font-size:18px">Hasil Ujian Peserta</strong>
+        <div class="col-md-10 text-right">
+            @if($peserta_ujian->nilai != null )
+                <a  href="{{route('exportHasil',$peserta_ujian->id)}}"  target="_blank">
+                    <button type="button" class="btn btn-info">
+                    <i class="fa fa-download" aria-hidden="true"></i> Download PDF
+                    </button>
+                </a>
+            @endif
+        </div>
        
 
     </div>

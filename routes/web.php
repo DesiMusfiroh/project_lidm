@@ -64,6 +64,9 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/wait/{id}','UjianController@waitUjian')->name('waitUjian');
 
         Route::get('/finish/{id}','UjianController@finishUjian',['id'=> 'id'])->name('finishUjian');
+         //Hasil Ujian
+         Route::get('/export-hasil/{id}','DocumentController@exportHasil')->name('exportHasil');
+        
 
     });
 });
@@ -156,6 +159,7 @@ Route::group(['prefix' => 'guru'], function () {
         Route::get('/show/{id}','UjianController@show')->name('guru.ujian.show');
         Route::get('/monitoring','UjianController@monitoring')->name('guru.ujian.monitoring');
         Route::get('/koreksi/{id}','UjianController@koreksi')->name('koreksi');
+        Route::get('/export-rekap/{id}','DocumentController@exportRekap')->name('exportRekap');
     });
 });
 
