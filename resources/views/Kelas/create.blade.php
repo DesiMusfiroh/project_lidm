@@ -22,7 +22,7 @@
                     <div class="form-group row">
                         <label  class="col-sm-2 col-form-label">Nama Kelas</label>
                         <div class="col-sm-10">
-                        <input type="text" class="form-control" name="nama_kelas">
+                        <input type="text" class="form-control" name="nama_kelas" id="nama_kelas" value="">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -34,7 +34,7 @@
             </div>
             <div class="card-footer ">
                 <div class="container text-right">
-                    <button type="submit" class="btn btn-info">Simpan</button>
+                    <button type="submit"  onclick="alert()"  class="btn btn-info">Simpan</button>
                 </div>
             </div>
             </form>
@@ -43,4 +43,17 @@
     </div>
     </div>
 </main>
+@endsection
+
+@section('js')
+<script>
+function alert() {
+    namakelas = $('#nama_kelas').val();
+    swal({
+        title: "Kelas baru berhasil di buat !",
+        text: namakelas,
+        icon: "success",
+    });
+}
+</script>
 @endsection

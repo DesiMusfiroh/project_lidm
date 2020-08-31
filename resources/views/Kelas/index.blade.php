@@ -14,17 +14,17 @@
     <div class="alert alert-success pb-1 pt-2" role="alert">
     <h5><strong>Daftar Kelas</strong> </h5>
     </div>
-    @if(session('success'))
+    <!-- @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>{{session('success')}}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div> 
-@endif
-                        @if (session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif -->
     @if($kelas->count() != 0)
 
         <div class="row">

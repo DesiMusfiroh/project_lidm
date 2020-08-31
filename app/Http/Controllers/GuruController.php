@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Auth;
 use App\Guru;
@@ -91,7 +90,6 @@ class GuruController extends Controller
         ];
 
         Guru::whereId($guru->id)->update($update);
-
         return redirect()->route('guru.profil')->with('success','Data Profil berhasil di update');
     }
 

@@ -21,8 +21,9 @@ class UjianController extends Controller
 
     public function index(){
         try {
-            $ujian = Ujian::where('guru_id',auth()->user()->guru->id)->paginate(7);
-            return view('Ujian.index',compact(['ujian']));
+            $ujian = Ujian::where('guru_id',auth()->user()->guru->id)->where('isdelete',false)->paginate(7);
+            $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->get();
+            return view('Ujian.index',compact(['ujian','paketsoal']));
           } catch (\Exception $e) {
             return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
           }
@@ -61,6 +62,7 @@ class UjianController extends Controller
           $data['siswa_id'] = $anggota->siswa_id;
           $data['nilai'] = 0;
           $data['status'] = false;
+          $data['isdelete'] = false;
 
           PesertaUjian::create($data);
         }
@@ -68,6 +70,36 @@ class UjianController extends Controller
         return redirect()->route('guru.ujian.index')->with('success','Berhasil membuat ujian');
     }
 
+     //Update Ujian
+     public function updateUjian(Request $request){
+        try {
+          $ujian = Ujian::FindOrFail($request->id);
+          $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->get();
+          $update_ujian = [
+              'paket_soal_id' => $request->paket_soal_id,
+              'nama_ujian' => $request->nama_ujian,
+              'waktu_mulai' => $request->waktu_mulai,
+          ];
+          $ujian->update($update_ujian);
+          return redirect()->back()->withSuccess('Perubahan berhasil disimpan');
+        } catch (\Exception $e) {
+          return redirect()->back()->with('pesan','Pastikan tidak ada kolom yang kosong');
+        }
+    }
+//Delete Paket Soal
+public function deleteUjian($id){
+    $ujian = Ujian::find($id);
+    Ujian::where('id',$ujian->id)->update([
+      'isdelete' => true,
+      'status' => 2,
+    ]);
+    $peserta_ujian  = PesertaUjian::where('ujian_id',$ujian->id)->update([
+        'status' =>1,
+        'isdelete' => true,
+    ]);
+
+    return redirect()->back()->withSuccess('Berhasil Menghapus Ujian');
+  }
     public function show($id){
       $ujian = Ujian::find($id);
       $peserta_ujian = PesertaUjian::where('ujian_id',$id)->get();
@@ -76,9 +108,8 @@ class UjianController extends Controller
     }
 
     public function monitoring() {
-        try {
-
-            $ujian_aktif = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',0)->where('isdelete',0)->get();
+        try {   
+        $ujian_aktif = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',0)->where('isdelete',0)->get();
         $ujian_run = Ujian::where('guru_id',Auth::user()->guru->id)->where('status',1)->where('isdelete',0)->get();
         date_default_timezone_set("Asia/Jakarta");
 
@@ -131,15 +162,31 @@ class UjianController extends Controller
         }
 
         return view('Ujian.monitoring',compact('ujian_aktif','ujian_run'))->with('tabel',json_encode($array))->with('run',json_encode($run));
-
-
-          } catch (\Exception $e) {
+           
+        } catch (\Exception $e) {
             return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
-          }
+        }
+           
+    }
 
+    public function monitoring_room($id) {
+        $ujian = Ujian::find($id);
+        $peserta_ujian = PesertaUjian::where('ujian_id',$id)->get();
 
-         }
+        date_default_timezone_set("Asia/Jakarta"); // mengatur time zone untuk WIB.
+        $waktu_mulai = date('F d, Y H:i:s', strtotime($ujian->waktu_mulai)); // mengubah bentuk string waktu mulai untuk digunakan pada date di js
 
+        $durasi_jam   =  date('H', strtotime($ujian->paket_soal->durasi));
+        $durasi_menit =  date('i', strtotime($ujian->paket_soal->durasi));
+        $durasi_detik =  date('s', strtotime($ujian->paket_soal->durasi));
+
+        // waktu selesai = waktu mulai + durasi
+        $selesai = date_create($ujian->waktu_mulai);
+        date_add($selesai, date_interval_create_from_date_string("$durasi_jam hours, $durasi_menit minutes, $durasi_detik seconds"));
+        $waktu_selesai = date_format($selesai, 'Y-m-d H:i:s');
+
+        return view('Ujian.monitoringroom',['peserta_ujian' => $peserta_ujian] ,compact('ujian', 'waktu_mulai', 'waktu_selesai'));
+    }
 
     public function run_exam(Request $request) {
 
@@ -234,6 +281,7 @@ class UjianController extends Controller
 
         try {
             $peserta_ujian = PesertaUjian::where('siswa_id',auth()->user()->siswa->id)->where('status', 0)->get();
+        
             return view('Ujian-Siswa.index',compact(['peserta_ujian']));
           } catch (\Exception $e) {
             return redirect()->route('siswa.profil')->with('error','Mohon lengkapi profil anda');

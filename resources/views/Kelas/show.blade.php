@@ -199,17 +199,24 @@
 
                         <!-- tugas -->
                         <div class="tab-pane" id="tugas" role="tabpanel" aria-labelledby="tugas-tab">
-                            <div class="mb-0 text-right">
-                                <a href="{{route('tugas.create',$kelas->id)}}"> <button class="btn btn-success">Buat Tugas</button> </a>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist" >
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link active" id="tugasindividu-tab" data-toggle="tab" href="#tugasindividu" role="tab" aria-controls="tugasindividu" aria-selected="true">Tugas Individu</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="tugaskelompok-tab" data-toggle="tab" href="#tugaskelompok" role="tab" aria-controls="tugaskelompok" aria-selected="false">Tugas Kelompok</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-0 text-right">
+                                        <a href="{{route('tugas.create',$kelas->id)}}"> <button class="btn btn-success">Buat Tugas</button> </a>
+                                    </div>
+                                </div>
                             </div>
-                                <ul class="nav nav-tabs" id="myTab" role="tablist" >
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="tugasindividu-tab" data-toggle="tab" href="#tugasindividu" role="tab" aria-controls="tugasindividu" aria-selected="true">Individu</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="tugaskelompok-tab" data-toggle="tab" href="#tugaskelompok" role="tab" aria-controls="tugaskelompok" aria-selected="false">Kelompok</a>
-                                    </li>
-                                </ul>
+                               
                                 <div class="tab-content">
                                 <div class="tab-pane active" id="tugasindividu" role="tabpanel" aria-labelledby="tugasindividu-tab">
                                         <div class="row table-inside">
@@ -266,7 +273,7 @@
                                             <td>{{$item->nama_tugas}}</td>
 
                                             <td>
-                                            <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button>
+                                            <a href="{{route('showTugasKelompok',$item->id)}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -314,7 +321,10 @@
   function copy_text() {
         document.getElementById("kode_kelas").select();
         document.execCommand("copy");
-        alert("Kode Akses Ujian Berhasil di Copy !");
+        swal({
+            title: "Kode Akses Ujian Berhasil di Copy !",
+            icon: "success",
+        });
     }
 </script>
 @endsection

@@ -8,7 +8,7 @@ class PesertaUjian extends Model
 {
     protected $table = 'peserta_ujian';
 
-    protected $fillable = ['ujian_id','anggota_kelas_id','siswa_id','nilai','status'];
+    protected $fillable = ['ujian_id','anggota_kelas_id','siswa_id','nilai','status','isdelete'];
 
     public function ujian(){
       return $this->belongsTo(Ujian::class);

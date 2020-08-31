@@ -23,7 +23,7 @@
                     <strong style="font-size:18px; "> Profil</strong>
                 </div>
                 <div class="card-body pb-0 ">
-                        @if (session('success'))
+                        <!-- @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ session('success') }}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -33,7 +33,7 @@
                         @endif
                         @if (session('error'))
                             <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
+                        @endif -->
 
                     <div class="container">
 
@@ -127,14 +127,6 @@
                         <strong style="font-size:18px"> Profil </strong>
                     </div>
                     <div class="card-body pb-0">
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
-
-                        @if (session('error'))
-                            <div class="alert alert-danger">{{ session('error') }}</div>
-                        @endif
-
                         <div class="container">
 
                                 <div class="form-row ">
@@ -206,9 +198,6 @@
                                 <textarea class="form-control" id="alamat" rows="2" name="alamat" style="border-radius:10px;  box-shadow: 2px 1px 3px grey;"> </textarea>
                             </div>
 
-
-                            <div class="text-right" > <button type="submit" class="btn btn-primary" style="box-shadow: 3px 2px 5px grey;">Save </button> </div>
-
                         </div>
 
                     </div>
@@ -225,13 +214,16 @@
                             <label for="file_foto"> <b> Foto : </b> </label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile"  name="foto">
-                                <label class="custom-file-label" for="customFile">Pilih File Foto ..</label>
+                                <label class="custom-file-label" for="customFile"></label>
                             </div>
 
                             @if($errors->has('foto'))
                               <span class="help-block">{{$errors->first('foto')}}</span>
                             @endif
                         </div>
+                        
+
+                        <div class="text-right" > <button type="submit" onclick="alert()" class="btn btn-info mb-3" style="box-shadow: 3px 2px 5px grey;">Simpan Profil </button> </div>
                     </div>
                 </div>
             </div>
@@ -252,4 +244,15 @@
   });
   </script>
 @endif
+@endsection
+
+@section('js')
+<script>
+function alert() {
+    swal({
+        title: "Data profil berhasil di simpan !",
+        icon: "success",
+    });
+}
+</script>
 @endsection

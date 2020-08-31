@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Events\TaskEvent;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -115,11 +115,16 @@ Route::group(['prefix' => 'guru'], function () {
             // Route::post('serahkan/serahkan_tugas','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
 
             Route::patch('/updatetugas','TugasController@update_tugas_individu')->name('ubahTugas');
+           
+           // Route::post('detail/edit/{id_kumpul_tugas_individu}','TugasController@updateNilai')->name('editNilaiTugasIndividu');
+            //Detail Tugas Individu
             Route::get('/detail/{id}','TugasController@showTugasIndividu')->name('showTugasIndividu');
-            Route::post('detail/edit/{id_kumpul_tugas_individu}','TugasController@updateNilai')->name('editNilaiTugasIndividu');
-
-            //Beri Nilai
+            //Beri Nilai Tugas Anggota Kelas
             Route::patch('/BeriNilai','TugasController@beri_nilai_tugas_individu')->name('beriNilai');
+            //Detail Tugas Kelompok
+            Route::get('/detailTugasKelompok/{id}','TugasController@showTugasKelompok')->name('showTugasKelompok');
+             //Beri Nilai Tugas Kelompok
+             Route::patch('/BeriNilaiKelompok','TugasController@beri_nilai_tugas_kelompok')->name('beriNilaiKelompok');
 
 
         });
@@ -155,9 +160,12 @@ Route::group(['prefix' => 'guru'], function () {
     Route::group(['prefix' => 'ujian'], function(){
         Route::get('/','UjianController@index')->name('guru.ujian.index');
         Route::get('/create','UjianController@create')->name('guru.ujian.create');
+        Route::patch('/update','UjianController@updateUjian')->name('guru.ujian.update');
         Route::post('/store','UjianController@store')->name('guru.ujian.store');
+        Route::get('/delete/{id}','UjianController@deleteUjian')->name('guru.ujian.delete');
         Route::get('/show/{id}','UjianController@show')->name('guru.ujian.show');
         Route::get('/monitoring','UjianController@monitoring')->name('guru.ujian.monitoring');
+        Route::get('/monitoring/room/{id}','UjianController@monitoring_room')->name('guru.ujian.monitoring.room');
         Route::get('/koreksi/{id}','UjianController@koreksi')->name('koreksi');
         Route::get('/export-rekap/{id}','DocumentController@exportRekap')->name('exportRekap');
     });

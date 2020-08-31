@@ -96,7 +96,7 @@ class AnggotaKelasController extends Controller
 
         $kumpul_tugas_kelompok = KumpulTugasKelompok::whereIn('kelompok_id',$kelompok_saya)->get();
         //dd($kumpul_tugas_kelompok);
-        $hasil_ujian               = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->get();
+        $hasil_ujian               = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->where('isdelete',0)->get();
         $kumpul_tugas_individu     = KumpulTugasIndividu::where('anggota_kelas_id',$anggota_kelas_id)->paginate(5);
         //$kumpul_tugas_kelompok     = KumpulTugasKelompok::where('anggota_kelompok_id',$anggota_kelompok_id)->paginate(5);
         

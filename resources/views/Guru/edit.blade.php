@@ -115,14 +115,14 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group mt-0">
                                         <label for="instansi"> <b> Instansi : </b> </label>
                                         <input type="text" class="form-control" id="instansi" name="instansi"  value="{{$guru->instansi}}" style="border-radius:10px; box-shadow: 3px 0px 5px grey;">
                                         @if($errors->has('instansi'))
                                         <span class="help-block">{{$errors->first('instansi')}}</span>
                                         @endif
                                     </div>
-                                    <div class="form-group mt-1">
+                                    <div class="form-group mt-0">
                                         <label for="alamat"> <b> Alamat : </b> </label>
                                         <textarea class="form-control" id="alamat" rows="2" name="alamat" style="border-radius:10px; border-color:#c4cdcf; box-shadow: 3px 3px 5px grey;"> {{$guru->alamat}} </textarea>
                                         @if($errors->has('alamat'))
@@ -130,7 +130,7 @@
                                          @endif
                                     </div>
 
-                                    <div class="text-right"> <button type="submit" class="btn btn-primary" style="box-shadow: 3px 2px 5px grey;"> Update </button> </div>
+                                    <div class="text-right"> <button type="submit" onclick="alertUpdate()" class="btn btn-info" style="box-shadow: 3px 2px 5px grey;"> Update Profil </button> </div>
 
                                 </div>
 
@@ -144,4 +144,15 @@
         </div>
     </div>
 </main>
+@endsection
+
+@section('js')
+<script>
+// function alertUpdate() {
+//     swal({
+//         title: "Data profil berhasil di update !",
+//         icon: "success",
+//     });
+// }
+</script>
 @endsection

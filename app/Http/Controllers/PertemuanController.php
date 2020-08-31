@@ -10,8 +10,7 @@ use App\AnggotaKelas;
 use App\Absensi;
 use App\ChatPertemuan;
 use App\KelompokMaster;
-use App\Events\ChatEvent;
-
+use App\Events\ChatEvent; 
 class PertemuanController extends Controller
 {
     public function create($id)

@@ -173,13 +173,24 @@ class TugasController extends Controller
         $file->move($tujuan_upload,$nama_file);
 
         $update_kumpul_tugas_kelompok= [
-            'tugas' => $file
+            'tugas' => $nama_file
         ];
         KumpulTugasKelompok::where('id', $request->id)->update($update_kumpul_tugas_kelompok);
         return redirect()->back()->with('success','Tugas Berhasil Diserahkan');
     }
 
 
+//Beri Nilai Tugas kelompok
+
+public function beri_nilai_tugas_kelompok(Request $request){
+    $kumpul_tugas_kelompok = KumpulTugasKelompok::findOrFail($request->id);
+    
+    $update_tugas= [
+        'nilai' => $request->nilai,
+    ];
+    $kumpul_tugas_kelompok->update($update_tugas);
+    return redirect()->back()->with('success','Nilai Telah diberikan');
+}
 
     public function showTugasIndividu($id, Kelas $kelas_id)
     {
@@ -196,6 +207,22 @@ class TugasController extends Controller
 
       //
       return view('Tugas.showTugasIndividu',compact(['tugas_individu_master','tugas_individu','kumpul_tugas_individu','kelas','kelas_id']));
+    }
+    public function showTugasKelompok($id, Kelas $kelas_id)
+    {
+        // intval($kelas_id);
+        // dd($kelas_id);
+
+      $kelas = TugasKelompokMaster::whereId($id)->value('kelas_id');
+    //   dd($kelas);
+      $tugas_kelompok_master = TugasKelompokMaster::find($id);
+      $tugas_kelompok_master_id = TugasKelompokMaster::whereId($id)->value('id');
+      $tugas_kelompok = Tugaskelompok::where('tugas_kelompok_master_id',$tugas_kelompok_master_id)->first();
+      //dd($tugas_individu);
+      $kumpul_tugas_kelompok= KumpulTugasKelompok::where('tugas_kelompok_id',$tugas_kelompok->id)->get();
+
+      //
+      return view('Tugas.showTugasKelompok',compact(['tugas_kelompok_master','tugas_kelompok','kumpul_tugas_kelompok','kelas','kelas_id']));
     }
     public function store(Request $request)
     {

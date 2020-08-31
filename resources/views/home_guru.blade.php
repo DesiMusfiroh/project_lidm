@@ -11,8 +11,8 @@
 @section('content')
 
 
-  <main class="main">
-    <!-- <div>
+<main class="main">
+    <div>
       {{ Breadcrumbs::render('home') }}
     </div> -->
     @if(session('success'))
@@ -21,11 +21,12 @@
     </div>
     @endif
     <index-component></index-component>
-    <div class="container-fluid">
-      <div class="card bg-heavy-rain " >
+    
+<div class="container-fluid"> 
+    @if( $guru != null )  
+    <div class="card bg-heavy-rain " >
         <div class="card-body" >
-         <div class="media">
-            @if( $guru != null )
+            <div class="media">
                 <img style="width: 150px; height: 150px; display: block;  margin: auto;" src="/images/{{$guru->foto}}" alt="">
 
             <div class="media-body ml-4">
@@ -59,7 +60,7 @@
                         <td>{{auth()->user()->email}}</td>
                     </tr>
 
-                    </tbody>
+                    
                 </table>
                 @else
                 <img style="width: 150px; height: 150px; display: block;  margin: auto;" src="assets/images/1.png" alt="">
@@ -96,8 +97,53 @@
 
                     </tbody>
                 </table>
+                </div>
+            </div>          
+        </div>         
+    </div>
 
-                @endif
+    <div class="divider mt-0" style="margin-bottom: 10px;">&nbsp;</div>
+        <div class="row">
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-heavy-rain">
+                    <div class="widget-content-wrapper">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Jumlah Kelas</div>
+                            <div class="widget-subheading">Jumlah kelas yang di ajar</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers "><span>{{auth()->user()->guru->jumlah_kelas()}}</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-heavy-rain ">
+                    <div class="widget-content-wrapper ">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Jumlah Siswa</div>
+                            <div class="widget-subheading">Total siswa yang di ajar</div>
+                        </div>
+                        <!-- jumlah siswa masih salah -->
+                        <div class="widget-content-right">
+                            <div class="widget-numbers "><span>{{auth()->user()->guru->jumlah_siswa()}}</span></div>
+                        </div>
+                        <!-- jumlah siswa masih salah -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-4">
+                <div class="card mb-3 widget-content bg-heavy-rain ">
+                    <div class="widget-content-wrapper ">
+                        <div class="widget-content-left">
+                            <div class="widget-heading">Jumlah Ujian</div>
+                            <div class="widget-subheading">Total ujian yang di buat</div>
+                        </div>
+                        <div class="widget-content-right">
+                            <div class="widget-numbers "><span>{{auth()->user()->guru->jumlah_ujian()}}</span></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -205,6 +251,15 @@
           </div>
       </div>
   </div>
+  @else
+  <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading"><b>Selamat Datang, {{auth()->user()->name}} !</b></h4>
+        <p>Selamat datang di aplikasi LinesRoom (Live Learning Assessment Room).  <br>
+        LinesRoom merupakan aplikasi pembelajaran daring berbasis web dengan sejumlah inovasi fitur, yang dapat menjadikan penilaian kompetensi siswa diperoleh dari berbagai aspek secara lebih komprehensif, sehingga akan membantu mewujudkan implementasi pendidikan holistik di indonesia, terutama pada masa pandemi ini.</p>
+        <hr>
+        
+        <p class="mb-0">Anda telah mendaftar sebagai <b>GURU</b> </p>
+    </div>
 
 
   </div>

@@ -19,11 +19,6 @@
 }
 
 </style>
-@if(session('sukses'))
-  <div class="alert alert-success" role="alert">
-    {{session('sukses')}}
-  </div>
-@endif
 
 <div>
   {{ Breadcrumbs::render('guru.ujian.monitoring') }}
@@ -44,9 +39,9 @@
                         Durasi : {{ $durasi_jam }} jam {{ $durasi_menit }} menit
                     </p>
                     <!-- <input type="text" class="ujian_id"  value="{{$item->id}}" > -->
-                    <button type="submit" onclick="openFullscreen(this.id);" id="{{$item->id}}" class="btn btn-info btn-sm monitoring" data-ujian_id="{{$item->id}}">
+                    <a href="{{route('guru.ujian.monitoring.room',$item->id)}}"> <button  type="submit" id="{{$item->id}}" class="btn btn-info btn-sm monitoring" data-ujian_id="{{$item->id}}">
                         <i class="fa fa-laptop fa-sm"></i> Monitoring Ujian
-                    </button>
+                    </button> </a>
 
                 </div>
             </div>
@@ -87,138 +82,7 @@
 
 </div>
 
-<!-- fullscreen monitoring ujian   -->
-<div id="fullscreenExam">
-
-      <!-- <div class="row">
-            <div class="card pl-7 pt-7 pt-3 text-center" style="border-radius:0px; height:120px; width:100%; background: linear-gradient(180deg, rgba(247, 253, 251, 0.85) 0%, rgba(39, 182, 130, 0.85) 100%);" >
-                <div class="row">
-                    <div class="col-md-9 offset-sm-1">
-                        <h3><strong><span id="nama_ujian"></span></strong></h3>
-                        <h5><strong><span id="teks_durasi"></span></strong></h5>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="mr-5" style="text-align:right; vertical-align:top;" id="buttonclose"><button class="btn btn-danger" style="font-size:15px;" onclick="closeFullscreen();"> <span class="fa fa-window-close"></span> <strong>Keluar</strong>  </button> </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3" style="min-height:80px;">
-                    <div class="row">
-                        <div class="col md-12 text-center">
-                            <h4><strong><span id="nama_ujian"></span></strong></h4>
-                            <strong><span id="teks_durasi"></span></strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-9">
-                <div class="row justify-content-center">
-                    <div class="card mt-4 ml-10 mr-10" style="border-radius:0px; background:black; box-shadow:0px 0px 0px black;">
-                        <video autoplay="true" id="video-webcam" width="600px" height="440px"> </video>
-                    </div>
-                </div>
-                <div class="row">
-
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card mr-3" style="height:650px; background: linear-gradient(180deg, #80F7FF 1.74%, #D7E8E9 96.02%);">
-                    <div class="card-header">
-                        <div class="row text-center ml-4 mr-4"  style="font-size:18px; font-weight:bold; color:white;"> <strong>Peserta Ujian</strong> </div> 
-                    </div>
-                    <div class="card-body">
-                        <div id="teks_peserta" class="ml-4 mr-4 " style="font-size:16px; font-weight:bold; color:white;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
-<!-- penutup fullscreen  -->
-
 <script>
-
-$("#fullscreenExam").hide();
-
-// Menampilkan fullscreen pengawasan ujian
-var elem = document.querySelector("#fullscreenExam");
-function openFullscreen(ujian_id) {
-
-    // mengirim data id ujian yang dipilih untuk monitoring
-    // var ujian_id    = $(this).data('ujian_id');  // data id ujian belum tertangkap
-    // var ujian_id    = $(".ujian_id").val();
-    console.log(ujian_id);
-    $.ajax({
-        url: "{{ url('fullscreen/room/exam') }}",
-        type: "GET",
-        dataType: 'json',
-        data: {
-            ujian_id: ujian_id
-        },
-        success: function(data) {
-            // console.log(data);
-            array_data = Object.values(data);
-
-            var nama_ujian = array_data[0];
-            var waktu_mulai = array_data[1];
-            var durasi = array_data[2];
-            var waktu_selesai = array_data[3];
-            var array_peserta = array_data[4];
-            // console.log(array_peserta);
-            // mengambil setiap value peserta dari array peserta
-            for (var key in array_peserta) {
-                var peserta = (array_peserta[key]);
-                // menampilkan peserta pada html
-                const teks_peserta = document.getElementById('teks_peserta');
-                teks_peserta.innerHTML = '<li>' + peserta + '</li>';
-            }
-            $("#nama_ujian").text(nama_ujian);
-            $("#waktu_mulai").text(waktu_mulai);
-            $("#durasi").text(durasi);
-            $("#waktu_selesai").text(waktu_selesai);
-
-            // pengaturan JS untuk membuat hitung durasi sisa waktu ujian
-            const selesai       = new Date(waktu_selesai).getTime();
-            const hitung_durasi = setInterval(function() {
-                const sekarang      = new Date().getTime();
-                const sisa_durasi   = selesai - sekarang;
-
-                const jam   = Math.floor(sisa_durasi % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-                const menit = Math.floor(sisa_durasi % (1000 * 60 * 60 ) / (1000 * 60 ));
-                const detik = Math.floor(sisa_durasi % (1000 * 60 ) / 1000 );
-
-                const teks_durasi = document.getElementById('teks_durasi');
-                teks_durasi.innerHTML = 'Ujian akan di berakhir dalam : ' + jam + ' jam ' + menit + ' menit ' + detik + ' detik lagi ';
-
-                if( durasi < 0 ) {
-                    clearInterval(hitung_durasi);
-                    closeFullscreen();
-                }
-            }, 1000);
-
-            // for (var key in array_data) {
-            //     var nama_ujian = (key, array_data[key][1]);
-            //     console.log(nama_ujian);
-
-            // }
-            // var ujian_room_id = data;
-            // $("#ujian_room_id").val(ujian_room_id);
-        }
-    });
-
-    $("#fullscreenExam").show();
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    }
-
-
-}
 
 // menghitung timer
 setInterval(myTimer, 1000);
@@ -311,37 +175,5 @@ for (var key in ujian_run) {
 }
 // ---------------------------------------------------
 
-//Pengaturan JS untuk akses kamera user
-var video = document.querySelector("#video-webcam");
-navigator.getUserMedia   =  navigator.getUserMedia ||
-                            navigator.webkitGetUserMedia ||
-                            navigator.mozGetUserMedia ||
-                            navigator.msGetUserMedia ||
-                            navigator.oGetUserMedia;
-if (navigator.getUserMedia) {
-    navigator.getUserMedia({ video: true }, handleVideo, videoError);
-}
-function handleVideo(stream) {
-    video.srcObject = stream;
-}
-function videoError(e) {
-    alert("Izinkan menggunakan webcam untuk demo!")
-}
-
-// keluar dari fullscreen
-function closeFullscreen() {
-    if (document.exitFullscreen) {
-        document.exitFullscreen();
-        $("#fullscreenExam").hide();
-    }
-}
-
-// tombol monitoring di klik, fullscreen tampil. bawa data ujian id ke kontroller. balikin detail ujian
-// hitung durasi
-// kalo duraasi habis, update status ujian jadi finish
-    // var options         = {  year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', hour24:true, minute: 'numeric', second: 'numeric' };
-    // var d               = new Date().toLocaleString("en-US",options, {timeZone: "Asia/Jakarta"});
-    // var jam             = parseInt(d.toISOString().substr(11,2)) + 7 ;
-    // var menit_detik     = d.toISOString().substr(13, 6);
 </script>
 @endsection

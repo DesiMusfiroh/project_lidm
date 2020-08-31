@@ -60,7 +60,7 @@
                   <label for=""> <strong> Nama Ujian</strong></label>
                 </div>
                 <div class="col-md-8 input-data">
-                  <input type="text" name="nama_ujian" value="" class="form-control" placeholder="nama ujian">
+                  <input type="text" name="nama_ujian" value="" class="form-control" >
                 </div>
               </div>
               <div class="row mt-2 mb-2  mr-3">
