@@ -13,16 +13,16 @@
                 <div class="card-header">
                   <strong style="font-size:18px"> Daftar Riwayat Ujian </strong>
                 </div>
-                @if (session('success'))
+                
+                <div class="card-body pb-0">
+                  @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ session('success') }}</strong>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                @endif
-                <div class="card-body pb-0">
-
+                  @endif
                 @if($ujian->count() != 0)
                 <div class="table-inside">
                     <table class="table table-striped table-bordered table-sm">
@@ -33,7 +33,7 @@
                             <th>Kelas</th>
                             <th>Paket Soal</th>
                             <th>Waktu Mulai</th>
-                            <th>Aksi</th>
+                            <th width="140px">Aksi</th>
                           </tr>
                         </thead>
                         <tbody class="text-center">

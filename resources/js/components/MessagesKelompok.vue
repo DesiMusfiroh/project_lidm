@@ -1,7 +1,8 @@
 <template>
+<div>
     <div id="chat-area">
         <div v-for="(message, index) in messages" :key="index" >
-            <div v-if="message.user_id === message.user.id" class="text-right display-right">
+            <div v-if="message.user_id === user.id" class="text-right display-right">
                 <div class="my-chat">
                     <span style="font-size:10px;">{{ moment(message.created_at).format('h:mm a')}}</span>
                     <strong style="font-size:11px;">{{message.user.name}} </strong>  <br>  
@@ -15,7 +16,9 @@
                     {{message.pesan}}
                 </div>
             </div>
-        </div>
+        </div> 
+    </div>
+    <div id="kirim-pesan">
         <div class="input-group mb-3">
             <input type="text" id="isipesan" class="form-control" placeholder="Ketik pesan " aria-label="" aria-describedby="button-addon2" v-model="newMessage" name="pesan">
             <input type="hidden" id="user_id" v-bind:user_id="user.id">
@@ -24,7 +27,8 @@
                 <button class="btn btn-success" type="button" id="button-addon2" @click="sendMessage">Kirim</button>
             </div>
         </div>
-    </div>
+    </div> 
+</div>
 </template>
 
 <script>

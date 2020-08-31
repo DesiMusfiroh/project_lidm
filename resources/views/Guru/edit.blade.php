@@ -148,11 +148,11 @@
 
 @section('js')
 <script>
-// function alertUpdate() {
-//     swal({
-//         title: "Data profil berhasil di update !",
-//         icon: "success",
-//     });
-// }
+function alertUpdate() {
+    swal({
+        title: "Data profil berhasil di update !",
+        icon: "success",
+    });
+}
 </script>
 @endsection

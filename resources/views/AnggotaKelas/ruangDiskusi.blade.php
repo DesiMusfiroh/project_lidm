@@ -7,20 +7,20 @@
     bottom: 20px;
     position:fixed;
 }
-/* The popup chat - hidden by default */
+    /* The popup chat - hidden by default */
 .chat-popup {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    right: 15px;
-    border: 3px solid #f1f1f1;
-    z-index: 9;
+display: none;
+position: fixed;
+bottom: 0;
+right: 15px;
+border: 3px solid #f1f1f1;
+z-index: 9;
 }
 /* Add styles to the form container */
 .form-container {
-    max-width: 300px;
-    padding: 10px;
-    background-color: white;
+max-width: 300px;
+padding: 10px;
+background-color: white;
 }
 #chat-area {
     overflow-y:scroll;
@@ -99,19 +99,18 @@ opacity: 1;
         </div>
     </div>
     <div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <div id="local-videos-container"></div>
-            <div id="remote-videos-container"></div>
-        </div>     
-    </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="local-videos-container"></div>
+                <div id="remote-videos-container"></div>
+            </div>     
+        </div>
     </div>
     <div id="chat">
         <button class="btn-warning btn"  onclick="openChat()"><i class="fa fa-comments"></i> Chat</button>
     </div>
 
     <div class="chat-popup " id="myForm">
-
         <div class="form-container" id="app">
             <h5><strong>ChatKelompok</strong> </h5>
             <messages-kelompok :kelas_id="{{$kelompok->kelompok_master->kelas->id}}" :id_kelompok="{{$kelompok->id}}" :user="{{auth()->user()}}"></messages-kelompok>

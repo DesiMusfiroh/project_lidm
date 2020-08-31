@@ -21,7 +21,7 @@ use App\Kelas;
                 <div class="card-title">Buat Tugas </div>
             </div>
                 <div class="card-body">  
-                    <div class="row alert alert-success">
+                    <div class="mr-3 ml-3 row alert alert-success">
                         <div class="col-md-5">
                             <input type="text" value="Pilih Tipe Tugas :" class=" btn btn-secondary mb-3" readonly>
                         </div>
@@ -98,7 +98,7 @@ use App\Kelas;
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info">Simpan</button>
+                        <button type="submit" class="btn btn-info"  onclick=alertIndividu()>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -147,10 +147,28 @@ use App\Kelas;
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info">Simpan</button>
+                        <button type="submit" class="btn btn-info" onclick=alertKelompok()>Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 <!-- Penutup Create Modal -->
+
+
+@section('js')
+<script>
+function alertIndividu() {
+    swal({
+        title: "Tugas Individu berhasil dibuat !",
+        icon: "success",
+    });
+}
+function alertKelompok() {
+    swal({
+        title: "Tugas Kelompok berhasil dibuat !",
+        icon: "success",
+    });
+}
+</script>
+@endsection

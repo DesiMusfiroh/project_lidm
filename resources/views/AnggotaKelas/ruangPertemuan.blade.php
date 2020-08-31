@@ -188,11 +188,8 @@ opacity: 1;
             </div>
 
             <div class="chat-popup " id="myForm">
-
                 <div class="form-container" id="app">
                     <h5><strong>Chat Pertemuan</strong> </h5>
-
-
                     <messages-component :kelas_id="{{$kelas->id}}" :id_pertemuan="{{$pertemuan->id}}" :user="{{auth()->user()}}"></messages-component>
                     <button type="button" class="tombol cancel" onclick="closeChat()">Close</button>
                 </div>

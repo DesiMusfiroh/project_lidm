@@ -40,6 +40,14 @@
         <div class="card-header  pt-3 pb-2 text-center" >
             <strong style="font-size:18px;"> Paket Soal : {{$paket_soal->judul}}  </strong>
         </div>
+        <!-- @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{session('success')}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif -->
         <div class="card-body">
             <div class="container">
                 <input type="hidden" name="paket_soal_id" value="{{ $paket_soal_id }}">
@@ -306,7 +314,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info">Simpan</button>
+                        <button type="submit" class="btn btn-info"  onclick=alertEssay()>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -406,7 +414,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info">Simpan</button>
+                        <button type="submit" class="btn btn-info" onclick=alertPilgan()>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -462,7 +470,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info">Simpan</button>
+                        <button type="submit" class="btn btn-info" onclick=alertUpdateEssay()>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -563,7 +571,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info">Simpan</button>
+                        <button type="submit" class="btn btn-info" onclick=alertUpdatePilgan()>Simpan</button>
                     </div>
                 </form>
             </div>
@@ -571,3 +579,32 @@
     </div>
 
 <!-- Penutup Update Modal -->
+
+@section('js')
+<script>
+function alertEssay() {
+    swal({
+        title: "Soal essay berhasil ditambahkan !",
+        icon: "success",
+    });
+}
+function alertUpdateEssay() {
+    swal({
+        title: "Soal essay berhasil diupdate !",
+        icon: "success",
+    });
+}
+function alertPilgan() {
+    swal({
+        title: "Soal pilihan ganda berhasil ditambahkan !",
+        icon: "success",
+    });
+}
+function alertUpdatePilgan() {
+    swal({
+        title: "Soal pilihan ganda berhasil diupdate !",
+        icon: "success",
+    });
+}
+</script>
+@endsection
