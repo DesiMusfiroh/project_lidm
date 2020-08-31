@@ -77967,10 +77967,6 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "0917886ecc5a7a459a92",
-<<<<<<< HEAD
-=======
-  // key: "cad66aeb7e557ebd0303",
->>>>>>> c6a1d63982f4186cce7041c2433d11762f8c8bf0
   cluster: "ap1",
   forceTLS: true,
   encrypted: true
@@ -78343,15 +78339,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! D:\WebXampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\WebXampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! D:\xampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
-// __webpack_require__(/*! C:\xampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
-// module.exports = __webpack_require__(/*! C:\xampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> c6a1d63982f4186cce7041c2433d11762f8c8bf0
 
 
 /***/ })
