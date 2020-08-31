@@ -32,7 +32,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="mr-auto">
-                        <button type="submit" class="btn btn-info">Simpan</button>
+                        <button type="submit" class="btn btn-info" onclick=alert()>Simpan</button>
                     </div>
                 </div>
             </form>
@@ -41,4 +41,15 @@
     </div>
     </div>
 </main>
+@endsection
+
+@section('js')
+<script>
+function alert() {
+    swal({
+        title: "Kelompok baru berhasil dibuat !",
+        icon: "success",
+    });
+}
+</script>
 @endsection

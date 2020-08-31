@@ -41,11 +41,22 @@
                 </div>
                 <hr>
 
-                <div class="text-right"> <button type="submit" class="btn btn-primary" style="box-shadow: 3px 2px 5px grey;">Save </button> </div>
+                <div class="text-right"> <button type="submit" class="btn btn-primary" style="box-shadow: 3px 2px 5px grey;" onclick=alert()>Save </button> </div>
             </div>
             </form>
         </div>
     </div>
 </div>
 
+@endsection
+
+@section('js')
+<script>
+function alert() {
+    swal({
+        title: "Paket soal baru berhasil dibuat !",
+        icon: "success",
+    });
+}
+</script>
 @endsection

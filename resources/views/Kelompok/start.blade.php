@@ -1,7 +1,18 @@
 @extends('layouts.layout_ruang')
 
 @section('content')
-
+<style>
+#end{
+    left:20px;
+    bottom: 20px;
+    position:fixed;
+}
+#leave{
+    right:20px;
+    top: 20px;
+    position:fixed;
+}
+</style>
 <?php use App\AnggotaKelompok; ?>
 <div>
     <div class="row">
@@ -9,7 +20,7 @@
             <div class="card bg-heavy-rain mt-3 mr-3 ml-3 pt-3 pb-2 pr-3 pl-3">
                 <div class="row">
                     <div class="col text-center">
-                    <h4><strong>Diskusi {{$kelompok_master->deskripsi}} </strong> </h4>
+                    <h4><strong>{{$kelompok_master->deskripsi}} ( {{$kelompok_master->kelas->nama_kelas}} ) </strong> </h4>
                     </div>
                 </div>
             </div>
@@ -29,7 +40,7 @@
                 <li class="card-text">{{$item->anggota_kelas->siswa->nama_lengkap}}</li>
                 @endforeach
                 </ul>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="" class="btn btn-primary">Monitoring</a>
             </div>
             </div>
         </div>

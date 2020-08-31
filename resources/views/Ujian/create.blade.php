@@ -63,7 +63,7 @@
               </div>
               <hr>
               <div class="row mt-2 offset-md-9">
-                <div class="text-right col-md-10"> <button type="submit" class="btn btn-primary" style="box-shadow: 3px 2px 5px grey;"> Simpan </button> </div>
+                <div class="text-right col-md-10"> <button type="submit" onclick=alert() class="btn btn-primary" style="box-shadow: 3px 2px 5px grey;"> Simpan </button> </div>
               </div>
             </form>
           </div>
@@ -74,3 +74,14 @@
 </div>
 </div>
 @stop
+
+@section('js')
+<script>
+function alert() {
+    swal({
+        title: "Ujian baru berhasil dijadwalkan!",
+        icon: "success",
+    });
+}
+</script>
+@endsection

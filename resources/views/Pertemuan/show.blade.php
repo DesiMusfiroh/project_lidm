@@ -82,21 +82,23 @@
                             <div class="row">
 
                                 @if($absensi->count() != 0)
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered table-sm">
                                         <thead class="thead-dark thead text-center">
                                             <tr>
                                                 <td width="30px">No</td>
                                                 <td>Nama Siswa</td>
+                                                <td>Nomor Induk</td>
                                                 <td>Keterangan</td>
                                                 <td width="30px"></td>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="text-center">
                                             <?php $i=1; ?>
                                             @foreach ($absensi as $item)
                                                 <tr>
                                                     <td><?php echo $i; $i++?></td>
                                                     <td>{{$item->anggota_kelas->siswa->nama_lengkap}}</td>
+                                                    <td>{{$item->anggota_kelas->siswa->nomor_induk}}</td>
                                                     <td>Hadir</td>
                                                     <td class="text-center">
                                                         <a href="#">
