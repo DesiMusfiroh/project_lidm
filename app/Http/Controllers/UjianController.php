@@ -32,7 +32,7 @@ class UjianController extends Controller
     public function create(){
         try {
             $kelas = Kelas::where('guru_id',auth()->user()->guru->id)->get();
-            $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->get();
+            $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->where('isdelete',false)->get();
             return view('Ujian.create',compact(['kelas','paketsoal']));
           } catch (\Exception $e) {
             return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
@@ -70,8 +70,9 @@ class UjianController extends Controller
 
     public function show($id){
       $ujian = Ujian::find($id);
-
-      return view('Ujian.show',compact(['ujian']));
+      $peserta_ujian = PesertaUjian::where('ujian_id',$id)->get();
+      //dd($peserta_ujian);
+      return view('Ujian.show',compact(['ujian','peserta_ujian']));
     }
 
     public function monitoring() {

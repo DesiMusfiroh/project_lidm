@@ -129,7 +129,7 @@
                   </div>
                   <!-- jumlah siswa masih salah -->
                   <div class="widget-content-right">
-                      <div class="widget-numbers "><span>{{auth()->user()->guru->jumlah_siswa()}}</span></div>
+                      <div class="widget-numbers "><span>{{$siswaku}}</span></div>
                   </div>
                   <!-- jumlah siswa masih salah -->
               </div>

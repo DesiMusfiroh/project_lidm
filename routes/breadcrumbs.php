@@ -82,6 +82,14 @@ Breadcrumbs::register('pertemuan.show', function ($breadcrumbs, $kelas, $pertemu
     $breadcrumbs->parent('guru.kelas.show',$kelas);
     $breadcrumbs->push($pertemuan->nama_pertemuan, url('guru/kelas/pertemuan/show/{kelas_id}/{id_pertemuan}'));
 });
+Breadcrumbs::register('kelompok.show', function ($breadcrumbs, $kelas, $kelompok_master) {
+    $breadcrumbs->parent('guru.kelas.show',$kelas);
+    $breadcrumbs->push($kelompok_master->deskripsi, route('kelompok.show',$kelompok_master->id));
+});
+Breadcrumbs::register('showTugasIndividu', function ($breadcrumbs, $kelas,$tugas_individu_master) {
+    $breadcrumbs->parent('guru.kelas.show',$kelas);
+    $breadcrumbs->push($tugas_individu_master->nama_tugas, route('showTugasIndividu', $tugas_individu_master->id));
+});
 
 Breadcrumbs::register('tugas.create', function ($breadcrumbs, $kelas) {
     $breadcrumbs->parent('guru.kelas.show',$kelas);
@@ -107,6 +115,10 @@ Breadcrumbs::register('guru.ujian.index', function ($breadcrumbs) {
 Breadcrumbs::register('guru.ujian.show', function ($breadcrumbs,$ujian) {
     $breadcrumbs->parent('guru.ujian.index');
     $breadcrumbs->push($ujian->nama_ujian, route('guru.ujian.show',$ujian->id));
+});
+Breadcrumbs::register('koreksi', function ($breadcrumbs,$ujian,$peserta_ujian) {
+    $breadcrumbs->parent('guru.ujian.show',$ujian);
+    $breadcrumbs->push('Koreksi Ujian', route('koreksi',$peserta_ujian->id));
 });
 Breadcrumbs::register('guru.ujian.monitoring', function ($breadcrumbs) {
     $breadcrumbs->parent('home');

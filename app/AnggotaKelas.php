@@ -33,5 +33,9 @@ class AnggotaKelas extends Model
         return $this->hasMany(KumpulTugasIndividu::class,'anggota_kelas_id');
     }
     
+    // public function jumlah_semua_siswa_guru(){
+    //   $guru_id = Guru::where('id',auth()->user()->guru->id)->value('id');
+    //   $kelas_guru = Kelas::
+    // }
 
 }

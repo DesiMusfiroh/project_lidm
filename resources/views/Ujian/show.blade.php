@@ -2,7 +2,7 @@
 @section('title','nama ujian')
 @section('content')
 <main class="main">
-<div>
+  <div>
     {{ Breadcrumbs::render('guru.ujian.show',$ujian) }}
   </div>
 <div class="container">
@@ -76,9 +76,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                          @if($ujian->peserta_ujian->count() !=0)
-                          @foreach($ujian->peserta_ujian as $item)
-
+                          @if($peserta_ujian->count() !=0)
+                          @foreach($peserta_ujian as $item)
+ 
                             <tr>
                               <td class="text-center">{{$loop->iteration}}</td>
                               <td class="text-center">{{$item->anggota_kelas->siswa->nama_lengkap}}</td>

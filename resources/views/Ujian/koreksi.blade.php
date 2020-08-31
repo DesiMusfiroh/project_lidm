@@ -1,6 +1,11 @@
 @extends('layouts.layout_guru')
 
 @section('content')
+<main>
+<div>
+{{ Breadcrumbs::render('koreksi',$peserta_ujian->ujian,$peserta_ujian) }}
+</div>
+
 <div class="container">
     @if(session('sukses'))
         <div class="alert alert-success" role="alert">
@@ -157,7 +162,7 @@
     
 
 </div>
-
+</main>
 <script>
   $(function () {
     $('#myTab li:last-child a').tab('show')

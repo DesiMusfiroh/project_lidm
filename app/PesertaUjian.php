@@ -24,4 +24,8 @@ class PesertaUjian extends Model
     public function pilgan_jawab(){
       return $this->hasMany(PilganJawab::class,'peserta_ujian_id');
     }
+
+    public function siswa(){
+      return $this->belongsTo(Siswa::class);
+    }
 }
