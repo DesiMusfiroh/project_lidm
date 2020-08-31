@@ -90,6 +90,10 @@ Breadcrumbs::register('showTugasIndividu', function ($breadcrumbs, $kelas,$tugas
     $breadcrumbs->parent('guru.kelas.show',$kelas);
     $breadcrumbs->push($tugas_individu_master->nama_tugas, route('showTugasIndividu', $tugas_individu_master->id));
 });
+Breadcrumbs::register('showTugasKelompok', function ($breadcrumbs, $kelas,$tugas_kelompok_master) {
+    $breadcrumbs->parent('guru.kelas.show',$kelas);
+    $breadcrumbs->push($tugas_kelompok_master->nama_tugas, route('showTugasKelompok', $tugas_kelompok_master->id));
+});
 
 Breadcrumbs::register('tugas.create', function ($breadcrumbs, $kelas) {
     $breadcrumbs->parent('guru.kelas.show',$kelas);

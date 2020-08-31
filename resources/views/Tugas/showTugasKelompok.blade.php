@@ -7,8 +7,7 @@
 @section('content')
 <main class="main">
     <div>
-    
-    
+        {{ Breadcrumbs::render('showTugasKelompok',$tugas_kelompok_master->kelas, $tugas_kelompok_master) }}
     </div>
     <div class="container">
         <div class="row justify-content-center">
