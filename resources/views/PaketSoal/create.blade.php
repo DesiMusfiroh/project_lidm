@@ -12,19 +12,19 @@
 
 
 <div class="col-md-12">
+    @if(session('pesan'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{session('pesan')}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="card">
         <div class="card-header  pt-3 pb-2 text-center">
             <strong style="font-size: 18px;">Buat Paket Soal</strong>
         </div>
         <div class="card-body">
-        @if(session('pesan'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>{{session('pesan')}}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-            </div>
-        @endif
             <form action="{{route('guru.paketsoal.store')}}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="container">

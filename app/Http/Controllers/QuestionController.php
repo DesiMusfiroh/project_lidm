@@ -17,7 +17,7 @@ class QuestionController extends Controller
     {
         $this->middleware('auth');
     }
-  
+
     public function index()
     {
         try {
@@ -26,10 +26,10 @@ class QuestionController extends Controller
           } catch (\Exception $e) {
             return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
           }
-        
+
     }
 
-    
+
     public function create()
     {
         try {
@@ -38,10 +38,10 @@ class QuestionController extends Controller
           } catch (\Exception $e) {
             return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
           }
-       
+
     }
 
-   
+
 
     public function store(Request $request)
     {
@@ -53,10 +53,10 @@ class QuestionController extends Controller
             'durasi' => $request->durasi,
             'isdelete' => $isdelete,
         ]);
-        return redirect()->route('guru.paketsoal.create')->with('pesan','Paket Soal baru berhasil dibuat');
+        return redirect()->route('paketsoal.index')->with('pesan','Paket Soal baru berhasil dibuat');
     }
 
- 
+
 
     // SOAL SATUAN CRUD CONTROLLER
     public function create_soal_satuan($paket_soal_id){
@@ -67,12 +67,12 @@ class QuestionController extends Controller
             $paket_soal = PaketSoal::find($paket_soal_id);
             $paket_soal_id = $paket_soal->id;
             return view('PaketSoal.create_soal_satuan',['soal_satuan' => $soal_satuan, 'paket_soal' => $paket_soal], compact('paket_soal_id'));
-      
+
         }else {
             $error = "Tidak bisa mengakses halaman";
             return view('error',compact(['error']));
           }
-  
+
       }
 
 
@@ -96,7 +96,7 @@ class QuestionController extends Controller
         PaketSoal::where('id',$paket_soal->id)->update([
           'isdelete' => true,
         ]);
-  
+
         return redirect()->back()->withSuccess('Berhasil Menghapus Paket Soal');
       }
       //Delete Soal Satuan
@@ -123,7 +123,7 @@ class QuestionController extends Controller
               'poin'           => $request->poin,
               'jenis'          => $request->jenis,
           ]);
-  
+
           $essay = $soal_satuan->Essay()->create([
               'soal_satuan_id' => $soal_satuan->soal_satuan_id,
               'pertanyaan'     => $request->pertanyaan,
@@ -155,7 +155,7 @@ class QuestionController extends Controller
               'poin'           => $request->poin,
               'jenis'          => $request->jenis,
           ]);
-  
+
           $pilgan= $soal_satuan->Pilgan()->create([
               'soal_satuan_id' => $soal_satuan->soal_satuan_id,
               'pertanyaan'     => $request->pertanyaan,
@@ -214,8 +214,8 @@ class QuestionController extends Controller
         return redirect()->back()->with('success','Soal Pilgan berhasil diupdate !');
     }
 
-      
 
-  
-   
+
+
+
 }

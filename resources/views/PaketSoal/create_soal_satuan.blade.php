@@ -3,7 +3,9 @@
 @section('title')
     <title>Unbreakable</title>
 @endsection
-
+@section('linkhead')
+<script src="https://cdn.ckeditor.com/ckeditor5/22.0.0/classic/ckeditor.js"></script>
+@stop
 @section('content')
 <?php
     use App\Essay;
@@ -19,13 +21,21 @@
         margin-left:30px;
     }
 </style>
-      
+
 <main class="main">
 
     <div>
         {{ Breadcrumbs::render('create_soal_satuan',$paket_soal) }}
     </div>
 <div class="container-fluid">
+  @if(session('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>{{session('success')}}</strong>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+  @endif
     <div class="card">
         <div class="card-header  pt-3 pb-2 text-center" >
             <strong style="font-size:18px;"> Paket Soal : {{$paket_soal->judul}}  </strong>
@@ -57,7 +67,7 @@
                 </div>
                 <hr>
 
-                
+
                 @if($errors->has('poin'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>{{$errors->first('poin')}}</strong>
@@ -131,11 +141,11 @@
                                                 >
                                                 Edit <i class="fa fa-edit"></i>
                                     </button>
-                                    
+
                                     @endif
-                                    <button  class=" btn btn-sm btn-danger " id="hapus"  style="box-shadow: 3px 2px 5px grey; margin:5px;" paket_soal_id="{{$paket_soal_id}}" soal_satuan_id="{{$item->id}}"> Hapus <i class="fa fa-trash"></i> </button>
+                                    <button  class=" btn btn-sm btn-danger hapus"  style="box-shadow: 3px 2px 5px grey; margin:5px;" paket_soal_id="{{$paket_soal_id}}" soal_satuan_id="{{$item->id}}"> Hapus <i class="fa fa-trash"></i> </button>
                                 </div>
-                               
+
                             </div>
                             <hr>
                         @endforeach
@@ -159,8 +169,8 @@
 
         });
     });
-    
-    $('#hapus').click(function(){
+
+    $('.hapus').click(function(){
       var paket_soal_id = $(this).attr('paket_soal_id');
       var soal_satuan_id = $(this).attr('soal_satuan_id');
       swal({
@@ -223,6 +233,32 @@
         $('#kunci_pilgan_update').val(kunci_pilgan_update);
         $('#poin_pilgan_update').val(poin_pilgan_update);
         });
+
+        ClassicEditor
+                    .create( document.querySelector( '#pertanyaanessay' ) )
+                    .then( pertanyaanessay => {
+                            console.log( pertanyaanessay );
+                    } )
+                    .catch( error => {
+                            console.error( error );
+                    } );
+                    ClassicEditor
+                                .create( document.querySelector( '#jawaban' ) )
+                                .then( jawaban => {
+                                        console.log( jawaban );
+                                } )
+                                .catch( error => {
+                                        console.error( error );
+                                } );
+
+                                ClassicEditor
+                                            .create( document.querySelector( '#pertanyaanpilgan' ) )
+                                            .then( pertanyaanpilgan => {
+                                                    console.log( pertanyaanpilgan );
+                                            } )
+                                            .catch( error => {
+                                                    console.error( error );
+                                            } );
 
     });
 </script>
@@ -541,6 +577,7 @@
             </div>
         </div>
     </div>
+
 <!-- Penutup Update Modal -->
 
 @section('js')

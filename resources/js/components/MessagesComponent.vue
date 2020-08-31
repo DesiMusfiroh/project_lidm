@@ -5,14 +5,14 @@
             <div v-if="message.user_id === user.id" class="text-right display-right">
                 <div class="my-chat">
                     <span style="font-size:10px;">{{ moment(message.created_at).format('h:mm a')}}</span>
-                    <strong style="font-size:11px;">{{message.user.name}} </strong>  <br>  
+                    <strong style="font-size:11px;">{{message.user.name}} </strong>  <br>
                     {{message.pesan}}
                 </div>
             </div>
             <div v-else class="text-left display-left">
                 <div class="other-chat">
-                    <strong style="font-size:11px;">{{message.user.name}} </strong> 
-                    <span style="font-size:10px;">{{ moment(message.created_at).format('h:mm a')}} </span><br> 
+                    <strong style="font-size:11px;">{{message.user.name}} </strong>
+                    <span style="font-size:10px;">{{ moment(message.created_at).format('h:mm a')}} </span><br>
                     {{message.pesan}}
                 </div>
             </div>
@@ -35,7 +35,7 @@
 import moment from 'moment';
 Vue.prototype.moment = moment;
 export default {
-    
+
     props: ['user','kelas_id','id_pertemuan','current_time'],
 
     data(){
@@ -50,13 +50,14 @@ export default {
     },
     created(){
         this.fetchMessages();
-        
+
         Echo.join('chat')
         .here(user => {
             this.users = user;
         })
         .joining(user => {
             this.users.push(user);
+            console.log(this.users);
         })
         .leaving(user => {
             this.users = this.users.filter(u => u.id != user.id);
@@ -73,15 +74,15 @@ export default {
             this.activeUser = false;
         }, 1000);
         })
-        
-        
+
+
     },
     methods: {
         fetchMessages(){
             axios.get(`../../../../../chat/${this.kelas_id}/${this.id_pertemuan}`).then(response => {
                 this.messages = response.data;
                 console.log(response.data);
-                
+
             })
         },
         sendMessage(){
@@ -89,15 +90,15 @@ export default {
                 user: this.user,
                 pesan: this.newMessage,
                 created_at: this.current_time
-                
+
             });
-            
-            
+
+
             axios.post(`../../../../../chat/${this.kelas_id}/${this.id_pertemuan}`,
                         {pesan: this.newMessage,
                         user_id: this.user.id,
                         pertemuan_id: this.id_pertemuan})
-            
+
             //this.newMessage = ''
             // axios.post('messages', {message: this.newMessage});
             this.newMessage = '';

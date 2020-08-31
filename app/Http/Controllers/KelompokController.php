@@ -140,7 +140,8 @@ class KelompokController extends Controller
             'kelompok_id' => $request->kelompok_id,
             'pesan' => $request->pesan
         ]);
-        broadcast(new ChatKelompokEvent($chat->load('user')))->toOthers();      
+        //return "oke";
+        broadcast(new ChatEvent($chat->load('user')))->toOthers();      
         return ['status' => 'success'];
     }
 }

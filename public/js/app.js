@@ -2014,6 +2014,8 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
       _this.users = user;
     }).joining(function (user) {
       _this.users.push(user);
+
+      console.log(_this.users);
     }).leaving(function (user) {
       _this.users = _this.users.filter(function (u) {
         return u.id != user.id;
@@ -2134,8 +2136,10 @@ Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
       _this.users = _this.users.filter(function (u) {
         return u.id != user.id;
       });
-    }).listen('ChatKelompokEvent', function (event) {
+    }).listen('ChatEvent', function (event) {
       _this.messages.push(event.chat);
+
+      console.log("oke");
     }).listenForWhisper('typing', function (user) {
       _this.activeUser = user;
 
@@ -65339,7 +65343,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(
-                    "  \r\n                    " +
+                    "\r\n                    " +
                       _vm._s(message.pesan) +
                       "\r\n                "
                   )
@@ -65359,7 +65363,7 @@ var render = function() {
                   ]),
                   _c("br"),
                   _vm._v(
-                    " \r\n                    " +
+                    "\r\n                    " +
                       _vm._s(message.pesan) +
                       "\r\n                "
                   )

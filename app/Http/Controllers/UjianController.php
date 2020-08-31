@@ -27,26 +27,26 @@ class UjianController extends Controller
           } catch (\Exception $e) {
             return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
           }
-     
+
     }
 
     public function create(){
-        try {   
+        try {
             $kelas = Kelas::where('guru_id',auth()->user()->guru->id)->get();
-            $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->get();
+            $paketsoal = PaketSoal::where('guru_id',auth()->user()->guru->id)->where('isdelete',false)->get();
             return view('Ujian.create',compact(['kelas','paketsoal']));
           } catch (\Exception $e) {
             return redirect()->route('guru.profil')->with('error','Mohon lengkapi profil anda');
           }
-     
 
-    
+
+
     }
 
     public function store(Request $request){
         $anggota_kelas = AnggotaKelas::where('kelas_id',$request->kelas)->get();
         $ujian = new Ujian;
-        $ujian->kelas_id = $request->kelas;
+        $ujian->kelas_id = $request->kelas; 
         $ujian->guru_id = auth()->user()->guru->id;
         $ujian->nama_ujian = $request->nama_ujian;
         $ujian->paket_soal_id = $request->paketsoal;
@@ -102,8 +102,9 @@ public function deleteUjian($id){
   }
     public function show($id){
       $ujian = Ujian::find($id);
-
-      return view('Ujian.show',compact(['ujian']));
+      $peserta_ujian = PesertaUjian::where('ujian_id',$id)->get();
+      //dd($peserta_ujian);
+      return view('Ujian.show',compact(['ujian','peserta_ujian']));
     }
 
     public function monitoring() {
@@ -285,8 +286,8 @@ public function deleteUjian($id){
           } catch (\Exception $e) {
             return redirect()->route('siswa.profil')->with('error','Mohon lengkapi profil anda');
           }
-     
-       
+
+
     }
 
     public function waitUjian($id)

@@ -6,7 +6,17 @@
 </div>
 <div class="container ">
 <div class="row justify-content-center">
-<div class="col-md-10">
+<div class="col-md-12">
+  @if(session('error'))
+    <div class="alert alert-danger" role="alert">
+      <ul>
+
+      @foreach($errors as $error)
+        <li>{{$error->message}}</li>
+      @endforeach
+    </ul>
+    </div>
+  @endif
   <div class="card ">
       <div class="card-header">
           <strong style="font-size: 18px;">Buat Ujian</strong>

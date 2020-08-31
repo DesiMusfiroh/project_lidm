@@ -60,7 +60,7 @@
 
                             <table class="table table-hover table-sm">
                                 <tr>
-                                    <td col><b> NIP </b> </td>
+                                    <td col><b> No. Induk </b> </td>
                                     <td> : </td>
                                     <td>{{ $guru->nip }}</td>
                                 </tr>
@@ -153,7 +153,7 @@
                             <input type="hidden" name="user_id" value="{{ Auth::user()->id }} ">
                             <div class="form-row mb-0 mt-0 pt-0">
                                 <div class="form-group col-md-6">
-                                    <label for="nomor_induk"><b> NIP  : </b></label>
+                                    <label for="nomor_induk"><b> No. Induk  : </b></label>
                                     <input type="text" class="form-control" id="nip" name="nip" style="border-radius:10px;  box-shadow: 3px 0px 5px grey;">
                                     @if($errors->has('nip'))
                                     <span class="help-block">{{$errors->first('nip')}}</span>
@@ -231,8 +231,19 @@
     </form>
 @endif
 </div>
-
 </main>
+@if(session('error'))
+  <script>
+  $(document).ready(function() {
+        swal({
+          title: "Oops",
+          text: "Lengkapi profil terlebih dahulu",
+          icon: "warning",
+          button: "Oke",
+        });
+  });
+  </script>
+@endif
 @endsection
 
 @section('js')

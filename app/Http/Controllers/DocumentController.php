@@ -76,11 +76,12 @@ class DocumentController extends Controller
         return $pdf->stream();
     }
     public function exportRekap($id){
-
+ 
       $ujian          = Ujian::find($id);
       $peserta_ujian  = PesertaUjian::where('ujian_id',$id)->get();
-      // dd($peserta_ujian);
-      $pdf            = PDF::loadView('Export/Rekap',compact('ujian','peserta_ujian' ));
+      //dd($peserta_ujian);
+      // $siswa          = Siswa::where('peserta_ujian_id',$peserta_ujian->siswa->id);
+      $pdf            = PDF::loadView('Export/Rekap',compact('ujian','peserta_ujian'));
     
       return $pdf->stream();
   }

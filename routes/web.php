@@ -47,9 +47,9 @@ Route::group(['prefix' => 'siswa'], function () {
         });
 
         Route::group(['prefix' => 'tugas'],function(){
-
             Route::patch('/kumpul_tugas/tugas/serahkan', 'TugasController@serahkan_tugas_individu')->name('serahTugas');
             Route::patch('/kumpul_tugas/tugaskelompok/serahkan', 'TugasController@serahkan_tugas_kelompok')->name('serahTugasKelompok');
+            Route::get('/{id}','TugasController@semuaTugas')->name('semuaTugas');
         });
 
         Route::group(['prefix' => 'diskusi'], function () {
@@ -58,7 +58,7 @@ Route::group(['prefix' => 'siswa'], function () {
         });
 
     });
-   
+
     Route::group(['prefix' => 'ujian'], function () {
         Route::get('/index','UjianController@indexUjian')->name('siswa.ujian.index');
         Route::get('/wait/{id}','UjianController@waitUjian')->name('waitUjian');

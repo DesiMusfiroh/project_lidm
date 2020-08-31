@@ -15,9 +15,8 @@
     <!-- Jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script defer src="https://unpkg.com/ziggy-js@0.9.x/dist/js/route.min.js"></script>
+    
     @yield('linkhead')
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
-
     <style media="screen">
     @import url('https://fonts.googleapis.com/css2?family=Palanquin:wght@500&display=swap');
     /* body {font-family: 'Palanquin', sans-serif;} */

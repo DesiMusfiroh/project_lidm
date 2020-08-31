@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Guru;
+use Alert2;                                                              
 
 class GuruController extends Controller
 {
