@@ -28,12 +28,22 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::user()->role == 1){
-            $guru_id = Guru::where('id',auth()->user()->guru->id)->value('id');
-            $kelas_guru = Kelas::where('guru_id',$guru_id)->get();
-            //dd($kelas_guru);
-            $siswaku = AnggotaKelas::whereIn('kelas_id',$kelas_guru)->count();
-            //dd($anggota_kelas);
-            return view('home_guru',compact(['kelas_guru','siswaku']));
+            if (Guru::where('user_id',auth()->user()->id)->count() != 0) {
+                //dd("oke");
+                $guru_id = Guru::where('id',auth()->user()->guru->id)->value('id');
+                $guru = Guru::find($guru_id);
+                if (Kelas::where('guru_id',$guru_id)->count() != 0) {
+                    $kelas_guru = Kelas::where('guru_id',$guru_id)->get();
+                    $siswaku = AnggotaKelas::whereIn('kelas_id',$kelas_guru)->count();
+                    //dd($anggota_kelas);
+                    return view('home_guru',compact(['kelas_guru','siswaku']));
+                }else{
+                    return view('home_guru',compact(['guru']));
+                }
+
+            }else{
+                return view('home_guru');
+            }
         } else {
             return view('home_siswa');
         }

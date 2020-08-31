@@ -104,6 +104,10 @@ class AnggotaKelasController extends Controller
         return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu], compact('kelas','kelompok_saya_ikuti','kumpul_tugas_kelompok'));
     }
 
+    public function showKelompok(){
+        
+    }
+
     public function showPertemuan($kelas_id, $id_pertemuan)
     {
         $pertemuan      = Pertemuan::find($id_pertemuan);

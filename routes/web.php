@@ -46,6 +46,10 @@ Route::group(['prefix' => 'siswa'], function () {
 
         });
 
+        Route::group(['prefix' => 'kelompok'], function () {
+          Route::get('/show/{id}','KelompokController@showKelompok')->name('showKelompok');
+        });
+
         Route::group(['prefix' => 'tugas'],function(){
             Route::patch('/kumpul_tugas/tugas/serahkan', 'TugasController@serahkan_tugas_individu')->name('serahTugas');
             Route::patch('/kumpul_tugas/tugaskelompok/serahkan', 'TugasController@serahkan_tugas_kelompok')->name('serahTugasKelompok');
