@@ -2105,6 +2105,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 Vue.prototype.moment = moment__WEBPACK_IMPORTED_MODULE_0___default.a;
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -65455,13 +65459,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { attrs: { id: "chat-area" } },
-    [
+  return _c("div", [
+    _c(
+      "div",
+      { attrs: { id: "chat-area" } },
       _vm._l(_vm.messages, function(message, index) {
         return _c("div", { key: index }, [
-          message.user_id === message.user.id
+          message.user_id === _vm.user.id
             ? _c("div", { staticClass: "text-right display-right" }, [
                 _c("div", { staticClass: "my-chat" }, [
                   _c("span", { staticStyle: { "font-size": "10px" } }, [
@@ -65476,9 +65480,9 @@ var render = function() {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(
-                    "  \n                " +
+                    "  \r\n                    " +
                       _vm._s(message.pesan) +
-                      "\n            "
+                      "\r\n                "
                   )
                 ])
               ])
@@ -65496,15 +65500,18 @@ var render = function() {
                   ]),
                   _c("br"),
                   _vm._v(
-                    " \n                " +
+                    " \r\n                    " +
                       _vm._s(message.pesan) +
-                      "\n            "
+                      "\r\n                "
                   )
                 ])
               ])
         ])
       }),
-      _vm._v(" "),
+      0
+    ),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "kirim-pesan" } }, [
       _c("div", { staticClass: "input-group mb-3" }, [
         _c("input", {
           directives: [
@@ -65559,9 +65566,8 @@ var render = function() {
           )
         ])
       ])
-    ],
-    2
-  )
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -77963,7 +77969,6 @@ window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/d
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
   key: "0917886ecc5a7a459a92",
-  // key: "cad66aeb7e557ebd0303",
   cluster: "ap1",
   forceTLS: true,
   encrypted: true
@@ -78338,8 +78343,6 @@ __webpack_require__.r(__webpack_exports__);
 
 __webpack_require__(/*! D:\xampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! D:\xampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
-// __webpack_require__(/*! C:\xampp\htdocs\project_lidm\resources\js\app.js */"./resources/js/app.js");
-// module.exports = __webpack_require__(/*! C:\xampp\htdocs\project_lidm\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

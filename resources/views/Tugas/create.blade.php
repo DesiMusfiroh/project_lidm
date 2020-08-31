@@ -21,7 +21,7 @@ use App\Kelas;
                 <div class="card-title">Buat Tugas </div>
             </div>
                 <div class="card-body">  
-                    <div class="row alert alert-success">
+                    <div class="mr-3 ml-3 row alert alert-success">
                         <div class="col-md-5">
                             <input type="text" value="Pilih Tipe Tugas :" class=" btn btn-secondary mb-3" readonly>
                         </div>
