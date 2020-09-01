@@ -144,6 +144,25 @@ function openFullscreen() {
             closeFullscreen();
         }
     }, 1000);
+
+      
+    $('#fullscreenExam').mouseleave(function(){
+      const peserta_ujian_id = $('#peserta_ujian_id').val();
+      closeFullscreen();
+      swal({
+        title: "Yakin?",
+        text: "Ketika meninggalkan ujian, anda tidak bisa mengulangi ujian lagi.Tekan cancel untuk kembali ujian id = "+peserta_ujian_id,
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          window.location = "../../../siswa/ujian/finish/"+peserta_ujian_id;
+        }
+      });
+
+    });
 }
 
 function closeFullscreen() {

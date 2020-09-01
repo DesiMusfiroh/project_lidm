@@ -94,37 +94,37 @@ class TugasController extends Controller
     }
 
     //SISWA ---------------------------------
-    public function update_tugas_individu(Request $request){
-        $kumpul_tugas_individu = KumpulTugasIndividu::findOrFail($request->id);
-        $file = $request->file('tugas');
-        $nama_file = time()."_".$file->getClientOriginalName();
-        $tujuan_upload = 'tugas';
-        $file->move($tujuan_upload,$nama_file);
+  public function update_tugas_individu(Request $request){
+      $kumpul_tugas_individu = KumpulTugasIndividu::findOrFail($request->id);
+      $file = $request->file('tugas');
+      $nama_file = time()."_".$file->getClientOriginalName();
+      $tujuan_upload = 'tugas';
+      $file->move($tujuan_upload,$nama_file);
 
-        $update_tugas= [
-            'tugas' => $nama_file,
-        ];
-        $kumpul_tugas_individu->update($update_tugas);
-        return redirect()->back()->with('success','Tugas Berhasil Diubah');
-    }
+      $update_tugas= [
+          'tugas' => $nama_file,
+      ];
+      $kumpul_tugas_individu->update($update_tugas);
+      return redirect()->back()->with('success','Tugas Berhasil Diubah');
+  }
 
-    public function semuaTugas($id){
-      $kelas = Kelas::find($id);
-      $siswa_id = Siswa::whereId(auth()->user()->siswa->id)->value('id');
-      $anggota_kelas_id = AnggotaKelas::where('siswa_id',$siswa_id)->value('id');
-      $kumpul_tugas_individu = KumpulTugasIndividu::where('anggota_kelas_id',$anggota_kelas_id)->get();
-      return view('AnggotaKelas.semuaTugas',compact(['kelas','siswa_id','anggota_kelas_id','kumpul_tugas_individu']));
-    }
+  public function semuaTugas($id){
+    $kelas = Kelas::find($id);
+    $siswa_id = Siswa::whereId(auth()->user()->siswa->id)->value('id');
+    $anggota_kelas_id = AnggotaKelas::where('siswa_id',$siswa_id)->value('id');
+    $kumpul_tugas_individu = KumpulTugasIndividu::where('anggota_kelas_id',$anggota_kelas_id)->get();
+    return view('AnggotaKelas.semuaTugas',compact(['kelas','siswa_id','anggota_kelas_id','kumpul_tugas_individu']));
+  }
 
-    public function beri_nilai_tugas_individu(Request $request){
-        $kumpul_tugas_individu = KumpulTugasIndividu::findOrFail($request->id);
+  public function beri_nilai_tugas_individu(Request $request){
+      $kumpul_tugas_individu = KumpulTugasIndividu::findOrFail($request->id);
 
-        $update_tugas= [
-            'nilai' => $request->nilai,
-        ];
-        $kumpul_tugas_individu->update($update_tugas);
-        return redirect()->back()->with('success','Nilai Telah diberikan');
-    }
+      $update_tugas= [
+          'nilai' => $request->nilai,
+      ];
+      $kumpul_tugas_individu->update($update_tugas);
+      return redirect()->back()->with('success','Nilai Telah diberikan');
+  }
 
  //Simpan Tugas Kelompok Master GURU -------------------
  public function tugas_kelompok_master_store(Request $request)

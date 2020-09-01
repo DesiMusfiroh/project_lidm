@@ -67,7 +67,7 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/index','UjianController@indexUjian')->name('siswa.ujian.index');
         Route::get('/wait/{id}','UjianController@waitUjian')->name('waitUjian');
 
-        Route::get('/finish/{id}','UjianController@finishUjian',['id'=> 'id'])->name('finishUjian');
+        Route::get('/finish/{peserta_ujian_id}','UjianController@finishUjian',['$peserta_ujian_id'=> 'peserta_ujian_id'])->name('finishUjian');
          //Hasil Ujian
          Route::get('/export-hasil/{id}','DocumentController@exportHasil')->name('exportHasil');
 
