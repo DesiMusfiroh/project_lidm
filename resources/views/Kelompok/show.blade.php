@@ -5,13 +5,13 @@
 @endsection
 
 @section('content')
-<main class="main"> 
+<main class="main">
     <div>
     {{ Breadcrumbs::render('kelompok.show',$kelompok_master->kelas, $kelompok_master) }}
     </div>
     <div class="container-fluid">
     <div class="row">
-        @foreach($kelompok as $kel)
+            @foreach($kelompok as $kel)
             <div class="col-md-4">
                 <div class="card" >
                     <div class="card-body">

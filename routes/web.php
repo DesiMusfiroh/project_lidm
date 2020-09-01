@@ -47,7 +47,7 @@ Route::group(['prefix' => 'siswa'], function () {
         });
 
         Route::group(['prefix' => 'kelompok'], function () {
-          Route::get('/show/{id}','KelompokController@showKelompok')->name('showKelompok');
+          Route::get('/show/{id}','AnggotaKelasController@showKelompok')->name('kelompokSaya.show');
         });
 
         Route::group(['prefix' => 'tugas'],function(){
@@ -70,7 +70,7 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/finish/{id}','UjianController@finishUjian',['id'=> 'id'])->name('finishUjian');
          //Hasil Ujian
          Route::get('/export-hasil/{id}','DocumentController@exportHasil')->name('exportHasil');
-        
+
 
     });
 });
@@ -119,10 +119,10 @@ Route::group(['prefix' => 'guru'], function () {
             // Route::post('serahkan/serahkan_tugas','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
 
             Route::patch('/updatetugas','TugasController@update_tugas_individu')->name('ubahTugas');
-           
+
            // Route::post('detail/edit/{id_kumpul_tugas_individu}','TugasController@updateNilai')->name('editNilaiTugasIndividu');
             //Detail Tugas Individu
-            Route::get('/detail/{id}','TugasController@showTugasIndividu')->name('showTugasIndividu'); 
+            Route::get('/detail/{id}','TugasController@showTugasIndividu')->name('showTugasIndividu');
             //Beri Nilai Tugas Anggota Kelas
             Route::patch('/BeriNilai','TugasController@beri_nilai_tugas_individu')->name('beriNilai');
             //Detail Tugas Kelompok
