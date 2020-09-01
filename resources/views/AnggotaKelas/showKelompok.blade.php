@@ -6,7 +6,9 @@
 
 @section('content')
 <main class="main">
-
+    <div>
+        {{ Breadcrumbs::render('kelompokSaya.show',$kelompok_saya->kelompok_master->kelas, $kelompok_saya) }}
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -14,7 +16,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <strong style="font-size:18px"> DAFTAR TUGAS </strong>
+                                <strong style="font-size:18px"> Kelompok Saya </strong>
                             </div>
                         </div>
                     </div>
@@ -47,7 +49,7 @@
                         </div>
                     @endif
                         <table class="mb-0 table table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                             <tr>
                                 <th>#</th>
                                 <th>Nama Siswa</th>

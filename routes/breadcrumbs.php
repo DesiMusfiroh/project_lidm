@@ -29,6 +29,11 @@ Breadcrumbs::register('pertemuanSiswa.show', function ($breadcrumbs, $kelas, $pe
     $breadcrumbs->push($pertemuan->nama_pertemuan, url('siswa/kelas/pertemuan/show/{kelas_id}/{id_pertemuan}'));
 });
 
+Breadcrumbs::register('kelompokSaya.show', function ($breadcrumbs, $kelas, $kelompok_saya_ikuti) {
+    $breadcrumbs->parent('siswa.kelas.show',$kelas);
+    $breadcrumbs->push($kelompok_saya_ikuti->nama_kelompok, route('kelompokSaya.show',$kelompok_saya_ikuti->id));
+});
+
 //Siswa Ujian
 Breadcrumbs::register('siswa.ujian.index', function ($breadcrumbs) {
     $breadcrumbs->parent('home');

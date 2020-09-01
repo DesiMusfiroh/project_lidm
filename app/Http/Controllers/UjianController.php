@@ -293,6 +293,7 @@ public function deleteUjian($id){
     public function waitUjian($id)
     {
         $peserta = PesertaUjian::find($id);
+        //dd($peserta->id);
         $ujian = Ujian::where('id',$peserta->ujian_id)->first();
         $paket_soal_id = $ujian->paket_soal_id;
         $paket_soal = PaketSoal::where('id',$paket_soal_id)->get();
@@ -402,12 +403,15 @@ public function deleteUjian($id){
     }
 
 
-    public function finishUjian($id){
-        $peserta = PesertaUjian::find($id);
+    public function finishUjian(Request $request,$peserta_ujian_id){
+        //dd($id);
+        //$peserta = PesertaUjian::find($id);
+        //$peserta_ujian_id = $request->peserta_ujian_id;
+        //dd($peserta_ujian_id);
         $update_finish_peserta = [
             'status' => 1,
         ];
-        PesertaUjian::where('id', $id)->update($update_finish_peserta);
+        PesertaUjian::where('id', $peserta_ujian_id)->update($update_finish_peserta);
         return redirect()->route('home')->with('info','Ujian telah diselesaikan, jawaban anda telah tersimpan !');
     }
 }

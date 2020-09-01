@@ -66,7 +66,7 @@
     </div>
 
     <input type="hidden" value="{{ $ujian->id }}" id="ujian_id">
-    <input type="hidden" value="{{ $peserta->id }}" id="peserta_ujian_id">
+    <input type="hidden" name="peserta_ujian_id" value="{{ $peserta->id }}" id="peserta_ujian_id">
 
 <script>
 // Pengaturan JS untuk simpan jawaban essay
