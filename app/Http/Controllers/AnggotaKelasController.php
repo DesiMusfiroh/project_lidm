@@ -150,7 +150,7 @@ class AnggotaKelasController extends Controller
             'nilai'                           => '', 
        ]);
        dd($tugas_individu);
-        return redirect()->back()->with('success', 'Tugas Berhasil Diserahkan');
+        return redirect()->back()->withSuccess('Tugas berhasil di serahkan !');
     }
     public function ruangPertemuan($kelas_id,$id_pertemuan)
     {

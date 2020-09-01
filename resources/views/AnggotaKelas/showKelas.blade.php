@@ -73,8 +73,8 @@
                             <a class="nav-link" id="kelompok-tab" data-toggle="tab" href="#kelompok" role="tab" aria-controls="kelompok" aria-selected="false">Kelompok</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="tugas-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas
-                            <span class="badge badge-pill badge-info">New</span></a>
+                            <a class="nav-link" id="tugas-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas</a>
+                            <!-- <span class="badge badge-pill badge-info">New</span></a> -->
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="hasil-ujian-tab" data-toggle="tab" href="#hasil-ujian" role="tab" aria-controls="hasil-ujian" aria-selected="false">Hasil Ujian</a>
@@ -85,6 +85,7 @@
                         <!-- pertemuan -->
                         <div class="tab-pane active" id="pertemuan" role="tabpanel" aria-labelledby="pertemuan-tab">
                             <div class="row table-inside">
+                                @if($pertemuan->count() != 0)
                                 <table class="table table-striped table-sm" >
                                     <thead class="thead-dark text-center" style="background-color:#393A3C; color:white; font-weight:bold">
                                         <tr>
@@ -95,7 +96,6 @@
                                             <td>Aksi</td>
                                         </tr>
                                     </thead>
-                                    @if($pertemuan->count() != 0)
                                     <tbody class="text-center">
                                     <?php $i=1; ?>
                                     @foreach ($pertemuan as $item)
@@ -117,14 +117,14 @@
                                         </tr>
                                     @endforeach
                                     </tbody>
-                                    @else
-                                    <tbody>
-                                    <div class="alert alert-warning" role="alert">
-                                        Belum ada pertemuan
-                                    </div>
-                                    </tbody>
-                                    @endif
                                 </table>
+                                @else
+                                    <div class="col-md-12">
+                                        <div class="alert alert-warning " role="alert">
+                                            Belum ada pertemuan
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                             <div class="row justify-content-center">{{$pertemuan->links()}}</div>
                         </div>
@@ -157,8 +157,10 @@
                                     </tbody>
                                 </table>
                             @else
-                                <div class="alert alert-warning" role="alert">
-                                    Belum ada kelompok dalam kelas ini
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        Belum ada kelompok dalam kelas ini
+                                    </div>
                                 </div>
                             @endif
                             </div>
@@ -185,8 +187,10 @@
                                     </tbody>
                                 </table>
                             @else
-                                <div class="alert alert-warning" role="alert">
-                                    Belum ada kelompok dalam kelas ini
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        Belum ada kelompok dalam kelas ini
+                                    </div>
                                 </div>
                             @endif
                             </div>

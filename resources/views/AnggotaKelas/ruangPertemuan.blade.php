@@ -252,7 +252,7 @@ opacity: 1;
         $deskripsi = array_data[0]['deskripsi'];
         swal({
             title: "Beralih ke ruang diskusi",
-            text: "Diskusi " + $deskripsi + "akan dimulai",
+            text: "Diskusi " + $deskripsi + " akan dimulai",
             icon: "info",
             buttons: true,
             dangerMode: false,

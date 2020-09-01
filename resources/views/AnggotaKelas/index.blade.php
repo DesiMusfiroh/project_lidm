@@ -86,11 +86,11 @@
 
 @section('js')
 <script>
-function alert() {
-    swal({
-        title: "Berhasil gabung ke dalam kelas !",
-        icon: "success",
-    });
-}
+// function alert() {
+//     swal({
+//         title: "Berhasil gabung ke dalam kelas !",
+//         icon: "success",
+//     });
+// }
 </script>
 @endsection

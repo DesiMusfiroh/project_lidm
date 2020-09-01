@@ -27,7 +27,7 @@ class PertemuanController extends Controller
             'waktu_mulai' => $request->waktu_mulai,
             'status' => 0,
         ]);
-        return redirect()->route('guru.kelas.show',$request->kelas_id)->with('success','Pertemuan baru berhasil dibuat');
+        return redirect()->route('guru.kelas.show',$request->kelas_id)->withSuccess('Pertemuan baru berhasil dibuat !');
     }
     public function show($kelas_id,$id_pertemuan)
     {

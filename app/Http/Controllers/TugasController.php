@@ -90,7 +90,7 @@ class TugasController extends Controller
             'tugas' => $nama_file
         ];
         KumpulTugasIndividu::where('id', $request->id)->update($update_kumpul_tugas_individu);
-        return redirect()->back()->with('success','Tugas Berhasil Diserahkan');
+        return redirect()->back()->with('success','Tugas Individu Berhasil Diserahkan');
     }
 
     //SISWA ---------------------------------
@@ -176,7 +176,7 @@ class TugasController extends Controller
             'tugas' => $nama_file
         ];
         KumpulTugasKelompok::where('id', $request->id)->update($update_kumpul_tugas_kelompok);
-        return redirect()->back()->with('success','Tugas Berhasil Diserahkan');
+        return redirect()->back()->with('success','Tugas Kelompok Berhasil Diserahkan');
     }
 
 

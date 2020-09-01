@@ -30,7 +30,7 @@
                             </button>
                         </div>
                 @endif
-                        <table class="mb-0 table table-hover">
+                        <table class="mb-0 table table-hover table-striped table-sm">
                             <thead>
                             <tr>
                                 <th>#</th>
@@ -53,7 +53,7 @@
                                 <td>{{number_format($item->nilai,0)}}</td>
                                 @if($item->nilai == 0)
                                 <td>
-                                <button type="submit" class="btn btn-info" data-toggle="modal" data-target=".ubah_modal_beriNilai"
+                                <button type="submit" class="btn btn-info btn-sm" data-toggle="modal" data-target=".ubah_modal_beriNilai"
                                             id="update"
                                             data-kumpul_tugas_kelompok_id_update = "{{ $item->id }}"
                                             data-tugas_kelompok_id_update = "{{ $item->tugas_kelompok_id }}"
@@ -67,7 +67,7 @@
                                 </td>
                                 @else
                                 <td>
-                                <button type="submit" class="btn btn-info" data-toggle="modal" data-target=".ubah_modal_beriNilai"
+                                <button type="submit" class="btn btn-info btn-sm" data-toggle="modal" data-target=".ubah_modal_beriNilai"
                                             id="update"
                                             data-kumpul_tugas_kelompok_id_update = "{{ $item->id }}"
                                             data-tugas_kelompok_id_update = "{{ $item->tugas_kelompok_id }}"
