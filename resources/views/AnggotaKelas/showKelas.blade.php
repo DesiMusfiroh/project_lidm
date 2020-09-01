@@ -130,7 +130,7 @@
                         </div>
                         <!-- kelompok -->
                         <div class="tab-pane" id="kelompok" role="tabpanel" aria-labelledby="kelompok-tab">
-                            <div class="row table-inside">
+                            <!-- <div class="row table-inside">
                             @if($kelompok_master->count() != 0)
                                 <table class="table table-striped table-sm text-center" >
                                     <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
@@ -163,7 +163,7 @@
                                     </div>
                                 </div>
                             @endif
-                            </div>
+                            </div> -->
                             <div class="row table-inside">
                             @if($kelompok_saya_ikuti->count() != 0)
                                 <table class="table table-striped table-sm text-center" >
@@ -171,6 +171,7 @@
                                         <tr>
                                             <td width="30px">No</td>
                                             <td>Nama kelompok</td>
+                                            <td>Opsi</td>
 
                                         </tr>
                                     </thead>
@@ -181,7 +182,9 @@
                                         <tr>
                                             <td><?php echo $i; $i++?></td>
                                             <td>{{$item->nama_kelompok}}</td>
-
+                                            <td>
+                                              <a href="{{route('kelompokSaya.show',$item->id )}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -233,12 +236,12 @@
                                                 <form action="{{route('serahTugas')}}" method="post" enctype="multipart/form-data" >
                                                 @csrf
                                                 @method('PATCH')
-                                        
-                                                <input type="hidden" name="id"  value="{{$item->id}}">         
+
+                                                <input type="hidden" name="id"  value="{{$item->id}}">
                                                 <input type="file" name="tugas">
-                                                
+
                                                 <td>
-                                                
+
                                                     <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
                                                 </td>
                                                 </div>
@@ -246,7 +249,7 @@
                                                 @else
                                                 <td> Diserahkan </td>
                                                 <td>
-                                                
+
                                                 <button type="submit" class="btn btn-info" data-toggle="modal" data-target=".ubah_modal_serahTugasIndividu"
                                                 id="update"
                                                 data-kumpul_tugas_individu_id_update = "{{ $item->id }}"
@@ -256,12 +259,12 @@
                                                 data-nilai_update = "{{ $item->nilai }}"
 
                                                 style="box-shadow: 3px 2px 5px grey; margin:5px;">Ubah Tugas</button>
-                                                
+
                                                 </td>
                                                 @endif
-                                                
+
                                                 </td>
-                                                
+
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -277,14 +280,14 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="tugasKelompok" role="tabpanel" aria-labelledby="tugasKelompok-tab">
-                            <div class="row table-inside"> 
+                            <div class="row table-inside">
                                 @if($kumpul_tugas_kelompok->count() != 0)
                                     <table class="table table-striped table-sm text-center" >
                                         <thead class="thead text-center" style="background-color:#393A3C; color:white; font-weight:bold">
                                             <tr>
                                                 <td width="30px">No</td>
                                                 <td>Nama tugas</td>
-                                                <td></td>                                            
+                                                <td></td>
                                             </tr>
                                         </thead>
 
@@ -298,12 +301,12 @@
                                                 <form action="{{route('serahTugasKelompok')}}" method="post" enctype="multipart/form-data" >
                                                 @csrf
                                                 @method('PATCH')
-                                        
-                                                
+
+
                                                 <td>
-                                                <input type="hidden" name="id"  value="{{$item->id}}">         
+                                                <input type="hidden" name="id"  value="{{$item->id}}">
                                                 <input type="file" name="tugas">
-                                                
+
                                                     <button class="btn btn-sm btn-outline-secondary" type="submit" id="simpan">Serahkan</button>
                                                 </td>
                                                 </div>
@@ -311,11 +314,11 @@
                                                 @else
                                                 <td> Diserahkan </td>
                                                 @endif
-                                                
+
                                             </tr>
                                         @endforeach
                                         </tbody>
-                                    </table>            
+                                    </table>
                                 @else
                                     <div class="alert alert-warning" role="alert">
                                         Belum ada kelompok dalam kelas ini
@@ -323,13 +326,13 @@
                                 @endif
                                 </div>
                             </div>
-                               
+
                             </div>
-                      
+
 
                         </div>
-                       
-                        
+
+
                         <!-- hasil ujian  -->
                         <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
                             <div class="row table-inside">

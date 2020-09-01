@@ -72,40 +72,21 @@ class AnggotaKelasController extends Controller
         $pertemuan          = Pertemuan::where('kelas_id',$id)->paginate(4);
         $anggotakelas       = AnggotaKelas::where('kelas_id',$id)->join('siswa','anggota_kelas.siswa_id','=','siswa.id')
                             ->orderBy('siswa.nama_lengkap')->get();
-
         $siswa_id                   = auth()->user()->siswa->id;
         $anggota_kelas_id           = AnggotaKelas::where('siswa_id',$siswa_id)->where('kelas_id',$id)->value('id');
-        //dd($anggota_kelas_id);
-
-        // $kelompok_master_id        = KelompokMaster::where('kelas_id',$id)->get();
-        // $kelompok_id               = Kelompok::where('kelompok_master_id',$kelompok_master_id)->get();
-        //$anggota_kelompok_id       = AnggotaKelompok::where('kelompok_id',$kelompok_id)->where('anggota_kelas_id',$anggota_kelas_id)->get();
-
-        $kelompok_master           = KelompokMaster::where('kelas_id',$id)->get();  
-        // $kelompok_id = Kelompok::where('kelompok_master_id',$kelompok_master->id)->get();
-        //dd($kelompok_master);
+        $kelompok_master           = KelompokMaster::where('kelas_id',$id)->get();
+        
         $kelompok_saya = AnggotaKelompok::where('anggota_kelas_id',$anggota_kelas_id)->get('kelompok_id');
-        //dd($kelompok_saya);
-        //dd($kelompok_saya);
-        // foreach ($kelompok_saya as $e=>$kel) {
-        //     //dd($kel->kelompok_id);
-        //     $kelompok_saya_ikuti[] = Kelompok::where('id',$kel->kelompok_id)->get();
-        // }
         $kelompok_saya_ikuti = Kelompok::whereIn('id',$kelompok_saya)->get();
-        //dd($kelompok_saya_ikuti);
-
         $kumpul_tugas_kelompok = KumpulTugasKelompok::whereIn('kelompok_id',$kelompok_saya)->get();
-        //dd($kumpul_tugas_kelompok);
         $hasil_ujian               = PesertaUjian::where('anggota_kelas_id',$anggota_kelas_id)->where('status',1)->where('isdelete',0)->get();
         $kumpul_tugas_individu     = KumpulTugasIndividu::where('anggota_kelas_id',$anggota_kelas_id)->paginate(5);
-        //$kumpul_tugas_kelompok     = KumpulTugasKelompok::where('anggota_kelompok_id',$anggota_kelompok_id)->paginate(5);
-        
-        // return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu,'kumpul_tugas_kelompok'=> $kumpul_tugas_kelompok], compact('kelas'));
         return view('AnggotaKelas.showKelas', ['pertemuan' => $pertemuan, 'anggotakelas' => $anggotakelas, 'kelompok_master' => $kelompok_master, 'hasil_ujian'=> $hasil_ujian,'kumpul_tugas_individu'=> $kumpul_tugas_individu], compact('kelas','kelompok_saya_ikuti','kumpul_tugas_kelompok'));
     }
 
-    public function showKelompok(){
-        
+    public function showKelompok($id){
+        $kelompok_saya = Kelompok::find($id);
+        return view('AnggotaKelas.showKelompok',compact(['kelompok_saya']));
     }
 
     public function showPertemuan($kelas_id, $id_pertemuan)
@@ -125,7 +106,7 @@ class AnggotaKelasController extends Controller
 
     public function serahkan_tugas_individu(Request $request)
     {
-  
+
         if($request->hasFile('tugas')) {
             $ext = strtolower($request->file('tugas')->getClientOriginalExtension());
             $originalName = $request->file('tugas')->getClientOriginalName();
@@ -143,11 +124,11 @@ class AnggotaKelasController extends Controller
 
     	$tugas_individu = new TugasIndividu;
         $tugas_individu = TugasIndividu::create([
-            'tugas_individu_master_id'        => $tugas_individu_master_id, 
+            'tugas_individu_master_id'        => $tugas_individu_master_id,
             'anggota_kelas_id'                => $anggota_kelas_id,
             'tugas'                           => $filenameToStore,
             'status'                          => '',
-            'nilai'                           => '', 
+            'nilai'                           => '',
        ]);
        dd($tugas_individu);
         return redirect()->back()->withSuccess('Tugas berhasil di serahkan !');
@@ -186,16 +167,16 @@ class AnggotaKelasController extends Controller
 
 
     public function hasilUjian($id){
-        $peserta_ujian = PesertaUjian::find($id); 
+        $peserta_ujian = PesertaUjian::find($id);
         //soal yang belum di koreksi
         $essay_jawab = EssayJawab::where('peserta_ujian_id', $peserta_ujian->id)->where('score','!=',null)->get();
         $pilgan_jawab = PilganJawab::where('peserta_ujian_id', $peserta_ujian->id)->get();
         $koreksi_jawaban = EssayJawab::where('peserta_ujian_id', $peserta_ujian->id)->where('score','=',null)->get();
-  
+
         $total_poin = SoalSatuan::where('paket_soal_id',$peserta_ujian->ujian->paket_soal->id)->sum('poin');
-  
+
         $score_pilgan = PilganJawab::where('peserta_ujian_id',$peserta_ujian->id)->sum('score');
-  
+
         if($koreksi_jawaban->count() == 0) {
             $score_essay = EssayJawab::where('peserta_ujian_id',$peserta_ujian->id)->sum('score');
             $total_score = $score_essay + $score_pilgan;
@@ -206,7 +187,7 @@ class AnggotaKelasController extends Controller
             ]);
             return view('AnggotaKelas.hasilUjian', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban], compact('nilai_akhir','total_poin'));
         }
-  
+
         return view('AnggotaKelas.hasilUjian', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban]);
       }
 
