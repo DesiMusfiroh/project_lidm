@@ -59,89 +59,117 @@
                     </div>
                 </div>
                 @endif
-            @if ($pilgan_jawab->count() != 0)
-            <h5> <strong>Hasil Ujian Pilihan Ganda Peserta</strong> </h5>
-            <div class="table-inside">
-            <table class="table table-striped table-bordered table-sm">
-                <thead class="thead-dark text-center">
-                    <tr>
-                        <th scope="col" style="width:50px">No</th>
-                        <th scope="col" style="width:400px">Jawaban Peserta</th>
-                        <th scope="col" style="width:150px">Kunci Jawaban</th>
-                        <th scope="col" style="width:150px">Keterangan</th>
-                        <th scope="col" style="width:140px">score</th>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item  active" role="presentation">
+                            <a class="nav-link" id="pilgan-tab" data-toggle="tab" href="#pilgan" role="tab" aria-controls="pilgan" aria-selected="false">Pilgan</a>
+                        </li>  
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="essay-tab" data-toggle="tab" href="#essay" role="tab" aria-controls="essay" aria-selected="true">Essay</a>
+                        </li>
+                       
+                </ul>
+                <div class="tab-content mr-3 ml-3">
+                        <!-- Pilgan-->
+                        <div class="tab-pane active" id="pilgan" role="tabpanel" aria-labelledby="pilgan-tab">
+                            <div class="row table-inside">
+                            @if ($pilgan_jawab->count() != 0)
+                            <h5> <strong>Hasil Ujian Pilihan Ganda Peserta</strong> </h5>
+                        
+                            <table class="table table-striped table-bordered table-sm">
+                                <thead class="thead-dark text-center">
+                                    <tr>
+                                        <th scope="col" style="width:50px">No</th>
+                                        <th scope="col" style="width:400px">Jawaban Peserta</th>
+                                        <th scope="col" style="width:150px">Kunci Jawaban</th>
+                                        <th scope="col" style="width:150px">Keterangan</th>
+                                        <th scope="col" style="width:140px">score</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i=0; ?>
-                    @foreach ($pilgan_jawab as $item)
-                    <tr>
-                        <td scope="row"><?php  $i++;  echo $i; ?></td>
-                        <td>{{$item->jawab}}</td>
-                        <td>{{$item->pilgan->kunci}}</td>
-                        <td>@if ($item->status == 'T') Benar @else Salah @endif</td>
-                        <td>{{$item->score}}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            </div>
-            @endif
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i=0; ?>
+                                    @foreach ($pilgan_jawab as $item)
+                                    <tr>
+                                        <td scope="row"><?php  $i++;  echo $i; ?></td>
+                                        <td>{{$item->jawab}}</td>
+                                        <td>{{$item->pilgan->kunci}}</td>
+                                        <td>@if ($item->status == 'T') Benar @else Salah @endif</td>
+                                        <td>{{$item->score}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                          
+                            @endif
+                            </div>
+                            </div>
 
-            @if ($essay_jawab->count() != 0)
-            <h5> <strong> Hasil Ujian Essay Peserta</strong></h5>
-            <div class="table-inside">
-            <table class="table table-striped table-bordered table-sm">
-                <thead class="thead-dark text-center">
-                    <tr>
-                        <th scope="col" style="width:50px">No</th>
-                        <th scope="col" style="width:400px">Pertanyaan</th>
-                        <th scope="col" style="width:150px">Jawaban Peserta</th>
-                        <th scope="col" style="width:150px">Poin Soal</th>
-                        <th scope="col" style="width:140px">score</th>
+                            <div class="tab-pane " id="essay" role="tabpanel" aria-labelledby="essay-tab">
+                            <div class="row table-inside">
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i=0; ?>
-                    @foreach ($essay_jawab as $item)
-                    <tr>
-                        <td scope="row"><?php  $i++;  echo $i; ?></td>
-                        <td>{!!$item->essay->pertanyaan!!}</td>
-                        <td>{{$item->jawab}}</td>
-                        <td>{!!$item->essay->soal_satuan->poin!!}</td>
-                        <td>{{$item->score}}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            </div>
-            @endif
-        </div>
-      @else
-      <script>
-        $(document).ready(function(){
-          // Swal.fire({
-          //   title: "Yakin?",
-          //   text: "Soal sedang dikoreksi",
-          //   icon: "warning",
-          //   buttons: true,
-          //   dangerMode: false,
-          // })
-          swal({
-            title: "Soal sedang dikoreksi",
-            text: "Anda dapat melihat hasil ujian setelah dikoreksi",
-            icon: "warning",
-            button: "Oke",
-          });
-          //swal("soal sedang dikoreksi");
-        });
-        // Swal.fire('Soal sedang dikoreksi');
-      </script>
-      <strong>Menunggu di koreksi </strong>
-      @endif
-    </div>
-</div>
-</div>
+                            @if ($essay_jawab->count() != 0)
+                            <h5> <strong> Hasil Ujian Essay Peserta</strong></h5>
+                            
+                            <table class="table table-striped table-bordered table-sm">
+                                <thead class="thead-dark text-center">
+                                    <tr>
+                                        <th scope="col" style="width:50px">No</th>
+                                        <th scope="col" style="width:400px">Pertanyaan</th>
+                                        <th scope="col" style="width:150px">Jawaban Peserta</th>
+                                        <th scope="col" style="width:150px">Poin Soal</th>
+                                        <th scope="col" style="width:140px">score</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i=0; ?>
+                                    @foreach ($essay_jawab as $item)
+                                    <tr>
+                                        <td scope="row"><?php  $i++;  echo $i; ?></td>
+                                        <td>{!!$item->essay->pertanyaan!!}</td>
+                                        <td>{{$item->jawab}}</td>
+                                        <td>{!!$item->essay->soal_satuan->poin!!}</td>
+                                        <td>{{$item->score}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                           
+                            @endif
+                            </div>
+                            </div>
+                        </div>
+
+                        </div>
+                    @else
+                    <script>
+                     $(function () {
+                            $('#myTab li:first-child a').tab('show')
+                                 })
+                            $("#start").hide();
+
+
+                        $(document).ready(function(){
+                        // Swal.fire({
+                        //   title: "Yakin?",
+                        //   text: "Soal sedang dikoreksi",
+                        //   icon: "warning",
+                        //   buttons: true,
+                        //   dangerMode: false,
+                        // })
+                        swal({
+                            title: "Soal sedang dikoreksi",
+                            text: "Anda dapat melihat hasil ujian setelah dikoreksi",
+                            icon: "warning",
+                            button: "Oke",
+                        });
+                        //swal("soal sedang dikoreksi");
+                        });
+                        // Swal.fire('Soal sedang dikoreksi');
+                    </script>
+                    <strong>Menunggu di koreksi </strong>
+                    @endif
+                    </div>
+                </div>
+                </div>
 @endsection
