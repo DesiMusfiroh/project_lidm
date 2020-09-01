@@ -121,7 +121,7 @@
     </div>
 </div>
 
-<!--edit essay-->
+<!--edit-->
 <script type="text/javascript">
 $(document).ready(function(){
     $(document).on('click','#update', function(){

@@ -29,6 +29,22 @@ class PertemuanController extends Controller
         ]);
         return redirect()->route('guru.kelas.show',$request->kelas_id)->with('success','Pertemuan baru berhasil dibuat');
     }
+
+     //Update Pertemuan
+     public function updatePertemuan(Request $request){
+        try {
+          $pertemuan = Pertemuan::FindOrFail($request->id);
+          $update_pertemuan = [
+              'nama_pertemuan' => $request->nama_pertemuan,
+              'deskripsi' => $request->deskripsi,
+              'waktu_mulai' => $request->waktu_mulai,
+          ];
+          $pertemuan->update($update_pertemuan);
+          return redirect()->back()->withSuccess('Perubahan berhasil disimpan');
+        } catch (\Exception $e) {
+          return redirect()->back()->with('pesan','Pastikan tidak ada kolom yang kosong');
+        }
+    }
     public function show($kelas_id,$id_pertemuan)
     {
         $pertemuan      = Pertemuan::find($id_pertemuan);

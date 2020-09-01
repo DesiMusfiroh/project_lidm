@@ -23,15 +23,7 @@
                     <td>: -</td>
                 @endif
                 </tr>
-                <tr>
-                @if ($no_hp  !== null)
-                    <td>No. Hp </td>
-                    <td>: {{$no_hp}}</td>
-                @else
-                    <td>No. Hp </td>
-                    <td>: - </td>
-                @endif
-                </tr>
+               
                 <tr>
                     <td>Nilai  </td>
                     <td>: {{$nilai_akhir}} </td>

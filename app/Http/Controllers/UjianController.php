@@ -260,7 +260,7 @@ public function deleteUjian($id){
             PesertaUjian::where('id',$id)->update([
                 'nilai' => $total_score
             ]);
-            return view('Ujian.koreksi', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban], compact('nilai_akhir','total_poin'));
+            return view('Ujian.koreksi', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban], compact('nilai_akhir'));
         }
 
         return view('Ujian.koreksi', ['peserta_ujian' => $peserta_ujian, 'essay_jawab' => $essay_jawab, 'pilgan_jawab' => $pilgan_jawab, 'koreksi_jawaban' => $koreksi_jawaban]);

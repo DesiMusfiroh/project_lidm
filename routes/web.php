@@ -46,6 +46,10 @@ Route::group(['prefix' => 'siswa'], function () {
 
         });
 
+        Route::group(['prefix' => 'kelompok'], function () {
+          Route::get('/show/{id}','AnggotaKelasController@showKelompok')->name('kelompokSaya.show');
+        });
+
         Route::group(['prefix' => 'tugas'],function(){
             Route::patch('/kumpul_tugas/tugas/serahkan', 'TugasController@serahkan_tugas_individu')->name('serahTugas');
             Route::patch('/kumpul_tugas/tugaskelompok/serahkan', 'TugasController@serahkan_tugas_kelompok')->name('serahTugasKelompok');
@@ -66,7 +70,7 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/finish/{id}','UjianController@finishUjian',['id'=> 'id'])->name('finishUjian');
          //Hasil Ujian
          Route::get('/export-hasil/{id}','DocumentController@exportHasil')->name('exportHasil');
-        
+
 
     });
 });
@@ -91,6 +95,7 @@ Route::group(['prefix' => 'guru'], function () {
         Route::group(['prefix' => 'pertemuan'], function () {
             Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
             Route::post('/store','PertemuanController@store')->name('pertemuan.store');
+            Route::patch('/update/pertemuan','PertemuanController@updatePertemuan')->name('guru.pertemuan.update');
             Route::get('/show/{kelas_id}/{id_pertemuan}','PertemuanController@show',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.show');
             Route::get('/ruang/{kelas_id}/{id_pertemuan}','PertemuanController@ruang',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang');
             Route::get('/end/{id}','PertemuanController@end')->name('pertemuan.end');
@@ -115,10 +120,10 @@ Route::group(['prefix' => 'guru'], function () {
             // Route::post('serahkan/serahkan_tugas','TugasController@tugas_individu_master_store')->name('storeTugasIndividu');
 
             Route::patch('/updatetugas','TugasController@update_tugas_individu')->name('ubahTugas');
-           
+
            // Route::post('detail/edit/{id_kumpul_tugas_individu}','TugasController@updateNilai')->name('editNilaiTugasIndividu');
             //Detail Tugas Individu
-            Route::get('/detail/{id}','TugasController@showTugasIndividu')->name('showTugasIndividu'); 
+            Route::get('/detail/{id}','TugasController@showTugasIndividu')->name('showTugasIndividu');
             //Beri Nilai Tugas Anggota Kelas
             Route::patch('/BeriNilai','TugasController@beri_nilai_tugas_individu')->name('beriNilai');
             //Detail Tugas Kelompok

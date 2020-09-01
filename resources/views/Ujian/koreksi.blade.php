@@ -75,12 +75,30 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="alert alert-success pt-1 pb-1" role="alert">
+                                        Total Poin :  -
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="alert alert-success pt-1 pb-1" role="alert">
+                                        Nilai Akhir : {{ $peserta_ujian->total_nilai() }}
+                                    </div>
+                                </div>
+                            </div>
+                            @else 
+                            <div class="row justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="alert alert-success pt-1 pb-1" role="alert">
+                                        Total Score : {{$peserta_ujian->nilai}}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="alert alert-success pt-1 pb-1" role="alert">
                                         Total Poin :  
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="alert alert-success pt-1 pb-1" role="alert">
-                                        Nilai Akhir : 
+                                        Nilai Akhir : -
                                     </div>
                                 </div>
                             </div>

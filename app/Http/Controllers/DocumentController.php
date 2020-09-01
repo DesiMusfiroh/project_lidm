@@ -63,7 +63,6 @@ class DocumentController extends Controller
 
         $nama_lengkap   = Siswa::where('id',$peserta_ujian->siswa_id)->value('nama_lengkap');
         $instansi       = Siswa::where('id',$peserta_ujian->siswa_id)->value('instansi');
-        $no_hp          = Siswa::where('id',$peserta_ujian->siswa_id)->value('no_hp');
         $essay_jawab    = EssayJawab::where('peserta_ujian_id', $peserta_ujian->id)->where('score','!=',null)->get();
         $pilgan_jawab   = PilganJawab::where('peserta_ujian_id', $peserta_ujian->id)->get();
 
@@ -72,13 +71,13 @@ class DocumentController extends Controller
         $score_essay    = EssayJawab::where('peserta_ujian_id',$peserta_ujian->id)->sum('score');
         $total_score    = $score_essay + $score_pilgan;
         $nilai_akhir    = $total_score / $total_poin * 100;
-        $pdf = PDF::loadView('Export/Hasil',compact('peserta_ujian','nama_lengkap','essay_jawab','pilgan_jawab','instansi','no_hp','nilai_akhir'));
+        $pdf = PDF::loadView('Export/Hasil',compact('peserta_ujian','nama_lengkap','essay_jawab','pilgan_jawab','instansi','nilai_akhir'));
         return $pdf->stream();
     }
     public function exportRekap($id){
  
       $ujian          = Ujian::find($id);
-      $peserta_ujian  = PesertaUjian::where('ujian_id',$id)->get();
+      $peserta_ujian  = PesertaUjian::where('ujian_id',$id)->orderBy('nilai','desc')->get();
       //dd($peserta_ujian);
       // $siswa          = Siswa::where('peserta_ujian_id',$peserta_ujian->siswa->id);
       $pdf            = PDF::loadView('Export/Rekap',compact('ujian','peserta_ujian'));
