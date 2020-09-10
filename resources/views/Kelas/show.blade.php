@@ -322,7 +322,7 @@
         document.getElementById("kode_kelas").select();
         document.execCommand("copy");
         swal({
-            title: "Kode Akses Ujian Berhasil di Copy !",
+            title: "Kode Akses Kelas Berhasil di Copy !",
             icon: "success",
         });
     }

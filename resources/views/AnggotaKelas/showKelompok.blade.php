@@ -14,7 +14,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-12">
-                                <strong style="font-size:18px"> DAFTAR TUGAS </strong>
+                                <strong style="font-size:18px"> DAFTAR KELOMPOK </strong>
                             </div>
                         </div>
                     </div>

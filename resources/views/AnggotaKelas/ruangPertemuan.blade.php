@@ -293,7 +293,7 @@ connection.onstream = function(event) {
         localVideosContainer.appendChild( video ).style.width = "500px";
     }
     if(event.type === 'remote') {
-        remoteVideosContainer.appendChild( video ).style.width = "200px";
+        remoteVideosContainer.appendChild( video ). 
     }
 }
 
