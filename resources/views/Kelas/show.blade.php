@@ -97,9 +97,7 @@
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="messages-tab" data-toggle="tab" href="#tugas" role="tab" aria-controls="tugas" aria-selected="false">Tugas </a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="hasil-ujian-tab" data-toggle="tab" href="#hasil-ujian" role="tab" aria-controls="hasil-ujian" aria-selected="false">Hasil Ujian</a>
-                        </li>
+                        
                     </ul>
 
                     <div class="tab-content mr-3 ml-3">
@@ -135,12 +133,28 @@
                                             @elseif($item->status ==2)
                                             <td>Selesai</td>
                                             @endif
+                                            @if($item->status == 1 || $item->status == 2)
+
                                             <td>
-                                            <a href="#">
-                                                <button class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></button>
-                                            </a>
                                             <a href="{{route('pertemuan.show',['kelas_id'=>$kelas->id,'id_pertemuan'=>$item->id])}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
                                             </td>
+                                            @else
+
+                                            <td>
+                                            <button type="button" class="btn  btn-sm btn-warning" data-toggle="modal" data-target=".update_modal_pertemuan"
+                                                id="update"
+                                                data-id_pertemuan_update="{{ $item->id }}"
+                                                data-kelas_id_update="{{ $item->kelas_id }}"
+                                                data-nama_pertemuan_update="{!! $item->nama_pertemuan !!}"
+                                                data-deskripsi_update="{!! $item->deskripsi !!}"
+                                                data-waktu_mulai_update="{!! $item->waktu_mulai !!}"
+                                                data-status_update="{!! $item->status!!}"
+                                                title="Ubah Pertemuan">
+                                                    <i class="fa fa-edit" aria-hidden="true"></i>
+                                             </button>
+                                            <a href="{{route('pertemuan.show',['kelas_id'=>$kelas->id,'id_pertemuan'=>$item->id])}}"> <button class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button> </a>
+                                            </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                     </tbody>
@@ -292,15 +306,7 @@
                                 </div>
                         </div>
 
-                        <!-- hasil ujian -->
-                        <div class="tab-pane" id="hasil-ujian" role="tabpanel" aria-labelledby="hasil-ujian-tab">
-                            <div class="col-md-12">
-                                <div class="alert alert-warning" role="alert">
-                                   Belum ada hasil ujian 
-                                </div>
-                            </div>
-
-                        </div>
+                        
                     </div>
 
                 </div>
@@ -326,5 +332,74 @@
             icon: "success",
         });
     }
+//edit
+$(document).ready(function(){
+    $(document).on('click','#update', function(){
+        var id_pertemuan_update        = $(this).data('id_pertemuan_update');
+        var kelas_id_update            = $(this).data('kelas_id_update');
+        var nama_pertemuan_update      = $(this).data('nama_pertemuan_update');
+        var deskripsi_update           = $(this).data('deskripsi_update');
+        var waktu_mulai_update         = $(this).data('waktu_mulai_update');
+        var status_update              = $(this).data('status_update');
+
+        $('#id_pertemuan_update').val(id_pertemuan_update);
+        $('#kelas_id_update').val(kelas_id_update);
+        $('#nama_pertemuan').val(nama_pertemuan_update);
+        $('#deskripsi').val(deskripsi_update);
+        $('#waktu_mulai').val(waktu_mulai_update);
+        $('#status_update').val(status_update);
+
+    });
+    });
 </script>
 @endsection
+<!-- update Modal (paket)-->
+<div class="modal fade update_modal_pertemuan"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header ">
+                    <h5 class="modal-title " id="exampleModalLabel"> <strong>Edit Paket Pertemuan</strong> </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{route('guru.pertemuan.update')}}" method="post">
+                    @csrf
+                    @method('PATCH')
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <input type="hidden" name="id" id="id_pertemuan_update" value="">
+                            <input type="hidden" name="kelas_id" id="kelas_id_update" value="">
+                            <input type="hidden" name="status" id="status_update" value="">
+
+                            <div class="form-group row">
+                                    <label  class="col-sm-2 col-form-label">Nama Pertemuan</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" value="" id="nama_pertemuan" name="nama_pertemuan">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label  class="col-sm-2 col-form-label">Waktu Mulai</label>
+                                <div class="col-md-10">
+                                <input  id="waktu_mulai" class="form-control" type="datetime-local" name="waktu_mulai" required >
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label"> Deskripsi</label>
+                                <div class="col-sm-10">
+                                <textarea class="form-control" value="" id="deskripsi" rows="3" name="deskripsi"></textarea>
+                                </div>
+                            </div>     
+                    
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-info">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

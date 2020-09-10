@@ -67,7 +67,7 @@ Route::group(['prefix' => 'siswa'], function () {
         Route::get('/index','UjianController@indexUjian')->name('siswa.ujian.index');
         Route::get('/wait/{id}','UjianController@waitUjian')->name('waitUjian');
 
-        Route::get('/finish/{id}','UjianController@finishUjian',['id'=> 'id'])->name('finishUjian');
+        Route::get('/finish/{peserta_ujian_id}','UjianController@finishUjian',['$peserta_ujian_id'=> 'peserta_ujian_id'])->name('finishUjian');
          //Hasil Ujian
          Route::get('/export-hasil/{id}','DocumentController@exportHasil')->name('exportHasil');
 
@@ -95,6 +95,7 @@ Route::group(['prefix' => 'guru'], function () {
         Route::group(['prefix' => 'pertemuan'], function () {
             Route::get('/create/{id}','PertemuanController@create')->name('pertemuan.create');
             Route::post('/store','PertemuanController@store')->name('pertemuan.store');
+            Route::patch('/update/pertemuan','PertemuanController@updatePertemuan')->name('guru.pertemuan.update');
             Route::get('/show/{kelas_id}/{id_pertemuan}','PertemuanController@show',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.show');
             Route::get('/ruang/{kelas_id}/{id_pertemuan}','PertemuanController@ruang',['$kelas_id'=>'kelas_id','$id_pertemuan'=>'id_pertemuan'])->name('pertemuan.ruang');
             Route::get('/end/{id}','PertemuanController@end')->name('pertemuan.end');

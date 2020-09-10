@@ -43,7 +43,7 @@
 
 		<td align="center">{{$loop->iteration}}</td>
 		<td > {{$item->siswa->nama_lengkap}} </td>
-		<td align="center">{{number_format($item->nilai,0)}}</td>
+		<td align="center">{{number_format($item->total_nilai())}}</td>
       
     </tr>
   @endforeach
