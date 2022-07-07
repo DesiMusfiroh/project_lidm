@@ -27,7 +27,7 @@
     "dependencies": {
         "font-awesome": "^4.7.0",
         "laravel-echo": "^1.8.1",
-        "moment": "^2.27.0",
+        "moment": "^2.29.4",
         "pusher-js": "^7.0.0",
         "vue-axios": "^2.1.5",
         "vue-chat-scroll": "^1.4.0"
